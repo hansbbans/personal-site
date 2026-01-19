@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: Personal website with gear, food guide, photos, and books sections\n\n- Add responsive HTML/CSS layout\n- Implement Google Sheets integration for restaurant data\n- Add Google Maps integration for city guides\n- Create sections for gear, food, photos, and books\n- Include setup documentation and templates\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
