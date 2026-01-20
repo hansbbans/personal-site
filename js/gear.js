@@ -25,17 +25,17 @@ async function loadGearData() {
 }
 
 function parseGearData(values) {
-    // Skip header row, assume columns: Category, Product Name, Description, URL
+    // Skip header row, assume columns: Name, Category, URL, Description
     const gearByCategory = {};
 
     for (let i = 1; i < values.length; i++) {
         const row = values[i];
-        if (!row[0] || !row[1]) continue; // Skip if no category or product name
+        if (!row[0] || !row[1]) continue; // Skip if no name or category
 
-        const category = row[0];
-        const productName = row[1];
-        const description = row[2] || '';
-        const url = row[3] || '';
+        const productName = row[0];
+        const category = row[1];
+        const url = row[2] || '';
+        const description = row[3] || '';
 
         if (!gearByCategory[category]) {
             gearByCategory[category] = [];
