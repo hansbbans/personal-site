@@ -1,5 +1,5 @@
 // Configuration
-const GOOGLE_SHEETS_API_KEY = 'YOUR_GOOGLE_SHEETS_API_KEY';
+const GOOGLE_SHEETS_API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
 const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID';
 
 // State
