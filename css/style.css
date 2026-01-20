@@ -372,14 +372,14 @@ img {
     overflow: hidden;
     border-radius: 1rem;
     cursor: pointer;
-    max-width: 800px;
+    max-width: 600px;
     width: 100%;
 }
 
 .photo-item img {
     width: 100%;
     height: auto;
-    max-height: 600px;
+    max-height: 400px;
     object-fit: cover;
     display: block;
     transition: var(--transition);
