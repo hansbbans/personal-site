@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hans - Personal Site</title>
+    <title>Food Guide - Hans</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
             <a href="index.html" class="nav-brand">Hans</a>
             <ul class="nav-menu">
                 <li><a href="gear.html">Gear</a></li>
-                <li><a href="food.html">Food</a></li>
+                <li><a href="food.html" class="active">Food</a></li>
                 <li><a href="photos.html">Photos</a></li>
                 <li><a href="books.html">Books</a></li>
             </ul>
@@ -28,31 +28,21 @@
     </nav>
 
     <main>
-        <section class="hero-section">
+        <section class="section section-alt">
             <div class="container">
-                <h1 class="hero-title">Welcome</h1>
-                <p class="hero-subtitle">Explore my recommendations and experiences</p>
+                <h2 class="section-title">City Food Guides</h2>
+                <p class="section-subtitle">My favorite restaurants around the world</p>
 
-                <div class="hero-grid">
-                    <a href="gear.html" class="hero-card">
-                        <h3>Gear</h3>
-                        <p>Products I use and recommend</p>
-                    </a>
+                <div class="city-tabs">
+                    <button class="city-tab active" data-city="0">Loading...</button>
+                </div>
 
-                    <a href="food.html" class="hero-card">
-                        <h3>Food</h3>
-                        <p>Restaurant guides by city</p>
-                    </a>
+                <div class="city-content">
+                    <div id="map" class="map-container"></div>
 
-                    <a href="photos.html" class="hero-card">
-                        <h3>Photos</h3>
-                        <p>Moments captured</p>
-                    </a>
-
-                    <a href="books.html" class="hero-card">
-                        <h3>Books</h3>
-                        <p>Reading recommendations</p>
-                    </a>
+                    <div class="restaurants-list">
+                        <p class="loading-message">Loading restaurants...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -64,6 +54,7 @@
         </div>
     </footer>
 
-    <script src="js/navigation.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfQ4-x8DWUnMWqG5XuVGV-GBvvyFf7cQc&callback=initMap" async defer></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

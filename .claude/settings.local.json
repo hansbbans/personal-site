@@ -10,7 +10,11 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(gh auth setup-git:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(python3:*)",
+      "Bash(curl:*)"
     ]
   }
 }
