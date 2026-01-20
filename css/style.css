@@ -275,6 +275,13 @@ img {
 .restaurant-address {
     color: var(--text-secondary);
     font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.restaurant-date {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-style: italic;
     margin-bottom: 0.75rem;
 }
 

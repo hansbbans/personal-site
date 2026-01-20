@@ -79,7 +79,7 @@ async function loadRestaurantData() {
 function parseRestaurantData(values) {
     if (!values || values.length < 2) return [];
 
-    // Assume first row is headers: Name, Address, Dishes, Latitude, Longitude
+    // Assume first row is headers: Name, Address, Dishes, Latitude, Longitude, Date Last Visited
     const headers = values[0].map(h => h.toLowerCase());
     const restaurants = [];
 
@@ -92,7 +92,8 @@ function parseRestaurantData(values) {
             address: row[1] || '',
             dishes: row[2] || '',
             lat: parseFloat(row[3]) || null,
-            lng: parseFloat(row[4]) || null
+            lng: parseFloat(row[4]) || null,
+            dateVisited: row[5] || null
         };
 
         restaurants.push(restaurant);
@@ -142,6 +143,9 @@ function renderRestaurants(restaurants) {
         <div class="restaurant-card">
             <h3>${restaurant.name}</h3>
             <p class="restaurant-address">${restaurant.address}</p>
+            ${restaurant.dateVisited ? `
+                <p class="restaurant-date">Last visited: ${restaurant.dateVisited}</p>
+            ` : ''}
             ${restaurant.dishes ? `
                 <div class="restaurant-dishes">
                     <strong>Recommended dishes:</strong><br>

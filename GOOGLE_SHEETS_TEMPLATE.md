@@ -11,42 +11,43 @@
 
 Each sheet should have these columns in this exact order:
 
-| Column | Header    | Description                           | Example                    |
-|--------|-----------|---------------------------------------|----------------------------|
-| A      | Name      | Restaurant name                       | Joe's Pizza                |
-| B      | Address   | Full street address                   | 7 Carmine St, New York, NY |
-| C      | Dishes    | Comma-separated dish names            | Margherita, Pepperoni      |
-| D      | Latitude  | Decimal latitude coordinate           | 40.7308                    |
-| E      | Longitude | Decimal longitude coordinate          | -74.0023                   |
+| Column | Header           | Description                           | Example                    |
+|--------|------------------|---------------------------------------|----------------------------|
+| A      | Name             | Restaurant name                       | Joe's Pizza                |
+| B      | Address          | Full street address                   | 7 Carmine St, New York, NY |
+| C      | Dishes           | Comma-separated dish names            | Margherita, Pepperoni      |
+| D      | Latitude         | Decimal latitude coordinate           | 40.7308                    |
+| E      | Longitude        | Decimal longitude coordinate          | -74.0023                   |
+| F      | Date Last Visited| Date you last visited (optional)      | December 2024              |
 
 ## Example Sheet: "New York"
 
 ```
-Name                    | Address                           | Dishes                              | Latitude | Longitude
-Joe's Pizza             | 7 Carmine St, New York, NY        | Margherita, Pepperoni              | 40.7308  | -74.0023
-Katz's Delicatessen     | 205 E Houston St, New York, NY    | Pastrami, Reuben Sandwich          | 40.7223  | -73.9873
-Levain Bakery           | 167 W 74th St, New York, NY       | Chocolate Chip Cookie, Oatmeal     | 40.7789  | -73.9810
-Xi'an Famous Foods      | 67 Bayard St, New York, NY        | Hand-Ripped Noodles, Lamb Burger   | 40.7159  | -73.9979
+Name                    | Address                           | Dishes                              | Latitude | Longitude | Date Last Visited
+Joe's Pizza             | 7 Carmine St, New York, NY        | Margherita, Pepperoni              | 40.7308  | -74.0023  | December 2024
+Katz's Delicatessen     | 205 E Houston St, New York, NY    | Pastrami, Reuben Sandwich          | 40.7223  | -73.9873  | November 2024
+Levain Bakery           | 167 W 74th St, New York, NY       | Chocolate Chip Cookie, Oatmeal     | 40.7789  | -73.9810  |
+Xi'an Famous Foods      | 67 Bayard St, New York, NY        | Hand-Ripped Noodles, Lamb Burger   | 40.7159  | -73.9979  | January 2025
 ```
 
 ## Example Sheet: "San Francisco"
 
 ```
-Name                    | Address                           | Dishes                              | Latitude | Longitude
-Tartine Bakery          | 600 Guerrero St, San Francisco    | Morning Bun, Croissant             | 37.7618  | -122.4220
-Swan Oyster Depot       | 1517 Polk St, San Francisco       | Clam Chowder, Oysters              | 37.7914  | -122.4213
-La Taqueria             | 2889 Mission St, San Francisco    | Carne Asada Burrito                | 37.7518  | -122.4180
-Zuni Café               | 1658 Market St, San Francisco     | Roast Chicken, Caesar Salad        | 37.7728  | -122.4211
+Name                    | Address                           | Dishes                              | Latitude | Longitude | Date Last Visited
+Tartine Bakery          | 600 Guerrero St, San Francisco    | Morning Bun, Croissant             | 37.7618  | -122.4220 | October 2024
+Swan Oyster Depot       | 1517 Polk St, San Francisco       | Clam Chowder, Oysters              | 37.7914  | -122.4213 | October 2024
+La Taqueria             | 2889 Mission St, San Francisco    | Carne Asada Burrito                | 37.7518  | -122.4180 |
+Zuni Café               | 1658 Market St, San Francisco     | Roast Chicken, Caesar Salad        | 37.7728  | -122.4211 | March 2024
 ```
 
 ## Example Sheet: "Tokyo"
 
 ```
-Name                    | Address                           | Dishes                              | Latitude  | Longitude
-Sukiyabashi Jiro        | 2-15 Ginza 4-chome, Tokyo         | Omakase Sushi                      | 35.6714   | 139.7635
-Ichiran Ramen           | 1-22-7 Shibuya, Tokyo             | Tonkotsu Ramen                     | 35.6602   | 139.7005
-Tsukiji Market          | 5-2-1 Tsukiji, Chuo, Tokyo        | Fresh Sashimi, Sea Urchin          | 35.6654   | 139.7707
-Narisawa                | 2-6-15 Minami-Aoyama, Tokyo       | Tasting Menu                       | 35.6658   | 139.7151
+Name                    | Address                           | Dishes                              | Latitude  | Longitude | Date Last Visited
+Sukiyabashi Jiro        | 2-15 Ginza 4-chome, Tokyo         | Omakase Sushi                      | 35.6714   | 139.7635  | April 2024
+Ichiran Ramen           | 1-22-7 Shibuya, Tokyo             | Tonkotsu Ramen                     | 35.6602   | 139.7005  | April 2024
+Tsukiji Market          | 5-2-1 Tsukiji, Chuo, Tokyo        | Fresh Sashimi, Sea Urchin          | 35.6654   | 139.7707  |
+Narisawa                | 2-6-15 Minami-Aoyama, Tokyo       | Tasting Menu                       | 35.6658   | 139.7151  | April 2024
 ```
 
 ## Tips for Getting Coordinates
@@ -73,12 +74,14 @@ For many restaurants at once:
 
 ## Important Notes
 
-- **First row MUST be headers**: Name, Address, Dishes, Latitude, Longitude
-- **Don't skip columns**: Even if you don't have dishes, leave the column empty
+- **First row MUST be headers**: Name, Address, Dishes, Latitude, Longitude, Date Last Visited
+- **Don't skip columns**: Even if you don't have data for a column, leave it empty (don't delete the column)
 - **Coordinates are optional**: If you don't provide lat/lng, the restaurant will still show in the list, just not on the map
 - **Dishes can be empty**: If you don't want to list specific dishes, leave column C blank
+- **Date is optional**: Leave column F blank if you don't want to show when you last visited
 - **Use decimal degrees**: Not degrees/minutes/seconds (use 40.7308, not 40°43'50.9"N)
 - **Negative longitude**: Western hemisphere uses negative values (e.g., -122.4220 for San Francisco)
+- **Date format is flexible**: Use any format you like (e.g., "December 2024", "12/2024", "Dec 24")
 
 ## Making the Spreadsheet Public
 
