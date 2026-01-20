@@ -25,7 +25,7 @@ async function loadGearData() {
 }
 
 function parseGearData(values) {
-    // Skip header row, assume columns: Category, Product Name, Description
+    // Skip header row, assume columns: Category, Product Name, Description, URL
     const gearByCategory = {};
 
     for (let i = 1; i < values.length; i++) {
@@ -35,6 +35,7 @@ function parseGearData(values) {
         const category = row[0];
         const productName = row[1];
         const description = row[2] || '';
+        const url = row[3] || '';
 
         if (!gearByCategory[category]) {
             gearByCategory[category] = [];
@@ -42,7 +43,8 @@ function parseGearData(values) {
 
         gearByCategory[category].push({
             name: productName,
-            description: description
+            description: description,
+            url: url
         });
     }
 
@@ -80,7 +82,14 @@ function renderGearSections(gearByCategory) {
 
         gearByCategory[category].forEach(item => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `<strong>${item.name}</strong> - ${item.description}`;
+
+            // If URL exists, make product name a link
+            if (item.url) {
+                listItem.innerHTML = `<strong><a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.name}</a></strong> - ${item.description}`;
+            } else {
+                listItem.innerHTML = `<strong>${item.name}</strong> - ${item.description}`;
+            }
+
             list.appendChild(listItem);
         });
 

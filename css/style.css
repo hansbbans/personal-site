@@ -240,6 +240,16 @@ img {
     font-weight: 600;
 }
 
+.gear-list strong a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.gear-list strong a:hover {
+    text-decoration: underline;
+}
+
 .gear-category {
     color: var(--primary-color);
     font-size: 0.875rem;
