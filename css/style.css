@@ -379,6 +379,8 @@ img {
 .photo-item img {
     width: 100%;
     height: auto;
+    max-height: 600px;
+    object-fit: cover;
     display: block;
     transition: var(--transition);
 }
