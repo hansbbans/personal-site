@@ -372,7 +372,8 @@ img {
     overflow: hidden;
     border-radius: 1rem;
     cursor: pointer;
-    max-width: 100%;
+    max-width: 800px;
+    width: 100%;
 }
 
 .photo-item img {
