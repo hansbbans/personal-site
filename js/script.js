@@ -79,7 +79,7 @@ async function loadRestaurantData() {
 function parseRestaurantData(values) {
     if (!values || values.length < 2) return [];
 
-    // Assume first row is headers: Name, Address, Dishes, Latitude, Longitude, Date Last Visited
+    // Assume first row is headers: Name, Date Last Visited, Address, Dishes, Latitude, Longitude
     const headers = values[0].map(h => h.toLowerCase());
     const restaurants = [];
 
@@ -89,11 +89,11 @@ function parseRestaurantData(values) {
 
         const restaurant = {
             name: row[0] || '',
-            address: row[1] || '',
-            dishes: row[2] || '',
-            lat: parseFloat(row[3]) || null,
-            lng: parseFloat(row[4]) || null,
-            dateVisited: row[5] || null
+            dateVisited: row[1] || null,
+            address: row[2] || '',
+            dishes: row[3] || '',
+            lat: parseFloat(row[4]) || null,
+            lng: parseFloat(row[5]) || null
         };
 
         restaurants.push(restaurant);
