@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gear - Hans</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎒</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="nav-brand">Hans</a>
             <ul class="nav-menu">
-                <li><a href="gear.html" class="active">Gear</a></li>
-                <li><a href="food.html">Food</a></li>
-                <li><a href="photos.html">Photos</a></li>
-                <li><a href="books.html">Books</a></li>
+                <li><a href="about.html">👤 About</a></li>
+                <li><a href="gear.html" class="active">🎒 Gear</a></li>
+                <li><a href="food.html">🍜 Food</a></li>
+                <li><a href="photos.html">📷 Photos</a></li>
+                <li><a href="books.html">📚 Books</a></li>
+                <li><a href="now.html">⏰ Now</a></li>
             </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -30,67 +37,85 @@
     <main>
         <section class="section">
             <div class="container">
-                <h2 class="section-title">My Setup</h2>
+                <h2 class="section-title">🎒 My Setup</h2>
                 <p class="section-subtitle">Hardware and software I use daily</p>
 
                 <!-- Table of Contents -->
-                <nav class="gear-toc">
+                <nav class="gear-toc fade-in">
                     <h3>Contents</h3>
                     <ul>
-                        <li><a href="#electronics">Electronics</a></li>
-                        <li><a href="#edc">EDC</a></li>
+                        <li><a href="#electronics">💻 Electronics</a></li>
+                        <li><a href="#edc">🎒 EDC</a></li>
                     </ul>
                 </nav>
 
                 <!-- Gear Sections -->
                 <div class="gear-content">
                     <section id="electronics" class="gear-section">
-                        <h2>Electronics</h2>
+                        <h2>💻 Electronics</h2>
                         <ul class="gear-list">
-                            <li>
-                                <strong>M1 14" MacBook Pro</strong> - The best thing I can say is that I never notice anything about this computer.
+                            <li class="standout fade-in">
+                                <strong><a href="#">M1 14" MacBook Pro</a></strong>
+                                <span class="badge badge-daily-driver">⭐ Daily Driver</span>
+                                <br>The best thing I can say is that I never notice anything about this computer.
                             </li>
-                            <li>
-                                <strong>Apple Studio Display</strong> - Crystal clear picture for connecting to the MBP but I would consider buying something bigger that works with other devices if I could do it over.
+                            <li class="fade-in">
+                                <strong><a href="#">Apple Studio Display</a></strong>
+                                <br>Crystal clear picture for connecting to the MBP but I would consider buying something bigger that works with other devices if I could do it over.
                             </li>
-                            <li>
-                                <strong>11" iPad Pro with Cellular</strong> - The perfect daily computer except for the restrictions of iPadOS.
+                            <li class="standout fade-in">
+                                <strong><a href="#">11" iPad Pro with Cellular</a></strong>
+                                <span class="badge badge-favorite">❤️ Favorite</span>
+                                <br>The perfect daily computer except for the restrictions of iPadOS.
                             </li>
-                            <li>
-                                <strong>iPhone 15 Pro Max</strong> - iPhones are pretty boring at this point and I also find this size to be annoying so looking forward to either downsizing or getting the rumored fold phone.
+                            <li class="fade-in">
+                                <strong><a href="#">iPhone 15 Pro Max</a></strong>
+                                <br>iPhones are pretty boring at this point and I also find this size to be annoying so looking forward to either downsizing or getting the rumored fold phone.
                             </li>
-                            <li>
-                                <strong>Rolling Square inCharge XL 6-in-1 Multi Charging Cable</strong> - I've slowly been purging all of my non USB-C devices but it still comes up somehow.
+                            <li class="fade-in">
+                                <strong><a href="#">Rolling Square inCharge XL 6-in-1 Multi Charging Cable</a></strong>
+                                <br>I've slowly been purging all of my non USB-C devices but it still comes up somehow.
                             </li>
-                            <li>
-                                <strong>Baseus USB C to USB C Cable, 100W Retractable</strong> - Why tie cables when you can retract them!
+                            <li class="fade-in">
+                                <strong><a href="#">Baseus USB C to USB C Cable, 100W Retractable</a></strong>
+                                <br>Why tie cables when you can retract them!
                             </li>
                         </ul>
                     </section>
 
                     <section id="edc" class="gear-section">
-                        <h2>EDC</h2>
+                        <h2>🎒 EDC</h2>
                         <ul class="gear-list">
-                            <li>
-                                <strong>Evergoods CTB 20 or Aer City Pack Pro</strong> - After having purchased almost every backpack in the last five years, I've decided that the CTB20 and the Aer CPP are the two closest to perfect. I prefer the vertical nature of the CPP but I do like the incremental pockets of the CTB20.
+                            <li class="standout fade-in">
+                                <strong><a href="#">Evergoods CTB 20</a></strong> or <strong><a href="#">Aer City Pack Pro</a></strong>
+                                <span class="badge badge-daily-driver">⭐ Daily Driver</span>
+                                <br>After having purchased almost every backpack in the last five years, I've decided that the CTB20 and the Aer CPP are the two closest to perfect. I prefer the vertical nature of the CPP but I do like the incremental pockets of the CTB20.
                             </li>
-                            <li>
-                                <strong>Aer Day Sling 3 Max X-Pac</strong> - Perfect size for a vacation or a long day out in the city. My only quibble is the buckle can be a little fiddly.
+                            <li class="standout fade-in">
+                                <strong><a href="#">Aer Day Sling 3 Max X-Pac</a></strong>
+                                <span class="badge badge-favorite">❤️ Favorite</span>
+                                <br>Perfect size for a vacation or a long day out in the city. My only quibble is the buckle can be a little fiddly.
                             </li>
-                            <li>
-                                <strong>Hero Clip Carabiners</strong> - Useful for hanging stuff including my kiddo's jacket and water bottle.
+                            <li class="fade-in">
+                                <strong><a href="#">Hero Clip Carabiners</a></strong>
+                                <br>Useful for hanging stuff including my kiddo's jacket and water bottle.
                             </li>
-                            <li>
-                                <strong>Owala Water Bottle</strong> - Having tried every major water bottle, the Owala one is the easiest to clean and best cap/lid system.
+                            <li class="standout fade-in">
+                                <strong><a href="#">Owala Water Bottle</a></strong>
+                                <span class="badge badge-favorite">❤️ Favorite</span>
+                                <br>Having tried every major water bottle, the Owala one is the easiest to clean and best cap/lid system.
                             </li>
-                            <li>
-                                <strong>WUBEN G5 Rechargeable EDC Flashlight</strong> - Very light and very bright! The light can also pivot so you can clip it on your clothes and use it as a makeshift headlight.
+                            <li class="fade-in">
+                                <strong><a href="#">WUBEN G5 Rechargeable EDC Flashlight</a></strong>
+                                <br>Very light and very bright! The light can also pivot so you can clip it on your clothes and use it as a makeshift headlight.
                             </li>
-                            <li>
-                                <strong>Nitecore NB Air 5000mAh Ultra Lightweight</strong> - For peace of mind to have an extra little juice if any device dies out.
+                            <li class="fade-in">
+                                <strong><a href="#">Nitecore NB Air 5000mAh Ultra Lightweight</a></strong>
+                                <br>For peace of mind to have an extra little juice if any device dies out.
                             </li>
-                            <li>
-                                <strong>Pilot Juice Up 04 Retractable Gel Ink Pen (0.4mm)</strong> - The best everyday cheap pen that writes like a charm.
+                            <li class="fade-in">
+                                <strong><a href="#">Pilot Juice Up 04 Retractable Gel Ink Pen (0.4mm)</a></strong>
+                                <br>The best everyday cheap pen that writes like a charm.
                             </li>
                         </ul>
                     </section>
@@ -101,11 +126,21 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Hans. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="GitHub">⌨️</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="Email">✉️</a>
+                </div>
+                <p>&copy; 2025 Hans. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script src="js/navigation.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
     <script src="js/gear.js"></script>
 </body>
 </html>

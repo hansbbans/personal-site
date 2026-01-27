@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photos - Hans</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="nav-brand">Hans</a>
             <ul class="nav-menu">
-                <li><a href="gear.html">Gear</a></li>
-                <li><a href="food.html">Food</a></li>
-                <li><a href="photos.html" class="active">Photos</a></li>
-                <li><a href="books.html">Books</a></li>
+                <li><a href="about.html">👤 About</a></li>
+                <li><a href="gear.html">🎒 Gear</a></li>
+                <li><a href="food.html">🍜 Food</a></li>
+                <li><a href="photos.html" class="active">📷 Photos</a></li>
+                <li><a href="books.html">📚 Books</a></li>
+                <li><a href="now.html">⏰ Now</a></li>
             </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -30,12 +37,12 @@
     <main>
         <section class="section">
             <div class="container">
-                <h2 class="section-title">Photography</h2>
+                <h2 class="section-title">📷 Photography</h2>
                 <p class="section-subtitle">Moments captured</p>
 
                 <div class="photos-grid">
                     <!-- Add your own photos here - just copy images to the images/ folder and update the src and alt text -->
-                    <div class="photo-item">
+                    <div class="photo-item fade-in">
                         <img src="images/R0002049.jpg" alt="Sample photo" loading="lazy">
                         <div class="photo-overlay">
                             <span class="photo-location">Update location</span>
@@ -44,7 +51,7 @@
 
                     <!-- Add more photos by copying this block and updating the image src and location -->
                     <!--
-                    <div class="photo-item">
+                    <div class="photo-item fade-in">
                         <img src="images/your-photo-name.jpg" alt="Photo description" loading="lazy">
                         <div class="photo-overlay">
                             <span class="photo-location">Location name</span>
@@ -58,7 +65,15 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Hans. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="GitHub">⌨️</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="Email">✉️</a>
+                </div>
+                <p>&copy; 2025 Hans. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -69,6 +84,8 @@
     </div>
 
     <script src="js/navigation.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
     <script src="js/lightbox.js"></script>
 </body>
 </html>
