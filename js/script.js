@@ -192,7 +192,29 @@ function updateMap(restaurants) {
     const validRestaurants = restaurants.filter(r => r.lat && r.lng);
 
     if (validRestaurants.length === 0) {
-        // If no coordinates, just show default view
+        // If no coordinates, try to geocode based on city name or show default
+        const cityName = citiesData[currentCity]?.name || '';
+        // Default city centers as fallback
+        const cityCenters = {
+            'New York': { lat: 40.7128, lng: -74.0060 },
+            'NYC': { lat: 40.7128, lng: -74.0060 },
+            'San Francisco': { lat: 37.7749, lng: -122.4194 },
+            'SF': { lat: 37.7749, lng: -122.4194 },
+            'Los Angeles': { lat: 34.0522, lng: -118.2437 },
+            'LA': { lat: 34.0522, lng: -118.2437 },
+            'Chicago': { lat: 41.8781, lng: -87.6298 },
+            'Seattle': { lat: 47.6062, lng: -122.3321 },
+            'Austin': { lat: 30.2672, lng: -97.7431 },
+            'Boston': { lat: 42.3601, lng: -71.0589 },
+            'Miami': { lat: 25.7617, lng: -80.1918 },
+            'Tokyo': { lat: 35.6762, lng: 139.6503 },
+            'London': { lat: 51.5074, lng: -0.1278 },
+            'Paris': { lat: 48.8566, lng: 2.3522 },
+            'Seoul': { lat: 37.5665, lng: 126.9780 }
+        };
+        const center = cityCenters[cityName] || { lat: 37.7749, lng: -122.4194 };
+        map.setCenter(center);
+        map.setZoom(12);
         return;
     }
 
@@ -238,6 +260,12 @@ function updateMap(restaurants) {
         map.setZoom(15);
     } else {
         map.fitBounds(bounds);
+        // Add listener to prevent over-zooming on fitBounds
+        google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+            if (map.getZoom() > 16) {
+                map.setZoom(16);
+            }
+        });
     }
 }
 
