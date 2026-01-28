@@ -1,4 +1,4 @@
-/* Food Page Styles */
+/* Food Page Styles - Editorial Warmth */
 
 /* Category Filter Pills */
 .category-filters {
@@ -13,55 +13,57 @@
 .category-pill {
     padding: 0.5rem 1rem;
     border: 2px solid var(--border-color);
-    background: var(--bg-primary);
+    background: var(--bg-card);
     border-radius: 2rem;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all var(--transition-fast);
     color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 0.35rem;
+    font-family: var(--font-mono);
 }
 
 .category-pill:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .category-pill.active {
-    background: var(--primary-color);
+    background: var(--primary);
     color: white;
-    border-color: var(--primary-color);
+    border-color: var(--primary);
 }
 
 .category-pill .count {
     background: rgba(255,255,255,0.2);
     padding: 0.1rem 0.4rem;
     border-radius: 1rem;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 .category-pill:not(.active) .count {
     background: var(--bg-secondary);
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 /* Stats Bar */
 .food-stats {
     text-align: center;
     padding: 0.75rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 0.9rem;
+    font-family: var(--font-mono);
     margin-bottom: 1rem;
 }
 
 /* Food Grid */
 .food-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
@@ -71,16 +73,34 @@
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    transition: all var(--transition-medium);
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.food-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-medium);
 }
 
 .food-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color);
+    border-color: var(--primary);
+}
+
+.food-card:hover::before {
+    transform: scaleX(1);
 }
 
 .food-card-header {
@@ -96,7 +116,8 @@
 }
 
 .food-card-name {
-    font-size: 1.15rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
@@ -115,22 +136,24 @@
     font-weight: 600;
     white-space: nowrap;
     flex-shrink: 0;
+    font-family: var(--font-mono);
 }
 
 .food-card-category {
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--primary-color);
-    background: rgba(13, 148, 136, 0.1);
+    color: var(--primary);
+    background: rgba(194, 65, 12, 0.1);
     padding: 0.25rem 0.6rem;
     border-radius: 0.25rem;
+    font-family: var(--font-mono);
 }
 
 [data-theme="dark"] .food-card-category {
-    background: rgba(45, 212, 191, 0.15);
+    background: rgba(251, 146, 60, 0.15);
 }
 
 .food-card-body {
@@ -163,11 +186,12 @@
 }
 
 .food-card-dishes-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
 }
 
 .food-card-dish-tags {
@@ -182,13 +206,13 @@
     border-radius: 1rem;
     font-size: 0.8rem;
     color: var(--text-primary);
-    transition: var(--transition);
+    transition: all var(--transition-fast);
 }
 
 .dish-pill.highlight {
     background: linear-gradient(135deg, #fef3c7, #fde68a);
     color: #92400e;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 [data-theme="dark"] .dish-pill.highlight {
@@ -208,26 +232,27 @@
     gap: 0.5rem;
     width: 100%;
     padding: 1rem;
-    background: var(--bg-secondary);
+    background: var(--bg-card);
     border: 2px dashed var(--border-color);
     border-radius: 0.75rem;
     color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all var(--transition-fast);
+    font-family: var(--font-mono);
 }
 
 .map-toggle:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .map-toggle.active {
     border-style: solid;
-    border-color: var(--primary-color);
-    background: rgba(13, 148, 136, 0.05);
-    color: var(--primary-color);
+    border-color: var(--primary);
+    background: var(--bg-warm);
+    color: var(--primary);
 }
 
 .map-wrapper {
@@ -240,7 +265,7 @@
 
 .map-wrapper.visible {
     display: block;
-    animation: slideDown 0.3s ease;
+    animation: slideDown 0.4s var(--ease-out-expo);
 }
 
 @keyframes slideDown {
@@ -264,7 +289,7 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 4rem 2rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .food-empty-icon {
@@ -275,11 +300,6 @@
 
 .food-empty-text {
     font-size: 1.1rem;
-}
-
-/* Category Emoji Map */
-.category-emoji {
-    margin-right: 0.25rem;
 }
 
 /* Responsive */
@@ -302,19 +322,5 @@
     
     .map-container {
         height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .food-card-header {
-        padding: 1rem 1rem 0.5rem;
-    }
-    
-    .food-card-body {
-        padding: 0 1rem 1rem;
-    }
-    
-    .food-card-name {
-        font-size: 1.05rem;
     }
 }

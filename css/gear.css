@@ -1,4 +1,4 @@
-/* Gear Page Styles */
+/* Gear Page Styles - Editorial Warmth */
 
 /* Category Filter Pills */
 .category-filters {
@@ -13,54 +13,56 @@
 .category-pill {
     padding: 0.5rem 1rem;
     border: 2px solid var(--border-color);
-    background: var(--bg-primary);
+    background: var(--bg-card);
     border-radius: 2rem;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all var(--transition-fast);
     color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 0.35rem;
+    font-family: var(--font-mono);
 }
 
 .category-pill:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .category-pill.active {
-    background: var(--primary-color);
+    background: var(--primary);
     color: white;
-    border-color: var(--primary-color);
+    border-color: var(--primary);
 }
 
 .category-pill .count {
     background: rgba(255,255,255,0.2);
     padding: 0.1rem 0.4rem;
     border-radius: 1rem;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 .category-pill:not(.active) .count {
     background: var(--bg-secondary);
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 /* Stats Bar */
 .gear-stats {
     text-align: center;
     padding: 0.75rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 0.9rem;
+    font-family: var(--font-mono);
     margin-bottom: 1rem;
 }
 
 /* Gear Grid */
 .gear-grid-dynamic {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     gap: 1.25rem;
     margin-bottom: 2rem;
 }
@@ -71,22 +73,42 @@
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    transition: all var(--transition-medium);
     border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.gear-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background var(--transition-fast);
 }
 
 .gear-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) translateX(2px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color);
+    border-color: var(--primary);
+}
+
+.gear-card:hover::before {
+    background: var(--primary);
+}
+
+.gear-card.standout::before {
+    background: var(--primary);
 }
 
 .gear-card.standout {
-    border-left: 4px solid var(--primary-color);
+    background: var(--bg-warm);
 }
 
 .gear-card-body {
-    padding: 1.25rem;
+    padding: 1.5rem;
 }
 
 .gear-card-header {
@@ -99,43 +121,46 @@
 
 .gear-card-category {
     display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--primary-color);
-    background: rgba(13, 148, 136, 0.1);
-    padding: 0.2rem 0.5rem;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    background: rgba(194, 65, 12, 0.1);
+    padding: 0.25rem 0.6rem;
     border-radius: 0.25rem;
+    font-family: var(--font-mono);
 }
 
 [data-theme="dark"] .gear-card-category {
-    background: rgba(45, 212, 191, 0.15);
+    background: rgba(251, 146, 60, 0.15);
 }
 
 .gear-card-name {
-    font-size: 1.1rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0 0 0.5rem;
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .gear-card-name a {
-    color: var(--primary-color);
+    color: var(--primary);
     text-decoration: none;
-    transition: var(--transition);
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid transparent;
 }
 
 .gear-card-name a:hover {
-    text-decoration: underline;
+    border-bottom-color: var(--primary);
 }
 
 .gear-card-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* Empty State */
@@ -143,7 +168,7 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 4rem 2rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .gear-empty-icon {
@@ -172,5 +197,9 @@
     
     .category-pill {
         flex-shrink: 0;
+    }
+    
+    .gear-card-body {
+        padding: 1.25rem;
     }
 }
