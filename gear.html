@@ -6,6 +6,7 @@
     <title>Gear - Hans</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎒</text></svg>">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gear.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -38,87 +39,19 @@
         <section class="section">
             <div class="container">
                 <h2 class="section-title">🎒 My Setup</h2>
-                <p class="section-subtitle">Hardware and software I use daily</p>
+                <p class="section-subtitle">Hardware and tools I use daily</p>
 
-                <!-- Table of Contents -->
-                <nav class="gear-toc fade-in">
-                    <h3>Contents</h3>
-                    <ul>
-                        <li><a href="#electronics">💻 Electronics</a></li>
-                        <li><a href="#edc">🎒 EDC</a></li>
-                    </ul>
-                </nav>
+                <!-- Category Filter Pills -->
+                <div class="category-filters" id="categoryFilters">
+                    <button class="category-pill active" data-category="all">All</button>
+                </div>
 
-                <!-- Gear Sections -->
-                <div class="gear-content">
-                    <section id="electronics" class="gear-section">
-                        <h2>💻 Electronics</h2>
-                        <ul class="gear-list">
-                            <li class="standout fade-in">
-                                <strong><a href="#">M1 14" MacBook Pro</a></strong>
-                                <span class="badge badge-daily-driver">⭐ Daily Driver</span>
-                                <br>The best thing I can say is that I never notice anything about this computer.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">Apple Studio Display</a></strong>
-                                <br>Crystal clear picture for connecting to the MBP but I would consider buying something bigger that works with other devices if I could do it over.
-                            </li>
-                            <li class="standout fade-in">
-                                <strong><a href="#">11" iPad Pro with Cellular</a></strong>
-                                <span class="badge badge-favorite">❤️ Favorite</span>
-                                <br>The perfect daily computer except for the restrictions of iPadOS.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">iPhone 15 Pro Max</a></strong>
-                                <br>iPhones are pretty boring at this point and I also find this size to be annoying so looking forward to either downsizing or getting the rumored fold phone.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">Rolling Square inCharge XL 6-in-1 Multi Charging Cable</a></strong>
-                                <br>I've slowly been purging all of my non USB-C devices but it still comes up somehow.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">Baseus USB C to USB C Cable, 100W Retractable</a></strong>
-                                <br>Why tie cables when you can retract them!
-                            </li>
-                        </ul>
-                    </section>
+                <!-- Stats Bar -->
+                <div class="gear-stats" id="gearStats"></div>
 
-                    <section id="edc" class="gear-section">
-                        <h2>🎒 EDC</h2>
-                        <ul class="gear-list">
-                            <li class="standout fade-in">
-                                <strong><a href="#">Evergoods CTB 20</a></strong> or <strong><a href="#">Aer City Pack Pro</a></strong>
-                                <span class="badge badge-daily-driver">⭐ Daily Driver</span>
-                                <br>After having purchased almost every backpack in the last five years, I've decided that the CTB20 and the Aer CPP are the two closest to perfect. I prefer the vertical nature of the CPP but I do like the incremental pockets of the CTB20.
-                            </li>
-                            <li class="standout fade-in">
-                                <strong><a href="#">Aer Day Sling 3 Max X-Pac</a></strong>
-                                <span class="badge badge-favorite">❤️ Favorite</span>
-                                <br>Perfect size for a vacation or a long day out in the city. My only quibble is the buckle can be a little fiddly.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">Hero Clip Carabiners</a></strong>
-                                <br>Useful for hanging stuff including my kiddo's jacket and water bottle.
-                            </li>
-                            <li class="standout fade-in">
-                                <strong><a href="#">Owala Water Bottle</a></strong>
-                                <span class="badge badge-favorite">❤️ Favorite</span>
-                                <br>Having tried every major water bottle, the Owala one is the easiest to clean and best cap/lid system.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">WUBEN G5 Rechargeable EDC Flashlight</a></strong>
-                                <br>Very light and very bright! The light can also pivot so you can clip it on your clothes and use it as a makeshift headlight.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">Nitecore NB Air 5000mAh Ultra Lightweight</a></strong>
-                                <br>For peace of mind to have an extra little juice if any device dies out.
-                            </li>
-                            <li class="fade-in">
-                                <strong><a href="#">Pilot Juice Up 04 Retractable Gel Ink Pen (0.4mm)</a></strong>
-                                <br>The best everyday cheap pen that writes like a charm.
-                            </li>
-                        </ul>
-                    </section>
+                <!-- Gear Grid -->
+                <div class="gear-grid-dynamic" id="gearGrid">
+                    <p class="loading-message">Loading gear...</p>
                 </div>
             </div>
         </section>
@@ -140,7 +73,6 @@
 
     <script src="js/navigation.js"></script>
     <script src="js/theme.js"></script>
-    <script src="js/animations.js"></script>
     <script src="js/gear.js"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fede3c0d4b03486c98392098d02e566b"}'></script>
 </body>

@@ -1,99 +1,184 @@
-// Configuration
+// Gear Page Script
 const GOOGLE_SHEETS_API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
-const GEAR_SPREADSHEET_ID = 'YOUR_GEAR_SPREADSHEET_ID_HERE'; // Replace with your gear spreadsheet ID
+const GEAR_SPREADSHEET_ID = '1CjV68p-3hjCF1Hl5DMNjDFkRHjn6tIIBpCTWpHZju6s';
 
-// Load gear data on page load
+// Category emoji mapping
+const CATEGORY_EMOJI = {
+    'electronics': '💻',
+    'edc': '🎒',
+    'audio': '🎧',
+    'camera': '📷',
+    'travel': '✈️',
+    'office': '🖥️',
+    'fitness': '💪',
+    'default': '📦'
+};
+
+// Badge styles
+const BADGE_STYLES = {
+    'daily driver': { emoji: '⭐', class: 'badge-daily-driver' },
+    'favorite': { emoji: '❤️', class: 'badge-favorite' },
+    'must have': { emoji: '🔥', class: 'badge-must-order' }
+};
+
+// State
+let currentCategory = 'all';
+let gearData = [];
+
+// Get emoji for category
+function getCategoryEmoji(category) {
+    if (!category) return CATEGORY_EMOJI.default;
+    const key = category.toLowerCase().trim();
+    return CATEGORY_EMOJI[key] || CATEGORY_EMOJI.default;
+}
+
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadGearData();
 });
 
+// Load data from Google Sheets
 async function loadGearData() {
     try {
         const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${GEAR_SPREADSHEET_ID}/values/Sheet1?key=${GOOGLE_SHEETS_API_KEY}`;
         const response = await fetch(dataUrl);
         const data = await response.json();
-
-        if (!data.values || data.values.length < 2) {
-            console.error('No gear data found');
-            return;
-        }
-
-        renderGearSections(parseGearData(data.values));
+        
+        gearData = parseGearData(data.values);
+        
+        renderCategoryFilters();
+        renderGear();
     } catch (error) {
-        console.error('Error loading gear data:', error);
+        console.error('Error loading gear:', error);
+        document.getElementById('gearGrid').innerHTML = 
+            '<p class="loading-message">Unable to load gear.</p>';
     }
 }
 
 function parseGearData(values) {
-    // Skip header row, assume columns: Name, Category, URL, Description
-    const gearByCategory = {};
-
+    if (!values || values.length < 2) return [];
+    
+    // Headers: Name, Category, Description, Badge, Amazon Link, ASIN
+    const items = [];
     for (let i = 1; i < values.length; i++) {
         const row = values[i];
-        if (!row[0] || !row[1]) continue; // Skip if no name or category
-
-        const productName = row[0];
-        const category = row[1];
-        const url = row[2] || '';
-        const description = row[3] || '';
-
-        if (!gearByCategory[category]) {
-            gearByCategory[category] = [];
-        }
-
-        gearByCategory[category].push({
-            name: productName,
-            description: description,
-            url: url
+        if (!row[0]) continue;
+        
+        items.push({
+            name: row[0] || '',
+            category: row[1] || '',
+            description: row[2] || '',
+            badge: row[3] || '',
+            amazonLink: row[4] || '',
+            asin: row[5] || ''
         });
     }
-
-    return gearByCategory;
+    return items;
 }
 
-function renderGearSections(gearByCategory) {
-    const tocContainer = document.querySelector('.gear-toc ul');
-    const contentContainer = document.querySelector('.gear-content');
-
-    // Clear existing content
-    tocContainer.innerHTML = '';
-    contentContainer.innerHTML = '';
-
-    // Generate sections for each category
-    Object.keys(gearByCategory).forEach((category, index) => {
-        const categoryId = category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-
-        // Add to table of contents
-        const tocItem = document.createElement('li');
-        tocItem.innerHTML = `<a href="#${categoryId}">${category}</a>`;
-        tocContainer.appendChild(tocItem);
-
-        // Create section
-        const section = document.createElement('section');
-        section.id = categoryId;
-        section.className = 'gear-section';
-
-        const heading = document.createElement('h2');
-        heading.textContent = category;
-        section.appendChild(heading);
-
-        const list = document.createElement('ul');
-        list.className = 'gear-list';
-
-        gearByCategory[category].forEach(item => {
-            const listItem = document.createElement('li');
-
-            // If URL exists, make product name a link
-            if (item.url) {
-                listItem.innerHTML = `<strong><a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.name}</a></strong> - ${item.description}`;
-            } else {
-                listItem.innerHTML = `<strong>${item.name}</strong> - ${item.description}`;
-            }
-
-            list.appendChild(listItem);
-        });
-
-        section.appendChild(list);
-        contentContainer.appendChild(section);
+// Render category filter pills
+function renderCategoryFilters() {
+    const container = document.getElementById('categoryFilters');
+    const categories = {};
+    
+    // Count categories
+    gearData.forEach(item => {
+        if (item.category && item.category.trim()) {
+            const cat = item.category.trim();
+            categories[cat] = (categories[cat] || 0) + 1;
+        }
     });
+    
+    const sorted = Object.entries(categories)
+        .sort((a, b) => b[1] - a[1]);
+    
+    container.innerHTML = `
+        <button class="category-pill active" data-category="all">
+            All <span class="count">${gearData.length}</span>
+        </button>
+        ${sorted.map(([cat, count]) => `
+            <button class="category-pill" data-category="${cat}">
+                <span class="category-emoji">${getCategoryEmoji(cat)}</span>
+                ${cat}
+                <span class="count">${count}</span>
+            </button>
+        `).join('')}
+    `;
+    
+    container.querySelectorAll('.category-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            currentCategory = pill.dataset.category;
+            container.querySelectorAll('.category-pill').forEach(p => 
+                p.classList.toggle('active', p.dataset.category === currentCategory)
+            );
+            renderGear();
+        });
+    });
+}
+
+// Get filtered gear
+function getFilteredGear() {
+    if (currentCategory === 'all') {
+        return gearData;
+    }
+    return gearData.filter(item => 
+        item.category && item.category.trim().toLowerCase() === currentCategory.toLowerCase()
+    );
+}
+
+// Get badge HTML
+function getBadgeHtml(badge) {
+    if (!badge) return '';
+    const key = badge.toLowerCase().trim();
+    const style = BADGE_STYLES[key];
+    if (!style) return '';
+    return `<span class="badge ${style.class}">${style.emoji} ${badge}</span>`;
+}
+
+// Render gear
+function renderGear() {
+    const grid = document.getElementById('gearGrid');
+    const items = getFilteredGear();
+    const stats = document.getElementById('gearStats');
+    
+    // Update stats
+    if (currentCategory === 'all') {
+        stats.textContent = `${gearData.length} items`;
+    } else {
+        stats.textContent = `${items.length} of ${gearData.length} items`;
+    }
+    
+    if (items.length === 0) {
+        grid.innerHTML = `
+            <div class="gear-empty">
+                <div class="gear-empty-icon">🎒</div>
+                <div class="gear-empty-text">No gear in this category yet</div>
+            </div>
+        `;
+        return;
+    }
+    
+    grid.innerHTML = items.map(item => `
+        <div class="gear-card ${item.badge ? 'standout' : ''}">
+            <div class="gear-card-body">
+                <div class="gear-card-header">
+                    ${item.category ? `
+                        <span class="gear-card-category">
+                            ${getCategoryEmoji(item.category)} ${item.category}
+                        </span>
+                    ` : ''}
+                    ${getBadgeHtml(item.badge)}
+                </div>
+                <h3 class="gear-card-name">
+                    ${item.amazonLink 
+                        ? `<a href="${item.amazonLink}" target="_blank" rel="noopener">${item.name}</a>`
+                        : item.name
+                    }
+                </h3>
+                ${item.description ? `
+                    <p class="gear-card-description">${item.description}</p>
+                ` : ''}
+            </div>
+        </div>
+    `).join('');
 }
