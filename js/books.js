@@ -57,11 +57,16 @@ async function loadBooksData() {
 function parseBookData(values) {
     if (!values || values.length < 2) return [];
     
-    // Headers: Title, Author, Category, Rating, Status, Notes
+    // Headers: Title, Author, Category, Rating, Status, Notes, Amazon Link
     const books = [];
     for (let i = 1; i < values.length; i++) {
         const row = values[i];
         if (!row[0]) continue;
+        
+        // Extract ISBN/ASIN from Amazon link
+        const amazonLink = row[6] || '';
+        const asinMatch = amazonLink.match(/\/dp\/([A-Z0-9]+)/i);
+        const isbn = asinMatch ? asinMatch[1] : null;
         
         books.push({
             title: row[0] || '',
@@ -70,7 +75,10 @@ function parseBookData(values) {
             rating: row[3] ? parseFloat(row[3]) : null,
             status: row[4] || 'Read',
             notes: row[5] || '',
-            coverUrl: row[6] || null // Optional: Cover URL in column G
+            amazonLink: amazonLink,
+            isbn: isbn,
+            // Use Open Library for covers (falls back gracefully if not found)
+            coverUrl: isbn ? `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg` : null
         });
     }
     return books;
@@ -150,34 +158,36 @@ function renderBooks() {
     }
     
     grid.innerHTML = books.map(book => `
-        <div class="book-card">
-            <div class="book-card-cover">
-                ${book.coverUrl 
-                    ? `<img src="${book.coverUrl}" alt="${book.title}" loading="lazy">`
-                    : `<span class="book-card-cover-placeholder">📖</span>`
-                }
-                ${book.rating ? `
-                    <span class="book-card-rating">⭐ ${book.rating}</span>
-                ` : ''}
-                ${book.status && book.status.toLowerCase() === 'reading' ? `
-                    <span class="book-card-status reading">Reading</span>
-                ` : ''}
-                ${book.status && book.status.toLowerCase() === 'to read' ? `
-                    <span class="book-card-status to-read">To Read</span>
-                ` : ''}
+        <a href="${book.amazonLink || '#'}" target="_blank" rel="noopener" class="book-card-link">
+            <div class="book-card">
+                <div class="book-card-cover">
+                    ${book.coverUrl 
+                        ? `<img src="${book.coverUrl}" alt="${book.title}" loading="lazy" onerror="this.parentElement.innerHTML='<span class=\\'book-card-cover-placeholder\\'>📖</span>'">`
+                        : `<span class="book-card-cover-placeholder">📖</span>`
+                    }
+                    ${book.rating ? `
+                        <span class="book-card-rating">⭐ ${book.rating}</span>
+                    ` : ''}
+                    ${book.status && book.status.toLowerCase() === 'reading' ? `
+                        <span class="book-card-status reading">Reading</span>
+                    ` : ''}
+                    ${book.status && book.status.toLowerCase() === 'to read' ? `
+                        <span class="book-card-status to-read">To Read</span>
+                    ` : ''}
+                </div>
+                <div class="book-card-body">
+                    ${book.category ? `
+                        <span class="book-card-category">
+                            ${getCategoryEmoji(book.category)} ${book.category}
+                        </span>
+                    ` : ''}
+                    <h3 class="book-card-title">${book.title}</h3>
+                    <p class="book-card-author">by ${book.author}</p>
+                    ${book.notes ? `
+                        <p class="book-card-notes">${book.notes}</p>
+                    ` : ''}
+                </div>
             </div>
-            <div class="book-card-body">
-                ${book.category ? `
-                    <span class="book-card-category">
-                        ${getCategoryEmoji(book.category)} ${book.category}
-                    </span>
-                ` : ''}
-                <h3 class="book-card-title">${book.title}</h3>
-                <p class="book-card-author">by ${book.author}</p>
-                ${book.notes ? `
-                    <p class="book-card-notes">${book.notes}</p>
-                ` : ''}
-            </div>
-        </div>
+        </a>
     `).join('');
 }
