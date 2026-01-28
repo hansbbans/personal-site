@@ -7,6 +7,10 @@ let currentCity = 0;
 let citiesData = [];
 let map;
 let markers = [];
+let filters = {
+    cuisine: 'all',
+    minRating: 0
+};
 
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,7 +83,7 @@ async function loadRestaurantData() {
 function parseRestaurantData(values) {
     if (!values || values.length < 2) return [];
 
-    // Assume first row is headers: Name, Category, Date Last Visited, Address, Dishes, Latitude, Longitude
+    // Headers: Name, Category, Date Last Visited, Address, Dishes, Latitude, Longitude, Yelp Rating, Google Rating
     const headers = values[0].map(h => h.toLowerCase());
     const restaurants = [];
 
@@ -94,7 +98,9 @@ function parseRestaurantData(values) {
             address: row[3] || '',
             dishes: row[4] || '',
             lat: parseFloat(row[5]) || null,
-            lng: parseFloat(row[6]) || null
+            lng: parseFloat(row[6]) || null,
+            yelpRating: parseFloat(row[7]) || null,
+            googleRating: parseFloat(row[8]) || null
         };
 
         restaurants.push(restaurant);
@@ -115,6 +121,99 @@ function renderCityTabs() {
         button.addEventListener('click', () => showCity(index));
         cityTabsContainer.appendChild(button);
     });
+
+    // Render filters after city tabs
+    renderFilters();
+}
+
+function renderFilters() {
+    // Get all unique cuisines across all cities
+    const allCuisines = new Set();
+    citiesData.forEach(city => {
+        city.restaurants.forEach(r => {
+            if (r.category && r.category.trim()) {
+                allCuisines.add(r.category.trim());
+            }
+        });
+    });
+
+    const cuisineOptions = Array.from(allCuisines).sort();
+
+    // Create filter container
+    const filterContainer = document.createElement('div');
+    filterContainer.className = 'filter-container';
+    filterContainer.innerHTML = `
+        <div class="filter-group">
+            <label for="cuisine-filter">Cuisine:</label>
+            <select id="cuisine-filter">
+                <option value="all">All Cuisines</option>
+                ${cuisineOptions.map(c => `<option value="${c}">${c}</option>`).join('')}
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="rating-filter">Min Google Rating:</label>
+            <select id="rating-filter">
+                <option value="0">Any Rating</option>
+                <option value="4">4.0+</option>
+                <option value="4.3">4.3+</option>
+                <option value="4.5">4.5+</option>
+                <option value="4.7">4.7+</option>
+            </select>
+        </div>
+        <div class="filter-results"></div>
+    `;
+
+    // Insert after city tabs
+    const cityTabs = document.querySelector('.city-tabs');
+    cityTabs.parentNode.insertBefore(filterContainer, cityTabs.nextSibling);
+
+    // Add event listeners
+    document.getElementById('cuisine-filter').addEventListener('change', (e) => {
+        filters.cuisine = e.target.value;
+        applyFilters();
+    });
+
+    document.getElementById('rating-filter').addEventListener('change', (e) => {
+        filters.minRating = parseFloat(e.target.value);
+        applyFilters();
+    });
+}
+
+function applyFilters() {
+    const restaurants = citiesData[currentCity].restaurants;
+    const filtered = filterRestaurants(restaurants);
+    renderRestaurants(filtered);
+    updateMap(filtered);
+    updateFilterResults(filtered.length, restaurants.length);
+}
+
+function filterRestaurants(restaurants) {
+    return restaurants.filter(r => {
+        // Filter by cuisine
+        if (filters.cuisine !== 'all') {
+            if (!r.category || r.category.trim().toLowerCase() !== filters.cuisine.toLowerCase()) {
+                return false;
+            }
+        }
+        // Filter by minimum Google rating
+        if (filters.minRating > 0) {
+            if (!r.googleRating || r.googleRating < filters.minRating) {
+                return false;
+            }
+        }
+        return true;
+    });
+}
+
+function updateFilterResults(shown, total) {
+    const resultsEl = document.querySelector('.filter-results');
+    if (resultsEl) {
+        if (shown === total) {
+            resultsEl.textContent = '';
+        } else {
+            resultsEl.textContent = `Showing ${shown} of ${total} restaurants`;
+        }
+    }
 }
 
 function showCity(index) {
@@ -125,24 +224,31 @@ function showCity(index) {
         tab.classList.toggle('active', i === index);
     });
 
-    // Render restaurants
-    renderRestaurants(citiesData[index].restaurants);
-
-    // Update map
-    updateMap(citiesData[index].restaurants);
+    // Apply filters and render
+    const filtered = filterRestaurants(citiesData[index].restaurants);
+    renderRestaurants(filtered);
+    updateMap(filtered);
+    updateFilterResults(filtered.length, citiesData[index].restaurants.length);
 }
 
 function renderRestaurants(restaurants) {
     const restaurantsList = document.querySelector('.restaurants-list');
 
     if (restaurants.length === 0) {
-        restaurantsList.innerHTML = '<p class="loading-message">No restaurants found for this city.</p>';
+        restaurantsList.innerHTML = '<p class="loading-message">No restaurants match your filters.</p>';
         return;
     }
 
     restaurantsList.innerHTML = restaurants.map(restaurant => `
         <div class="restaurant-card">
-            <h3>${restaurant.name}</h3>
+            <div class="restaurant-header">
+                <h3>${restaurant.name}</h3>
+                ${restaurant.googleRating ? `
+                    <span class="restaurant-rating" title="Google Maps rating">
+                        ⭐ ${restaurant.googleRating.toFixed(1)}
+                    </span>
+                ` : ''}
+            </div>
             ${restaurant.category ? `<p class="gear-category">${restaurant.category}</p>` : ''}
             <p class="restaurant-address">${restaurant.address}</p>
             ${restaurant.dateVisited ? `
