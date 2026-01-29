@@ -1064,6 +1064,73 @@ h1, h2, h3, .section-title, .hero-title {
 /* ============================================
    RESPONSIVE
    ============================================ */
+
+/* iPad and Tablet Optimization (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+    
+    .section-title {
+        font-size: 2.25rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-card h3 {
+        font-size: 1.25rem;
+    }
+    
+    .hero-card p {
+        font-size: 0.95rem;
+    }
+    
+    /* Photo grid optimization for iPad */
+    .photos-grid {
+        columns: 3;
+        gap: 1rem;
+    }
+    
+    /* Navigation adjustments */
+    .nav-menu li a {
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Lightbox optimization for iPad */
+    .lightbox-content {
+        max-width: 92%;
+        max-height: 92vh;
+    }
+    
+    .lightbox-nav {
+        width: 55px;
+        height: 55px;
+        font-size: 2.75rem;
+    }
+    
+    .lightbox-close {
+        width: 45px;
+        height: 45px;
+        font-size: 2rem;
+    }
+    
+    /* Better photo overlay sizing */
+    .photo-overlay {
+        padding: 0.75rem 1rem;
+    }
+    
+    .photo-location {
+        font-size: 0.8rem;
+    }
+    
+    .photo-year {
+        font-size: 0.7rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .photos-grid {
         columns: 2;
