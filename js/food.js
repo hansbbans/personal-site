@@ -255,13 +255,23 @@ function renderCards() {
         return;
     }
     
-    grid.innerHTML = restaurants.map(r => `
-        <div class="food-card">
+    grid.innerHTML = restaurants.map((r, index) => {
+        // Add personality features for food cards
+        const isHighRated = r.googleRating && r.googleRating >= 4.5;
+        const isFeatured = isHighRated && index % 6 === 0; // Featured high-rated restaurants
+        const featuredClass = isFeatured ? 'featured' : '';
+        const interactiveClass = 'card-interactive';
+        
+        return `
+        <div class="food-card ${featuredClass} ${interactiveClass}" 
+             data-category="${r.category || 'general'}"
+             data-rating="${r.googleRating || 0}"
+             title="Click for more details">
             <div class="food-card-header">
                 <div class="food-card-top">
-                    <h3 class="food-card-name">${r.name}</h3>
+                    <h3 class="food-card-name ${isFeatured ? 'card-title' : ''}">${r.name}</h3>
                     ${r.googleRating ? `
-                        <span class="food-card-rating">⭐ ${r.googleRating.toFixed(1)}</span>
+                        <div class="rating">${'⭐'.repeat(Math.floor(r.googleRating))} ${r.googleRating.toFixed(1)}</div>
                     ` : ''}
                 </div>
                 ${r.category ? `
@@ -272,11 +282,11 @@ function renderCards() {
             </div>
             <div class="food-card-body">
                 ${r.address ? `
-                    <div class="food-card-address">${r.address}</div>
+                    <div class="food-card-address">📍 ${r.address}</div>
                 ` : ''}
                 ${r.dishes ? `
                     <div class="food-card-dishes">
-                        <div class="food-card-dishes-label">Must try</div>
+                        <div class="food-card-dishes-label">🍽️ Must try</div>
                         <div class="food-card-dish-tags">
                             ${r.dishes.split(',').map((dish, i) => `
                                 <span class="dish-pill ${i === 0 ? 'highlight' : ''}">${dish.trim()}</span>
@@ -284,9 +294,11 @@ function renderCards() {
                         </div>
                     </div>
                 ` : ''}
+                <div class="card-tooltip">Click to view location</div>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Google Maps

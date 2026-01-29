@@ -157,9 +157,22 @@ function renderBooks() {
         return;
     }
     
-    grid.innerHTML = books.map(book => `
+    grid.innerHTML = books.map((book, index) => {
+        // Add personality features for book cards
+        const isHighRated = book.rating && parseFloat(book.rating) >= 4.5;
+        const isFavorite = isHighRated || (book.notes && book.notes.length > 100);
+        const isReading = book.status && book.status.toLowerCase() === 'reading';
+        const isFeatured = isFavorite && index % 8 === 0; // Featured books
+        const personalityClass = isFavorite ? 'favorite' : '';
+        const interactiveClass = 'card-interactive';
+        
+        return `
         <a href="${book.amazonLink || '#'}" target="_blank" rel="noopener" class="book-card-link">
-            <div class="book-card">
+            <div class="book-card ${personalityClass} ${interactiveClass}" 
+                 data-category="${book.category || 'general'}"
+                 data-rating="${book.rating || 0}"
+                 title="Click to view on Amazon">
+                <div class="book-spine"></div>
                 <div class="book-card-cover">
                     ${book.coverUrl 
                         ? `<img src="${book.coverUrl}" alt="${book.title}" loading="lazy" onerror="this.parentElement.innerHTML='<span class=\\'book-card-cover-placeholder\\'>📖</span>'">`
@@ -168,11 +181,11 @@ function renderBooks() {
                     ${book.rating ? `
                         <span class="book-card-rating">⭐ ${book.rating}</span>
                     ` : ''}
-                    ${book.status && book.status.toLowerCase() === 'reading' ? `
-                        <span class="book-card-status reading">Reading</span>
+                    ${isReading ? `
+                        <span class="book-card-status reading">📖 Reading</span>
                     ` : ''}
                     ${book.status && book.status.toLowerCase() === 'to read' ? `
-                        <span class="book-card-status to-read">To Read</span>
+                        <span class="book-card-status to-read">📚 To Read</span>
                     ` : ''}
                 </div>
                 <div class="book-card-body">
@@ -181,13 +194,16 @@ function renderBooks() {
                             ${getCategoryEmoji(book.category)} ${book.category}
                         </span>
                     ` : ''}
-                    <h3 class="book-card-title">${book.title}</h3>
+                    <h3 class="book-card-title ${isFeatured ? 'card-title' : ''}">${book.title}</h3>
                     <p class="book-card-author">by ${book.author}</p>
                     ${book.notes ? `
                         <p class="book-card-notes">${book.notes}</p>
                     ` : ''}
+                    <div class="page-curl"></div>
                 </div>
+                <div class="card-tooltip">Click to view on Amazon</div>
             </div>
         </a>
-    `).join('');
+        `;
+    }).join('');
 }

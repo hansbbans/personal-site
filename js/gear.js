@@ -135,6 +135,28 @@ function getBadgeHtml(badge) {
     return `<span class="badge ${style.class}">${style.emoji} ${badge}</span>`;
 }
 
+// Get personality badge for standout items
+function getPersonalityBadge(badge) {
+    if (!badge) return '';
+    
+    const key = badge.toLowerCase().trim();
+    let badgeClass = 'personality-badge';
+    let emoji = '⭐';
+    
+    if (key.includes('daily')) {
+        badgeClass += ' badge-daily-driver';
+        emoji = '⚡';
+    } else if (key.includes('favorite')) {
+        badgeClass += ' badge-favorite';
+        emoji = '❤️';
+    } else if (key.includes('must')) {
+        badgeClass += ' badge-must-have';
+        emoji = '🔥';
+    }
+    
+    return `<div class="${badgeClass}">${emoji}</div>`;
+}
+
 // Render gear
 function renderGear() {
     const grid = document.getElementById('gearGrid');
@@ -158,8 +180,19 @@ function renderGear() {
         return;
     }
     
-    grid.innerHTML = items.map(item => `
-        <div class="gear-card ${item.badge ? 'standout' : ''}">
+    grid.innerHTML = items.map((item, index) => {
+        // Add some personality variations
+        const isStandout = item.badge && (item.badge.toLowerCase().includes('daily') || item.badge.toLowerCase().includes('favorite'));
+        const isFeatured = isStandout && index % 7 === 0; // Every 7th standout item is featured large
+        const personalityClass = isStandout ? 'standout' : '';
+        const featuredClass = isFeatured ? 'featured-large' : '';
+        const interactiveClass = 'card-interactive';
+        
+        return `
+        <div class="gear-card ${personalityClass} ${featuredClass} ${interactiveClass}" 
+             data-category="${item.category || 'misc'}"
+             title="Click for details">
+            ${isStandout ? getPersonalityBadge(item.badge) : ''}
             <div class="gear-card-body">
                 <div class="gear-card-header">
                     ${item.category ? `
@@ -169,7 +202,7 @@ function renderGear() {
                     ` : ''}
                     ${getBadgeHtml(item.badge)}
                 </div>
-                <h3 class="gear-card-name">
+                <h3 class="gear-card-name ${isFeatured ? 'card-title' : ''}">
                     ${item.amazonLink 
                         ? `<a href="${item.amazonLink}" target="_blank" rel="noopener">${item.name}</a>`
                         : item.name
@@ -178,7 +211,11 @@ function renderGear() {
                 ${item.description ? `
                     <p class="gear-card-description">${item.description}</p>
                 ` : ''}
+                ${item.amazonLink ? `
+                    <div class="card-tooltip">Click to view on Amazon</div>
+                ` : ''}
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
