@@ -23,20 +23,23 @@ function initPersonalityFeatures() {
 // Enhanced Card Click Interactions
 function addCardClickInteractions() {
     document.addEventListener('click', (e) => {
+        // Don't interfere with actual links
+        if (e.target.closest('a')) return;
+        
         const card = e.target.closest('.card-interactive');
         if (!card) return;
         
         // Create ripple effect
         createRippleEffect(card, e);
         
-        // Add click animation
-        card.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-            card.style.transform = '';
-        }, 150);
-        
         // Analytics/tracking could go here
         trackCardInteraction(card);
+        
+        // If card has a link inside, trigger it
+        const link = card.querySelector('a[href]');
+        if (link) {
+            link.click();
+        }
     });
 }
 
@@ -151,37 +154,10 @@ function addKeyboardNavigation() {
     });
 }
 
-// Subtle Parallax Scrolling
+// Subtle Parallax Scrolling - DISABLED (interferes with card transforms/clicks)
 function addParallaxScrolling() {
-    const personalityGrids = document.querySelectorAll('.personality-grid');
-    
-    if (personalityGrids.length === 0 || window.innerWidth < 768) return;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        
-        personalityGrids.forEach(grid => {
-            const cards = grid.querySelectorAll('.card-interactive');
-            cards.forEach((card, index) => {
-                // Different cards move at slightly different rates
-                const cardRate = rate + (index % 3) * 2;
-                card.style.transform = `translateY(${cardRate}px)`;
-            });
-        });
-    }
-    
-    // Throttle scroll events for performance
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                updateParallax();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
+    // Parallax disabled - was causing issues with card hover states and click targets
+    return;
 }
 
 // Subtle Audio Feedback (Optional)
