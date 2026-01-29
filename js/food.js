@@ -260,13 +260,14 @@ function renderCards() {
         const isHighRated = r.googleRating && r.googleRating >= 4.5;
         const isFeatured = isHighRated && index % 6 === 0; // Featured high-rated restaurants
         const featuredClass = isFeatured ? 'featured' : '';
-        const interactiveClass = 'card-interactive';
+        
+        // Build Google Maps link from address
+        const mapsLink = r.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + r.address)}` : null;
         
         return `
-        <div class="food-card ${featuredClass} ${interactiveClass}" 
+        <div class="food-card ${featuredClass}" 
              data-category="${r.category || 'general'}"
-             data-rating="${r.googleRating || 0}"
-             title="Click for more details">
+             data-rating="${r.googleRating || 0}">
             <div class="food-card-header">
                 <div class="food-card-top">
                     <h3 class="food-card-name ${isFeatured ? 'card-title' : ''}">${r.name}</h3>
@@ -282,7 +283,7 @@ function renderCards() {
             </div>
             <div class="food-card-body">
                 ${r.address ? `
-                    <div class="food-card-address">📍 ${r.address}</div>
+                    <a href="${mapsLink}" target="_blank" rel="noopener" class="food-card-address">📍 ${r.address}</a>
                 ` : ''}
                 ${r.dishes ? `
                     <div class="food-card-dishes">
@@ -294,7 +295,6 @@ function renderCards() {
                         </div>
                     </div>
                 ` : ''}
-                <div class="card-tooltip">Click to view location</div>
             </div>
         </div>
         `;
