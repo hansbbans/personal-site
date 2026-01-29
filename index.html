@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hans - Personal Site</title>
+    <title>Hans Cho</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="nav-brand">Hans</a>
+            <a href="index.html" class="nav-brand">Hans Cho</a>
             <ul class="nav-menu">
-                <li><a href="about.html">👤 About</a></li>
-                <li><a href="gear.html">🎒 Gear</a></li>
-                <li><a href="food.html">🍜 Food</a></li>
-                <li><a href="photos.html">📷 Photos</a></li>
-                <li><a href="books.html">📚 Books</a></li>
-                <li><a href="now.html">⏰ Now</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gear.html">Gear</a></li>
+                <li><a href="food.html">Food</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="now.html">Now</a></li>
             </ul>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                <span class="sun-icon">☀️</span>
-                <span class="moon-icon">🌙</span>
+                <span class="sun-icon">○</span>
+                <span class="moon-icon">●</span>
             </button>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span>
@@ -37,45 +37,78 @@
     <main>
         <section class="hero-section">
             <div class="container">
-                <h1 class="hero-title">Hey, I'm Hans 👋</h1>
-                <p class="hero-subtitle">Explore my recommendations and experiences</p>
+                <div class="hero-intro">
+                    <h1 class="hero-title">Hans Cho builds iOS apps and digital products</h1>
+                    <p class="hero-subtitle">Dad to a 4-year-old. Based in NYC. Learning in public.</p>
+                    <a href="about.html" class="bio-link">More about me →</a>
+                </div>
 
-                <div class="bio-section fade-in">
-                    <div class="bio-photo">
-                        <!-- Replace with your photo: <img src="images/hans.jpg" alt="Hans"> -->
-                        🧑‍💻
-                    </div>
-                    <div class="bio-content">
-                        <h2>Nice to meet you!</h2>
-                        <p>I'm a tech enthusiast, avid traveler, and forever curious human based in the world. This site is my little corner of the internet where I share the gear I love, restaurants I recommend, books that shaped my thinking, and photos from my adventures.</p>
-                        <a href="about.html" class="bio-link">Learn more about me →</a>
+                <!-- What I'm Building Section -->
+                <div class="building-section">
+                    <h2 class="section-label">What I'm Building</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3>iOS Development</h3>
+                                <span class="phase-badge">Phase 1</span>
+                            </div>
+                            <p class="project-desc">Learning Swift & SwiftUI, building my first apps</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 25%"></div>
+                            </div>
+                            <span class="progress-label">25% • Just getting started</span>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3>Personal Site</h3>
+                                <span class="phase-badge phase-active">Active</span>
+                            </div>
+                            <p class="project-desc">Redesigning this site, making it more me</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <span class="progress-label">60% • Ongoing</span>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3>Build Log</h3>
+                                <span class="phase-badge">Soon</span>
+                            </div>
+                            <p class="project-desc">Public learning journal for projects & experiments</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 5%"></div>
+                            </div>
+                            <span class="progress-label">5% • Planning</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="hero-grid">
-                    <a href="gear.html" class="hero-card fade-in">
-                        <span class="card-icon">🎒</span>
-                        <h3>Gear</h3>
-                        <p>Products I use and recommend</p>
-                    </a>
+                <!-- Quick Links Grid -->
+                <div class="quick-links">
+                    <h2 class="section-label">Explore</h2>
+                    <div class="links-grid">
+                        <a href="gear.html" class="link-card">
+                            <h3>Gear</h3>
+                            <p>Products I use daily</p>
+                        </a>
 
-                    <a href="food.html" class="hero-card fade-in">
-                        <span class="card-icon">🍜</span>
-                        <h3>Food</h3>
-                        <p>Restaurant guides by city</p>
-                    </a>
+                        <a href="food.html" class="link-card">
+                            <h3>Food</h3>
+                            <p>Restaurant guides</p>
+                        </a>
 
-                    <a href="photos.html" class="hero-card fade-in">
-                        <span class="card-icon">📷</span>
-                        <h3>Photos</h3>
-                        <p>Moments captured</p>
-                    </a>
+                        <a href="photos.html" class="link-card">
+                            <h3>Photos</h3>
+                            <p>Travel & moments</p>
+                        </a>
 
-                    <a href="books.html" class="hero-card fade-in">
-                        <span class="card-icon">📚</span>
-                        <h3>Books</h3>
-                        <p>Reading recommendations</p>
-                    </a>
+                        <a href="books.html" class="link-card">
+                            <h3>Books</h3>
+                            <p>Reading list</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -85,12 +118,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="social-links">
-                    <a href="#" aria-label="Twitter">𝕏</a>
-                    <a href="#" aria-label="GitHub">⌨️</a>
-                    <a href="#" aria-label="LinkedIn">💼</a>
-                    <a href="#" aria-label="Email">✉️</a>
+                    <a href="#" aria-label="Twitter">Twitter</a>
+                    <a href="#" aria-label="GitHub">GitHub</a>
+                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="#" aria-label="Email">Email</a>
                 </div>
-                <p>&copy; 2025 Hans. All rights reserved.</p>
+                <p>&copy; 2025 Hans Cho. Built with curiosity.</p>
             </div>
         </div>
     </footer>
@@ -98,6 +131,7 @@
     <script src="js/navigation.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/animations.js"></script>
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fede3c0d4b03486c98392098d02e566b"}'></script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fede3c0d4b03486c98392098d02e566b"}'></script>
 </body>
 </html>
