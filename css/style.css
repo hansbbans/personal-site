@@ -716,6 +716,18 @@ h1, h2, h3, .section-title, .hero-title {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.photo-year {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    display: block;
+    opacity: 0.9;
 }
 
 /* Progressive loading styles */
