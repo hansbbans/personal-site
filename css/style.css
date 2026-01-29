@@ -718,6 +718,39 @@ h1, h2, h3, .section-title, .hero-title {
     letter-spacing: 0.02em;
 }
 
+/* Progressive loading styles */
+.photo-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.photo-item.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.photo-loading {
+    filter: blur(10px);
+    transition: filter 0.3s ease;
+}
+
+.photo-loaded {
+    filter: none;
+}
+
+/* Staggered animation delay for photo items */
+.photo-item:nth-child(1) { transition-delay: 0.1s; }
+.photo-item:nth-child(2) { transition-delay: 0.2s; }
+.photo-item:nth-child(3) { transition-delay: 0.3s; }
+.photo-item:nth-child(4) { transition-delay: 0.4s; }
+.photo-item:nth-child(5) { transition-delay: 0.5s; }
+.photo-item:nth-child(6) { transition-delay: 0.6s; }
+.photo-item:nth-child(7) { transition-delay: 0.7s; }
+.photo-item:nth-child(8) { transition-delay: 0.8s; }
+.photo-item:nth-child(9) { transition-delay: 0.9s; }
+.photo-item:nth-child(10) { transition-delay: 1.0s; }
+
 /* Lightbox */
 .lightbox {
     display: none;
