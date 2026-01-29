@@ -145,18 +145,18 @@ class PhotoLightbox {
 
         const currentPhoto = this.photoItems[this.currentIndex];
         
-        // Get the best quality version of the image
+        // Get the original high-quality image for lightbox
         const originalSrc = currentPhoto.src;
         const filename = originalSrc.split('/').pop();
         
-        // Try to use the large optimized version if available, fallback to original
-        let bestSrc = originalSrc;
+        // Always use the original uncompressed image in lightbox for best quality
+        let bestSrc;
         if (originalSrc.includes('/optimized/')) {
-            bestSrc = originalSrc;
+            // If currently showing optimized version, get original
+            bestSrc = `images/${filename}`;
         } else {
-            // Check if optimized version exists
-            const largePath = `images/optimized/large/${filename}`;
-            bestSrc = largePath;
+            // Already showing original
+            bestSrc = originalSrc;
         }
 
         // Update image with smooth transition
