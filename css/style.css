@@ -795,6 +795,55 @@ h1, h2, h3, .section-title, .hero-title {
     transform: rotate(90deg);
 }
 
+/* Lightbox navigation arrows */
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 3rem;
+    font-weight: 300;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+    user-select: none;
+}
+
+.lightbox-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+    left: 2rem;
+}
+
+.lightbox-next {
+    right: 2rem;
+}
+
+/* Lightbox counter */
+.lightbox-counter {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
 /* ============================================
    ABOUT & NOW PAGES
    ============================================ */
@@ -1116,6 +1165,35 @@ h1, h2, h3, .section-title, .hero-title {
     .page-content > p:first-of-type::first-letter {
         font-size: 2.5rem;
     }
+
+    /* Lightbox navigation responsive */
+    .lightbox-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 2.5rem;
+    }
+
+    .lightbox-prev {
+        left: 1rem;
+    }
+
+    .lightbox-next {
+        right: 1rem;
+    }
+
+    .lightbox-close {
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 2rem;
+    }
+
+    .lightbox-counter {
+        bottom: 1rem;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1135,5 +1213,39 @@ h1, h2, h3, .section-title, .hero-title {
     .theme-toggle {
         width: 38px;
         height: 38px;
+    }
+
+    /* Lightbox mobile optimization */
+    .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 2rem;
+    }
+
+    .lightbox-prev {
+        left: 0.5rem;
+    }
+
+    .lightbox-next {
+        right: 0.5rem;
+    }
+
+    .lightbox-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.5rem;
+    }
+
+    .lightbox-counter {
+        bottom: 0.5rem;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+
+    .lightbox-content {
+        max-width: 95%;
+        max-height: 85vh;
     }
 }
