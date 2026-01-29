@@ -17,7 +17,7 @@
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
         }
         
@@ -105,6 +105,45 @@
             color: #666;
         }
         
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            background: transparent;
+            color: #a3a3a3;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .tab-btn:hover {
+            color: #e5e5e5;
+            background: #1a1a1a;
+        }
+        
+        .tab-btn.active {
+            color: #2563eb;
+            background: #1a1a1a;
+        }
+        
+        .tab-panel {
+            display: none;
+        }
+        
+        .tab-panel.active {
+            display: block;
+        }
+        
         .drop-zone {
             border: 2px dashed #333;
             border-radius: 12px;
@@ -132,7 +171,7 @@
         
         .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
@@ -144,6 +183,25 @@
             overflow: hidden;
         }
         
+        .preview-item.marked-delete {
+            opacity: 0.4;
+        }
+        
+        .preview-item.marked-delete::after {
+            content: 'MARKED FOR DELETION';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+        
         .preview-item img {
             width: 100%;
             aspect-ratio: 1;
@@ -152,9 +210,12 @@
         
         .preview-item .info {
             padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
         
-        .preview-item input {
+        .preview-item input, .preview-item select {
             width: 100%;
             padding: 0.5rem;
             font-size: 0.85rem;
@@ -162,6 +223,20 @@
             border-radius: 6px;
             background: #0a0a0a;
             color: #e5e5e5;
+        }
+        
+        .preview-item .row {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .preview-item .row input:first-child {
+            flex: 2;
+        }
+        
+        .preview-item .row input:last-child {
+            flex: 1;
+            text-align: center;
         }
         
         .preview-item .remove {
@@ -183,10 +258,25 @@
             background: #ef4444;
         }
         
+        .preview-item .undo-delete {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            border: none;
+            background: #22c55e;
+            color: white;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
         .actions {
             display: flex;
             gap: 1rem;
             justify-content: flex-end;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -222,6 +312,15 @@
             background: #444;
         }
         
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        
         .status {
             margin-top: 1.5rem;
             padding: 1rem;
@@ -250,7 +349,70 @@
             color: #2563eb;
         }
         
+        .manage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .manage-header h2 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #a3a3a3;
+        }
+        
+        .photo-count {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .changes-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #f59e0b;
+        }
+        
+        .changes-indicator.visible {
+            display: flex;
+        }
+        
+        .changes-indicator::before {
+            content: '●';
+            font-size: 0.7rem;
+        }
+        
         .hidden { display: none !important; }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -280,31 +442,63 @@
             </p>
         </div>
 
-        <div class="drop-zone" id="dropZone">
-            <div class="icon">📁</div>
-            <p>Drag & drop photos here, or click to select</p>
-            <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('manage')">📋 Manage Photos</button>
+            <button class="tab-btn" onclick="switchTab('upload')">⬆️ Upload New</button>
         </div>
 
-        <div class="preview-grid" id="previewGrid"></div>
-
-        <div class="actions" id="actions" style="display: none;">
-            <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
-            <button class="btn btn-primary" id="uploadBtn" onclick="uploadPhotos()">Upload Photos</button>
+        <!-- Manage Photos Tab -->
+        <div class="tab-panel active" id="manageTab">
+            <div class="manage-header">
+                <div>
+                    <h2>Existing Photos</h2>
+                    <span class="photo-count" id="photoCount"></span>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <span class="changes-indicator" id="changesIndicator">Unsaved changes</span>
+                    <button class="btn btn-secondary" onclick="loadExistingPhotos()">🔄 Refresh</button>
+                </div>
+            </div>
+            
+            <div id="existingPhotosGrid" class="preview-grid">
+                <div class="empty-state">
+                    <div class="icon">📷</div>
+                    <p>Click "Refresh" to load photos from GitHub</p>
+                </div>
+            </div>
+            
+            <div class="actions" id="manageActions" style="display: none;">
+                <button class="btn btn-secondary" onclick="revertChanges()">Revert Changes</button>
+                <button class="btn btn-primary" id="saveBtn" onclick="saveChanges()">Save Changes</button>
+            </div>
+            
+            <div class="status" id="manageStatus"></div>
         </div>
 
-        <div class="status" id="status"></div>
+        <!-- Upload Tab -->
+        <div class="tab-panel" id="uploadTab">
+            <div class="drop-zone" id="dropZone">
+                <div class="icon">📁</div>
+                <p>Drag & drop photos here, or click to select</p>
+                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+            </div>
+
+            <div class="preview-grid" id="previewGrid"></div>
+
+            <div class="actions" id="uploadActions" style="display: none;">
+                <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+                <button class="btn btn-primary" id="uploadBtn" onclick="uploadPhotos()">Upload Photos</button>
+            </div>
+
+            <div class="status" id="uploadStatus"></div>
+        </div>
     </div>
 
     <script>
-        // Simple password gate (obfuscated slightly)
-        const PASS_HASH = '5e884898da28047d9169e1809c96be759e5a11e8838583d1ea0a70e'; // sha256 of password, truncated
-        
-        // Check password
+        // Password check
         function checkPassword() {
             const input = document.getElementById('passwordInput').value;
-            // Simple check - in production you'd hash and compare
-            if (input === 'letmein2026') { // Change this password!
+            if (input === 'letmein2026') {
                 sessionStorage.setItem('authed', '1');
                 showMain();
             } else {
@@ -320,9 +514,9 @@
             document.getElementById('passwordGate').classList.add('hidden');
             document.getElementById('mainContent').classList.remove('hidden');
             loadConfig();
+            loadExistingPhotos();
         }
         
-        // Check if already authed this session
         if (sessionStorage.getItem('authed')) {
             showMain();
         }
@@ -347,12 +541,287 @@
             localStorage.setItem('photoAdminConfig', JSON.stringify(config));
         }
         
-        // Auto-save config on change
         ['repoOwner', 'repoName', 'githubToken'].forEach(id => {
             document.getElementById(id).addEventListener('change', saveConfig);
         });
         
-        // File handling
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            
+            if (tab === 'manage') {
+                document.querySelector('.tab-btn:first-child').classList.add('active');
+                document.getElementById('manageTab').classList.add('active');
+            } else {
+                document.querySelector('.tab-btn:last-child').classList.add('active');
+                document.getElementById('uploadTab').classList.add('active');
+            }
+        }
+        
+        // ============ MANAGE EXISTING PHOTOS ============
+        
+        let existingPhotos = [];
+        let originalPhotosHtml = '';
+        let photosFileSha = '';
+        let hasChanges = false;
+        
+        async function loadExistingPhotos() {
+            const owner = document.getElementById('repoOwner').value;
+            const repo = document.getElementById('repoName').value;
+            const token = document.getElementById('githubToken').value;
+            
+            if (!owner || !repo || !token) {
+                setManageStatus('error', 'Please fill in GitHub configuration first');
+                return;
+            }
+            
+            saveConfig();
+            setManageStatus('loading', '<span class="loading-spinner"></span> Loading photos from GitHub...');
+            
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${owner}/${repo}/contents/photos.html`,
+                    { headers: { 'Authorization': `token ${token}` } }
+                );
+                
+                if (!response.ok) throw new Error('Could not fetch photos.html');
+                
+                const data = await response.json();
+                photosFileSha = data.sha;
+                originalPhotosHtml = atob(data.content);
+                
+                // Parse photos from HTML
+                existingPhotos = parsePhotosFromHtml(originalPhotosHtml);
+                
+                renderExistingPhotos();
+                hasChanges = false;
+                updateChangesIndicator();
+                setManageStatus('', '');
+                
+            } catch (err) {
+                setManageStatus('error', `Error: ${err.message}`);
+            }
+        }
+        
+        function parsePhotosFromHtml(html) {
+            const photos = [];
+            const regex = /<div class="photo-item[^"]*">\s*<img src="([^"]+)"[^>]*>\s*<div class="photo-overlay">\s*<span class="photo-location">([^<]*)<\/span>(?:\s*<span class="photo-year">([^<]*)<\/span>)?\s*<\/div>\s*<\/div>/g;
+            
+            let match;
+            while ((match = regex.exec(html)) !== null) {
+                photos.push({
+                    src: match[1],
+                    location: match[2] || '',
+                    year: match[3] || '',
+                    deleted: false,
+                    originalLocation: match[2] || '',
+                    originalYear: match[3] || ''
+                });
+            }
+            
+            return photos;
+        }
+        
+        function renderExistingPhotos() {
+            const grid = document.getElementById('existingPhotosGrid');
+            const count = existingPhotos.filter(p => !p.deleted).length;
+            document.getElementById('photoCount').textContent = `${count} photo${count !== 1 ? 's' : ''}`;
+            
+            if (existingPhotos.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📷</div>
+                        <p>No photos found in gallery</p>
+                    </div>
+                `;
+                document.getElementById('manageActions').style.display = 'none';
+                return;
+            }
+            
+            const owner = document.getElementById('repoOwner').value;
+            const repo = document.getElementById('repoName').value;
+            
+            grid.innerHTML = existingPhotos.map((photo, idx) => {
+                // Build full image URL for preview
+                const imgSrc = photo.src.startsWith('http') 
+                    ? photo.src 
+                    : `https://raw.githubusercontent.com/${owner}/${repo}/main/${photo.src}`;
+                
+                return `
+                    <div class="preview-item ${photo.deleted ? 'marked-delete' : ''}" data-idx="${idx}">
+                        ${photo.deleted 
+                            ? `<button class="undo-delete" onclick="undoDelete(${idx})">Undo</button>`
+                            : `<button class="remove" onclick="markDelete(${idx})">×</button>`
+                        }
+                        <img src="${imgSrc}" alt="Photo" loading="lazy">
+                        <div class="info">
+                            <div class="row">
+                                <input type="text" placeholder="Location" 
+                                       value="${escapeHtml(photo.location)}" 
+                                       onchange="updatePhoto(${idx}, 'location', this.value)"
+                                       ${photo.deleted ? 'disabled' : ''}>
+                                <input type="text" placeholder="Year" 
+                                       value="${escapeHtml(photo.year)}"
+                                       onchange="updatePhoto(${idx}, 'year', this.value)"
+                                       ${photo.deleted ? 'disabled' : ''}>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('manageActions').style.display = 'flex';
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function updatePhoto(idx, field, value) {
+            existingPhotos[idx][field] = value;
+            checkForChanges();
+        }
+        
+        function markDelete(idx) {
+            existingPhotos[idx].deleted = true;
+            renderExistingPhotos();
+            checkForChanges();
+        }
+        
+        function undoDelete(idx) {
+            existingPhotos[idx].deleted = false;
+            renderExistingPhotos();
+            checkForChanges();
+        }
+        
+        function checkForChanges() {
+            hasChanges = existingPhotos.some(p => 
+                p.deleted || 
+                p.location !== p.originalLocation || 
+                p.year !== p.originalYear
+            );
+            updateChangesIndicator();
+        }
+        
+        function updateChangesIndicator() {
+            const indicator = document.getElementById('changesIndicator');
+            indicator.classList.toggle('visible', hasChanges);
+        }
+        
+        function revertChanges() {
+            existingPhotos = parsePhotosFromHtml(originalPhotosHtml);
+            renderExistingPhotos();
+            hasChanges = false;
+            updateChangesIndicator();
+            setManageStatus('', '');
+        }
+        
+        async function saveChanges() {
+            if (!hasChanges) {
+                setManageStatus('error', 'No changes to save');
+                return;
+            }
+            
+            const owner = document.getElementById('repoOwner').value;
+            const repo = document.getElementById('repoName').value;
+            const token = document.getElementById('githubToken').value;
+            
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+            setManageStatus('loading', '<span class="loading-spinner"></span> Saving changes to GitHub...');
+            
+            try {
+                // Build updated photos.html content
+                const activePhotos = existingPhotos.filter(p => !p.deleted);
+                const deletedPhotos = existingPhotos.filter(p => p.deleted);
+                
+                // Generate new photo blocks
+                const photoBlocks = activePhotos.map(photo => `
+                    <div class="photo-item">
+                        <img src="${photo.src}" alt="Photo" loading="lazy">
+                        <div class="photo-overlay">
+                            <span class="photo-location">${escapeHtml(photo.location)}</span>
+                            <span class="photo-year">${escapeHtml(photo.year)}</span>
+                        </div>
+                    </div>`).join('\n');
+                
+                // Replace the photos-grid content
+                const gridStart = '<div class="photos-grid">';
+                const gridEnd = '</div>\n            </div>\n        </section>';
+                
+                const startIdx = originalPhotosHtml.indexOf(gridStart) + gridStart.length;
+                const endIdx = originalPhotosHtml.indexOf('<!-- Add your own photos');
+                
+                let updatedHtml;
+                if (endIdx > startIdx) {
+                    // Keep the comment block
+                    const afterPhotos = originalPhotosHtml.substring(endIdx);
+                    updatedHtml = originalPhotosHtml.substring(0, startIdx) + '\n' + photoBlocks + '\n                    ' + afterPhotos;
+                } else {
+                    // Fallback: find closing tags
+                    const closingIdx = originalPhotosHtml.indexOf('</div>', originalPhotosHtml.indexOf('photos-grid'));
+                    updatedHtml = originalPhotosHtml.substring(0, startIdx) + '\n' + photoBlocks + '\n                ' + originalPhotosHtml.substring(closingIdx);
+                }
+                
+                // Commit to GitHub
+                const response = await fetch(
+                    `https://api.github.com/repos/${owner}/${repo}/contents/photos.html`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: `Update ${activePhotos.length} photos${deletedPhotos.length ? `, remove ${deletedPhotos.length}` : ''}`,
+                            content: btoa(unescape(encodeURIComponent(updatedHtml))),
+                            sha: photosFileSha
+                        })
+                    }
+                );
+                
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.message || 'Failed to save');
+                }
+                
+                const result = await response.json();
+                photosFileSha = result.content.sha;
+                originalPhotosHtml = updatedHtml;
+                
+                // Update original values
+                existingPhotos = existingPhotos.filter(p => !p.deleted).map(p => ({
+                    ...p,
+                    originalLocation: p.location,
+                    originalYear: p.year
+                }));
+                
+                hasChanges = false;
+                updateChangesIndicator();
+                renderExistingPhotos();
+                
+                setManageStatus('success', `✓ Saved! ${deletedPhotos.length ? `Removed ${deletedPhotos.length} photo(s). ` : ''}Changes will be live shortly.`);
+                
+            } catch (err) {
+                setManageStatus('error', `Error: ${err.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Changes';
+            }
+        }
+        
+        function setManageStatus(type, message) {
+            const status = document.getElementById('manageStatus');
+            status.className = 'status ' + type;
+            status.innerHTML = message;
+        }
+        
+        // ============ UPLOAD NEW PHOTOS ============
+        
         let pendingFiles = [];
         
         const dropZone = document.getElementById('dropZone');
@@ -388,59 +857,64 @@
                     pendingFiles.push({
                         file,
                         dataUrl: e.target.result,
-                        location: ''
+                        location: '',
+                        year: new Date().getFullYear().toString()
                     });
-                    renderPreviews();
+                    renderUploadPreviews();
                 };
                 reader.readAsDataURL(file);
             }
         }
         
-        function renderPreviews() {
+        function renderUploadPreviews() {
             const grid = document.getElementById('previewGrid');
             grid.innerHTML = pendingFiles.map((item, idx) => `
                 <div class="preview-item">
                     <button class="remove" onclick="removeFile(${idx})">×</button>
                     <img src="${item.dataUrl}" alt="Preview">
                     <div class="info">
-                        <input type="text" placeholder="Location (optional)" 
-                               value="${item.location}" 
-                               onchange="updateLocation(${idx}, this.value)">
+                        <div class="row">
+                            <input type="text" placeholder="Location" 
+                                   value="${item.location}" 
+                                   onchange="updatePendingFile(${idx}, 'location', this.value)">
+                            <input type="text" placeholder="Year" 
+                                   value="${item.year}" 
+                                   onchange="updatePendingFile(${idx}, 'year', this.value)">
+                        </div>
                     </div>
                 </div>
             `).join('');
             
-            document.getElementById('actions').style.display = pendingFiles.length ? 'flex' : 'none';
+            document.getElementById('uploadActions').style.display = pendingFiles.length ? 'flex' : 'none';
         }
         
         function removeFile(idx) {
             pendingFiles.splice(idx, 1);
-            renderPreviews();
+            renderUploadPreviews();
         }
         
-        function updateLocation(idx, value) {
-            pendingFiles[idx].location = value;
+        function updatePendingFile(idx, field, value) {
+            pendingFiles[idx][field] = value;
         }
         
         function clearAll() {
             pendingFiles = [];
-            renderPreviews();
-            setStatus('', '');
+            renderUploadPreviews();
+            setUploadStatus('', '');
         }
         
-        // GitHub API
         async function uploadPhotos() {
             const owner = document.getElementById('repoOwner').value;
             const repo = document.getElementById('repoName').value;
             const token = document.getElementById('githubToken').value;
             
             if (!owner || !repo || !token) {
-                setStatus('error', 'Please fill in all GitHub configuration fields');
+                setUploadStatus('error', 'Please fill in all GitHub configuration fields');
                 return;
             }
             
             if (pendingFiles.length === 0) {
-                setStatus('error', 'No files to upload');
+                setUploadStatus('error', 'No files to upload');
                 return;
             }
             
@@ -451,24 +925,19 @@
             btn.textContent = 'Uploading...';
             
             try {
-                setStatus('loading', 'Uploading photos...');
+                setUploadStatus('loading', '<span class="loading-spinner"></span> Uploading photos...');
                 
                 const uploadedPhotos = [];
                 
-                // Upload each image
                 for (let i = 0; i < pendingFiles.length; i++) {
                     const item = pendingFiles[i];
-                    setStatus('loading', `Uploading ${i + 1}/${pendingFiles.length}: ${item.file.name}`);
+                    setUploadStatus('loading', `<span class="loading-spinner"></span> Uploading ${i + 1}/${pendingFiles.length}: ${item.file.name}`);
                     
-                    // Generate unique filename
                     const ext = item.file.name.split('.').pop().toLowerCase();
                     const timestamp = Date.now();
                     const filename = `photo_${timestamp}_${i}.${ext}`;
-                    
-                    // Convert to base64 (remove data URL prefix)
                     const base64 = item.dataUrl.split(',')[1];
                     
-                    // Upload to GitHub
                     const response = await fetch(
                         `https://api.github.com/repos/${owner}/${repo}/contents/images/${filename}`,
                         {
@@ -491,45 +960,39 @@
                     
                     uploadedPhotos.push({
                         filename,
-                        location: item.location || 'Update location'
+                        location: item.location || 'Update location',
+                        year: item.year || new Date().getFullYear().toString()
                     });
                 }
                 
-                // Now update photos.html
-                setStatus('loading', 'Updating photos.html...');
+                setUploadStatus('loading', '<span class="loading-spinner"></span> Updating photos.html...');
                 
-                // Get current photos.html
+                // Fetch latest photos.html
                 const fileResponse = await fetch(
                     `https://api.github.com/repos/${owner}/${repo}/contents/photos.html`,
-                    {
-                        headers: { 'Authorization': `token ${token}` }
-                    }
+                    { headers: { 'Authorization': `token ${token}` } }
                 );
                 
-                if (!fileResponse.ok) {
-                    throw new Error('Could not fetch photos.html');
-                }
+                if (!fileResponse.ok) throw new Error('Could not fetch photos.html');
                 
                 const fileData = await fileResponse.json();
                 const currentContent = atob(fileData.content);
                 
-                // Generate new photo HTML blocks
                 const newPhotoBlocks = uploadedPhotos.map(photo => `
-                    <div class="photo-item fade-in">
+                    <div class="photo-item">
                         <img src="images/${photo.filename}" alt="Photo" loading="lazy">
                         <div class="photo-overlay">
                             <span class="photo-location">${photo.location}</span>
+                            <span class="photo-year">${photo.year}</span>
                         </div>
                     </div>`).join('\n');
                 
-                // Insert after the opening of photos-grid div
                 const insertPoint = '<div class="photos-grid">';
                 const updatedContent = currentContent.replace(
                     insertPoint,
                     insertPoint + '\n' + newPhotoBlocks
                 );
                 
-                // Commit updated photos.html
                 const updateResponse = await fetch(
                     `https://api.github.com/repos/${owner}/${repo}/contents/photos.html`,
                     {
@@ -540,7 +1003,7 @@
                         },
                         body: JSON.stringify({
                             message: `Add ${uploadedPhotos.length} photo(s) to gallery`,
-                            content: btoa(updatedContent),
+                            content: btoa(unescape(encodeURIComponent(updatedContent))),
                             sha: fileData.sha
                         })
                     }
@@ -551,22 +1014,25 @@
                     throw new Error(err.message || 'Failed to update photos.html');
                 }
                 
-                setStatus('success', `✓ Uploaded ${uploadedPhotos.length} photo(s) successfully! Changes will be live shortly.`);
+                setUploadStatus('success', `✓ Uploaded ${uploadedPhotos.length} photo(s)! Changes will be live shortly.`);
                 pendingFiles = [];
-                renderPreviews();
+                renderUploadPreviews();
+                
+                // Refresh the manage tab
+                loadExistingPhotos();
                 
             } catch (err) {
-                setStatus('error', `Error: ${err.message}`);
+                setUploadStatus('error', `Error: ${err.message}`);
             } finally {
                 btn.disabled = false;
                 btn.textContent = 'Upload Photos';
             }
         }
         
-        function setStatus(type, message) {
-            const status = document.getElementById('status');
+        function setUploadStatus(type, message) {
+            const status = document.getElementById('uploadStatus');
             status.className = 'status ' + type;
-            status.textContent = message;
+            status.innerHTML = message;
         }
     </script>
 </body>
