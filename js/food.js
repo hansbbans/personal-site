@@ -248,32 +248,14 @@ function setupMapToggle() {
     });
 }
 
-// Load data from Google Sheets
+// Load data from local JSON file
 async function loadRestaurantData() {
     try {
-        const metadataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}?key=${GOOGLE_SHEETS_API_KEY}`;
-        const metadataResponse = await fetch(metadataUrl);
-        const metadata = await metadataResponse.json();
-
-        if (!metadata.sheets) {
-            console.error('No sheets found');
-            return;
-        }
-
-        const sheetNames = metadata.sheets.map(s => s.properties.title);
-
-        citiesData = await Promise.all(
-            sheetNames.map(async (sheetName) => {
-                const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${GOOGLE_SHEETS_API_KEY}`;
-                const response = await fetch(dataUrl);
-                const data = await response.json();
-                return {
-                    name: sheetName,
-                    restaurants: parseRestaurantData(data.values)
-                };
-            })
-        );
-
+        const response = await fetch('data/food-data.json');
+        const data = await response.json();
+        
+        citiesData = data.cities;
+        
         renderCityTabs();
         renderMainCategoryFilters();
         showCity(0);
