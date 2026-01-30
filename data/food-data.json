@@ -1,0 +1,500 @@
+{
+  "metadata": {
+    "lastUpdated": "2026-01-30",
+    "version": "2.0",
+    "description": "Hierarchical cuisine-based category system for food guide"
+  },
+  "categories": {
+    "Asian": {
+      "emoji": "🥢",
+      "subcategories": ["Japanese", "Chinese", "Korean", "Thai", "Vietnamese", "Indian", "Other Asian"]
+    },
+    "European": {
+      "emoji": "🍝",
+      "subcategories": ["Italian", "French", "Spanish", "German", "Other European"]
+    },
+    "American": {
+      "emoji": "🍔",
+      "subcategories": ["Burgers/Diners", "BBQ/Southern", "Pizza", "Sandwiches/Delis", "Steakhouse", "Other American"]
+    },
+    "Mexican": {
+      "emoji": "🌮",
+      "subcategories": ["Tacos", "Burritos", "Seafood/Mariscos", "Regional", "Other Mexican"]
+    },
+    "Mediterranean/Middle Eastern": {
+      "emoji": "🧆",
+      "subcategories": ["Israeli", "Lebanese", "Turkish", "Persian/Iranian", "Greek", "Other Mediterranean/Middle Eastern"]
+    },
+    "Cafes & Desserts": {
+      "emoji": "☕",
+      "subcategories": ["Coffee/Cafes", "Bakeries", "Dessert Shops", "Ice Cream", "Other Cafes & Desserts"]
+    },
+    "Bars & Drinks": {
+      "emoji": "🍸",
+      "subcategories": ["Cocktail Bars", "Wine Bars", "Breweries/Pubs", "Other Bars & Drinks"]
+    }
+  },
+  "cities": [
+    {
+      "name": "NYC",
+      "restaurants": [
+        {
+          "name": "L'Industrie",
+          "legacyCategory": "Pizza",
+          "mainCategory": "American",
+          "subcategory": "Pizza",
+          "dateVisited": "",
+          "address": "254 S 2nd St, Brooklyn, NY 11211",
+          "dishes": "Burratta Slice",
+          "lat": 40.7116,
+          "lng": -73.9579,
+          "yelpRating": 4.6,
+          "googleRating": 4.7
+        },
+        {
+          "name": "Atomix",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "104 E 30th St, New York, NY 10016",
+          "dishes": "Tasting Menu",
+          "lat": 40.74421,
+          "lng": -73.98286,
+          "yelpRating": 4.5,
+          "googleRating": 4.7
+        },
+        {
+          "name": "Rubirosa",
+          "legacyCategory": "Pizza",
+          "mainCategory": "American",
+          "subcategory": "Pizza",
+          "dateVisited": "",
+          "address": "235 Mulberry St, New York, NY 10012",
+          "dishes": "",
+          "lat": 40.722748,
+          "lng": -73.996232,
+          "yelpRating": 4.3,
+          "googleRating": 4.6
+        },
+        {
+          "name": "Cello Pizza",
+          "legacyCategory": "Pizza",
+          "mainCategory": "American",
+          "subcategory": "Pizza",
+          "dateVisited": "",
+          "address": "36 St Marks Pl, New York, NY 10003",
+          "dishes": "",
+          "lat": 40.72861,
+          "lng": -73.98806,
+          "yelpRating": 4.2,
+          "googleRating": 4.8
+        },
+        {
+          "name": "Cho Dang Gol",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "55 W 35th St, New York, NY 10001",
+          "dishes": "",
+          "lat": 40.75024,
+          "lng": -73.9862,
+          "yelpRating": null,
+          "googleRating": 4.6
+        },
+        {
+          "name": "Rolo's",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "853 Onderdonk Ave, Ridgewood, NY 11385",
+          "dishes": "",
+          "lat": 40.7019,
+          "lng": -73.9035,
+          "yelpRating": null,
+          "googleRating": 4.5
+        },
+        {
+          "name": "Naro",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "610 5th Ave, New York, NY 10020",
+          "dishes": "",
+          "lat": 40.758678,
+          "lng": -73.978798,
+          "yelpRating": null,
+          "googleRating": 4.6
+        },
+        {
+          "name": "Carnitas Ramirez",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "210 E 3rd St, New York, NY 10009",
+          "dishes": "",
+          "lat": 40.722509,
+          "lng": -73.98284,
+          "yelpRating": null,
+          "googleRating": 4.8
+        },
+        {
+          "name": "Llama Inn",
+          "legacyCategory": "Peruvian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "50 Withers St, Brooklyn, NY 11211",
+          "dishes": "",
+          "lat": 40.7167,
+          "lng": -73.9507,
+          "yelpRating": null,
+          "googleRating": 4.3,
+          "notes": "Peruvian - placed in Other Asian temporarily until Latin American category added"
+        },
+        {
+          "name": "Sushi Ishikawa",
+          "legacyCategory": "Sushi",
+          "mainCategory": "Asian",
+          "subcategory": "Japanese",
+          "dateVisited": "",
+          "address": "419 E 74th St, New York, NY 10021",
+          "dishes": "",
+          "lat": 40.768759,
+          "lng": -73.954061,
+          "yelpRating": null,
+          "googleRating": 4.6
+        },
+        {
+          "name": "Jungsik",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "2 Harrison St, New York, NY 10013",
+          "dishes": "",
+          "lat": 40.71875,
+          "lng": -74.00975,
+          "yelpRating": 4.6,
+          "googleRating": 4.6
+        },
+        {
+          "name": "Los Tacos No. 1",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Tacos",
+          "dateVisited": "",
+          "address": "75 9th Ave, New York, NY 10011",
+          "dishes": "",
+          "lat": 40.742352,
+          "lng": -74.00621,
+          "yelpRating": null,
+          "googleRating": 4.8
+        },
+        {
+          "name": "Dept. of Culture",
+          "legacyCategory": "Caribbean",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "327 Nostrand Ave, Brooklyn, NY 11216",
+          "dishes": "",
+          "lat": 40.6755,
+          "lng": -73.9561,
+          "yelpRating": null,
+          "googleRating": 4.7,
+          "notes": "Caribbean - placed in Other American until Latin American category added"
+        },
+        {
+          "name": "Joo Ok",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "22 W 32nd St, 16th Floor, New York, NY 10001",
+          "dishes": "",
+          "lat": 40.7475,
+          "lng": -73.987,
+          "yelpRating": null,
+          "googleRating": 4.7
+        },
+        {
+          "name": "Okiboru House of Tsukumen",
+          "legacyCategory": "Japanese",
+          "mainCategory": "Asian",
+          "subcategory": "Japanese",
+          "dateVisited": "",
+          "address": "117 Orchard St, New York, NY 10002",
+          "dishes": "",
+          "lat": 40.71875,
+          "lng": -73.9895,
+          "yelpRating": null,
+          "googleRating": 4.5
+        },
+        {
+          "name": "Raku",
+          "legacyCategory": "Japanese",
+          "mainCategory": "Asian",
+          "subcategory": "Japanese",
+          "dateVisited": "",
+          "address": "342 E 6th St, New York, NY 10003",
+          "dishes": "",
+          "lat": 40.72649,
+          "lng": -73.98668,
+          "yelpRating": null,
+          "googleRating": 4.3
+        },
+        {
+          "name": "Hyun",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "10 E 33rd St, New York, NY 10016",
+          "dishes": "",
+          "lat": 40.74785,
+          "lng": -73.98725,
+          "yelpRating": null,
+          "googleRating": 4.1
+        },
+        {
+          "name": "Plaza Ortega",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "140 Stanhope St, Brooklyn, NY 11221",
+          "dishes": "",
+          "lat": 40.6891,
+          "lng": -73.9171,
+          "yelpRating": null,
+          "googleRating": 4.7
+        },
+        {
+          "name": "Soothr",
+          "legacyCategory": "Thai",
+          "mainCategory": "Asian",
+          "subcategory": "Thai",
+          "dateVisited": "",
+          "address": "204 E 13th St, New York, NY 10003",
+          "dishes": "",
+          "lat": 40.7327,
+          "lng": -73.9866,
+          "yelpRating": null,
+          "googleRating": 4.7
+        },
+        {
+          "name": "Lucali",
+          "legacyCategory": "Pizza",
+          "mainCategory": "American",
+          "subcategory": "Pizza",
+          "dateVisited": "",
+          "address": "575 Henry St, Brooklyn, NY 11231",
+          "dishes": "",
+          "lat": 40.6818,
+          "lng": -74.0004,
+          "yelpRating": 4.2,
+          "googleRating": 4.2
+        },
+        {
+          "name": "Scarr's PIzza",
+          "legacyCategory": "Pizza",
+          "mainCategory": "American",
+          "subcategory": "Pizza",
+          "dateVisited": "",
+          "address": "35 Orchard St, New York, NY 10002",
+          "dishes": "",
+          "lat": 40.7157,
+          "lng": -73.9916,
+          "yelpRating": 3.9,
+          "googleRating": 4.4
+        },
+        {
+          "name": "Best Pizza",
+          "legacyCategory": "Pizza",
+          "mainCategory": "American",
+          "subcategory": "Pizza",
+          "dateVisited": "",
+          "address": "33 Havemeyer St, Brooklyn, NY 11211",
+          "dishes": "",
+          "lat": 40.712,
+          "lng": -73.9556,
+          "yelpRating": null,
+          "googleRating": 4.5
+        },
+        {
+          "name": "Thirteen Water",
+          "legacyCategory": "Sushi",
+          "mainCategory": "Asian",
+          "subcategory": "Japanese",
+          "dateVisited": "",
+          "address": "208 E 7th St, New York, NY 10009",
+          "dishes": "",
+          "lat": 40.7238,
+          "lng": -73.9833,
+          "yelpRating": null,
+          "googleRating": 4.6
+        }
+      ]
+    },
+    {
+      "name": "Toronto",
+      "restaurants": [
+        {
+          "name": "Takja BBQ House",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "962 College Street, Toronto, ON",
+          "dishes": "",
+          "lat": 43.6535402,
+          "lng": -79.4273704,
+          "yelpRating": null,
+          "googleRating": 4.7
+        },
+        {
+          "name": "DaiLo",
+          "legacyCategory": "Chinese",
+          "mainCategory": "Asian",
+          "subcategory": "Chinese",
+          "dateVisited": "",
+          "address": "503 College Street, Toronto, ON",
+          "dishes": "",
+          "lat": 43.6558494,
+          "lng": -79.4098196,
+          "yelpRating": null,
+          "googleRating": 4.6
+        }
+      ]
+    },
+    {
+      "name": "Tokyo",
+      "restaurants": []
+    },
+    {
+      "name": "Paris",
+      "restaurants": []
+    },
+    {
+      "name": "Portland",
+      "restaurants": [
+        {
+          "name": "Jeju",
+          "legacyCategory": "Korean",
+          "mainCategory": "Asian",
+          "subcategory": "Korean",
+          "dateVisited": "",
+          "address": "626 SE Main St., Portland, OR 97214",
+          "dishes": "",
+          "lat": 45.5134373,
+          "lng": -122.6590621,
+          "yelpRating": null,
+          "googleRating": 4.3
+        },
+        {
+          "name": "Proud Mary Cafe",
+          "legacyCategory": "Coffee",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Coffee/Cafes",
+          "dateVisited": "",
+          "address": "2012 NE Alberta St, Portland, OR",
+          "dishes": "",
+          "lat": 45.5589592,
+          "lng": -122.64458,
+          "yelpRating": null,
+          "googleRating": 4.5
+        },
+        {
+          "name": "kann",
+          "legacyCategory": "Haitian",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "548 SE Ash St, Portland, OR 97214",
+          "dishes": "",
+          "lat": 45.5213911,
+          "lng": -122.6599297,
+          "yelpRating": null,
+          "googleRating": 4.5,
+          "notes": "Haitian - placed in Other American until Caribbean/Latin American category added"
+        },
+        {
+          "name": "Tin Shen Garden Cafe",
+          "legacyCategory": "Taiwanese",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "1438 NE Alberta St, Portland, OR 97211",
+          "dishes": "",
+          "lat": 45.5589664,
+          "lng": -122.650895,
+          "yelpRating": null,
+          "googleRating": 4.6,
+          "notes": "Taiwanese - placed in Other Asian (could also be Chinese)"
+        },
+        {
+          "name": "Nong's Khao Man Gai",
+          "legacyCategory": "Thai",
+          "mainCategory": "Asian",
+          "subcategory": "Thai",
+          "dateVisited": "",
+          "address": "609 SE Ankeny St, Portland, OR 97214",
+          "dishes": "",
+          "lat": 45.5223803,
+          "lng": -122.6594045,
+          "yelpRating": null,
+          "googleRating": 4.6
+        }
+      ]
+    }
+  ],
+  "categoryStats": {
+    "NYC": {
+      "total": 23,
+      "byMainCategory": {
+        "American": 8,
+        "Asian": 13,
+        "Mexican": 2
+      },
+      "bySubcategory": {
+        "Pizza": 7,
+        "Korean": 7,
+        "Japanese": 4,
+        "Other American": 2,
+        "Other Mexican": 2,
+        "Thai": 1,
+        "Other Asian": 1
+      }
+    },
+    "Toronto": {
+      "total": 2,
+      "byMainCategory": {
+        "Asian": 2
+      },
+      "bySubcategory": {
+        "Korean": 1,
+        "Chinese": 1
+      }
+    },
+    "Portland": {
+      "total": 5,
+      "byMainCategory": {
+        "Asian": 3,
+        "American": 1,
+        "Cafes & Desserts": 1
+      },
+      "bySubcategory": {
+        "Korean": 1,
+        "Thai": 1,
+        "Other Asian": 1,
+        "Coffee/Cafes": 1,
+        "Other American": 1
+      }
+    }
+  }
+}

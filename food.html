@@ -47,10 +47,13 @@
                     <button class="city-tab active" data-city="0">Loading...</button>
                 </div>
 
-                <!-- Category Filter Pills -->
-                <div class="category-filters" id="categoryFilters">
-                    <button class="category-pill active" data-category="all">All</button>
+                <!-- Main Category Filter Pills -->
+                <div class="category-filters" id="mainCategoryFilters">
+                    <button class="category-pill main-category-pill active" data-category="all">All</button>
                 </div>
+
+                <!-- Subcategory Filter Pills (shown when main category selected) -->
+                <div class="category-filters hidden" id="subcategoryFilters"></div>
 
                 <!-- Stats Bar -->
                 <div class="food-stats" id="foodStats"></div>
@@ -90,6 +93,7 @@
     <script src="js/navigation.js"></script>
     <script src="js/theme.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfQ4-x8DWUnMWqG5XuVGV-GBvvyFf7cQc&callback=initMap" async defer></script>
+    <script src="js/food-categories.js"></script>
     <script src="js/food.js"></script>
     <script src="js/personality-interactions.js"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fede3c0d4b03486c98392098d02e566b"}'></script>

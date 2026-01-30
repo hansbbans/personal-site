@@ -26,9 +26,12 @@ Temporary Items
 .vscode/
 .idea/
 
-# Environment variables (if you add any)
+# Environment variables and config
 .env
 .env.local
+.env.*.local
+config.json
+config.local.json
 
 # Node modules (if you add any build tools later)
 node_modules/

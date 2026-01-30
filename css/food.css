@@ -1,5 +1,71 @@
 /* Food Page Styles - Editorial Warmth */
 
+/* ============================================
+   CATEGORY COLOR SCHEME
+   ============================================
+   Asian: #C41E3A (Deep Red)
+   European: #1E3A5F (Navy Blue)
+   American: #D2691E (Burnt Orange)
+   Mexican: #228B22 (Vibrant Green)
+   Mediterranean/Middle Eastern: #008B8B (Teal)
+   Cafes & Desserts: #8B4513 (Coffee Brown)
+   Bars & Drinks: #4B0082 (Deep Purple)
+   ============================================ */
+
+/* CSS Variables for Category Colors */
+:root {
+    --cat-asian: #C41E3A;
+    --cat-asian-light: rgba(196, 30, 58, 0.1);
+    --cat-asian-dark: rgba(196, 30, 58, 0.15);
+    
+    --cat-european: #1E3A5F;
+    --cat-european-light: rgba(30, 58, 95, 0.1);
+    --cat-european-dark: rgba(30, 58, 95, 0.15);
+    
+    --cat-american: #D2691E;
+    --cat-american-light: rgba(210, 105, 30, 0.1);
+    --cat-american-dark: rgba(210, 105, 30, 0.15);
+    
+    --cat-mexican: #228B22;
+    --cat-mexican-light: rgba(34, 139, 34, 0.1);
+    --cat-mexican-dark: rgba(34, 139, 34, 0.15);
+    
+    --cat-mediterranean: #008B8B;
+    --cat-mediterranean-light: rgba(0, 139, 139, 0.1);
+    --cat-mediterranean-dark: rgba(0, 139, 139, 0.15);
+    
+    --cat-cafes: #8B4513;
+    --cat-cafes-light: rgba(139, 69, 19, 0.1);
+    --cat-cafes-dark: rgba(139, 69, 19, 0.15);
+    
+    --cat-bars: #4B0082;
+    --cat-bars-light: rgba(75, 0, 130, 0.1);
+    --cat-bars-dark: rgba(75, 0, 130, 0.15);
+}
+
+[data-theme="dark"] {
+    --cat-asian-light: rgba(196, 30, 58, 0.2);
+    --cat-asian-dark: rgba(196, 30, 58, 0.25);
+    
+    --cat-european-light: rgba(30, 58, 95, 0.25);
+    --cat-european-dark: rgba(30, 58, 95, 0.3);
+    
+    --cat-american-light: rgba(210, 105, 30, 0.2);
+    --cat-american-dark: rgba(210, 105, 30, 0.25);
+    
+    --cat-mexican-light: rgba(34, 139, 34, 0.2);
+    --cat-mexican-dark: rgba(34, 139, 34, 0.25);
+    
+    --cat-mediterranean-light: rgba(0, 139, 139, 0.2);
+    --cat-mediterranean-dark: rgba(0, 139, 139, 0.25);
+    
+    --cat-cafes-light: rgba(139, 69, 19, 0.2);
+    --cat-cafes-dark: rgba(139, 69, 19, 0.25);
+    
+    --cat-bars-light: rgba(75, 0, 130, 0.2);
+    --cat-bars-dark: rgba(75, 0, 130, 0.25);
+}
+
 /* Category Filter Pills */
 .category-filters {
     display: flex;
@@ -47,6 +113,112 @@
 .category-pill:not(.active) .count {
     background: var(--bg-secondary);
     color: var(--text-muted);
+}
+
+/* Category-specific pill colors */
+.category-pill[data-category="Asian"] {
+    border-color: var(--cat-asian);
+}
+
+.category-pill[data-category="Asian"]:hover {
+    background: var(--cat-asian-light);
+    color: var(--cat-asian);
+}
+
+.category-pill[data-category="Asian"].active {
+    background: var(--cat-asian);
+    border-color: var(--cat-asian);
+    color: white;
+}
+
+.category-pill[data-category="European"] {
+    border-color: var(--cat-european);
+}
+
+.category-pill[data-category="European"]:hover {
+    background: var(--cat-european-light);
+    color: var(--cat-european);
+}
+
+.category-pill[data-category="European"].active {
+    background: var(--cat-european);
+    border-color: var(--cat-european);
+    color: white;
+}
+
+.category-pill[data-category="American"] {
+    border-color: var(--cat-american);
+}
+
+.category-pill[data-category="American"]:hover {
+    background: var(--cat-american-light);
+    color: var(--cat-american);
+}
+
+.category-pill[data-category="American"].active {
+    background: var(--cat-american);
+    border-color: var(--cat-american);
+    color: white;
+}
+
+.category-pill[data-category="Mexican"] {
+    border-color: var(--cat-mexican);
+}
+
+.category-pill[data-category="Mexican"]:hover {
+    background: var(--cat-mexican-light);
+    color: var(--cat-mexican);
+}
+
+.category-pill[data-category="Mexican"].active {
+    background: var(--cat-mexican);
+    border-color: var(--cat-mexican);
+    color: white;
+}
+
+.category-pill[data-category="Mediterranean/Middle Eastern"] {
+    border-color: var(--cat-mediterranean);
+}
+
+.category-pill[data-category="Mediterranean/Middle Eastern"]:hover {
+    background: var(--cat-mediterranean-light);
+    color: var(--cat-mediterranean);
+}
+
+.category-pill[data-category="Mediterranean/Middle Eastern"].active {
+    background: var(--cat-mediterranean);
+    border-color: var(--cat-mediterranean);
+    color: white;
+}
+
+.category-pill[data-category="Cafes & Desserts"] {
+    border-color: var(--cat-cafes);
+}
+
+.category-pill[data-category="Cafes & Desserts"]:hover {
+    background: var(--cat-cafes-light);
+    color: var(--cat-cafes);
+}
+
+.category-pill[data-category="Cafes & Desserts"].active {
+    background: var(--cat-cafes);
+    border-color: var(--cat-cafes);
+    color: white;
+}
+
+.category-pill[data-category="Bars & Drinks"] {
+    border-color: var(--cat-bars);
+}
+
+.category-pill[data-category="Bars & Drinks"]:hover {
+    background: var(--cat-bars-light);
+    color: var(--cat-bars);
+}
+
+.category-pill[data-category="Bars & Drinks"].active {
+    background: var(--cat-bars);
+    border-color: var(--cat-bars);
+    color: white;
 }
 
 /* Stats Bar */
@@ -103,6 +275,186 @@
     transform: scaleX(1);
 }
 
+/* ============================================
+   CATEGORY-SPECIFIC CARD STYLES
+   ============================================ */
+
+/* Asian - Deep Red (#C41E3A) */
+.food-card.category-asian {
+    border-top: 3px solid var(--cat-asian);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-asian-light) 100%);
+}
+
+.food-card.category-asian:hover {
+    border-color: var(--cat-asian);
+    box-shadow: 0 8px 30px rgba(196, 30, 58, 0.2);
+}
+
+.food-card.category-asian .food-card-category {
+    background: var(--cat-asian-light);
+    color: var(--cat-asian);
+}
+
+[data-theme="dark"] .food-card.category-asian .food-card-category {
+    background: var(--cat-asian-dark);
+}
+
+/* European - Navy Blue (#1E3A5F) */
+.food-card.category-european {
+    border-top: 3px solid var(--cat-european);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-european-light) 100%);
+}
+
+.food-card.category-european:hover {
+    border-color: var(--cat-european);
+    box-shadow: 0 8px 30px rgba(30, 58, 95, 0.2);
+}
+
+.food-card.category-european .food-card-category {
+    background: var(--cat-european-light);
+    color: var(--cat-european);
+}
+
+[data-theme="dark"] .food-card.category-european .food-card-category {
+    background: var(--cat-european-dark);
+}
+
+/* American - Burnt Orange (#D2691E) */
+.food-card.category-american {
+    border-top: 3px solid var(--cat-american);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-american-light) 100%);
+}
+
+.food-card.category-american:hover {
+    border-color: var(--cat-american);
+    box-shadow: 0 8px 30px rgba(210, 105, 30, 0.2);
+}
+
+.food-card.category-american .food-card-category {
+    background: var(--cat-american-light);
+    color: var(--cat-american);
+}
+
+[data-theme="dark"] .food-card.category-american .food-card-category {
+    background: var(--cat-american-dark);
+}
+
+/* Mexican - Vibrant Green (#228B22) */
+.food-card.category-mexican {
+    border-top: 3px solid var(--cat-mexican);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-mexican-light) 100%);
+}
+
+.food-card.category-mexican:hover {
+    border-color: var(--cat-mexican);
+    box-shadow: 0 8px 30px rgba(34, 139, 34, 0.2);
+}
+
+.food-card.category-mexican .food-card-category {
+    background: var(--cat-mexican-light);
+    color: var(--cat-mexican);
+}
+
+[data-theme="dark"] .food-card.category-mexican .food-card-category {
+    background: var(--cat-mexican-dark);
+}
+
+/* Mediterranean - Teal (#008B8B) */
+.food-card.category-mediterranean {
+    border-top: 3px solid var(--cat-mediterranean);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-mediterranean-light) 100%);
+}
+
+.food-card.category-mediterranean:hover {
+    border-color: var(--cat-mediterranean);
+    box-shadow: 0 8px 30px rgba(0, 139, 139, 0.2);
+}
+
+.food-card.category-mediterranean .food-card-category {
+    background: var(--cat-mediterranean-light);
+    color: var(--cat-mediterranean);
+}
+
+[data-theme="dark"] .food-card.category-mediterranean .food-card-category {
+    background: var(--cat-mediterranean-dark);
+}
+
+/* Cafes & Desserts - Coffee Brown (#8B4513) */
+.food-card.category-cafes {
+    border-top: 3px solid var(--cat-cafes);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-cafes-light) 100%);
+}
+
+.food-card.category-cafes:hover {
+    border-color: var(--cat-cafes);
+    box-shadow: 0 8px 30px rgba(139, 69, 19, 0.2);
+}
+
+.food-card.category-cafes .food-card-category {
+    background: var(--cat-cafes-light);
+    color: var(--cat-cafes);
+}
+
+[data-theme="dark"] .food-card.category-cafes .food-card-category {
+    background: var(--cat-cafes-dark);
+}
+
+/* Bars & Drinks - Deep Purple (#4B0082) */
+.food-card.category-bars {
+    border-top: 3px solid var(--cat-bars);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-bars-light) 100%);
+}
+
+.food-card.category-bars:hover {
+    border-color: var(--cat-bars);
+    box-shadow: 0 8px 30px rgba(75, 0, 130, 0.2);
+}
+
+.food-card.category-bars .food-card-category {
+    background: var(--cat-bars-light);
+    color: var(--cat-bars);
+}
+
+[data-theme="dark"] .food-card.category-bars .food-card-category {
+    background: var(--cat-bars-dark);
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Ensure category badges have sufficient contrast */
+.food-card-category .main-cat {
+    font-weight: 600;
+}
+
+.food-card-category .sub-cat {
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+/* Ensure text contrast on category pills */
+.category-pill[data-category].active {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* High contrast focus states for accessibility */
+.category-pill:focus-visible,
+.food-card:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .food-card,
+    .category-pill,
+    .map-legend-pin {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 .food-card-header {
     padding: 1.25rem 1.25rem 0.75rem;
 }
@@ -140,20 +492,58 @@
 }
 
 .food-card-category {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.15rem;
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--primary);
     background: rgba(194, 65, 12, 0.1);
-    padding: 0.25rem 0.6rem;
-    border-radius: 0.25rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.5rem;
     font-family: var(--font-mono);
 }
 
 [data-theme="dark"] .food-card-category {
     background: rgba(251, 146, 60, 0.15);
+}
+
+.food-card-category .main-cat {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.food-card-category .sub-cat {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Subcategory filter pills */
+#subcategoryFilters {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+#subcategoryFilters.hidden {
+    display: none;
+}
+
+.subcategory-pill {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.subcategory-pill.active {
+    background: var(--secondary);
+    border-color: var(--secondary);
 }
 
 .food-card-body {
@@ -284,6 +674,52 @@
     width: 100%;
 }
 
+/* Map Category Legend */
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    justify-content: center;
+}
+
+.map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+.map-legend-pin {
+    width: 12px;
+    height: 12px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.map-legend-pin.asian { background: var(--cat-asian); }
+.map-legend-pin.european { background: var(--cat-european); }
+.map-legend-pin.american { background: var(--cat-american); }
+.map-legend-pin.mexican { background: var(--cat-mexican); }
+.map-legend-pin.mediterranean { background: var(--cat-mediterranean); }
+.map-legend-pin.cafes { background: var(--cat-cafes); }
+.map-legend-pin.bars { background: var(--cat-bars); }
+
+/* Custom Google Maps Info Window Styling */
+.gm-style .gm-style-iw-c {
+    border-radius: 12px !important;
+    padding: 12px !important;
+}
+
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+}
+
 /* Empty State */
 .food-empty {
     grid-column: 1 / -1;
@@ -322,5 +758,55 @@
     
     .map-container {
         height: 300px;
+    }
+    
+    .map-legend {
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .map-legend-item {
+        font-size: 0.7rem;
+    }
+    
+    .map-legend-pin {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Ensure category badges have sufficient contrast */
+.food-card-category .main-cat {
+    font-weight: 600;
+}
+
+.food-card-category .sub-cat {
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+/* Ensure text contrast on category pills */
+.category-pill[data-category].active {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* High contrast focus states for accessibility */
+.category-pill:focus-visible,
+.food-card:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .food-card,
+    .category-pill,
+    .map-legend-pin {
+        transition: none !important;
+        animation: none !important;
     }
 }

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Admin - Hans</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍜</text></svg>">
+    <link rel="stylesheet" href="css/admin-styles.css">
+    <style>
+        /* Food-specific admin styles */
+        .food-admin-header {
+            background: linear-gradient(135deg, #c2410c, #ea580c);
+            color: white;
+            padding: 1.5rem;
+            margin: -2rem -2rem 2rem;
+        }
+        
+        .food-admin-header h1 {
+            margin: 0;
+            font-size: 1.75rem;
+        }
+        
+        .food-admin-header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.9;
+        }
+        
+        .category-select-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .category-select-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        
+        .restaurant-list {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+        }
+        
+        .restaurant-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background var(--transition-fast);
+        }
+        
+        .restaurant-item:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .restaurant-item:last-child {
+            border-bottom: none;
+        }
+        
+        .restaurant-info h4 {
+            margin: 0 0 0.25rem;
+            font-size: 1rem;
+        }
+        
+        .restaurant-meta {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .restaurant-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--bg-card);
+            padding: 0.15rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: var(--font-mono);
+        }
+        
+        .restaurant-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        
+        [data-theme="dark"] .loading-content {
+            background: var(--bg-card);
+        }
+        
+        .city-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .city-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 0.25rem;
+            transition: all var(--transition-fast);
+        }
+        
+        .city-tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+        
+        .city-tab.active {
+            color: var(--primary);
+            background: rgba(194, 65, 12, 0.1);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="food-admin-header">
+            <h1>🍜 Food Admin</h1>
+            <p>Manage restaurant entries and categories</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="add" onclick="app.switchTab('add')">
+                ➕ Add Restaurant
+            </button>
+            <button class="tab-btn" data-tab="manage" onclick="app.switchTab('manage')">
+                📋 Manage Restaurants
+            </button>
+        </div>
+        
+        <!-- Add Restaurant Tab -->
+        <div class="tab-panel active" id="addTab">
+            <div class="form-section">
+                <h3>Add New Restaurant</h3>
+                
+                <div class="form-group">
+                    <label for="citySelect">City</label>
+                    <select id="citySelect" class="form-control">
+                        <option value="NYC">NYC</option>
+                        <option value="Toronto">Toronto</option>
+                        <option value="Tokyo">Tokyo</option>
+                        <option value="Paris">Paris</option>
+                        <option value="Portland">Portland</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="restaurantName">Restaurant Name *</label>
+                    <input type="text" id="restaurantName" class="form-control" placeholder="e.g., Atomix">
+                </div>
+                
+                <div class="category-select-group">
+                    <div class="form-group">
+                        <label for="mainCategory">Main Category *</label>
+                        <select id="mainCategory" class="form-control" onchange="app.updateSubcategories()">
+                            <option value="">Select category...</option>
+                            <option value="Asian">🥢 Asian</option>
+                            <option value="European">🍝 European</option>
+                            <option value="American">🍔 American</option>
+                            <option value="Mexican">🌮 Mexican</option>
+                            <option value="Mediterranean/Middle Eastern">🧆 Mediterranean/Middle Eastern</option>
+                            <option value="Cafes & Desserts">☕ Cafes & Desserts</option>
+                            <option value="Bars & Drinks">🍸 Bars & Drinks</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subcategory">Subcategory *</label>
+                        <select id="subcategory" class="form-control" disabled>
+                            <option value="">Select main category first</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="legacyCategory">Legacy Category (for Google Sheets)</label>
+                    <input type="text" id="legacyCategory" class="form-control" placeholder="e.g., Korean, Sushi, Pizza">
+                    <p class="form-hint">This is what appears in the Category column of the spreadsheet</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" class="form-control" placeholder="e.g., 104 E 30th St, New York, NY 10016">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="latitude">Latitude</label>
+                        <input type="number" id="latitude" class="form-control" step="any" placeholder="40.74421">
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude">Longitude</label>
+                        <input type="number" id="longitude" class="form-control" step="any" placeholder="-73.98286">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dishes">Signature Dishes (comma separated)</label>
+                    <input type="text" id="dishes" class="form-control" placeholder="e.g., Tasting Menu, Kimchi Stew">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="yelpRating">Yelp Rating</label>
+                        <input type="number" id="yelpRating" class="form-control" min="0" max="5" step="0.1" placeholder="4.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="googleRating">Google Rating</label>
+                        <input type="number" id="googleRating" class="form-control" min="0" max="5" step="0.1" placeholder="4.7">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateVisited">Date Visited</label>
+                    <input type="date" id="dateVisited" class="form-control">
+                </div>
+                
+                <button class="btn-primary" onclick="app.addRestaurant()">
+                    ➕ Add Restaurant
+                </button>
+            </div>
+        </div>
+        
+        <!-- Manage Restaurants Tab -->
+        <div class="tab-panel" id="manageTab">
+            <div class="city-tabs" id="manageCityTabs">
+                <button class="city-tab active" data-city="NYC">NYC</button>
+                <button class="city-tab" data-city="Toronto">Toronto</button>
+                <button class="city-tab" data-city="Tokyo">Tokyo</button>
+                <button class="city-tab" data-city="Paris">Paris</button>
+                <button class="city-tab" data-city="Portland">Portland</button>
+            </div>
+            
+            <div class="restaurant-list" id="restaurantList">
+                <div class="empty-state">
+                    <div class="empty-state-icon">⏳</div>
+                    <p>Loading restaurants...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit Modal -->
+        <div class="modal hidden" id="editModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>✏️ Edit Restaurant</h3>
+                    <button class="btn-close" onclick="app.closeEditModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editRestaurantIndex">
+                    <input type="hidden" id="editRestaurantCity">
+                    
+                    <div class="form-group">
+                        <label for="editName">Restaurant Name</label>
+                        <input type="text" id="editName" class="form-control">
+                    </div>
+                    
+                    <div class="category-select-group">
+                        <div class="form-group">
+                            <label for="editMainCategory">Main Category</label>
+                            <select id="editMainCategory" class="form-control" onchange="app.updateEditSubcategories()">
+                                <option value="">Select category...</option>
+                                <option value="Asian">🥢 Asian</option>
+                                <option value="European">🍝 European</option>
+                                <option value="American">🍔 American</option>
+                                <option value="Mexican">🌮 Mexican</option>
+                                <option value="Mediterranean/Middle Eastern">🧆 Mediterranean/Middle Eastern</option>
+                                <option value="Cafes & Desserts">☕ Cafes & Desserts</option>
+                                <option value="Bars & Drinks">🍸 Bars & Drinks</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editSubcategory">Subcategory</label>
+                            <select id="editSubcategory" class="form-control">
+                                <option value="">Select main category first</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editLegacyCategory">Legacy Category</label>
+                        <input type="text" id="editLegacyCategory" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editAddress">Address</label>
+                        <input type="text" id="editAddress" class="form-control">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editLatitude">Latitude</label>
+                            <input type="number" id="editLatitude" class="form-control" step="any">
+                        </div>
+                        <div class="form-group">
+                            <label for="editLongitude">Longitude</label>
+                            <input type="number" id="editLongitude" class="form-control" step="any">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editDishes">Signature Dishes</label>
+                        <input type="text" id="editDishes" class="form-control">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editYelpRating">Yelp Rating</label>
+                            <input type="number" id="editYelpRating" class="form-control" min="0" max="5" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGoogleRating">Google Rating</label>
+                            <input type="number" id="editGoogleRating" class="form-control" min="0" max="5" step="0.1">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="app.closeEditModal()">Cancel</button>
+                    <button class="btn-primary" onclick="app.saveEdit()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Status Bar -->
+        <div class="status-bar hidden" id="statusBar">
+            <div class="status-content" id="statusContent"></div>
+            <button class="status-close" onclick="app.hideStatus()">×</button>
+        </div>
+    </div>
+    
+    <script src="js/food-categories.js"></script>
+    <script src="js/food-admin.js"></script>
+</body>
+</html>

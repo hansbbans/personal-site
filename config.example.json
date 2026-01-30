@@ -1,0 +1,12 @@
+{
+  "_comment": "Copy this file to config.json and fill in your actual values. config.json is in .gitignore and should NEVER be committed.",
+  "adminPassword": "your_secure_password_here",
+  "githubToken": "ghp_your_github_token_here",
+  "repoOwner": "hansbbans",
+  "repoName": "personal-site",
+  "imageOptimization": {
+    "maxWidth": 1920,
+    "jpegQuality": 85,
+    "autoOptimize": true
+  }
+}
