@@ -281,13 +281,14 @@
 
 /* Asian - Deep Red (#C41E3A) */
 .food-card.category-asian {
-    border-top: 3px solid var(--cat-asian);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-asian-light) 100%);
+    border-left: 6px solid var(--cat-asian) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-asian-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-asian:hover {
-    border-color: var(--cat-asian);
-    box-shadow: 0 8px 30px rgba(196, 30, 58, 0.2);
+    border-left-color: var(--cat-asian) !important;
+    box-shadow: -4px 0 20px rgba(196, 30, 58, 0.3) !important;
 }
 
 .food-card.category-asian .food-card-category {
@@ -301,13 +302,14 @@
 
 /* European - Navy Blue (#1E3A5F) */
 .food-card.category-european {
-    border-top: 3px solid var(--cat-european);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-european-light) 100%);
+    border-left: 6px solid var(--cat-european) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-european-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-european:hover {
-    border-color: var(--cat-european);
-    box-shadow: 0 8px 30px rgba(30, 58, 95, 0.2);
+    border-left-color: var(--cat-european) !important;
+    box-shadow: -4px 0 20px rgba(30, 58, 95, 0.3) !important;
 }
 
 .food-card.category-european .food-card-category {
@@ -321,12 +323,14 @@
 
 /* American - Burnt Orange (#D2691E) */
 .food-card.category-american {
-    border-top: 3px solid var(--cat-american);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-american-light) 100%);
+    border-left: 6px solid var(--cat-american) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-american-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-american:hover {
-    border-color: var(--cat-american);
+    border-left-color: var(--cat-american) !important;
+    box-shadow: -4px 0 20px rgba(210, 105, 30, 0.3) !important;
     box-shadow: 0 8px 30px rgba(210, 105, 30, 0.2);
 }
 
@@ -341,13 +345,14 @@
 
 /* Mexican - Vibrant Green (#228B22) */
 .food-card.category-mexican {
-    border-top: 3px solid var(--cat-mexican);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-mexican-light) 100%);
+    border-left: 6px solid var(--cat-mexican) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-mexican-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-mexican:hover {
-    border-color: var(--cat-mexican);
-    box-shadow: 0 8px 30px rgba(34, 139, 34, 0.2);
+    border-left-color: var(--cat-mexican) !important;
+    box-shadow: -4px 0 20px rgba(34, 139, 34, 0.3) !important;
 }
 
 .food-card.category-mexican .food-card-category {
@@ -361,13 +366,14 @@
 
 /* Mediterranean - Teal (#008B8B) */
 .food-card.category-mediterranean {
-    border-top: 3px solid var(--cat-mediterranean);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-mediterranean-light) 100%);
+    border-left: 6px solid var(--cat-mediterranean) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-mediterranean-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-mediterranean:hover {
-    border-color: var(--cat-mediterranean);
-    box-shadow: 0 8px 30px rgba(0, 139, 139, 0.2);
+    border-left-color: var(--cat-mediterranean) !important;
+    box-shadow: -4px 0 20px rgba(0, 139, 139, 0.3) !important;
 }
 
 .food-card.category-mediterranean .food-card-category {
@@ -381,13 +387,14 @@
 
 /* Cafes & Desserts - Coffee Brown (#8B4513) */
 .food-card.category-cafes {
-    border-top: 3px solid var(--cat-cafes);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-cafes-light) 100%);
+    border-left: 6px solid var(--cat-cafes) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-cafes-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-cafes:hover {
-    border-color: var(--cat-cafes);
-    box-shadow: 0 8px 30px rgba(139, 69, 19, 0.2);
+    border-left-color: var(--cat-cafes) !important;
+    box-shadow: -4px 0 20px rgba(139, 69, 19, 0.3) !important;
 }
 
 .food-card.category-cafes .food-card-category {
@@ -401,13 +408,14 @@
 
 /* Bars & Drinks - Deep Purple (#4B0082) */
 .food-card.category-bars {
-    border-top: 3px solid var(--cat-bars);
-    background: linear-gradient(180deg, var(--bg-card) 0%, var(--cat-bars-light) 100%);
+    border-left: 6px solid var(--cat-bars) !important;
+    border-top: none !important;
+    background: linear-gradient(90deg, var(--cat-bars-light) 0%, var(--bg-card) 30%) !important;
 }
 
 .food-card.category-bars:hover {
-    border-color: var(--cat-bars);
-    box-shadow: 0 8px 30px rgba(75, 0, 130, 0.2);
+    border-left-color: var(--cat-bars) !important;
+    box-shadow: -4px 0 20px rgba(75, 0, 130, 0.3) !important;
 }
 
 .food-card.category-bars .food-card-category {
