@@ -158,19 +158,34 @@ function setupMapToggle() {
 
 // Load data from local JSON file
 async function loadRestaurantData() {
+    console.log('[DEBUG] loadRestaurantData() started');
     try {
+        console.log('[DEBUG] Fetching data/food-data.json...');
         const response = await fetch('data/food-data.json');
+        console.log('[DEBUG] Response status:', response.status);
+        
         const data = await response.json();
+        console.log('[DEBUG] Data loaded:', data);
+        console.log('[DEBUG] Cities:', data.cities?.length);
         
         citiesData = data.cities;
+        console.log('[DEBUG] citiesData set:', citiesData);
         
+        console.log('[DEBUG] Calling renderCityTabs()...');
         renderCityTabs();
+        
+        console.log('[DEBUG] Calling renderMainCategoryFilters()...');
         renderMainCategoryFilters();
+        
+        console.log('[DEBUG] Calling showCity(0)...');
         showCity(0);
+        
+        console.log('[DEBUG] loadRestaurantData() completed successfully');
     } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('[DEBUG] Error loading data:', error);
+        console.error('[DEBUG] Error stack:', error.stack);
         document.getElementById('foodGrid').innerHTML = 
-            '<p class="loading-message">Unable to load restaurants.</p>';
+            '<p class="loading-message">Unable to load restaurants. Error: ' + error.message + '</p>';
     }
 }
 
@@ -315,9 +330,13 @@ function getFilteredRestaurants() {
 
 // Show city
 function showCity(index) {
+    console.log('[DEBUG] showCity(' + index + ') called');
     currentCity = index;
     currentMainCategory = 'all';
     currentSubcategory = 'all';
+    
+    console.log('[DEBUG] citiesData:', citiesData);
+    console.log('[DEBUG] currentCity data:', citiesData[currentCity]);
     
     // Update active tab
     document.querySelectorAll('.city-tab').forEach((tab, i) => {
@@ -329,21 +348,33 @@ function showCity(index) {
         pill.classList.toggle('active', pill.dataset.category === 'all');
     });
     
+    console.log('[DEBUG] Calling renderSubcategoryFilters()...');
     renderSubcategoryFilters();
+    
+    console.log('[DEBUG] Calling renderCards()...');
     renderCards();
     
     if (mapVisible) {
         updateMap(getFilteredRestaurants());
     }
+    console.log('[DEBUG] showCity() completed');
 }
 
 // Render cards
 function renderCards() {
+    console.log('[DEBUG] renderCards() called');
     const grid = document.getElementById('foodGrid');
+    console.log('[DEBUG] grid element:', grid);
+    
     const restaurants = getFilteredRestaurants();
+    console.log('[DEBUG] filtered restaurants:', restaurants.length);
+    
     const stats = document.getElementById('foodStats');
     const cityData = citiesData[currentCity];
+    console.log('[DEBUG] cityData:', cityData);
+    
     const total = cityData?.restaurants.length || 0;
+    console.log('[DEBUG] total restaurants:', total);
     
     // Update stats
     let statsText = '';
