@@ -1,37 +1,82 @@
 {
   "metadata": {
     "lastUpdated": "2026-01-30",
-    "version": "2.0",
+    "version": "2.1",
     "description": "Hierarchical cuisine-based category system for food guide"
   },
   "categories": {
     "Asian": {
       "emoji": "🥢",
-      "subcategories": ["Japanese", "Chinese", "Korean", "Thai", "Vietnamese", "Indian", "Other Asian"]
+      "subcategories": [
+        "Japanese",
+        "Chinese",
+        "Korean",
+        "Thai",
+        "Vietnamese",
+        "Indian",
+        "Other Asian"
+      ]
     },
     "European": {
       "emoji": "🍝",
-      "subcategories": ["Italian", "French", "Spanish", "German", "Other European"]
+      "subcategories": [
+        "Italian",
+        "French",
+        "Spanish",
+        "German",
+        "Other European"
+      ]
     },
     "American": {
       "emoji": "🍔",
-      "subcategories": ["Burgers/Diners", "BBQ/Southern", "Pizza", "Sandwiches/Delis", "Steakhouse", "Other American"]
+      "subcategories": [
+        "Burgers/Diners",
+        "BBQ/Southern",
+        "Pizza",
+        "Sandwiches/Delis",
+        "Steakhouse",
+        "Other American"
+      ]
     },
     "Mexican": {
       "emoji": "🌮",
-      "subcategories": ["Tacos", "Burritos", "Seafood/Mariscos", "Regional", "Other Mexican"]
+      "subcategories": [
+        "Tacos",
+        "Burritos",
+        "Seafood/Mariscos",
+        "Regional",
+        "Other Mexican"
+      ]
     },
     "Mediterranean/Middle Eastern": {
       "emoji": "🧆",
-      "subcategories": ["Israeli", "Lebanese", "Turkish", "Persian/Iranian", "Greek", "Other Mediterranean/Middle Eastern"]
+      "subcategories": [
+        "Israeli",
+        "Lebanese",
+        "Turkish",
+        "Persian/Iranian",
+        "Greek",
+        "Other Mediterranean/Middle Eastern"
+      ]
     },
     "Cafes & Desserts": {
       "emoji": "☕",
-      "subcategories": ["Coffee/Cafes", "Bakeries", "Dessert Shops", "Ice Cream", "Other Cafes & Desserts"]
+      "subcategories": [
+        "Coffee/Cafes",
+        "Bakeries",
+        "Dessert Shops",
+        "Ice Cream",
+        "Other Cafes & Desserts"
+      ]
     },
     "Bars & Drinks": {
       "emoji": "🍸",
-      "subcategories": ["Cocktail Bars", "Wine Bars", "Breweries/Pubs", "Other Bars & Drinks"]
+      "subcategories": [
+        "Cocktail Bars",
+        "Wine Bars",
+        "Breweries/Pubs",
+        "Other Bars & Drinks"
+      ]
     }
   },
   "cities": [
@@ -338,6 +383,97 @@
           "lng": -73.9833,
           "yelpRating": null,
           "googleRating": 4.6
+        },
+        {
+          "name": "Plaza Ortega",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "140 Stanhope St, Brooklyn, NY 11221",
+          "dishes": "",
+          "lat": 40.6891,
+          "lng": -73.9171,
+          "yelpRating": null,
+          "googleRating": 4.7
+        },
+        {
+          "name": "Morgenstern's BANANAS",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "2 Rivington St, New York, NY 10002",
+          "dishes": "",
+          "lat": 40.721583,
+          "lng": -73.9930434,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Nan Xiang Soup Dumplings - Flushing",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "39-16 Prince St #104, Flushing, NY 11354",
+          "dishes": "",
+          "lat": 40.7595751,
+          "lng": -73.8324134,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "New World Mall",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "136-20 Roosevelt Ave, Flushing, NY 11354",
+          "dishes": "",
+          "lat": 40.7593415,
+          "lng": -73.8291722,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Paulie Gee's Slice Shop",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "110 Franklin St, Brooklyn, NY 11222",
+          "dishes": "",
+          "lat": 40.7283642,
+          "lng": -73.957175,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "White Bear",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "135-02 Roosevelt Ave, Flushing, NY 11354",
+          "dishes": "",
+          "lat": 40.758775,
+          "lng": -73.8316571,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Hometown Bar-B-Que",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "454 Van Brunt St, Brooklyn, NY 11231",
+          "dishes": "",
+          "lat": 40.6749167,
+          "lng": -74.0161583,
+          "yelpRating": null,
+          "googleRating": null
         }
       ]
     },
@@ -374,11 +510,273 @@
     },
     {
       "name": "Tokyo",
-      "restaurants": []
+      "restaurants": [
+        {
+          "name": "AFURI Harajuku",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "3 Chome−63−1 グランデフォレスタ原宿 1F, Sendagaya, Shibuya, Tokyo 151-0051, Japan",
+          "dishes": "",
+          "lat": 35.6730053,
+          "lng": 139.7038019,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Butagumi",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "2 Chome-24-9 Nishiazabu, Minato City, Tokyo 106-0031, Japan",
+          "dishes": "",
+          "lat": 35.6609663,
+          "lng": 139.7221289,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Fuglen Tokyo",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "1 Chome-16-11 Tomigaya, Shibuya, Tokyo 151-0063, Japan",
+          "dishes": "",
+          "lat": 35.6666181,
+          "lng": 139.6923999,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Fūunji Shinjuku",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "2 Chome−14−3 北斗第一ビル １F, Yoyogi, Shibuya, Tokyo 151-0053, Japan",
+          "dishes": "",
+          "lat": 35.6868343,
+          "lng": 139.6966393,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Imafuku",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "1 Chome-12-19 Shirokane, Minato City, Tokyo 108-0072, Japan",
+          "dishes": "",
+          "lat": 35.6454012,
+          "lng": 139.7341418,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Isetan Shinjuku",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "3 Chome-14-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan",
+          "dishes": "",
+          "lat": 35.691574,
+          "lng": 139.7046466,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "SAVOY Azabujuban",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "2 Chome−20−12 オリエント麻布 1階, Azabujuban, Minato City, Tokyo 106-0045, Japan",
+          "dishes": "",
+          "lat": 35.6548695,
+          "lng": 139.7364827,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Seirinkan",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "2 Chome-6-4 Kamimeguro, Meguro City, Tokyo 153-0051, Japan",
+          "dishes": "",
+          "lat": 35.6428764,
+          "lng": 139.6990394,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Udon Shin",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "2 Chome−20−16 相馬ビル １F, Yoyogi, Shibuya, Tokyo 151-0053, Japan",
+          "dishes": "",
+          "lat": 35.686489,
+          "lng": 139.697001,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Yakitori BIRD LAND Ginza",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "4 Chome−2−15 塚本素山ビルディング B1F, Ginza, Chuo City, Tokyo 104-0061, Japan",
+          "dishes": "",
+          "lat": 35.672785,
+          "lng": 139.763893,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Yoroniku",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "6 Chome−6−22 LunaRossa南青山 B1, Minamiaoyama, Minato City, Tokyo 107-0062, Japan",
+          "dishes": "",
+          "lat": 35.6602462,
+          "lng": 139.7175653,
+          "yelpRating": null,
+          "googleRating": null
+        }
+      ]
     },
     {
       "name": "Paris",
-      "restaurants": []
+      "restaurants": [
+        {
+          "name": "Ober Mamma",
+          "legacyCategory": "European",
+          "mainCategory": "European",
+          "subcategory": "Other European",
+          "dateVisited": "",
+          "address": "107 Bd Richard-Lenoir, 75011 Paris, France",
+          "dishes": "",
+          "lat": 48.8644739,
+          "lng": 2.3701387,
+          "yelpRating": null,
+          "googleRating": 5
+        },
+        {
+          "name": "Berthillon",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "31 Rue Saint-Louis en l'Île, 75004 Paris, France",
+          "dishes": "",
+          "lat": 48.8517232,
+          "lng": 2.3567354,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Boutique yam'Tcha",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "4 Rue Sauval, 75001 Paris, France",
+          "dishes": "",
+          "lat": 48.8617019,
+          "lng": 2.3424475,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Du Pain et des Idées",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "34 Rue Yves Toudic, 75010 Paris, France",
+          "dishes": "",
+          "lat": 48.8712453,
+          "lng": 2.3628904,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "HolyBelly",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "5 Rue Lucien Sampaix, 75010 Paris, France",
+          "dishes": "",
+          "lat": 48.8710383,
+          "lng": 2.3596596,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "L'As du Fallafel",
+          "legacyCategory": "Mediterranean/Middle Eastern",
+          "mainCategory": "Mediterranean/Middle Eastern",
+          "subcategory": "Other Mediterranean/Middle Eastern",
+          "dateVisited": "",
+          "address": "34 Rue des Rosiers, 75004 Paris, France",
+          "dishes": "",
+          "lat": 48.8574067,
+          "lng": 2.3591962,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "L'Avant Comptoir de la Terre",
+          "legacyCategory": "European",
+          "mainCategory": "European",
+          "subcategory": "Other European",
+          "dateVisited": "",
+          "address": "3 Carr de l'Odéon, 75006 Paris, France",
+          "dishes": "",
+          "lat": 48.8520234,
+          "lng": 2.338782,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Pierre Hermé",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "72 Rue Bonaparte, 75006 Paris, France",
+          "dishes": "",
+          "lat": 48.8514868,
+          "lng": 2.332762,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Robert et Louise",
+          "legacyCategory": "European",
+          "mainCategory": "European",
+          "subcategory": "Other European",
+          "dateVisited": "",
+          "address": "64 Rue Vieille du Temple, 75003 Paris, France",
+          "dishes": "",
+          "lat": 48.8590662,
+          "lng": 2.3594996,
+          "yelpRating": null,
+          "googleRating": null
+        }
+      ]
     },
     {
       "name": "Portland",
@@ -449,6 +847,465 @@
           "lng": -122.6594045,
           "yelpRating": null,
           "googleRating": 4.6
+        }
+      ]
+    },
+    {
+      "name": "Miami",
+      "restaurants": [
+        {
+          "name": "KYU Miami",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "251 NW 25th St, Miami, FL 33127",
+          "dishes": "",
+          "lat": 25.800891,
+          "lng": -80.200212,
+          "yelpRating": null,
+          "googleRating": 5
+        },
+        {
+          "name": "Stubborn Seed - Miami Beach",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "101 Washington Ave, Miami Beach, FL 33139",
+          "dishes": "",
+          "lat": 25.7701757,
+          "lng": -80.1348768,
+          "yelpRating": null,
+          "googleRating": 5
+        }
+      ]
+    },
+    {
+      "name": "San Francisco",
+      "restaurants": [
+        {
+          "name": "Anchor Oyster Bar",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "579 Castro St, San Francisco, CA 94114",
+          "dishes": "",
+          "lat": 37.7597022,
+          "lng": -122.4347069,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "b. patisserie",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "2821 California St, San Francisco, CA 94115",
+          "dishes": "",
+          "lat": 37.7878443,
+          "lng": -122.4408389,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Hog Island Oyster Co.",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "Ferry Building, #11, San Francisco, CA 94111",
+          "dishes": "",
+          "lat": 37.7959647,
+          "lng": -122.3934171,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "La Taqueria",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "2889 Mission St, San Francisco, CA 94110",
+          "dishes": "",
+          "lat": 37.7508961,
+          "lng": -122.4180867,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Mitchell's Ice Cream",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "688 San Jose Ave, San Francisco, CA 94110",
+          "dishes": "",
+          "lat": 37.7442195,
+          "lng": -122.4227909,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "San Tung",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "1031 Irving St, San Francisco, CA 94122",
+          "dishes": "",
+          "lat": 37.7637594,
+          "lng": -122.4690005,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Tartine Bakery",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "600 Guerrero St, San Francisco, CA 94110",
+          "dishes": "",
+          "lat": 37.7614347,
+          "lng": -122.4240821,
+          "yelpRating": null,
+          "googleRating": null
+        }
+      ]
+    },
+    {
+      "name": "Los Angeles",
+      "restaurants": [
+        {
+          "name": "Din Tai Fung",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "1164 Galleria Way, Glendale, CA 91210",
+          "dishes": "",
+          "lat": 34.144386,
+          "lng": -118.2583313,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Eggslut",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "317 S Broadway, Los Angeles, CA 90013",
+          "dishes": "",
+          "lat": 34.0505885,
+          "lng": -118.2486089,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "El Taurino",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "1104 Hoover St, Los Angeles, CA 90006",
+          "dishes": "",
+          "lat": 34.0515068,
+          "lng": -118.2839926,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Father's Office",
+          "legacyCategory": "Bars & Drinks",
+          "mainCategory": "Bars & Drinks",
+          "subcategory": "Other Bars & Drinks",
+          "dateVisited": "",
+          "address": "3229 Helms Ave, Los Angeles, CA 90034",
+          "dishes": "",
+          "lat": 34.0304077,
+          "lng": -118.384824,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Guisados",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "8935 Santa Monica Blvd, West Hollywood, CA 90069",
+          "dishes": "",
+          "lat": 34.0843958,
+          "lng": -118.385235,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Howlin' Ray's Hot Chicken - Chinatown",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "727 N Broadway #128, Los Angeles, CA 90012",
+          "dishes": "",
+          "lat": 34.0615425,
+          "lng": -118.2397141,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Men Oh Tokushima Ramen",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "456 E 2nd St, Los Angeles, CA 90012",
+          "dishes": "",
+          "lat": 34.0470175,
+          "lng": -118.2385061,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Sonoratown",
+          "legacyCategory": "Mexican",
+          "mainCategory": "Mexican",
+          "subcategory": "Other Mexican",
+          "dateVisited": "",
+          "address": "208 E 8th St, Los Angeles, CA 90014",
+          "dishes": "",
+          "lat": 34.041615,
+          "lng": -118.2521844,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Sushi Gen",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "422 E 2nd St, Los Angeles, CA 90012",
+          "dishes": "",
+          "lat": 34.0467107,
+          "lng": -118.238617,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Verve Coffee Roasters",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "833 S Spring St, Los Angeles, CA 90014",
+          "dishes": "",
+          "lat": 34.0423681,
+          "lng": -118.2545639,
+          "yelpRating": null,
+          "googleRating": null
+        }
+      ]
+    },
+    {
+      "name": "London",
+      "restaurants": [
+        {
+          "name": "Blacklock Soho",
+          "legacyCategory": "European",
+          "mainCategory": "European",
+          "subcategory": "Other European",
+          "dateVisited": "",
+          "address": "24 Great Windmill St, London W1D 7LG, United Kingdom",
+          "dishes": "",
+          "lat": 51.5117776,
+          "lng": -0.1346968,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Dinings",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "22 Harcourt St, London W1H 4HH, United Kingdom",
+          "dishes": "",
+          "lat": 51.519843,
+          "lng": -0.1646916,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Dishoom",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "12 Upper St Martin's Ln, London WC2H 9FB, United Kingdom",
+          "dishes": "",
+          "lat": 51.5125176,
+          "lng": -0.1268291,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Flat Iron Soho",
+          "legacyCategory": "European",
+          "mainCategory": "European",
+          "subcategory": "Other European",
+          "dateVisited": "",
+          "address": "17 Beak St, Carnaby, London W1F 9RW, United Kingdom",
+          "dishes": "",
+          "lat": 51.512088,
+          "lng": -0.138361,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Flat White",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "17 Berwick St, London W1F 0PT, United Kingdom",
+          "dishes": "",
+          "lat": 51.5136211,
+          "lng": -0.1347673,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Gold Mine",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "100-102 Queensway, London W2 3RR, United Kingdom",
+          "dishes": "",
+          "lat": 51.5133393,
+          "lng": -0.1874985,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Golden Union",
+          "legacyCategory": "American",
+          "mainCategory": "American",
+          "subcategory": "Other American",
+          "dateVisited": "",
+          "address": "38 Poland St, London W1F 7LY, United Kingdom",
+          "dishes": "",
+          "lat": 51.5153926,
+          "lng": -0.1375941,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Nude Coffee Roasters",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "25 Hanbury St, London E1 6QR, United Kingdom",
+          "dishes": "",
+          "lat": 51.5204634,
+          "lng": -0.0727785,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Roti King",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "40 Doric Way, Euston Rd., London NW1 1LH, United Kingdom",
+          "dishes": "",
+          "lat": 51.5290963,
+          "lng": -0.1319957,
+          "yelpRating": null,
+          "googleRating": null
+        }
+      ]
+    },
+    {
+      "name": "Kyoto",
+      "restaurants": [
+        {
+          "name": "% ARABICA coffee",
+          "legacyCategory": "Cafes & Desserts",
+          "mainCategory": "Cafes & Desserts",
+          "subcategory": "Other Cafes & Desserts",
+          "dateVisited": "",
+          "address": "605 Teianmaenocho, Shimogyo Ward, Kyoto, 600-8031, Japan",
+          "dishes": "",
+          "lat": 35.003348,
+          "lng": 135.766698,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Fushimi Inari Taisha",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "68 Fukakusa Yabunouchicho, Fushimi Ward, Kyoto, 612-0882, Japan",
+          "dishes": "",
+          "lat": 34.9676945,
+          "lng": 135.7791876,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Kinkaku-ji",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "1 Kinkakujicho, Kita Ward, Kyoto, 603-8361, Japan",
+          "dishes": "",
+          "lat": 35.03937,
+          "lng": 135.7292431,
+          "yelpRating": null,
+          "googleRating": null
+        },
+        {
+          "name": "Wagyu Steak Hafuu Honten",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "471-1 Sasayacho, Nakagyo Ward, Kyoto, 604-0983, Japan",
+          "dishes": "",
+          "lat": 35.015413,
+          "lng": 135.76561,
+          "yelpRating": null,
+          "googleRating": null
+        }
+      ]
+    },
+    {
+      "name": "Osaka",
+      "restaurants": [
+        {
+          "name": "Dotonbori",
+          "legacyCategory": "Asian",
+          "mainCategory": "Asian",
+          "subcategory": "Other Asian",
+          "dateVisited": "",
+          "address": "1 Chome Dotonbori, Chuo Ward, Osaka, 542-0071, Japan",
+          "dishes": "",
+          "lat": 34.6687234,
+          "lng": 135.5012971,
+          "yelpRating": null,
+          "googleRating": null
         }
       ]
     }
