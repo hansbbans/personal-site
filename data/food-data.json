@@ -1290,24 +1290,6 @@
           "googleRating": null
         }
       ]
-    },
-    {
-      "name": "Osaka",
-      "restaurants": [
-        {
-          "name": "Dotonbori",
-          "legacyCategory": "Asian",
-          "mainCategory": "Asian",
-          "subcategory": "Other Asian",
-          "dateVisited": "",
-          "address": "1 Chome Dotonbori, Chuo Ward, Osaka, 542-0071, Japan",
-          "dishes": "",
-          "lat": 34.6687234,
-          "lng": 135.5012971,
-          "yelpRating": null,
-          "googleRating": null
-        }
-      ]
     }
   ],
   "categoryStats": {
