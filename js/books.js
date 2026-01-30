@@ -77,8 +77,8 @@ function parseBookData(values) {
             notes: row[5] || '',
             amazonLink: amazonLink,
             isbn: isbn,
-            // Use Open Library for covers (falls back gracefully if not found)
-            coverUrl: isbn ? `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg` : null
+            // Use Amazon's image server for covers
+            coverUrl: isbn ? `https://images-na.ssl-images-amazon.com/images/P/${isbn}.01.LZZZZZZZ.jpg` : null
         });
     }
     return books;
