@@ -1,38 +1,5 @@
 // Food Page Script with Hierarchical Categories
-const GOOGLE_SHEETS_API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
-const SPREADSHEET_ID = '1EneuCtSuzmZI6P7Flwd0oRIsrrziX2fyduylwQIW3cc';
-
-// Hierarchical category structure
-const FOOD_CATEGORIES = {
-    "Asian": {
-        emoji: "🥢",
-        subcategories: ["Japanese", "Chinese", "Korean", "Thai", "Vietnamese", "Indian", "Other Asian"]
-    },
-    "European": {
-        emoji: "🍝",
-        subcategories: ["Italian", "French", "Spanish", "German", "Other European"]
-    },
-    "American": {
-        emoji: "🍔",
-        subcategories: ["Burgers/Diners", "BBQ/Southern", "Pizza", "Sandwiches/Delis", "Steakhouse", "Other American"]
-    },
-    "Mexican": {
-        emoji: "🌮",
-        subcategories: ["Tacos", "Burritos", "Seafood/Mariscos", "Regional", "Other Mexican"]
-    },
-    "Mediterranean/Middle Eastern": {
-        emoji: "🧆",
-        subcategories: ["Israeli", "Lebanese", "Turkish", "Persian/Iranian", "Greek", "Other Mediterranean/Middle Eastern"]
-    },
-    "Cafes & Desserts": {
-        emoji: "☕",
-        subcategories: ["Coffee/Cafes", "Bakeries", "Dessert Shops", "Ice Cream", "Other Cafes & Desserts"]
-    },
-    "Bars & Drinks": {
-        emoji: "🍸",
-        subcategories: ["Cocktail Bars", "Wine Bars", "Breweries/Pubs", "Other Bars & Drinks"]
-    }
-};
+// FOOD_CATEGORIES is loaded from food-categories.js
 
 // Subcategory emoji mapping
 const SUBCATEGORY_EMOJI = {
@@ -89,66 +56,7 @@ const SUBCATEGORY_EMOJI = {
     "Other Bars & Drinks": "🥃"
 };
 
-// Legacy category to hierarchical mapping
-const CATEGORY_MAPPING = {
-    // Asian - Japanese
-    "Sushi": { mainCategory: "Asian", subcategory: "Japanese" },
-    "Japanese": { mainCategory: "Asian", subcategory: "Japanese" },
-    "Ramen": { mainCategory: "Asian", subcategory: "Japanese" },
-    
-    // Asian - Chinese
-    "Chinese": { mainCategory: "Asian", subcategory: "Chinese" },
-    "Taiwanese": { mainCategory: "Asian", subcategory: "Other Asian" },
-    
-    // Asian - Korean
-    "Korean": { mainCategory: "Asian", subcategory: "Korean" },
-    
-    // Asian - Thai
-    "Thai": { mainCategory: "Asian", subcategory: "Thai" },
-    
-    // Asian - Vietnamese
-    "Vietnamese": { mainCategory: "Asian", subcategory: "Vietnamese" },
-    
-    // Asian - Indian
-    "Indian": { mainCategory: "Asian", subcategory: "Indian" },
-    
-    // European - Italian
-    "Italian": { mainCategory: "European", subcategory: "Italian" },
-    "Pizza": { mainCategory: "American", subcategory: "Pizza" },
-    
-    // American
-    "American": { mainCategory: "American", subcategory: "Other American" },
-    "Burgers": { mainCategory: "American", subcategory: "Burgers/Diners" },
-    "BBQ": { mainCategory: "American", subcategory: "BBQ/Southern" },
-    
-    // Mexican
-    "Mexican": { mainCategory: "Mexican", subcategory: "Other Mexican" },
-    "Tacos": { mainCategory: "Mexican", subcategory: "Tacos" },
-    
-    // Mediterranean
-    "Mediterranean": { mainCategory: "Mediterranean/Middle Eastern", subcategory: "Other Mediterranean/Middle Eastern" },
-    "Greek": { mainCategory: "Mediterranean/Middle Eastern", subcategory: "Greek" },
-    "Middle Eastern": { mainCategory: "Mediterranean/Middle Eastern", subcategory: "Other Mediterranean/Middle Eastern" },
-    
-    // Cafes & Desserts
-    "Coffee": { mainCategory: "Cafes & Desserts", subcategory: "Coffee/Cafes" },
-    "Cafe": { mainCategory: "Cafes & Desserts", subcategory: "Coffee/Cafes" },
-    "Bakery": { mainCategory: "Cafes & Desserts", subcategory: "Bakeries" },
-    "Dessert": { mainCategory: "Cafes & Desserts", subcategory: "Dessert Shops" },
-    "Ice Cream": { mainCategory: "Cafes & Desserts", subcategory: "Ice Cream" },
-    
-    // Bars
-    "Bar": { mainCategory: "Bars & Drinks", subcategory: "Other Bars & Drinks" },
-    "Cocktail Bar": { mainCategory: "Bars & Drinks", subcategory: "Cocktail Bars" },
-    "Wine Bar": { mainCategory: "Bars & Drinks", subcategory: "Wine Bars" },
-    "Brewery": { mainCategory: "Bars & Drinks", subcategory: "Breweries/Pubs" },
-    
-    // Uncategorized/Other
-    "Peruvian": { mainCategory: "Asian", subcategory: "Other Asian" },
-    "Caribbean": { mainCategory: "American", subcategory: "Other American" },
-    "Haitian": { mainCategory: "American", subcategory: "Other American" },
-    "Seafood": { mainCategory: "American", subcategory: "Other American" },
-};
+// CATEGORY_MAPPING is loaded from food-categories.js
 
 // State
 let currentCity = 0;
