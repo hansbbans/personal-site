@@ -1,0 +1,135 @@
+{"trips": [
+  {
+    "id": "50BF97230FD350EA",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.7886753,
+            "longitude": -73.70843289999999
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "576CDB27A4BC305B",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 41.680468,
+            "longitude": -73.96979999999999
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "58F4204B0D45E54F",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.74081553902043,
+            "longitude": -73.98977197869628
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.7226285,
+            "longitude": -73.9945497
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {
+        "travel_mode": "TRANSIT",
+        "transit": {"route": {"leg": [
+          {
+            "mode": "WALKING",
+            "destination": "23 St-Baruch College"
+          },
+          {
+            "mode": "TRANSIT",
+            "destination": "Broadway-Lafayette/Bleecker St"
+          },
+          {"mode": "WALKING"}
+        ]}}
+      },
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "recurrence": {"weekly_pattern": {"day": [
+      {"day": 1},
+      {"day": 2},
+      {"day": 3},
+      {"day": 4},
+      {"day": 5}
+    ]}},
+    "id": "commute_to_home",
+    "place_visit": [
+      {
+        "departure_timing": {"time": {
+          "hour": 18,
+          "minute": 0
+        }},
+        "id": "244B6CE0CBD2370D",
+        "place": {"semantic_type": "TYPE_WORK"}
+      },
+      {
+        "id": "244B6CE0CBCCD6AC",
+        "place": {"semantic_type": "TYPE_HOME"}
+      }
+    ]
+  },
+  {
+    "recurrence": {"weekly_pattern": {"day": [
+      {"day": 1},
+      {"day": 2},
+      {"day": 3},
+      {"day": 4},
+      {"day": 5}
+    ]}},
+    "id": "commute_to_work",
+    "place_visit": [
+      {
+        "id": "244B6CE0CBF27373",
+        "place": {"semantic_type": "TYPE_HOME"}
+      },
+      {
+        "id": "244B6CE0CBB72E80",
+        "place": {"semantic_type": "TYPE_WORK"},
+        "arrival_timing": {"time": {
+          "hour": 9,
+          "minute": 15
+        }}
+      }
+    ]
+  }
+]}

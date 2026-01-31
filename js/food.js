@@ -118,8 +118,9 @@ async function loadRestaurantData() {
         console.log('[DEBUG] Data loaded:', data);
         console.log('[DEBUG] Cities:', data.cities?.length);
         
-        citiesData = data.cities;
-        console.log('[DEBUG] citiesData set:', citiesData);
+        // Sort cities: NYC first (home base), then by restaurant count descending
+        citiesData = sortCities(data.cities);
+        console.log('[DEBUG] citiesData sorted:', citiesData.map(c => `${c.name}(${c.restaurants.length})`));
         
         console.log('[DEBUG] Calling renderCityTabs()...');
         renderCityTabs();
@@ -137,6 +138,20 @@ async function loadRestaurantData() {
         document.getElementById('foodGrid').innerHTML = 
             '<p class="loading-message">Unable to load restaurants. Error: ' + error.message + '</p>';
     }
+}
+
+// Sort cities: NYC first, then by restaurant count descending
+function sortCities(cities) {
+    return cities.sort((a, b) => {
+        // NYC always first (home base)
+        if (a.name === 'NYC') return -1;
+        if (b.name === 'NYC') return 1;
+        
+        // Then sort by restaurant count descending
+        const countA = a.restaurants?.length || 0;
+        const countB = b.restaurants?.length || 0;
+        return countB - countA;
+    });
 }
 
 function parseRestaurantData(values) {
@@ -170,11 +185,16 @@ function parseRestaurantData(values) {
 // Render city tabs
 function renderCityTabs() {
     const container = document.querySelector('.city-tabs');
-    container.innerHTML = citiesData.map((city, i) => `
-        <button class="city-tab ${i === 0 ? 'active' : ''}" data-city="${i}">
-            ${city.name}
-        </button>
-    `).join('');
+    container.innerHTML = citiesData.map((city, i) => {
+        const isHomeBase = city.name === 'NYC';
+        const recCount = city.restaurants?.length || 0;
+        return `
+            <button class="city-tab ${i === 0 ? 'active' : ''} ${isHomeBase ? 'home-base' : ''}" data-city="${i}">
+                ${isHomeBase ? '🏠 ' : ''}${city.name}
+                <span class="city-count">${recCount}</span>
+            </button>
+        `;
+    }).join('');
     
     container.querySelectorAll('.city-tab').forEach(tab => {
         tab.addEventListener('click', () => {

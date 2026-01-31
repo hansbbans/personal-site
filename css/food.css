@@ -247,3 +247,81 @@
         min-height: 300px;
     }
 }
+
+/* ============================================
+   HOME BASE CITY TAB (NYC)
+   ============================================ */
+
+.city-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.city-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0.4rem;
+    background: var(--border-default);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.city-tab.active .city-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--bg-primary);
+}
+
+.city-tab.home-base {
+    background: linear-gradient(135deg, var(--accent-color), #0ea5e9);
+    color: white;
+    border-color: var(--accent-color);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
+}
+
+.city-tab.home-base:hover {
+    background: linear-gradient(135deg, #0d9488, #0284c7);
+    border-color: #0d9488;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+}
+
+.city-tab.home-base.active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+}
+
+.city-tab.home-base .city-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+.city-tab.home-base.active .city-count {
+    background: var(--accent-color);
+    color: white;
+}
+
+[data-theme="dark"] .city-tab.home-base {
+    background: linear-gradient(135deg, #14b8a6, #0ea5e9);
+    box-shadow: 0 2px 8px rgba(20, 184, 166, 0.25);
+}
+
+[data-theme="dark"] .city-tab.home-base:hover {
+    background: linear-gradient(135deg, #2dd4bf, #38bdf8);
+}
+
+[data-theme="dark"] .city-tab.home-base.active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+>>>>>>> a904635 (feat: major site improvements and 40 new restaurants)
+}

@@ -1,0 +1,6225 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -79.3802780,
+          43.6497220
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-06-19T17:43:44Z",
+        "google_maps_url": "http://maps.google.com/?cid=5139442081159687409",
+        "location": {
+          "address": "325 Bay St., Toronto, ON M5H 4G3, Canada",
+          "country_code": "CA",
+          "name": "The St. Regis Toronto"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-02-02T06:33:47Z",
+        "google_maps_url": "http://maps.google.com/?q=48.880948,2.355314",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0703822,
+          29.9554046
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-01-11T17:58:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=2202795739567890544",
+        "location": {
+          "address": "910 Iberville St, New Orleans, LA 70112, United States",
+          "country_code": "US",
+          "name": "Courtyard by Marriott New Orleans French Quarter/Iberville"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-08-10T08:53:07Z",
+        "google_maps_url": "http://maps.google.com/?q=1.357130,103.763336",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-05-09T07:39:53Z",
+        "google_maps_url": "http://maps.google.com/?q=35.671782,139.709735",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2022-10-19T16:32:23Z",
+        "google_maps_url": "http://maps.google.com/?q=34.696850,135.509064",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9226004,
+          40.6982505
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2022-08-31T00:53:24Z",
+        "google_maps_url": "http://maps.google.com/?cid=9475419689901823219",
+        "location": {
+          "address": "140 Stanhope St, Brooklyn, NY 11221, United States",
+          "country_code": "US",
+          "name": "Plaza Ortega"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9571750,
+          40.7283642
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2022-08-15T20:02:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=15644544739977789417",
+        "location": {
+          "address": "110 Franklin St, Brooklyn, NY 11222, United States",
+          "country_code": "US",
+          "name": "Paulie Gee's Slice Shop"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9591550,
+          40.7285107
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2022-08-15T20:02:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=12733573919609556150",
+        "location": {
+          "address": "63 West St, Brooklyn, NY 11222, United States",
+          "country_code": "US",
+          "name": "Yoseka Stationery"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2021-08-01T18:55:32Z",
+        "google_maps_url": "http://maps.google.com/?q=37.755761,-122.409618",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.8833024,
+          40.7428738
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2021-05-30T18:32:40Z",
+        "google_maps_url": "http://maps.google.com/?cid=5996213392303113426",
+        "location": {
+          "address": "81-32 Broadway, Elmhurst, NY 11373, United States",
+          "country_code": "US",
+          "name": "Eim Khao Mun Kai"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2020-05-30T08:45:03Z",
+        "google_maps_url": "http://maps.google.com/?q=32.790399,-96.810133",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2020-01-20T06:52:29Z",
+        "google_maps_url": "http://maps.google.com/?q=34.062966,-118.238218",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-12-22T09:52:43Z",
+        "google_maps_url": "http://maps.google.com/?q=49.813443,23.959550",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -75.1820210,
+          39.9742044
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-11-24T04:05:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=3619862963197520618",
+        "location": {
+          "address": "2800 W Girard Ave, Philadelphia, PA 19130, United States",
+          "country_code": "US",
+          "name": "Green Eggs Café"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9503385,
+          40.7833943
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-11-19T19:23:58Z",
+        "google_maps_url": "http://maps.google.com/?cid=5257389459415528119",
+        "location": {
+          "address": "1675 3rd Ave, New York, NY 10128, United States",
+          "country_code": "US",
+          "name": "Duane Reade"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -1.9706343,
+          43.3258886
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-08-28T14:19:38Z",
+        "google_maps_url": "http://maps.google.com/?cid=11508390477803289383",
+        "location": {
+          "address": "Nafarroa Hiribidea, 5, 20013 Donostia / San Sebastián, Gipuzkoa, Spain",
+          "country_code": "ES",
+          "name": "AVIA"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -1.9493146,
+          43.3214573
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-08-28T10:44:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=12654512911765395255",
+        "location": {
+          "address": "Alcalde J. Elosegi Hiribidea, 273, 20015 Donostia / San Sebastián, Gipuzkoa, Spain",
+          "country_code": "ES",
+          "name": "Arzak"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3060754,
+          34.0638885
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-08-04T21:42:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=14330795205766034179",
+        "location": {
+          "address": "3821 W 6th St, Los Angeles, CA 90020, United States",
+          "country_code": "US",
+          "name": "Hae Jang Chon Korean BBQ Restaurant"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-06-28T13:40:50Z",
+        "google_maps_url": "http://maps.google.com/?q=33.615544,-117.901011",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-05-16T10:49:57Z",
+        "google_maps_url": "http://maps.google.com/?q=35.685374,139.690971",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-03-21T06:16:58Z",
+        "google_maps_url": "http://maps.google.com/?q=40.715613,-73.953406",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3305330,
+          34.1049360
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-02-16T21:28:15Z",
+        "google_maps_url": "http://maps.google.com/?cid=15720824449301953542",
+        "location": {
+          "address": "1835 N Cahuenga Blvd, Los Angeles, CA 90028, United States",
+          "country_code": "US",
+          "name": "Madera Kitchen"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.0079258,
+          33.8586543
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-02-10T23:26:39Z",
+        "google_maps_url": "http://maps.google.com/?cid=17048726904977320720",
+        "location": {
+          "address": "7152 Orangethorpe Ave, Buena Park, CA 90621, United States",
+          "country_code": "US",
+          "name": "Hanyang"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2662026,
+          34.0350200
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-02-10T18:38:59Z",
+        "google_maps_url": "http://maps.google.com/?cid=7219323182168971376",
+        "location": {
+          "address": "240 Venice Blvd., Los Angeles, CA 90015, United States",
+          "country_code": "US",
+          "name": "Joe's Auto Parks"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2019-02-09T16:36:19Z",
+        "google_maps_url": "http://maps.google.com/?q=1417+Echo+Park+Ave,+Los+Angeles,+CA+90026,+USA&ftid=0x80c2c71c45a60d11:0x9346b3046ce37fd3",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9520118,
+          40.7426265
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-12-26T17:32:44Z",
+        "google_maps_url": "http://maps.google.com/?cid=9622806398427112725",
+        "location": {
+          "address": "10-70 Jackson Ave, Long Island City, NY 11101, United States",
+          "country_code": "US",
+          "name": "Hibino LIC"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9844536,
+          40.7499711
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-12-18T03:28:49Z",
+        "google_maps_url": "http://maps.google.com/?cid=13462698481716873882",
+        "location": {
+          "address": "Restaurant, 8 W 36th St. 1st Floor, New York, NY 10018, United States",
+          "country_code": "US",
+          "name": "Yoon Haeundae Galbi"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9526290,
+          40.7771534
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-11-15T16:22:57Z",
+        "google_maps_url": "http://maps.google.com/?cid=9974299942578858877",
+        "location": {
+          "address": "1631 2nd Ave, New York, NY 10028, United States",
+          "country_code": "US",
+          "name": "PQR"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-10-18T07:28:27Z",
+        "google_maps_url": "http://maps.google.com/?q=34.067689,-118.260969",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -74.0161583,
+          40.6749167
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-10-16T17:53:46Z",
+        "google_maps_url": "http://maps.google.com/?cid=1094684385557750178",
+        "location": {
+          "address": "454 Van Brunt St, Brooklyn, NY 11231, United States",
+          "country_code": "US",
+          "name": "Hometown Bar-B-Que"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-10-14T06:40:12Z",
+        "google_maps_url": "http://maps.google.com/?q=32.777937,-96.759166",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-09-11T04:37:05Z",
+        "google_maps_url": "http://maps.google.com/?q=Cadillac+Mountain,+Bar+Harbor,+ME+04609&ftid=0x4caebee134938907:0x4593da30d1476d87",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-08-13T06:25:35Z",
+        "google_maps_url": "http://maps.google.com/?q=35.692710,139.699480",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-08-06T00:13:16Z",
+        "google_maps_url": "http://maps.google.com/?q=34.021034,-118.410674",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2355541,
+          34.0460317
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-08-04T04:19:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=7943902575014312891",
+        "location": {
+          "address": "827 E 3rd St, Los Angeles, CA 90013, United States",
+          "country_code": "US",
+          "name": "Go Get Em Tiger"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2521844,
+          34.0416150
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-08-04T03:33:25Z",
+        "google_maps_url": "http://maps.google.com/?cid=4986511368808354132",
+        "location": {
+          "address": "208 E 8th St, Los Angeles, CA 90014, United States",
+          "country_code": "US",
+          "name": "Sonoratown"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3768761,
+          34.0737387
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-08-01T16:21:43Z",
+        "google_maps_url": "http://maps.google.com/?cid=2599314987192026057",
+        "location": {
+          "address": "8500 Beverly Blvd Suite 112, Los Angeles, CA 90048, United States",
+          "country_code": "US",
+          "name": "Yardbird Table & Bar"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3612823,
+          34.0798067
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-08-01T16:19:47Z",
+        "google_maps_url": "http://maps.google.com/?cid=12867786651284332482",
+        "location": {
+          "address": "456 N Fairfax Ave, Los Angeles, CA 90036, United States",
+          "country_code": "US",
+          "name": "Paramount Coffee Project"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.8910583,
+          33.7905631
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-07-13T15:24:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=2085004657082178766",
+        "location": {
+          "address": "200 The City Dr N, Orange, CA 92868, United States",
+          "country_code": "US",
+          "name": "Ayres Hotel Orange"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-07-12T03:47:56Z",
+        "google_maps_url": "http://maps.google.com/?q=High+Country+Pl,+Moorpark,+CA+93021&ftid=0x80e8326aebc32d4d:0x746dafc5083152ec",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-28T02:48:27Z",
+        "google_maps_url": "http://maps.google.com/?q=2228+OR-422,+Chiloquin,+OR+97624,+USA&ftid=0x54c8bb527059d6e3:0x33c6eebbf8881fac",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9930434,
+          40.7215830
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-22T22:40:33Z",
+        "google_maps_url": "http://maps.google.com/?cid=14541626952662743862",
+        "location": {
+          "address": "2 Rivington St, New York, NY 10002, United States",
+          "country_code": "US",
+          "name": "Morgenstern's BANANAS"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7719961,
+          35.6680392
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-10T21:29:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=17950613981231099473",
+        "location": {
+          "address": "2 Chome-12-6 Tsukiji, Chuo City, Tokyo 104-0045, Japan",
+          "country_code": "JP",
+          "name": "Turret Coffee Tsukiji"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7369897,
+          35.6739227
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-10T08:50:05Z",
+        "google_maps_url": "http://maps.google.com/?cid=13614378801744281929",
+        "location": {
+          "address": "Japan, 〒107-0052 Tokyo, Minato City, Akasaka, 3 Chome−14−9 Ｂ１Ｆ",
+          "country_code": "JP",
+          "name": "Japanese BlackWagyu Ajitetsu Akasaka"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6904007,
+          35.6861125
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-10T08:46:44Z",
+        "google_maps_url": "http://maps.google.com/?cid=3231512592087154070",
+        "location": {
+          "address": "2, 3 Chome-7-1 Nishishinjuku, Shinjuku City, Tokyo 163-1055, Japan",
+          "country_code": "JP",
+          "name": "Park Hyatt Tokyo"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7657394,
+          35.6723189
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-10T01:47:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=1040930456608094136",
+        "location": {
+          "address": "Japan, 〒104-0061 Tokyo, Chuo City, Ginza, 3 Chome−5−12 サヱグサビル",
+          "country_code": "JP",
+          "name": "Apple 銀座"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7341418,
+          35.6454012
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-09T09:19:26Z",
+        "google_maps_url": "http://maps.google.com/?cid=3860353555914896534",
+        "location": {
+          "address": "1 Chome-12-19 Shirokane, Minato City, Tokyo 108-0072, Japan",
+          "country_code": "JP",
+          "name": "Imafuku"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7121287,
+          35.6610664
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-09T08:29:43Z",
+        "google_maps_url": "http://maps.google.com/?cid=11111365229786475658",
+        "location": {
+          "address": "Japan, 〒107-0062 Tokyo, Minato City, Minamiaoyama, 5 Chome−12−24 シャトー東洋南青山",
+          "country_code": "JP",
+          "name": "NIKE LAB MA5"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7065913,
+          35.6687662
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-09T04:39:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=8835090660299633945",
+        "location": {
+          "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 4 Chome−28−18 ピノ原宿",
+          "country_code": "JP",
+          "name": "KICKS LAB. Pino Harajuku Branch"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7075919,
+          35.6686620
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-09T04:36:28Z",
+        "google_maps_url": "http://maps.google.com/?cid=2812623031378167785",
+        "location": {
+          "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 4 Chome−25−12 ｍｉｃｏ神宮前",
+          "country_code": "JP",
+          "name": "Nike Kicks Lounge Omotesando"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.8603206,
+          35.6419847
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-09T04:24:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=1630475176606126355",
+        "location": {
+          "address": "6 Chome-2 Rinkaicho, Edogawa City, Tokyo 134-0086, Japan",
+          "country_code": "JP",
+          "name": "Kasai Rinkai Park"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6970010,
+          35.6864890
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-09T01:47:45Z",
+        "google_maps_url": "http://maps.google.com/?cid=5413784674946717542",
+        "location": {
+          "address": "Japan, 〒151-0053 Tokyo, Shibuya, Yoyogi, 2 Chome−20−16 相馬ビル １F",
+          "country_code": "JP",
+          "name": "Udon Shin"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.5378838,
+          34.6606139
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-08T07:40:53Z",
+        "google_maps_url": "http://maps.google.com/?cid=18379366437682780731",
+        "location": {
+          "address": "5 Chome-3-17 Momodani, Ikuno Ward, Osaka, 544-0034, Japan",
+          "name": "Osaka Ikuno Korea Town"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.5021825,
+          34.6678017
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-08T03:05:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=2827550958429058892",
+        "location": {
+          "address": "Japan, 〒542-0076 Osaka, Chuo Ward, Namba, 1 Chome−5−24 だるまビル 2F",
+          "country_code": "JP",
+          "name": "Matsusakagyu Yakiniku M Hanare Branch"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.5002547,
+          34.7334658
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-07T12:18:45Z",
+        "google_maps_url": "http://maps.google.com/?cid=4312131637787784911",
+        "location": {
+          "address": "Osaka, Japan",
+          "country_code": "JP",
+          "name": "Shin-Osaka Station"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7573015,
+          35.0042697
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-07T09:28:03Z",
+        "google_maps_url": "http://maps.google.com/?cid=2521468783158862043",
+        "location": {
+          "address": "471-1 Kannondocho, Nakagyo Ward, Kyoto, 604-8222, Japan",
+          "country_code": "JP",
+          "name": "Wajoryomen Sugari"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7647230,
+          35.0050258
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-07T02:54:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=13159134450370243740",
+        "location": {
+          "address": "Nakagyo Ward, Kyoto, 604-8055, Japan",
+          "country_code": "JP",
+          "name": "Nishiki Market"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7647324,
+          35.6876656
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-06T03:15:15Z",
+        "google_maps_url": "http://maps.google.com/?cid=14468844851369583672",
+        "location": {
+          "address": "1 Chome-8-1 Ōtemachi, Chiyoda City, Tokyo 100-0004, Japan",
+          "country_code": "JP",
+          "name": "KDDI Otemachi Building Inner Post Office"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7575095,
+          34.9856948
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T15:02:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=2658070174394966790",
+        "location": {
+          "address": "Japan, 〒600-8216 Kyoto, Shimogyo Ward, Higashishiokojicho, 901 京都ポルタ 11F",
+          "country_code": "JP",
+          "name": "Katsukura - Kyoto Porta"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.6770527,
+          35.0145036
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T15:01:11Z",
+        "google_maps_url": "http://maps.google.com/?cid=9223628766368230824",
+        "location": {
+          "address": "Japan, 〒616-8385 Kyoto, Ukyo Ward, 嵯峨天龍寺芒ノ馬場25嵐山スクエアウエストパ―ク",
+          "country_code": "JP",
+          "name": "Sushi Naritaya"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7656100,
+          35.0154130
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T15:00:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=9765123227851010420",
+        "location": {
+          "address": "471-1 Sasayacho, Nakagyo Ward, Kyoto, 604-0983, Japan",
+          "country_code": "JP",
+          "name": "Wagyu Steak Hafuu Honten"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7589822,
+          34.9858585
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T14:58:52Z",
+        "google_maps_url": "http://maps.google.com/?cid=6927398041748640008",
+        "location": {
+          "address": "JR京都駅 Central Entrance, Shimogyo Ward, Kyoto, 600-8216, Japan",
+          "country_code": "JP",
+          "name": "Hotel Granvia Kyoto"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7666980,
+          35.0033480
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T14:58:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=2112438859294084051",
+        "location": {
+          "address": "605 Teianmaenocho, Shimogyo Ward, Kyoto, 600-8031, Japan",
+          "country_code": "JP",
+          "name": "% ARABICA coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7888729,
+          35.0105678
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T14:57:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=3963125087917501458",
+        "location": {
+          "address": "339 Higashikomonozacho, Higashiyama Ward, Kyoto, 606-8435, Japan",
+          "country_code": "JP",
+          "name": "Keage Incline"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7160849,
+          35.6611386
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T05:56:30Z",
+        "google_maps_url": "http://maps.google.com/?cid=15661077281002319952",
+        "location": {
+          "address": "6 Chome-3-16 Minamiaoyama, Minato City, Tokyo 107-0062, Japan",
+          "country_code": "JP",
+          "name": "Blue Note Tokyo"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7788427,
+          35.6974587
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T04:15:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=6262217562493916098",
+        "location": {
+          "address": "3 Chome-20-1 Kanda Sakumacho, Chiyoda City, Tokyo 101-0025, Japan",
+          "country_code": "JP",
+          "name": "Aoshima Syokudo Akihabara"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7719418,
+          35.6980411
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T04:14:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=2168826573582545697",
+        "location": {
+          "address": "Japan, 〒101-0021 Tokyo, Chiyoda City, Sotokanda, 1 Chome−15−16 ラジオ会館７階",
+          "country_code": "JP",
+          "name": "Azone Akihabara"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7721035,
+          35.7012401
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-05T04:13:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=9868122701256186535",
+        "location": {
+          "address": "Japan, 〒101-0021 Tokyo, Chiyoda City, Sotokanda, 4 Chome−4−7 MTビル",
+          "name": "Eternal Amusement Tower"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6953601,
+          35.6627030
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-04T20:01:26Z",
+        "google_maps_url": "http://maps.google.com/?cid=4739067769474410735",
+        "location": {
+          "address": "Japan, 〒150-0042 Tokyo, Shibuya, Udagawacho, 41−26 パピエビル",
+          "country_code": "JP",
+          "name": "Katsudon-ya Zuicho"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-04T11:05:36Z",
+        "google_maps_url": "http://maps.google.com/?q=35.643890,139.784010",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6926380,
+          35.7707719
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-04T07:28:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=3704279090084377669",
+        "location": {
+          "address": "3 Chome-41-1 Maenocho, Itabashi City, Tokyo 174-0063, Japan",
+          "name": "Maenohara Onsen Sayano Yudokoro"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7027761,
+          35.6604614
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T22:12:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=11116051877154353055",
+        "location": {
+          "address": "1 Chome-15-19 Shibuya, Tokyo 150-0002, Japan",
+          "country_code": "JP",
+          "name": "Chatei Hatou"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6923999,
+          35.6666181
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:52:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=17164645774726874279",
+        "location": {
+          "address": "1 Chome-16-11 Tomigaya, Shibuya, Tokyo 151-0063, Japan",
+          "country_code": "JP",
+          "name": "Fuglen Tokyo"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6997888,
+          35.6488866
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:50:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=15490653164204088489",
+        "location": {
+          "address": "Japan, 〒150-0033 Tokyo, Shibuya, Sarugakucho, 17−5 代官山Ｔ－ＳＩＴＥ １号館～３号館 １階～２階",
+          "country_code": "JP",
+          "name": "Tsutaya Books Daikanyama"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7170937,
+          35.6622568
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:49:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=15044873861634050844",
+        "location": {
+          "address": "6 Chome-5-1 Minamiaoyama, Minato City, Tokyo 107-0062, Japan",
+          "country_code": "JP",
+          "name": "Nezu Museum"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6993259,
+          35.6763976
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:44:52Z",
+        "google_maps_url": "http://maps.google.com/?cid=10361244767556222835",
+        "location": {
+          "address": "1-1 Yoyogikamizonocho, Shibuya, Tokyo 151-8557, Japan",
+          "country_code": "JP",
+          "name": "Meiji Jingu"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7966553,
+          35.7147651
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:43:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=7785923974874169613",
+        "location": {
+          "address": "2 Chome-3-1 Asakusa, Taito City, Tokyo 111-0032, Japan",
+          "country_code": "JP",
+          "name": "Sensō-ji"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7482928,
+          35.6574790
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:43:38Z",
+        "google_maps_url": "http://maps.google.com/?cid=9846179875119807780",
+        "location": {
+          "address": "4 Chome-7-35 Shibakoen, Minato City, Tokyo 105-0011, Japan",
+          "country_code": "JP",
+          "name": "Zojo-ji Temple"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7037879,
+          35.6695858
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:42:35Z",
+        "google_maps_url": "http://maps.google.com/?cid=11305212664266204135",
+        "location": {
+          "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−13−14 原宿クエスト 1F",
+          "country_code": "JP",
+          "name": "Nike Harajuku"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7718239,
+          35.7061495
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:11:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=7673543629028063610",
+        "location": {
+          "address": "1 Chome-10-10 Ueno, Taito City, Tokyo 110-0005, Japan",
+          "country_code": "JP",
+          "name": "Usagiya"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7701907,
+          35.6999616
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:09:43Z",
+        "google_maps_url": "http://maps.google.com/?cid=16623577799635651036",
+        "location": {
+          "address": "Japan, 〒101-0021 Tokyo, Chiyoda City, Sotokanda, 1−１ 3丁目1-13 倉田ビル4F",
+          "name": "Akihabara Electrical Town Organization"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7046466,
+          35.6915740
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:08:18Z",
+        "google_maps_url": "http://maps.google.com/?cid=10048688310454447541",
+        "location": {
+          "address": "3 Chome-14-1 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan",
+          "country_code": "JP",
+          "name": "Isetan Shinjuku"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7777998,
+          35.6158394
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T14:05:52Z",
+        "google_maps_url": "http://maps.google.com/?cid=13919405450926408671",
+        "location": {
+          "address": "2 Chome-6-3 Aomi, Koto City, Tokyo 135-0064, Japan",
+          "country_code": "JP",
+          "name": "Odaiba Ōedo-Onsen Monogatari"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7039981,
+          35.6569770
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T13:45:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=8963800606739303068",
+        "location": {
+          "address": "Japan, 〒150-0002 Tokyo, Shibuya, 3 Chome−18−10 大野ビル2号館 B1F",
+          "country_code": "JP",
+          "name": "Gyukatsu Motomura Shibuya Branch"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6990394,
+          35.6428764
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T13:43:20Z",
+        "google_maps_url": "http://maps.google.com/?cid=4360680047692106960",
+        "location": {
+          "address": "2 Chome-6-4 Kamimeguro, Meguro City, Tokyo 153-0051, Japan",
+          "country_code": "JP",
+          "name": "Seirinkan"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7364827,
+          35.6548695
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-03T13:40:15Z",
+        "google_maps_url": "http://maps.google.com/?cid=7969213468898129262",
+        "location": {
+          "address": "Japan, 〒106-0045 Tokyo, Minato City, Azabujuban, 2 Chome−20−12 オリエント麻布 1階",
+          "country_code": "JP",
+          "name": "SAVOY Azabujuban"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7038019,
+          35.6730053
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-02T15:19:12Z",
+        "google_maps_url": "http://maps.google.com/?cid=14658399961265590294",
+        "location": {
+          "address": "Japan, 〒151-0051 Tokyo, Shibuya, Sendagaya, 3 Chome−63−1 グランデフォレスタ原宿 1F",
+          "country_code": "JP",
+          "name": "AFURI Harajuku"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6966393,
+          35.6868343
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-02T15:18:11Z",
+        "google_maps_url": "http://maps.google.com/?cid=3272539110311166620",
+        "location": {
+          "address": "Japan, 〒151-0053 Tokyo, Shibuya, Yoyogi, 2 Chome−14−3 北斗第一ビル １F",
+          "country_code": "JP",
+          "name": "Fūunji Shinjuku"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7612701,
+          35.6684684
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-02T15:15:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=8263217184568084951",
+        "location": {
+          "address": "8 Chome-7-6 Ginza, Chuo City, Tokyo 104-0061, Japan",
+          "country_code": "JP",
+          "name": "Ginza Kyūbey Honten"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7221289,
+          35.6609663
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-05-02T15:15:30Z",
+        "google_maps_url": "http://maps.google.com/?cid=7603239805685047243",
+        "location": {
+          "address": "2 Chome-24-9 Nishiazabu, Minato City, Tokyo 106-0031, Japan",
+          "country_code": "JP",
+          "name": "Butagumi"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8651561,
+          1.3027855
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-25T10:52:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=3304893425101850258",
+        "location": {
+          "address": "5001 Beach Rd, Singapore 199588",
+          "country_code": "SG",
+          "name": "The Golden Mile"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8400279,
+          1.2768524
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-25T09:13:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=10704112423686424085",
+        "location": {
+          "address": "4 Everton Prk, #01-40, Singapore 080004",
+          "country_code": "SG",
+          "name": "Nylon Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-19T03:49:24Z",
+        "google_maps_url": "http://maps.google.com/?q=10C+Leith+Rd,+Singapore+547887&ftid=0x31da17ac8a1b3895:0xf52fc39a6111bec",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7638930,
+          35.6727850
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-18T18:47:18Z",
+        "google_maps_url": "http://maps.google.com/?cid=7672052621710130498",
+        "location": {
+          "address": "Japan, 〒104-0061 Tokyo, Chuo City, Ginza, 4 Chome−2−15 塚本素山ビルディング B1F",
+          "country_code": "JP",
+          "name": "Yakitori BIRD LAND Ginza"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7175653,
+          35.6602462
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-18T18:43:54Z",
+        "google_maps_url": "http://maps.google.com/?cid=17504455164455004442",
+        "location": {
+          "address": "Japan, 〒107-0062 Tokyo, Minato City, Minamiaoyama, 6 Chome−6−22 LunaRossa南青山 B1",
+          "country_code": "JP",
+          "name": "Yoroniku"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.5120505,
+          34.6734697
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-18T04:48:39Z",
+        "google_maps_url": "http://maps.google.com/?cid=15334446403831691918",
+        "location": {
+          "address": "Japan, 〒542-0066 Osaka, Chuo Ward, Kawarayamachi, 1 Chome−7−22 アストロヴィラ松屋町 1階",
+          "country_code": "JP",
+          "name": "Aoba Ramen Hommamonya"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.4289645,
+          34.6545182
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-18T04:44:40Z",
+        "google_maps_url": "http://maps.google.com/?cid=8035482904308493516",
+        "location": {
+          "address": "1 Chome-1-10 Kaigandori, Minato Ward, Osaka, 552-0022, Japan",
+          "country_code": "JP",
+          "name": "Osaka Aquarium Kaiyukan"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.5012971,
+          34.6687234
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-18T04:44:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=13311254180582368656",
+        "location": {
+          "address": "1 Chome Dotonbori, Chuo Ward, Osaka, 542-0071, Japan",
+          "country_code": "JP",
+          "name": "Dotonbori"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.5258546,
+          34.6872571
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-18T04:44:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=1081374622389182017",
+        "location": {
+          "address": "1-1 Osakajo, Chuo Ward, Osaka, 540-0002, Japan",
+          "country_code": "JP",
+          "name": "Osaka Castle"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8141545,
+          1.3240414
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T23:50:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=7972831364797720980",
+        "location": {
+          "address": "2 Adam Rd, Singapore 289876",
+          "country_code": "SG",
+          "name": "Adam Food Centre"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8447670,
+          1.2803361
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T23:47:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=14879639582559932586",
+        "location": {
+          "address": "1 Kadayanallur St, Singapore 069184",
+          "country_code": "SG",
+          "name": "Maxwell Food Centre"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8099395,
+          1.3043337
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T23:46:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=15629643567097183184",
+        "location": {
+          "address": "11 Dempsey Rd, #01-16, Singapore 249673",
+          "country_code": "SG",
+          "name": "JUMBO Seafood - Dempsey Hill"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.9349594,
+          1.3069299
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T23:33:26Z",
+        "google_maps_url": "http://maps.google.com/?cid=7853980947918247856",
+        "location": {
+          "address": "1220 ECP, Singapore 468960",
+          "country_code": "SG",
+          "name": "East Coast Lagoon Food Village"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7292431,
+          35.0393700
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T17:05:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=1073025677330113631",
+        "location": {
+          "address": "1 Kinkakujicho, Kita Ward, Kyoto, 603-8361, Japan",
+          "country_code": "JP",
+          "name": "Kinkaku-ji"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7846610,
+          34.9946662
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T17:05:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=7111013964196361402",
+        "location": {
+          "address": "1 Chome-294 Kiyomizu, Higashiyama Ward, Kyoto, 605-0862, Japan",
+          "country_code": "JP",
+          "name": "Kiyomizu-dera"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          135.7791876,
+          34.9676945
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-16T17:05:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=8870624639634301673",
+        "location": {
+          "address": "68 Fukakusa Yabunouchicho, Fushimi Ward, Kyoto, 612-0882, Japan",
+          "country_code": "JP",
+          "name": "Fushimi Inari Taisha"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8328072,
+          1.2850771
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-10T14:40:08Z",
+        "google_maps_url": "http://maps.google.com/?cid=4726285401114284914",
+        "location": {
+          "address": "30 Seng Poh Rd, Singapore 168898",
+          "country_code": "SG",
+          "name": "Tiong Bahru Market"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8827264,
+          1.3128969
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-10T14:18:49Z",
+        "google_maps_url": "http://maps.google.com/?cid=13386836470060926368",
+        "location": {
+          "address": "414 Geylang Rd, Singapore 389392",
+          "country_code": "SG",
+          "name": "No Signboard Seafood At Geylang"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8495448,
+          1.3255172
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-10T14:17:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=14988244928271313004",
+        "location": {
+          "address": "Balestier Rd, #399 401 & 403, Singapore 329801",
+          "country_code": "SG",
+          "name": "Boon Tong Kee Restaurant"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          103.8435700,
+          1.2845200
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-09T14:25:40Z",
+        "google_maps_url": "http://maps.google.com/?cid=228003217539317294",
+        "location": {
+          "address": "151 New Bridge Road 91 Upper Cross Street Singapore 059443/058362, New Bridge Rd, Singapore 059443",
+          "country_code": "SG",
+          "name": "Chinatown"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1397753,
+          51.5131089
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-04-06T07:19:03Z",
+        "google_maps_url": "http://maps.google.com/?cid=5103589685198072735",
+        "location": {
+          "address": "22 Kingly St, Carnaby, London W1B 5QP, United Kingdom",
+          "country_code": "GB",
+          "name": "Dishoom Carnaby"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7765215,
+          35.7188351
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-29T18:06:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=2535480516976146397",
+        "location": {
+          "address": "13-9 Uenokoen, Taito City, Tokyo 110-8712, Japan",
+          "country_code": "JP",
+          "name": "Tokyo National Museum"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1315350,
+          51.5134706
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-29T02:01:39Z",
+        "google_maps_url": "http://maps.google.com/?cid=5158198841314979984",
+        "location": {
+          "address": "47 Frith St, London W1D 4HT, United Kingdom",
+          "country_code": "GB",
+          "name": "Ronnie Scott's"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1326885,
+          51.5112365
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-29T00:00:30Z",
+        "google_maps_url": "http://maps.google.com/?cid=5797736823706703373",
+        "location": {
+          "address": "34 Rupert St, London W1D 6DN, United Kingdom",
+          "country_code": "GB",
+          "name": "The Palomar"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1318554,
+          51.5121847
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-29T00:00:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=13291796954013381766",
+        "location": {
+          "address": "65-73 Shaftesbury Ave, London W1D 6EX, United Kingdom",
+          "country_code": "GB",
+          "name": "Montcalm Piccadilly Townhouse"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1414724,
+          51.5084912
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-28T23:58:45Z",
+        "google_maps_url": "http://maps.google.com/?cid=14784365971836433154",
+        "location": {
+          "address": "42 Albemarle St, London W1S 4JH, United Kingdom",
+          "country_code": "GB",
+          "name": "Gymkhana"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -84.5141019,
+          39.1132346
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-25T13:51:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=7553343528813346913",
+        "location": {
+          "address": "1610 Walnut St, Cincinnati, OH 45202, United States",
+          "country_code": "US",
+          "name": "OTR Living Water Church"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-25T05:24:58Z",
+        "google_maps_url": "http://maps.google.com/?q=32.852310,-96.724810",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7062758,
+          35.7128908
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-20T17:25:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=17003017670595255877",
+        "location": {
+          "address": "Japan, 〒169-0075 Tokyo, Shinjuku City, Takadanobaba, 2 Chome−14−8 Ntビル 地下１階",
+          "country_code": "JP",
+          "name": "Jazz SPOT Intro"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7312690,
+          35.6637447
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-20T17:03:57Z",
+        "google_maps_url": "http://maps.google.com/?cid=1929567231198545264",
+        "location": {
+          "address": "7 Chome-14-4 Roppongi, Minato City, Tokyo 106-0032, Japan",
+          "country_code": "JP",
+          "name": "Remm"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.6967568,
+          35.6570266
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-15T16:10:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=4046262615780765221",
+        "location": {
+          "address": "Japan, 〒150-0043 Tokyo, Shibuya, Dogenzaka, 1 Chome−17−10 第二宝ビル ２F",
+          "country_code": "JP",
+          "name": "Jazz Blues Soul Bar"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7100517,
+          35.6851763
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-15T16:09:49Z",
+        "google_maps_url": "http://maps.google.com/?cid=7646744610971579015",
+        "location": {
+          "address": "11 Naitomachi, Shinjuku City, Tokyo 160-0014, Japan",
+          "country_code": "JP",
+          "name": "Shinjuku Gyoen National Garden"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.8107004,
+          35.7100627
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-15T16:09:41Z",
+        "google_maps_url": "http://maps.google.com/?cid=9015449659807889194",
+        "location": {
+          "address": "1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan",
+          "country_code": "JP",
+          "name": "Tokyo Skytree"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          139.7702515,
+          35.6647703
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-03-15T16:08:24Z",
+        "google_maps_url": "http://maps.google.com/?cid=6325845380007391103",
+        "location": {
+          "address": "Japan, 〒104-0045 Tokyo, Chuo City, Tsukiji, 4 Chome および６丁目一部",
+          "name": "Fish Market Tsukiji Outer Market"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -75.1792437,
+          39.9513259
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-02-08T05:14:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=306107086880126473",
+        "location": {
+          "address": "2319 Walnut St, Philadelphia, PA 19103, United States",
+          "country_code": "US",
+          "name": "Good Karma Café"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          24.0239695,
+          49.8435891
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2018-01-18T04:54:49Z",
+        "google_maps_url": "http://maps.google.com/?cid=4885250736225066573",
+        "location": {
+          "address": "Horodotska St, Lviv, Lviv Oblast, Ukraine, 79007",
+          "country_code": "UA",
+          "name": "Astoria Hotel"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2913381,
+          34.0564313
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-10-02T23:22:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=11734006477412438292",
+        "location": {
+          "address": "856 Vermont Ave B, Los Angeles, CA 90005, United States",
+          "country_code": "US",
+          "name": "Soowon Galbi"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3615722,
+          34.0703278
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-30T16:13:11Z",
+        "google_maps_url": "http://maps.google.com/?cid=9000317963999003155",
+        "location": {
+          "address": "363 S Fairfax Ave, Los Angeles, CA 90036, United States",
+          "country_code": "US",
+          "name": "Frank's"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2546805,
+          34.0415305
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-30T02:29:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=1853511207211670675",
+        "location": {
+          "address": "862 Main St, Los Angeles, CA 90014, United States",
+          "country_code": "US",
+          "name": "Nice Kicks"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3852350,
+          34.0843958
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-29T19:32:12Z",
+        "google_maps_url": "http://maps.google.com/?cid=3559205062036122684",
+        "location": {
+          "address": "8935 Santa Monica Blvd, West Hollywood, CA 90069, United States",
+          "country_code": "US",
+          "name": "Guisados"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-27T16:39:00Z",
+        "google_maps_url": "http://maps.google.com/?q=2+Sable+Sands,+Newport+Coast,+CA+92657&ftid=0x80dce0d59995e979:0xd459f7a8a0a4dbde",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-21T21:04:53Z",
+        "google_maps_url": "http://maps.google.com/?q=1501+Hill+St,+Los+Angeles,+CA+90015&ftid=0x80c2c7c58887818d:0xf37172b2118a5b95",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2397141,
+          34.0615425
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-21T21:04:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=482792306849415632",
+        "location": {
+          "address": "727 N Broadway #128, Los Angeles, CA 90012, United States",
+          "country_code": "US",
+          "name": "Howlin' Ray's Hot Chicken - Chinatown"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.7328232,
+          33.6257700
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-18T16:49:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=267018890169367359",
+        "location": {
+          "address": "23331 Moulton Pkwy, Laguna Hills, CA 92653, United States",
+          "country_code": "US",
+          "name": "Crossline Community Church"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.8320166,
+          40.7593179
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-08T14:34:18Z",
+        "google_maps_url": "http://maps.google.com/?cid=14692368421253586738",
+        "location": {
+          "address": "39-07 Prince St, Flushing, NY 11354, United States",
+          "country_code": "US",
+          "name": "Spicy & Tasty"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.8291722,
+          40.7593415
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-08T14:34:12Z",
+        "google_maps_url": "http://maps.google.com/?cid=3172024345407344509",
+        "location": {
+          "address": "136-20 Roosevelt Ave, Flushing, NY 11354, United States",
+          "country_code": "US",
+          "name": "New World Mall"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.8281716,
+          40.7579426
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-08T14:33:55Z",
+        "google_maps_url": "http://maps.google.com/?cid=8744034113938488697",
+        "location": {
+          "address": "41-41 Kissena Blvd #101, Queens, NY 11354, United States",
+          "country_code": "US",
+          "name": "Bao & Pancakes Inc. 新天津包子"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.8324134,
+          40.7595751
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-08T14:33:44Z",
+        "google_maps_url": "http://maps.google.com/?cid=2643412766659077252",
+        "location": {
+          "address": "39-16 Prince St #104, Flushing, NY 11354, United States",
+          "country_code": "US",
+          "name": "Nan Xiang Soup Dumplings - Flushing"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.8316571,
+          40.7587750
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-09-08T14:33:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=6794221723886564665",
+        "location": {
+          "address": "135-02 Roosevelt Ave, Flushing, NY 11354, United States",
+          "country_code": "US",
+          "name": "White Bear"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-08-29T00:49:59Z",
+        "google_maps_url": "http://maps.google.com/?q=1711+Bow+Valley+Trail,+Canmore,+AB+T1W+1L7,+Canada&ftid=0x5370c58df444913b:0x28ac4edc1ff02fbb",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9788906,
+          40.7430122
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-29T15:17:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=9743612206352082361",
+        "location": {
+          "address": "223 E 30th St, New York, NY 10016, United States",
+          "country_code": "US",
+          "name": "Remnant Neighborhood Center"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -87.6997915,
+          41.9245667
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-27T18:52:34Z",
+        "google_maps_url": "http://maps.google.com/?cid=5423573469968123443",
+        "location": {
+          "address": "2385 N Milwaukee Ave, Chicago, IL 60647, United States",
+          "country_code": "US",
+          "name": "Gaslight Coffee Roasters"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -87.6401747,
+          41.8703243
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-27T18:25:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=3801858655344078153",
+        "location": {
+          "address": "520 W Taylor St, Chicago, IL 60607, United States",
+          "country_code": "US",
+          "name": "Portillo's Chicago – Canal and Taylor"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -87.6748218,
+          41.9089496
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-27T18:25:17Z",
+        "google_maps_url": "http://maps.google.com/?cid=2197273545872741903",
+        "location": {
+          "address": "1505 N Milwaukee Ave, Chicago, IL 60622, United States",
+          "country_code": "US",
+          "name": "Jeni's Splendid Ice Creams"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -87.9089858,
+          41.9802588
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-27T16:13:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=5843217136966282571",
+        "location": {
+          "address": "10000 W O'Hare Ave, Chicago, IL 60666, United States",
+          "country_code": "US",
+          "name": "Chicago O'Hare International Airport"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -87.6315393,
+          41.8935110
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-27T16:02:34Z",
+        "google_maps_url": "http://maps.google.com/?cid=5806266154725630959",
+        "location": {
+          "address": "100 W Ontario St, Chicago, IL 60610, United States",
+          "country_code": "US",
+          "name": "Portillo's & Barnelli's Chicago"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-05-11T09:11:52Z",
+        "google_maps_url": "http://maps.google.com/?q=48.863889,2.360607",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-04-15T22:40:48Z",
+        "google_maps_url": "http://maps.google.com/?q=4+Berry+St,+Brooklyn,+NY+11249&ftid=0x89c2594338ac16cd:0xe0401ec336d4d84c",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -73.9415456,
+          40.7475910
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-22T17:50:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=8886657909933825870",
+        "location": {
+          "address": "26-25 Jackson Ave, Long Island City, NY 11101, United States",
+          "country_code": "US",
+          "name": "Partners Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1253497,
+          51.5357396
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-07T20:03:08Z",
+        "google_maps_url": "http://maps.google.com/?cid=7957225233947571477",
+        "location": {
+          "address": "1 Granary Square, London N1C 4AA, United Kingdom",
+          "country_code": "GB",
+          "name": "Caravan King's Cross"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3495336,
+          48.8628446
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-07T11:43:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=4689171296913686652",
+        "location": {
+          "address": "115 Rue St Denis, 75001 Paris, France",
+          "country_code": "FR",
+          "name": "Raviolis Nord Est"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3596580,
+          48.8439069
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-07T11:32:52Z",
+        "google_maps_url": "http://maps.google.com/?cid=11995939021325286734",
+        "location": {
+          "address": "75005 Paris, France",
+          "country_code": "FR",
+          "name": "Jardin des Plantes"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3363309,
+          48.8466144
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-07T11:32:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=545460441531939211",
+        "location": {
+          "address": "75006 Paris, France",
+          "country_code": "FR",
+          "name": "Jardin du Luxembourg"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3464138,
+          48.8462218
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-07T11:32:25Z",
+        "google_maps_url": "http://maps.google.com/?cid=64716156227004248",
+        "location": {
+          "address": "Pl. du Panthéon, 75005 Paris, France",
+          "country_code": "FR",
+          "name": "Panthéon"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3462818,
+          48.8527634
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-06T23:10:35Z",
+        "google_maps_url": "http://maps.google.com/?cid=6399405877439815158",
+        "location": {
+          "address": "5 Rue de la Huchette, 75005 Paris, France",
+          "country_code": "FR",
+          "name": "Caveau de la Huchette"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3723575,
+          48.8647418
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-06T21:56:05Z",
+        "google_maps_url": "http://maps.google.com/?cid=2709807997037557509",
+        "location": {
+          "address": "55 Rue Oberkampf, 75011 Paris, France",
+          "country_code": "FR",
+          "name": "Pierre Sang In Oberkampf"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3320155,
+          48.8736289
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-06T12:32:58Z",
+        "google_maps_url": "http://maps.google.com/?cid=4900277619427605512",
+        "location": {
+          "address": "Etage 0, 40 Bd Haussmann Galeries Lafayette, 75009 Paris, France",
+          "country_code": "FR",
+          "name": "Stand KENZO Maroquinerie Homme"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3561421,
+          48.8581768
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T11:27:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=14951520115816807499",
+        "location": {
+          "address": "19 Rue Sainte-Croix de la Bretonnerie, 75004 Paris, France",
+          "country_code": "FR",
+          "name": "Benedict"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T06:16:46Z",
+        "google_maps_url": "http://maps.google.com/?q=Palais-Royal,+75001+Paris,+France&ftid=0x47e66e24f70432e9:0x7e04de8a2eda4b55",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.2950275,
+          48.8737917
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T06:16:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=15687558599447307325",
+        "location": {
+          "address": "Pl. Charles de Gaulle, 75008 Paris, France",
+          "country_code": "FR",
+          "name": "Arc de Triomphe"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.2892799,
+          48.8616885
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T05:47:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=16798441015819355226",
+        "location": {
+          "address": "Pl. du Trocadéro et du 11 Novembre, 75016 Paris, France",
+          "country_code": "FR",
+          "name": "Jardins du Trocadéro"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3847051,
+          48.8710678
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T05:46:20Z",
+        "google_maps_url": "http://maps.google.com/?cid=15816619883843833487",
+        "location": {
+          "address": "47 Rue des Couronnes, 75020 Paris, France",
+          "country_code": "FR",
+          "name": "Belleville Park"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3449609,
+          48.8553750
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T04:22:47Z",
+        "google_maps_url": "http://maps.google.com/?cid=3743689731647743848",
+        "location": {
+          "address": "10 Bd du Palais, 75001 Paris, France",
+          "country_code": "FR",
+          "name": "Sainte-Chapelle"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3574589,
+          48.8575475
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-05T04:21:18Z",
+        "google_maps_url": "http://maps.google.com/?cid=9281100324078642347",
+        "location": {
+          "address": "31 Rue Vieille du Temple, 75004 Paris, France",
+          "country_code": "FR",
+          "name": "La Belle Hortense"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3069585,
+          48.8621642
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-04T22:13:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=4838378235320844401",
+        "location": {
+          "address": "65 Quai d'Orsay, 75007 Paris, France",
+          "country_code": "FR",
+          "name": "American Church in Paris"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3326046,
+          48.8541588
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-04T22:02:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=1782201546845549567",
+        "location": {
+          "address": "172 Bd Saint-Germain, 75006 Paris, France",
+          "country_code": "FR",
+          "name": "Café de Flore"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3239712,
+          48.8538904
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-04T22:01:35Z",
+        "google_maps_url": "http://maps.google.com/?cid=7671653190995142393",
+        "location": {
+          "address": "27 Rue de Varenne, 75007 Paris, France",
+          "country_code": "FR",
+          "name": "Jacques Genin"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3025800,
+          48.8710200
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-04T22:00:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=11994092091973895482",
+        "location": {
+          "address": "79 Av. des Champs-Élysées, 75008 Paris, France",
+          "country_code": "FR",
+          "name": "Nike House of Innovation PAR/002"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3337848,
+          48.8521802
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-04T21:56:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=17520873415076573723",
+        "location": {
+          "address": "11 Rue des Canettes, 75006 Paris, France",
+          "country_code": "FR",
+          "name": "Chez Georges"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3424475,
+          48.8617019
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T22:02:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=14725216174687370100",
+        "location": {
+          "address": "4 Rue Sauval, 75001 Paris, France",
+          "country_code": "FR",
+          "name": "Boutique yam'Tcha"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3594996,
+          48.8590662
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:33:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=13476296587106863437",
+        "location": {
+          "address": "64 Rue Vieille du Temple, 75003 Paris, France",
+          "country_code": "FR",
+          "name": "Robert et Louise"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3327620,
+          48.8514868
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:30:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=2646298016192325314",
+        "location": {
+          "address": "72 Rue Bonaparte, 75006 Paris, France",
+          "country_code": "FR",
+          "name": "Pierre Hermé"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.2807232,
+          48.8675480
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:26:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=15116710398509233193",
+        "location": {
+          "address": "133 Av. Victor Hugo, 75016 Paris, France",
+          "country_code": "FR",
+          "name": "Le Stella"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3713093,
+          48.8693317
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:25:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=1023628011633690808",
+        "location": {
+          "address": "129 Ave Parmentier, 75011 Paris, France",
+          "country_code": "FR",
+          "name": "Le Châteaubriand"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3668319,
+          48.8607214
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:23:24Z",
+        "google_maps_url": "http://maps.google.com/?cid=2892717646480357157",
+        "location": {
+          "address": "111 Bd Beaumarchais, 75003 Paris, France",
+          "country_code": "FR",
+          "name": "Merci"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3369467,
+          48.8655806
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:22:19Z",
+        "google_maps_url": "http://maps.google.com/?cid=13714629952754788487",
+        "location": {
+          "address": "34 Rue de Richelieu, 75001 Paris, France",
+          "country_code": "FR",
+          "name": "Ellsworth"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3814506,
+          48.8610156
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:21:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=13299751829314325510",
+        "location": {
+          "address": "32 Rue Saint-Maur, 75011 Paris, France",
+          "country_code": "FR",
+          "name": "Le Servan"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3671983,
+          48.8567159
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:16:38Z",
+        "google_maps_url": "http://maps.google.com/?cid=2909814959004247245",
+        "location": {
+          "address": "2 Rue Roger Verlomme, 75003 Paris, France",
+          "country_code": "FR",
+          "name": "Chez Janou"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3591962,
+          48.8574067
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:15:58Z",
+        "google_maps_url": "http://maps.google.com/?cid=13334543139358008511",
+        "location": {
+          "address": "34 Rue des Rosiers, 75004 Paris, France",
+          "country_code": "FR",
+          "name": "L'As du Fallafel"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3387820,
+          48.8520234
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:15:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=1675143240332043814",
+        "location": {
+          "address": "3 Carr de l'Odéon, 75006 Paris, France",
+          "country_code": "FR",
+          "name": "L’Avant Comptoir de la Terre"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3359742,
+          48.8649742
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:14:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=11679062614182814962",
+        "location": {
+          "address": "14 Rue Molière, 75001 Paris, France",
+          "country_code": "FR",
+          "name": "Takara"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3567354,
+          48.8517232
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T21:13:53Z",
+        "google_maps_url": "http://maps.google.com/?cid=3847719462107820481",
+        "location": {
+          "address": "31 Rue Saint-Louis en l'Île, 75004 Paris, France",
+          "country_code": "FR",
+          "name": "Berthillon"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3376168,
+          48.8803939
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T20:48:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=6035630518928940852",
+        "location": {
+          "address": "24 Rue Henry Monnier, 75009 Paris, France",
+          "country_code": "FR",
+          "name": "Luz Verde"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3642854,
+          48.8631868
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T20:48:09Z",
+        "google_maps_url": "http://maps.google.com/?cid=5384701189971431202",
+        "location": {
+          "address": "58 Rue de Saintonge, 75003 Paris, France",
+          "country_code": "FR",
+          "name": "Bagnard"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3701387,
+          48.8644739
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T20:46:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=16453944569276813241",
+        "location": {
+          "address": "107 Bd Richard-Lenoir, 75011 Paris, France",
+          "country_code": "FR",
+          "name": "Ober Mamma"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3265614,
+          48.8599614
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-02T20:46:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=15019994644224418776",
+        "location": {
+          "address": "Esplanade Valéry Giscard d'Estaing, 75007 Paris, France",
+          "country_code": "FR",
+          "name": "Musée d'Orsay"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1520935,
+          51.5160581
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-01T14:20:39Z",
+        "google_maps_url": "http://maps.google.com/?cid=14262674611208827329",
+        "location": {
+          "address": "9 Duke St, London W1U 3EG, United Kingdom",
+          "country_code": "GB",
+          "name": "Zoilo"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3628904,
+          48.8712453
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-03-01T04:24:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=3752405038616106515",
+        "location": {
+          "address": "34 Rue Yves Toudic, 75010 Paris, France",
+          "country_code": "FR",
+          "name": "Du Pain et des Idées"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1557179,
+          51.5202728
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-27T07:15:09Z",
+        "google_maps_url": "http://maps.google.com/?cid=5961216610415672097",
+        "location": {
+          "address": "65 Chiltern St, London W1U 6NH, United Kingdom",
+          "country_code": "GB",
+          "name": "Il Blandford`s"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1534040,
+          51.5124794
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-27T07:14:11Z",
+        "google_maps_url": "http://maps.google.com/?cid=6811721782920470177",
+        "location": {
+          "address": "41 N Audley St, London W1K 6ZP, United Kingdom",
+          "country_code": "GB",
+          "name": "NAC"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0983506,
+          51.5138453
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-25T19:27:14Z",
+        "google_maps_url": "http://maps.google.com/?cid=4187561509782511582",
+        "location": {
+          "address": "St. Paul's Churchyard, London EC4M 8AD, United Kingdom",
+          "country_code": "GB",
+          "name": "St. Paul's Cathedral"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1432069,
+          51.5179999
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-25T19:25:40Z",
+        "google_maps_url": "http://maps.google.com/?cid=243531740993178387",
+        "location": {
+          "address": "All Souls C of E Church, 2 All Souls' Pl, London W1B 3DA, United Kingdom",
+          "country_code": "GB",
+          "name": "All Souls Langham Place⛪"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0986665,
+          51.5237293
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-25T12:05:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=2054668270718438676",
+        "location": {
+          "address": "82 Goswell Rd., London EC1V 7DB, United Kingdom",
+          "country_code": "GB",
+          "name": "Breddos Tacos Clerkenwell"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          12.5088275,
+          47.7385500
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-23T06:05:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=2643822770544584482",
+        "location": {
+          "country_code": "GB",
+          "name": "Pitt Cue Co."
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0899202,
+          51.5051655
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-23T06:04:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=12644428216325895588",
+        "location": {
+          "address": "6 Southwark St, London SE1 1TQ, United Kingdom",
+          "country_code": "GB",
+          "name": "Padella"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0993564,
+          51.5075953
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-23T06:04:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=2304839309186538471",
+        "location": {
+          "address": "Bankside, London SE1 9TG, United Kingdom",
+          "country_code": "GB",
+          "name": "Tate Modern"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1909471,
+          51.4817241
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-23T06:02:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=5236059605333009912",
+        "location": {
+          "address": "Fulham Rd., London SW6 1HS, United Kingdom",
+          "country_code": "GB",
+          "name": "Stamford Bridge"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1326671,
+          51.5141100
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T22:07:19Z",
+        "google_maps_url": "http://maps.google.com/?cid=14208665277994686615",
+        "location": {
+          "address": "26-27 Dean St, London W1D 3LL, United Kingdom",
+          "country_code": "GB",
+          "name": "Barrafina Dean Street"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1257365,
+          51.5094252
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:19:05Z",
+        "google_maps_url": "http://maps.google.com/?cid=16256777610075670330",
+        "location": {
+          "address": "10 Adelaide St, London WC2N 4HZ, United Kingdom",
+          "country_code": "GB",
+          "name": "Barrafina Adelaide Street"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1346968,
+          51.5117776
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:16:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=4886776573472184821",
+        "location": {
+          "address": "24 Great Windmill St, London W1D 7LG, United Kingdom",
+          "country_code": "GB",
+          "name": "Blacklock Soho"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1336974,
+          51.5144630
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:16:33Z",
+        "google_maps_url": "http://maps.google.com/?cid=13737680772467535873",
+        "location": {
+          "address": "2 St Anne's Ct, London W1F 0AZ, United Kingdom",
+          "country_code": "GB",
+          "name": "Zelman Meats"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1367930,
+          51.5144721
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:16:25Z",
+        "google_maps_url": "http://maps.google.com/?cid=4755658384285639803",
+        "location": {
+          "address": "10 Poland St, London W1F 8PZ, United Kingdom",
+          "country_code": "GB",
+          "name": "Bodean's BBQ Soho"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1383610,
+          51.5120880
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:16:18Z",
+        "google_maps_url": "http://maps.google.com/?cid=6326893433944503115",
+        "location": {
+          "address": "17 Beak St, Carnaby, London W1F 9RW, United Kingdom",
+          "country_code": "GB",
+          "name": "Flat Iron Soho"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1337348,
+          51.5116054
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:16:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=2346234991029164703",
+        "location": {
+          "address": "7 Archer St, London W1D 7AU, United Kingdom",
+          "country_code": "GB",
+          "name": "Gelupo"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1461847,
+          51.5065587
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T19:13:55Z",
+        "google_maps_url": "http://maps.google.com/?cid=2903511688697280513",
+        "location": {
+          "address": "10 Shepherd Market, London W1J 7QF, United Kingdom",
+          "country_code": "GB",
+          "name": "Kitty Fisher's Mayfair"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0904808,
+          51.5055826
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T17:34:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=3956582065801451336",
+        "location": {
+          "address": "London SE1 9AL, United Kingdom",
+          "country_code": "GB",
+          "name": "Borough Market"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1319957,
+          51.5290963
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T16:08:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=10137998710171492266",
+        "location": {
+          "address": "40 Doric Way, Euston Rd., London NW1 1LH, United Kingdom",
+          "country_code": "GB",
+          "name": "Roti King"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1375941,
+          51.5153926
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T16:08:05Z",
+        "google_maps_url": "http://maps.google.com/?cid=6805607435340319190",
+        "location": {
+          "address": "38 Poland St, London W1F 7LY, United Kingdom",
+          "country_code": "GB",
+          "name": "Golden Union"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1646916,
+          51.5198430
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-22T16:04:11Z",
+        "google_maps_url": "http://maps.google.com/?cid=636777716147038555",
+        "location": {
+          "address": "22 Harcourt St, London W1H 4HH, United Kingdom",
+          "country_code": "GB",
+          "name": "Dinings"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3596596,
+          48.8710383
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-21T16:39:34Z",
+        "google_maps_url": "http://maps.google.com/?cid=12476418235594517065",
+        "location": {
+          "address": "5 Rue Lucien Sampaix, 75010 Paris, France",
+          "country_code": "FR",
+          "name": "HolyBelly"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1565933,
+          51.5146208
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-20T15:35:14Z",
+        "google_maps_url": "http://maps.google.com/?cid=14765486522493027404",
+        "location": {
+          "address": "Marble Arch, 4 Bryanston St, London W1H 7BY, United Kingdom",
+          "country_code": "GB",
+          "name": "DoubleTree by Hilton London - Marble Arch"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4019862,
+          37.7865424
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-17T03:40:43Z",
+        "google_maps_url": "http://maps.google.com/?cid=8426102553862613404",
+        "location": {
+          "address": "690 Mission St, San Francisco, CA 94105, United States",
+          "country_code": "US",
+          "name": "The Grove - Yerba Buena"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-16T20:35:28Z",
+        "google_maps_url": "http://maps.google.com/?q=1+Market+St,+San+Francisco,+CA+94105&ftid=0x808580641dac7091:0x5df92387414160b0",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4342048,
+          37.7890301
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-16T01:21:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=11886812187126933616",
+        "location": {
+          "address": "2404 California St, San Francisco, CA 94115, United States",
+          "country_code": "US",
+          "name": "Smitten Ice Cream"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.3954860,
+          37.7853220
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-15T20:18:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=8631919565242265803",
+        "location": {
+          "address": "303 2nd St, San Francisco, CA 94107, United States",
+          "country_code": "US",
+          "name": "Rooster & Rice"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0657389,
+          51.6032123
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-15T06:02:01Z",
+        "google_maps_url": "http://maps.google.com/?cid=9549706922932907218",
+        "location": {
+          "address": "748 High Rd, Greater, London N17 0AP, United Kingdom",
+          "country_code": "GB",
+          "name": "Tottenham Hotspur Stadium"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4040535,
+          37.7875604
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-15T05:33:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=7017513929648810188",
+        "location": {
+          "address": "720 Market St, San Francisco, CA 94102, United States",
+          "country_code": "US",
+          "name": "Mazarine Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4040500,
+          37.7853583
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-14T00:57:25Z",
+        "google_maps_url": "http://maps.google.com/?cid=10154288238805617480",
+        "location": {
+          "address": "75 Yerba Buena Ln, San Francisco, CA 94103, United States",
+          "country_code": "US",
+          "name": "Tropisueno"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4077618,
+          37.7824573
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-13T16:00:34Z",
+        "google_maps_url": "http://maps.google.com/?cid=10491703791564549862",
+        "location": {
+          "address": "66 Mint St, San Francisco, CA 94103, United States",
+          "country_code": "US",
+          "name": "Blue Bottle Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4318400,
+          37.7812760
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-12T04:07:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=13173509829557508612",
+        "location": {
+          "address": "1290 Fillmore St, San Francisco, CA 94115, United States",
+          "country_code": "US",
+          "name": "Radiance Christian Church"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.3936029,
+          37.7953186
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-10T03:14:41Z",
+        "google_maps_url": "http://maps.google.com/?cid=13604532086238272160",
+        "location": {
+          "address": "One Ferry Building #50, 1 Ferry Plz, San Francisco, CA 94111, United States",
+          "country_code": "US",
+          "name": "Ferry Plaza Farmers Market"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.3934171,
+          37.7959647
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-10T03:14:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=9442219819750554241",
+        "location": {
+          "address": "Ferry Building, #11, San Francisco, CA 94111, United States",
+          "country_code": "US",
+          "name": "Hog Island Oyster Co."
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4347069,
+          37.7597022
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-10T02:58:08Z",
+        "google_maps_url": "http://maps.google.com/?cid=6034675008981876862",
+        "location": {
+          "address": "579 Castro St, San Francisco, CA 94114, United States",
+          "country_code": "US",
+          "name": "Anchor Oyster Bar"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4120379,
+          37.7881959
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-10T01:52:18Z",
+        "google_maps_url": "http://maps.google.com/?cid=3030198286370161761",
+        "location": {
+          "address": "619 Taylor St, San Francisco, CA 94102, United States",
+          "country_code": "US",
+          "name": "Ryoko's Japanese Restaurant & Bar"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.3941941,
+          37.7878728
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-10T01:47:19Z",
+        "google_maps_url": "http://maps.google.com/?cid=16742691009294365832",
+        "location": {
+          "address": "430 Folsom St, San Francisco, CA 94108, United States",
+          "country_code": "US",
+          "name": "AKIKOS"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4012865,
+          37.7918570
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T19:16:38Z",
+        "google_maps_url": "http://maps.google.com/?cid=7150230979000190465",
+        "location": {
+          "address": "301 Pine St, San Francisco, CA 94104, United States",
+          "country_code": "US",
+          "name": "Equinox Pine Street"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4191194,
+          37.7564917
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:29:50Z",
+        "google_maps_url": "http://maps.google.com/?cid=3410591911709045721",
+        "location": {
+          "address": "2534 Mission St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Foreign Cinema"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.5023147,
+          37.7566712
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:28:57Z",
+        "google_maps_url": "http://maps.google.com/?cid=13814300623704401757",
+        "location": {
+          "address": "3655 Lawton St, San Francisco, CA 94122, United States",
+          "country_code": "US",
+          "name": "Andytown Coffee Roasters"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.3881056,
+          37.7578494
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:27:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=14711809492879486843",
+        "location": {
+          "address": "699 22nd St, San Francisco, CA 94107, United States",
+          "country_code": "US",
+          "name": "Sunday Social"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4227909,
+          37.7442195
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:26:50Z",
+        "google_maps_url": "http://maps.google.com/?cid=4383184426747270780",
+        "location": {
+          "address": "688 San Jose Ave, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Mitchell's Ice Cream"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4111581,
+          37.7528425
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:25:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=348294281383901630",
+        "location": {
+          "address": "2950 24th St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Taqueria El Farolito"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4099426,
+          37.7529526
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:25:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=16753855001018446220",
+        "location": {
+          "address": "2884 24th St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "La Palma Mexicatessen"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4008003,
+          37.7859072
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:24:47Z",
+        "google_maps_url": "http://maps.google.com/?cid=6160253147796585757",
+        "location": {
+          "address": "San Francisco Museum of Modern Art, 151 3rd St, San Francisco, CA 94103, United States",
+          "country_code": "US",
+          "name": "Sightglass Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4113171,
+          37.7592345
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:24:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=2733781384327450309",
+        "location": {
+          "address": "3014 20th St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Sightglass Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4084543,
+          37.7770356
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:24:28Z",
+        "google_maps_url": "http://maps.google.com/?cid=13926460886861596347",
+        "location": {
+          "address": "270 7th St, San Francisco, CA 94103, United States",
+          "country_code": "US",
+          "name": "Sightglass Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4210993,
+          37.7589534
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:23:41Z",
+        "google_maps_url": "http://maps.google.com/?cid=9033960031764599090",
+        "location": {
+          "address": "877 Valencia St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Nice Kicks"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4625643,
+          37.7828140
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:22:41Z",
+        "google_maps_url": "http://maps.google.com/?cid=4754924583893187023",
+        "location": {
+          "address": "309 Clement St, San Francisco, CA 94118, United States",
+          "country_code": "US",
+          "name": "Burma Superstar"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4217806,
+          37.7670234
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:22:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=15508552329857280923",
+        "location": {
+          "address": "375 Valencia St, San Francisco, CA 94103, United States",
+          "country_code": "US",
+          "name": "Four Barrel Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:22:07Z",
+        "google_maps_url": "http://maps.google.com/?q=37.760906,-122.421683",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4240821,
+          37.7614347
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:21:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=6926389544917822571",
+        "location": {
+          "address": "600 Guerrero St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Tartine Bakery"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4257170,
+          37.7615900
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:21:46Z",
+        "google_maps_url": "http://maps.google.com/?cid=17824113911781466774",
+        "location": {
+          "address": "3692 18th St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Bi-Rite Creamery"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4408389,
+          37.7878443
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:21:26Z",
+        "google_maps_url": "http://maps.google.com/?cid=1055906375555324091",
+        "location": {
+          "address": "2821 California St, San Francisco, CA 94115, United States",
+          "country_code": "US",
+          "name": "b. patisserie"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4214111,
+          37.7564253
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:11:07Z",
+        "google_maps_url": "http://maps.google.com/?cid=7742604836892468051",
+        "location": {
+          "address": "1026 Valencia St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Ritual Coffee Roasters"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4378944,
+          37.7764861
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:10:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=1754822383999794408",
+        "location": {
+          "address": "736 Divisadero St, San Francisco, CA 94117, United States",
+          "country_code": "US",
+          "name": "The Mill"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4366404,
+          37.7968015
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:10:28Z",
+        "google_maps_url": "http://maps.google.com/?cid=101524560269466274",
+        "location": {
+          "address": "2271 Union St, San Francisco, CA 94123, United States",
+          "country_code": "US",
+          "name": "Wrecking Ball Coffee Roasters"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4819310,
+          37.7800530
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:08:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=14462437558698098688",
+        "location": {
+          "address": "5821 Geary Blvd, San Francisco, CA 94121, United States",
+          "country_code": "US",
+          "name": "PPQ Dungeness Island - San Francisco"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4209640,
+          37.7908308
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:07:29Z",
+        "google_maps_url": "http://maps.google.com/?cid=16765858646085057492",
+        "location": {
+          "address": "1517 Polk St, San Francisco, CA 94109, United States",
+          "country_code": "US",
+          "name": "Swan Oyster Depot"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4183182,
+          37.7526463
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:07:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=14071389523854149921",
+        "location": {
+          "address": "2779 Mission St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "Taquería El Farolito"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4180867,
+          37.7508961
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:06:52Z",
+        "google_maps_url": "http://maps.google.com/?cid=2449088951294747765",
+        "location": {
+          "address": "2889 Mission St, San Francisco, CA 94110, United States",
+          "country_code": "US",
+          "name": "La Taqueria"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4690005,
+          37.7637594
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:06:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=1377951454417225584",
+        "location": {
+          "address": "1031 Irving St, San Francisco, CA 94122, United States",
+          "country_code": "US",
+          "name": "San Tung"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T17:05:26Z",
+        "google_maps_url": "http://maps.google.com/?q=130+Sutter+St,+San+Francisco,+CA+94104&ftid=0x80858089be335caf:0xdf8d0be8f28798d6",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1258659,
+          51.5311162
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T16:05:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=13343444208639466770",
+        "location": {
+          "address": "Euston Rd., London N1C 4QP, United Kingdom",
+          "country_code": "GB",
+          "name": "St Pancras International"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T15:58:32Z",
+        "google_maps_url": "http://maps.google.com/?q=19+Rue+du+Dragon,+75006+Paris,+France&ftid=0x47e671d717184887:0x2e2c97569ce816de",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T04:35:34Z",
+        "google_maps_url": "http://maps.google.com/?q=Notre+Dame,+Paris,+France&ftid=0x47e671e39dd448af:0xe95d8ec82cfaf643",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.3376440,
+          48.8606111
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T04:35:08Z",
+        "google_maps_url": "http://maps.google.com/?cid=13363865620386383060",
+        "location": {
+          "address": "75001 Paris, France",
+          "country_code": "FR",
+          "name": "Louvre Museum"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          2.2944813,
+          48.8583701
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-09T04:34:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=10222232094831998944",
+        "location": {
+          "address": "Av. Gustave Eiffel, 75007 Paris, France",
+          "country_code": "FR",
+          "name": "Eiffel Tower"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4087648,
+          37.7876827
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2017-02-08T00:48:59Z",
+        "google_maps_url": "http://maps.google.com/?cid=16013590762682990664",
+        "location": {
+          "address": "335 Powell St, San Francisco, CA 94102, United States",
+          "country_code": "US",
+          "name": "The Westin St. Francis San Francisco on Union Square"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2016-03-11T18:29:22Z",
+        "google_maps_url": "http://maps.google.com/?q=2941+E+5th+Ave,+Vancouver,+BC+V5M+1N6,+Canada&ftid=0x5486712d80ca994b:0xf9b71361f9a3ef3b",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.2327239,
+          32.9513728
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2016-02-11T20:26:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=13299316125922289222",
+        "location": {
+          "address": "12873 El Camino Real M4, San Diego, CA 92130, United States",
+          "country_code": "US",
+          "name": "Carnitas' Snack Shack"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-10-18T06:35:19Z",
+        "google_maps_url": "http://maps.google.com/?q=35.468852,-97.513158",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.0559400,
+          42.3497600
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-09-26T13:37:54Z",
+        "google_maps_url": "http://maps.google.com/?cid=16853980261086455780",
+        "location": {
+          "address": "700 Atlantic Ave, Boston, MA 02111, United States",
+          "country_code": "US",
+          "name": "Boston-South Station"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.0671098,
+          42.3609297
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-09-26T13:37:27Z",
+        "google_maps_url": "http://maps.google.com/?cid=17224673694517943060",
+        "location": {
+          "address": "242 Cambridge St, Boston, MA 02114, United States",
+          "country_code": "US",
+          "name": "Anna's Taqueria"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.0967606,
+          42.3731073
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-09-22T19:49:21Z",
+        "google_maps_url": "http://maps.google.com/?cid=13308497867403066064",
+        "location": {
+          "address": "1166 Cambridge St, Cambridge, MA 02139, United States",
+          "country_code": "US",
+          "name": "Puritan & Company"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.1194958,
+          42.3518386
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-09-22T17:14:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=3099615000111605817",
+        "location": {
+          "address": "967 Commonwealth Ave, Boston, MA 02215, United States",
+          "country_code": "US",
+          "name": "Paradise Rock Club"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-07-31T07:16:10Z",
+        "google_maps_url": "http://maps.google.com/?q=35.128332,-90.070378",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -86.3343505,
+          39.2956352
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-07-13T13:51:28Z",
+        "google_maps_url": "http://maps.google.com/?cid=6517529041045869806",
+        "location": {
+          "address": "4500 Bear Creek Church Rd, Morgantown, IN 46160, United States",
+          "name": "Walnut Ridge Christian Camp and Retreat Center in Indiana"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-07-13T06:01:24Z",
+        "google_maps_url": "http://maps.google.com/?q=35.132829,-90.058993",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3575164,
+          34.0719407
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-25T22:25:47Z",
+        "google_maps_url": "http://maps.google.com/?cid=14091885898300447598",
+        "location": {
+          "address": "189 The Grove Dr, Los Angeles, CA 90036, United States",
+          "country_code": "US",
+          "name": "The Grove"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.4650510,
+          33.9905288
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-25T04:19:59Z",
+        "google_maps_url": "http://maps.google.com/?cid=14302284461092877562",
+        "location": {
+          "address": "1427 Abbot Kinney Blvd, Venice, CA 90291, United States",
+          "country_code": "US",
+          "name": "Gjelina Take Away"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.5648608,
+          34.0458857
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-25T00:42:38Z",
+        "google_maps_url": "http://maps.google.com/?cid=16499369779676357808",
+        "location": {
+          "address": "17985 Pacific Coast Hwy, Pacific Palisades, CA 90272, United States",
+          "country_code": "US",
+          "name": "The Getty Villa"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3118112,
+          34.0614657
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T19:57:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=5472461111720194518",
+        "location": {
+          "address": "3914 Wilshire Blvd, Los Angeles, CA 90010, United States",
+          "country_code": "US",
+          "name": "All You Can Eat Sushi & BBQ"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3442574,
+          34.0732669
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T19:57:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=168078219510020144",
+        "location": {
+          "address": "111 S La Brea Ave, Los Angeles, CA 90036, United States",
+          "country_code": "US",
+          "name": "Undefeated La Brea"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2532569,
+          34.0411529
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T19:55:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=10011467748622958216",
+        "location": {
+          "address": "836 S Los Angeles St, Los Angeles, CA 90014, United States",
+          "country_code": "US",
+          "name": "The Holy Grail"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3617038,
+          34.0810505
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T19:55:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=15671922137517470942",
+        "location": {
+          "address": "535 N Fairfax Ave, Los Angeles, CA 90036, United States",
+          "country_code": "US",
+          "name": "Flight Club Los Angeles"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3586397,
+          34.0839090
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T19:53:37Z",
+        "google_maps_url": "http://maps.google.com/?cid=14464538749789894533",
+        "location": {
+          "address": "7753 Melrose Ave, Los Angeles, CA 90046, United States",
+          "country_code": "US",
+          "name": "Sportie LA"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T18:06:20Z",
+        "google_maps_url": "http://maps.google.com/?q=5300+W+Olympic+Blvd,+Los+Angeles,+CA+90036&ftid=0x80c2b91df7c1d90b:0xa573e674267719d7",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2583313,
+          34.1443860
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:49:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=13715901715114732878",
+        "location": {
+          "address": "1164 Galleria Way, Glendale, CA 91210, United States",
+          "country_code": "US",
+          "name": "Din Tai Fung"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3028451,
+          34.0579746
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:31:28Z",
+        "google_maps_url": "http://maps.google.com/?cid=13827450203441429908",
+        "location": {
+          "address": "3385 W 8th St, Los Angeles, CA 90005, United States",
+          "country_code": "US",
+          "name": "Oo Kook Korean BBQ"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2898306,
+          34.0563389
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:30:56Z",
+        "google_maps_url": "http://maps.google.com/?cid=4408037746418115901",
+        "location": {
+          "address": "2819 James M Wood Blvd, Los Angeles, CA 90006, United States",
+          "country_code": "US",
+          "name": "Corner Place Restaurant"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.1486833,
+          34.1447129
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:30:41Z",
+        "google_maps_url": "http://maps.google.com/?cid=3043165500005056748",
+        "location": {
+          "address": "70 S Raymond Ave, Pasadena, CA 91105, United States",
+          "country_code": "US",
+          "name": "Copa Vida"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2545639,
+          34.0423681
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:30:12Z",
+        "google_maps_url": "http://maps.google.com/?cid=10739648017541253734",
+        "location": {
+          "address": "833 S Spring St, Los Angeles, CA 90014, United States",
+          "country_code": "US",
+          "name": "Verve Coffee Roasters"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2909451,
+          34.0601168
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:29:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=14324180230867411735",
+        "location": {
+          "address": "698 S Vermont Ave #109, Los Angeles, CA 90005, United States",
+          "country_code": "US",
+          "name": "Kobawoo House"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3089464,
+          34.0678224
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:29:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=203680806794163887",
+        "location": {
+          "address": "338 S Western Ave, Los Angeles, CA 90020, United States",
+          "country_code": "US",
+          "name": "Mr. Bossam K-town"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2385061,
+          34.0470175
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:27:26Z",
+        "google_maps_url": "http://maps.google.com/?cid=3613538694209728842",
+        "location": {
+          "address": "456 E 2nd St, Los Angeles, CA 90012, United States",
+          "country_code": "US",
+          "name": "Men Oh Tokushima Ramen"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2347907,
+          34.1446185
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:20:35Z",
+        "google_maps_url": "http://maps.google.com/?cid=17396763908707451085",
+        "location": {
+          "address": "143 S Verdugo Rd, Glendale, CA 91205, United States",
+          "country_code": "US",
+          "name": "Taco Azteca Original Inc"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3322327,
+          34.1726616
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:19:55Z",
+        "google_maps_url": "http://maps.google.com/?cid=17454067086764533915",
+        "location": {
+          "address": "2214 W Magnolia Blvd a, Burbank, CA 91506, United States",
+          "country_code": "US",
+          "name": "Quenelle"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2386170,
+          34.0467107
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:19:29Z",
+        "google_maps_url": "http://maps.google.com/?cid=10866569737196945776",
+        "location": {
+          "address": "422 E 2nd St, Los Angeles, CA 90012, United States",
+          "country_code": "US",
+          "name": "Sushi Gen"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2486089,
+          34.0505885
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-24T15:18:53Z",
+        "google_maps_url": "http://maps.google.com/?cid=9542565228212065267",
+        "location": {
+          "address": "317 S Broadway, Los Angeles, CA 90013, United States",
+          "country_code": "US",
+          "name": "Eggslut"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.1470559,
+          34.1346349
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-16T20:33:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=11362781399445796137",
+        "location": {
+          "address": "640 S Arroyo Pkwy, Pasadena, CA 91105, United States",
+          "country_code": "US",
+          "name": "Lucky Boy"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.3848240,
+          34.0304077
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-15T20:25:31Z",
+        "google_maps_url": "http://maps.google.com/?cid=11586149057292070219",
+        "location": {
+          "address": "3229 Helms Ave, Los Angeles, CA 90034, United States",
+          "country_code": "US",
+          "name": "Father's Office"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-06-11T15:48:24Z",
+        "google_maps_url": "http://maps.google.com/?q=5162+Melrose+Ave,+Los+Angeles,+CA+90038&ftid=0x80c2b8b04f8900b1:0xa7cfa87529a0a64",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.2839926,
+          34.0515068
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-05-27T19:56:52Z",
+        "google_maps_url": "http://maps.google.com/?cid=14004579156983688072",
+        "location": {
+          "address": "1104 Hoover St, Los Angeles, CA 90006, United States",
+          "country_code": "US",
+          "name": "El Taurino"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-05-26T19:41:51Z",
+        "google_maps_url": "http://maps.google.com/?q=Newport+Beach,+CA&ftid=0x80dce8b6c4bfb3dd:0xf1549554648b59bd",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -96.7952778,
+          32.7825000
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T20:54:48Z",
+        "google_maps_url": "http://maps.google.com/?cid=13288947916086138085",
+        "location": {
+          "address": "Second Floor, 1910 Pacific Ave #2060, Dallas, TX 75201, United States",
+          "country_code": "US",
+          "name": "Stupid Good Coffee"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -96.8010444,
+          32.7876959
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T20:54:39Z",
+        "google_maps_url": "http://maps.google.com/?cid=500356134714668464",
+        "location": {
+          "address": "1717 N Harwood St, Dallas, TX 75201, United States",
+          "country_code": "US",
+          "name": "Dallas Museum of Art"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T17:51:35Z",
+        "google_maps_url": "http://maps.google.com/?q=6575+Ascot+Ln,+Dallas,+TX+75214&ftid=0x864ea02ca64d57fb:0xf91fd9334e232131",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T13:56:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=8780066691137611247",
+        "location": {
+          "country_code": "US"
+        },
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -96.8053580,
+          32.7834737
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T13:55:26Z",
+        "google_maps_url": "http://maps.google.com/?cid=1754665305414928610",
+        "location": {
+          "address": "1801 N Griffin St, Dallas, TX 75202, United States",
+          "country_code": "US",
+          "name": "The Dallas World Aquarium"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T06:24:13Z",
+        "google_maps_url": "http://maps.google.com/?q=3700+Sylvan+Ave,+Dallas,+TX+75207&ftid=0x864e9be2a7671bc7:0x754d070a63b0ca3c",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -96.8016184,
+          32.7893644
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T06:22:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=5785296695854485354",
+        "location": {
+          "address": "2012 Woodall Rodgers Fwy, Dallas, TX 75201, United States",
+          "country_code": "US",
+          "name": "Klyde Warren Park"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-23T06:18:32Z",
+        "google_maps_url": "http://maps.google.com/?q=White+Rock+Lake,+Dallas,+TX&ftid=0x864ea1bdcb989fb3:0xb187a075c9710cc5",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -97.0601721,
+          33.0704973
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-22T04:03:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=2202755188245900412",
+        "location": {
+          "address": "2101 Justin Rd, Flower Mound, TX 75028, United States",
+          "country_code": "US",
+          "name": "The Village Church"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-22T01:57:49Z",
+        "google_maps_url": "http://maps.google.com/?q=2319+Fowler+Dr,+Denton,+TX+76209&ftid=0x864db57ddbb466a3:0x25d6f30dc6693f44",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -97.0820990,
+          34.0715564
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-21T04:08:30Z",
+        "google_maps_url": "http://maps.google.com/?cid=11796670768484734550",
+        "location": {
+          "address": "3323 Lodge Rd, Ardmore, OK 73401, United States",
+          "country_code": "US",
+          "name": "Lake Murray State Park"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -96.9683428,
+          34.5067964
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-21T04:07:59Z",
+        "google_maps_url": "http://maps.google.com/?cid=10242671549807626047",
+        "location": {
+          "address": "901 W 1st St, Sulphur, OK 73086, United States",
+          "country_code": "US",
+          "name": "Chickasaw Visitor Center"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-20T21:03:00Z",
+        "google_maps_url": "http://maps.google.com/?q=35.420154,-97.440610",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -97.5250564,
+          35.5080626
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-20T21:01:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=3384663229169274776",
+        "location": {
+          "address": "3700 N Shartel Ave, Oklahoma City, OK 73118, United States",
+          "country_code": "US",
+          "name": "Iron Star Urban Barbecue"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -97.5223173,
+          35.4929753
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-20T05:20:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=10815220569496137187",
+        "location": {
+          "address": "530 NW 23rd St, Oklahoma City, OK 73103, United States",
+          "country_code": "US",
+          "name": "Big Truck Tacos"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -97.5347616,
+          35.5038943
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-20T05:19:34Z",
+        "google_maps_url": "http://maps.google.com/?cid=4497070532078455595",
+        "location": {
+          "address": "3325 N Classen Blvd, Oklahoma City, OK 73118, United States",
+          "country_code": "US",
+          "name": "Cafe Kacao"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0519835,
+          35.1426419
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-20T04:09:54Z",
+        "google_maps_url": "http://maps.google.com/?cid=10882242487416468469",
+        "location": {
+          "address": "149 Union Ave, Memphis, TN 38103, United States",
+          "country_code": "US",
+          "name": "The Peabody Memphis"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -89.8949078,
+          35.1101993
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-20T04:08:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=1771780723327652428",
+        "location": {
+          "address": "760 Mt Moriah Rd, Memphis, TN 38117, United States",
+          "country_code": "US",
+          "name": "Gibson's Donuts"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -97.5739519,
+          35.5308511
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-19T22:11:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=17712371807226672634",
+        "location": {
+          "address": "3233 Northwest Expy, Oklahoma City, OK 73112, United States",
+          "country_code": "US",
+          "name": "Tower Hotel Oklahoma City"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0260493,
+          35.0476912
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-19T05:01:29Z",
+        "google_maps_url": "http://maps.google.com/?cid=18251103567641561873",
+        "location": {
+          "address": "Elvis Presley Blvd, Memphis, TN 38116, United States",
+          "country_code": "US",
+          "name": "Graceland"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0636756,
+          35.1360674
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-19T05:00:03Z",
+        "google_maps_url": "http://maps.google.com/?cid=5634936840527738090",
+        "location": {
+          "address": "422 Riverside Dr, Memphis, TN 38103, United States",
+          "country_code": "US",
+          "name": "Tom Lee Park"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-18T17:46:52Z",
+        "google_maps_url": "http://maps.google.com/?q=623+S+Greer+St,+Memphis,+TN+38111&ftid=0x887f86da927d870d:0x95c66c49e5c051e7",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0571843,
+          35.1338426
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-18T17:41:30Z",
+        "google_maps_url": "http://maps.google.com/?cid=12345558442982889130",
+        "location": {
+          "address": "147 E Butler Ave, Memphis, TN 38103, United States",
+          "country_code": "US",
+          "name": "Central BBQ - Downtown"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0505864,
+          35.1381418
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-18T17:41:17Z",
+        "google_maps_url": "http://maps.google.com/?cid=15361720266833755214",
+        "location": {
+          "address": "191 Beale St, Memphis, TN 38103, United States",
+          "country_code": "US",
+          "name": "FedExForum"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0534038,
+          35.1397152
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-18T17:41:09Z",
+        "google_maps_url": "http://maps.google.com/?cid=15765014669497244350",
+        "location": {
+          "address": "143 Beale St, Memphis, TN 38103, United States",
+          "country_code": "US",
+          "name": "B.B. King's Blues Club"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -90.0578591,
+          35.1382853
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2015-03-18T17:41:01Z",
+        "google_maps_url": "http://maps.google.com/?cid=784325292394108550",
+        "location": {
+          "address": "310 S Front St, Memphis, TN 38103, United States",
+          "country_code": "US",
+          "name": "Gus's World Famous Fried Chicken"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.3492774,
+          47.6205063
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2014-11-13T14:59:42Z",
+        "google_maps_url": "http://maps.google.com/?cid=15792901685599310349",
+        "location": {
+          "address": "400 Broad St, Seattle, WA 98109, United States",
+          "country_code": "US",
+          "name": "Space Needle"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2014-09-29T21:16:55Z",
+        "google_maps_url": "http://maps.google.com/?q=58-06 31st Ave #2, Woodside, NY 11377&ftid=0x89c25f11a112bf03:0xcb264dd4effc156b",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2014-01-30T22:13:09Z",
+        "google_maps_url": "http://maps.google.com/?q=34-59 59th St, Woodside, NY 11377&ftid=0x89c25f1b0e6cda59:0x1ef4ba3fba1870c5",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-05T12:17:55Z",
+        "google_maps_url": "http://maps.google.com/?q=51.514190,-0.203881",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1874985,
+          51.5133393
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-03T22:34:10Z",
+        "google_maps_url": "http://maps.google.com/?cid=1523183151035442946",
+        "location": {
+          "address": "100-102 Queensway, London W2 3RR, United Kingdom",
+          "country_code": "GB",
+          "name": "Gold Mine"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1195192,
+          51.5031864
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-02T23:24:22Z",
+        "google_maps_url": "http://maps.google.com/?cid=4796882358840715922",
+        "location": {
+          "address": "Riverside Building, County Hall, Westminster Bridge Rd, London SE1 7PB, United Kingdom",
+          "country_code": "GB",
+          "name": "London Eye"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1418900,
+          51.5013640
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T16:39:30Z",
+        "google_maps_url": "http://maps.google.com/?cid=731461058599387815",
+        "location": {
+          "address": "London SW1A 1AA, United Kingdom",
+          "name": "Buckingham Palace"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1269566,
+          51.5194133
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T16:38:59Z",
+        "google_maps_url": "http://maps.google.com/?cid=3436696222068785831",
+        "location": {
+          "address": "Great Russell St, London WC1B 3DG, United Kingdom",
+          "country_code": "GB",
+          "name": "The British Museum"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1272993,
+          51.4993695
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T16:38:40Z",
+        "google_maps_url": "http://maps.google.com/?cid=15748806018305053562",
+        "location": {
+          "address": "Dean's Yard, London SW1P 3PA, United Kingdom",
+          "country_code": "GB",
+          "name": "Westminster Abbey"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:48:24Z",
+        "google_maps_url": "http://maps.google.com/?q=Brick Ln, London, UK&ftid=0x48761cb640ab7f25:0xe1078eb9c803248e",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1268291,
+          51.5125176
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:47:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=11256896404490944630",
+        "location": {
+          "address": "12 Upper St Martin's Ln, London WC2H 9FB, United Kingdom",
+          "country_code": "GB",
+          "name": "Dishoom"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.0727785,
+          51.5204634
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:45:16Z",
+        "google_maps_url": "http://maps.google.com/?cid=5041489855606334545",
+        "location": {
+          "address": "25 Hanbury St, London E1 6QR, United Kingdom",
+          "country_code": "GB",
+          "name": "Nude Coffee Roasters"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1023500,
+          51.5224056
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:44:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=604479361829971312",
+        "location": {
+          "address": "27 Clerkenwell Rd, London EC1M 5RN, United Kingdom",
+          "country_code": "GB",
+          "name": "Workshop Coffee Clerkenwell"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1698310,
+          51.4978016
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:34:25Z",
+        "google_maps_url": "http://maps.google.com/?cid=10499955184474852925",
+        "location": {
+          "address": "Holy Trinity Brompton, Brompton Rd, London SW7 1JA, United Kingdom",
+          "country_code": "GB",
+          "name": "Holy Trinity Brompton"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1347673,
+          51.5136211
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:26:05Z",
+        "google_maps_url": "http://maps.google.com/?cid=328436187937423898",
+        "location": {
+          "address": "17 Berwick St, London W1F 0PT, United Kingdom",
+          "country_code": "GB",
+          "name": "Flat White"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -0.1100657,
+          51.5255125
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-11-01T14:25:28Z",
+        "google_maps_url": "http://maps.google.com/?cid=11203680282437109408",
+        "location": {
+          "address": "11-13 Exmouth Market, London EC1R 4QD, United Kingdom",
+          "country_code": "GB",
+          "name": "Caravan Exmouth Market"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2013-10-14T18:34:45Z",
+        "google_maps_url": "http://maps.google.com/?q=149-38 41st Ave, Queens, NY 11355&ftid=0x89c2602311532bbd:0xac20c6da55bd39d7",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2012-10-08T19:12:06Z",
+        "google_maps_url": "http://maps.google.com/?q=6515+13th+Ave,+Brooklyn,+NY&ftid=0x89c2453969dcd1ad:0x930d3ab5cde0ff4e",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2010-08-20T23:48:11Z",
+        "google_maps_url": "http://maps.google.com/?q=814 broadway santa monica california",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    }
+  ]
+}
