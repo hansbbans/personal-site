@@ -39,3 +39,6 @@ node_modules/
 # Build outputs
 dist/
 build/
+
+# Google Maps Takeout data
+maps-data/
