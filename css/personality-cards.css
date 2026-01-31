@@ -87,7 +87,6 @@
 .food-card:hover {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
-    background: var(--bg-card);
 }
 
 .food-card .food-card-name,

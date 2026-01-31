@@ -136,9 +136,8 @@
    HOVER STATE FIX
    ============================================ */
 
-.food-card:hover {
-    background: var(--bg-card) !important;
-}
+/* Note: .food-card:hover background is handled in personality-cards.css
+   to preserve the gradient border effect */
 
 /* ============================================
    MAP STYLES
