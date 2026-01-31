@@ -82,6 +82,11 @@ function setupMapToggle() {
     const toggle = document.getElementById('mapToggle');
     const wrapper = document.getElementById('mapWrapper');
     
+    if (!toggle || !wrapper) {
+        console.error('Map toggle elements not found');
+        return;
+    }
+    
     toggle.addEventListener('click', () => {
         mapVisible = !mapVisible;
         toggle.classList.toggle('active', mapVisible);
@@ -92,9 +97,11 @@ function setupMapToggle() {
         
         // Trigger map resize when shown
         if (mapVisible && map) {
-            google.maps.event.trigger(map, 'resize');
-            const restaurants = getFilteredRestaurants();
-            updateMap(restaurants);
+            setTimeout(() => {
+                google.maps.event.trigger(map, 'resize');
+                const restaurants = getFilteredRestaurants();
+                updateMap(restaurants);
+            }, 100);
         }
     });
 }
@@ -416,6 +423,12 @@ function renderCards() {
 
 // Google Maps
 function initMap() {
+    const mapElement = document.getElementById('map');
+    if (!mapElement) {
+        console.error('Map container not found');
+        return;
+    }
+    
     const cityCenters = {
         'NYC': { lat: 40.7128, lng: -74.0060 },
         'New York': { lat: 40.7128, lng: -74.0060 },
@@ -428,13 +441,18 @@ function initMap() {
     const cityName = citiesData[currentCity]?.name || '';
     const center = cityCenters[cityName] || { lat: 40.7128, lng: -74.0060 };
     
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: center,
-        styles: [
-            { featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] }
-        ]
-    });
+    try {
+        map = new google.maps.Map(mapElement, {
+            zoom: 12,
+            center: center,
+            styles: [
+                { featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] }
+            ]
+        });
+    } catch (error) {
+        console.error('Failed to initialize map:', error);
+        mapElement.innerHTML = '<p style="padding: 2rem; text-align: center; color: var(--text-muted);">Map unavailable</p>';
+    }
 }
 
 function updateMap(restaurants) {

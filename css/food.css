@@ -108,3 +108,112 @@
 [data-theme="dark"] .badge-infatuation {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
+
+/* ============================================
+   MAP STYLES
+   ============================================ */
+
+.map-section {
+    margin: 1.5rem 0;
+}
+
+.map-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 2px dashed var(--border-color);
+    border-radius: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-mono);
+}
+
+.map-toggle:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.map-toggle.active {
+    border-style: solid;
+    border-color: var(--primary);
+    background: var(--bg-warm);
+    color: var(--primary);
+}
+
+.map-wrapper {
+    display: none;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.map-wrapper.visible {
+    display: block;
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.map-container {
+    height: 400px;
+    width: 100%;
+    min-height: 400px;
+    background: var(--bg-secondary);
+}
+
+/* Map Legend */
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    justify-content: center;
+}
+
+.map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.map-legend-pin {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.map-legend-pin.asian { background: #C41E3A; }
+.map-legend-pin.european { background: #1E3A5F; }
+.map-legend-pin.american { background: #D2691E; }
+.map-legend-pin.mexican { background: #228B22; }
+.map-legend-pin.mediterranean { background: #008B8B; }
+.map-legend-pin.cafes { background: #8B4513; }
+.map-legend-pin.bars { background: #4B0082; }
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+        min-height: 300px;
+    }
+}
