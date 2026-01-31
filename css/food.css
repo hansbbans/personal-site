@@ -110,6 +110,37 @@
 }
 
 /* ============================================
+   TEXT OVERFLOW FIXES
+   ============================================ */
+
+.food-card-name {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+}
+
+.food-card-address {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.dish-pill {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* ============================================
+   HOVER STATE FIX
+   ============================================ */
+
+.food-card:hover {
+    background: var(--bg-card) !important;
+}
+
+/* ============================================
    MAP STYLES
    ============================================ */
 

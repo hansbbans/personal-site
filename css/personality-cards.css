@@ -90,8 +90,8 @@
     background: var(--bg-card);
 }
 
-.food-card .card-title,
-.food-card .card-description {
+.food-card .food-card-name,
+.food-card .food-card-address {
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
