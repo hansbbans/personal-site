@@ -8,10 +8,14 @@
     "test:unit": "jest",
     "test:e2e": "playwright test",
     "test:performance": "lhci autorun",
-    "test:all": "npm run test:unit && npm run test:e2e && npm run test:performance",
+    "test:visual": "playwright test --config=playwright.comprehensive.config.js",
+    "test:visual:update": "playwright test --config=playwright.comprehensive.config.js --update-snapshots",
+    "test:schema": "node tests/setup/validate-food-data.js",
+    "test:mobile": "playwright test tests/visual/comprehensive-visual.spec.js --grep 'Mobile Viewport Testing'",
+    "test:all": "npm run test:unit && npm run test:e2e && npm run test:performance && npm run test:schema && npm run test:visual",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "serve": "http-server -p 3000",
+    "serve": "http-server -p 3000 -c-1",
     "install-browsers": "playwright install"
   },
   "repository": {

@@ -1,820 +1,110 @@
-/* Food Page Styles - Editorial Warmth */
+
 
 /* ============================================
-   CATEGORY COLOR SCHEME
-   ============================================
-   Asian: #C41E3A (Deep Red)
-   European: #1E3A5F (Navy Blue)
-   American: #D2691E (Burnt Orange)
-   Mexican: #228B22 (Vibrant Green)
-   Mediterranean/Middle Eastern: #008B8B (Teal)
-   Cafes & Desserts: #8B4513 (Coffee Brown)
-   Bars & Drinks: #4B0082 (Deep Purple)
+   ACTION BUTTONS (CSV & GOOGLE MAPS)
    ============================================ */
 
-/* CSS Variables for Category Colors */
-:root {
-    --cat-asian: #C41E3A;
-    --cat-asian-light: rgba(196, 30, 58, 0.1);
-    --cat-asian-dark: rgba(196, 30, 58, 0.15);
-    
-    --cat-european: #1E3A5F;
-    --cat-european-light: rgba(30, 58, 95, 0.1);
-    --cat-european-dark: rgba(30, 58, 95, 0.15);
-    
-    --cat-american: #D2691E;
-    --cat-american-light: rgba(210, 105, 30, 0.1);
-    --cat-american-dark: rgba(210, 105, 30, 0.15);
-    
-    --cat-mexican: #228B22;
-    --cat-mexican-light: rgba(34, 139, 34, 0.1);
-    --cat-mexican-dark: rgba(34, 139, 34, 0.15);
-    
-    --cat-mediterranean: #008B8B;
-    --cat-mediterranean-light: rgba(0, 139, 139, 0.1);
-    --cat-mediterranean-dark: rgba(0, 139, 139, 0.15);
-    
-    --cat-cafes: #8B4513;
-    --cat-cafes-light: rgba(139, 69, 19, 0.1);
-    --cat-cafes-dark: rgba(139, 69, 19, 0.15);
-    
-    --cat-bars: #4B0082;
-    --cat-bars-light: rgba(75, 0, 130, 0.1);
-    --cat-bars-dark: rgba(75, 0, 130, 0.15);
-}
-
-[data-theme="dark"] {
-    --cat-asian-light: rgba(196, 30, 58, 0.2);
-    --cat-asian-dark: rgba(196, 30, 58, 0.25);
-    
-    --cat-european-light: rgba(30, 58, 95, 0.25);
-    --cat-european-dark: rgba(30, 58, 95, 0.3);
-    
-    --cat-american-light: rgba(210, 105, 30, 0.2);
-    --cat-american-dark: rgba(210, 105, 30, 0.25);
-    
-    --cat-mexican-light: rgba(34, 139, 34, 0.2);
-    --cat-mexican-dark: rgba(34, 139, 34, 0.25);
-    
-    --cat-mediterranean-light: rgba(0, 139, 139, 0.2);
-    --cat-mediterranean-dark: rgba(0, 139, 139, 0.25);
-    
-    --cat-cafes-light: rgba(139, 69, 19, 0.2);
-    --cat-cafes-dark: rgba(139, 69, 19, 0.25);
-    
-    --cat-bars-light: rgba(75, 0, 130, 0.2);
-    --cat-bars-dark: rgba(75, 0, 130, 0.25);
-}
-
-/* Category Filter Pills */
-.category-filters {
+.food-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
     justify-content: center;
     margin: 1.5rem 0;
-    padding: 0 1rem;
-}
-
-.category-pill {
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--border-color);
-    background: var(--bg-card);
-    border-radius: 2rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-family: var(--font-mono);
-}
-
-.category-pill:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.category-pill.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-.category-pill .count {
-    background: rgba(255,255,255,0.2);
-    padding: 0.1rem 0.4rem;
-    border-radius: 1rem;
-    font-size: 0.7rem;
-}
-
-.category-pill:not(.active) .count {
-    background: var(--bg-secondary);
-    color: var(--text-muted);
-}
-
-/* Category-specific pill colors */
-.category-pill[data-category="Asian"] {
-    border-color: var(--cat-asian);
-}
-
-.category-pill[data-category="Asian"]:hover {
-    background: var(--cat-asian-light);
-    color: var(--cat-asian);
-}
-
-.category-pill[data-category="Asian"].active {
-    background: var(--cat-asian);
-    border-color: var(--cat-asian);
-    color: white;
-}
-
-.category-pill[data-category="European"] {
-    border-color: var(--cat-european);
-}
-
-.category-pill[data-category="European"]:hover {
-    background: var(--cat-european-light);
-    color: var(--cat-european);
-}
-
-.category-pill[data-category="European"].active {
-    background: var(--cat-european);
-    border-color: var(--cat-european);
-    color: white;
-}
-
-.category-pill[data-category="American"] {
-    border-color: var(--cat-american);
-}
-
-.category-pill[data-category="American"]:hover {
-    background: var(--cat-american-light);
-    color: var(--cat-american);
-}
-
-.category-pill[data-category="American"].active {
-    background: var(--cat-american);
-    border-color: var(--cat-american);
-    color: white;
-}
-
-.category-pill[data-category="Mexican"] {
-    border-color: var(--cat-mexican);
-}
-
-.category-pill[data-category="Mexican"]:hover {
-    background: var(--cat-mexican-light);
-    color: var(--cat-mexican);
-}
-
-.category-pill[data-category="Mexican"].active {
-    background: var(--cat-mexican);
-    border-color: var(--cat-mexican);
-    color: white;
-}
-
-.category-pill[data-category="Mediterranean/Middle Eastern"] {
-    border-color: var(--cat-mediterranean);
-}
-
-.category-pill[data-category="Mediterranean/Middle Eastern"]:hover {
-    background: var(--cat-mediterranean-light);
-    color: var(--cat-mediterranean);
-}
-
-.category-pill[data-category="Mediterranean/Middle Eastern"].active {
-    background: var(--cat-mediterranean);
-    border-color: var(--cat-mediterranean);
-    color: white;
-}
-
-.category-pill[data-category="Cafes & Desserts"] {
-    border-color: var(--cat-cafes);
-}
-
-.category-pill[data-category="Cafes & Desserts"]:hover {
-    background: var(--cat-cafes-light);
-    color: var(--cat-cafes);
-}
-
-.category-pill[data-category="Cafes & Desserts"].active {
-    background: var(--cat-cafes);
-    border-color: var(--cat-cafes);
-    color: white;
-}
-
-.category-pill[data-category="Bars & Drinks"] {
-    border-color: var(--cat-bars);
-}
-
-.category-pill[data-category="Bars & Drinks"]:hover {
-    background: var(--cat-bars-light);
-    color: var(--cat-bars);
-}
-
-.category-pill[data-category="Bars & Drinks"].active {
-    background: var(--cat-bars);
-    border-color: var(--cat-bars);
-    color: white;
-}
-
-/* Stats Bar */
-.food-stats {
-    text-align: center;
-    padding: 0.75rem;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    font-family: var(--font-mono);
-    margin-bottom: 1rem;
-}
-
-/* Food Grid */
-.food-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-/* Food Card */
-.food-card {
-    background: var(--bg-card);
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-medium);
-    border: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.food-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--primary);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transition-medium);
-}
-
-.food-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary);
-}
-
-.food-card:hover::before {
-    transform: scaleX(1);
-}
-
-/* ============================================
-   CATEGORY-SPECIFIC CARD STYLES
-   ============================================ */
-
-/* Asian - Deep Red (#C41E3A) */
-.food-card.category-asian {
-    border-left: 6px solid var(--cat-asian) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-asian-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-asian:hover {
-    border-left-color: var(--cat-asian) !important;
-    box-shadow: -4px 0 20px rgba(196, 30, 58, 0.3) !important;
-}
-
-.food-card.category-asian .food-card-category {
-    background: var(--cat-asian-light);
-    color: var(--cat-asian);
-}
-
-[data-theme="dark"] .food-card.category-asian .food-card-category {
-    background: var(--cat-asian-dark);
-}
-
-/* European - Navy Blue (#1E3A5F) */
-.food-card.category-european {
-    border-left: 6px solid var(--cat-european) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-european-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-european:hover {
-    border-left-color: var(--cat-european) !important;
-    box-shadow: -4px 0 20px rgba(30, 58, 95, 0.3) !important;
-}
-
-.food-card.category-european .food-card-category {
-    background: var(--cat-european-light);
-    color: var(--cat-european);
-}
-
-[data-theme="dark"] .food-card.category-european .food-card-category {
-    background: var(--cat-european-dark);
-}
-
-/* American - Burnt Orange (#D2691E) */
-.food-card.category-american {
-    border-left: 6px solid var(--cat-american) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-american-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-american:hover {
-    border-left-color: var(--cat-american) !important;
-    box-shadow: -4px 0 20px rgba(210, 105, 30, 0.3) !important;
-    box-shadow: 0 8px 30px rgba(210, 105, 30, 0.2);
-}
-
-.food-card.category-american .food-card-category {
-    background: var(--cat-american-light);
-    color: var(--cat-american);
-}
-
-[data-theme="dark"] .food-card.category-american .food-card-category {
-    background: var(--cat-american-dark);
-}
-
-/* Mexican - Vibrant Green (#228B22) */
-.food-card.category-mexican {
-    border-left: 6px solid var(--cat-mexican) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-mexican-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-mexican:hover {
-    border-left-color: var(--cat-mexican) !important;
-    box-shadow: -4px 0 20px rgba(34, 139, 34, 0.3) !important;
-}
-
-.food-card.category-mexican .food-card-category {
-    background: var(--cat-mexican-light);
-    color: var(--cat-mexican);
-}
-
-[data-theme="dark"] .food-card.category-mexican .food-card-category {
-    background: var(--cat-mexican-dark);
-}
-
-/* Mediterranean - Teal (#008B8B) */
-.food-card.category-mediterranean {
-    border-left: 6px solid var(--cat-mediterranean) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-mediterranean-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-mediterranean:hover {
-    border-left-color: var(--cat-mediterranean) !important;
-    box-shadow: -4px 0 20px rgba(0, 139, 139, 0.3) !important;
-}
-
-.food-card.category-mediterranean .food-card-category {
-    background: var(--cat-mediterranean-light);
-    color: var(--cat-mediterranean);
-}
-
-[data-theme="dark"] .food-card.category-mediterranean .food-card-category {
-    background: var(--cat-mediterranean-dark);
-}
-
-/* Cafes & Desserts - Coffee Brown (#8B4513) */
-.food-card.category-cafes {
-    border-left: 6px solid var(--cat-cafes) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-cafes-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-cafes:hover {
-    border-left-color: var(--cat-cafes) !important;
-    box-shadow: -4px 0 20px rgba(139, 69, 19, 0.3) !important;
-}
-
-.food-card.category-cafes .food-card-category {
-    background: var(--cat-cafes-light);
-    color: var(--cat-cafes);
-}
-
-[data-theme="dark"] .food-card.category-cafes .food-card-category {
-    background: var(--cat-cafes-dark);
-}
-
-/* Bars & Drinks - Deep Purple (#4B0082) */
-.food-card.category-bars {
-    border-left: 6px solid var(--cat-bars) !important;
-    border-top: none !important;
-    background: linear-gradient(90deg, var(--cat-bars-light) 0%, var(--bg-card) 30%) !important;
-}
-
-.food-card.category-bars:hover {
-    border-left-color: var(--cat-bars) !important;
-    box-shadow: -4px 0 20px rgba(75, 0, 130, 0.3) !important;
-}
-
-.food-card.category-bars .food-card-category {
-    background: var(--cat-bars-light);
-    color: var(--cat-bars);
-}
-
-[data-theme="dark"] .food-card.category-bars .food-card-category {
-    background: var(--cat-bars-dark);
-}
-
-/* ============================================
-   ACCESSIBILITY IMPROVEMENTS
-   ============================================ */
-
-/* Ensure category badges have sufficient contrast */
-.food-card-category .main-cat {
-    font-weight: 600;
-}
-
-.food-card-category .sub-cat {
-    font-weight: 500;
-    opacity: 0.85;
-}
-
-/* Ensure text contrast on category pills */
-.category-pill[data-category].active {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* High contrast focus states for accessibility */
-.category-pill:focus-visible,
-.food-card:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 2px;
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-    .food-card,
-    .category-pill,
-    .map-legend-pin {
-        transition: none !important;
-        animation: none !important;
-    }
-}
-
-.food-card-header {
-    padding: 1.25rem 1.25rem 0.75rem;
-}
-
-.food-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-}
-
-.food-card-name {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-    line-height: 1.3;
-}
-
-.food-card-rating {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: white;
-    padding: 0.25rem 0.6rem;
-    border-radius: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    white-space: nowrap;
-    flex-shrink: 0;
-    font-family: var(--font-mono);
-}
-
-.food-card-category {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--primary);
-    background: rgba(194, 65, 12, 0.1);
-    padding: 0.35rem 0.75rem;
-    border-radius: 0.5rem;
-    font-family: var(--font-mono);
-}
-
-[data-theme="dark"] .food-card-category {
-    background: rgba(251, 146, 60, 0.15);
-}
-
-.food-card-category .main-cat {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.food-card-category .sub-cat {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-/* Subcategory filter pills */
-#subcategoryFilters {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px dashed var(--border-color);
-}
-
-#subcategoryFilters.hidden {
-    display: none;
-}
-
-.subcategory-pill {
-    font-size: 0.75rem;
-    padding: 0.4rem 0.8rem;
-}
-
-.subcategory-pill.active {
-    background: var(--secondary);
-    border-color: var(--secondary);
-}
-
-.food-card-body {
-    padding: 0 1.25rem 1.25rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.food-card-address {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.4rem;
-}
-
-.food-card-address::before {
-    content: "📍";
-    font-size: 0.75rem;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-}
-
-.food-card-dishes {
-    margin-top: auto;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.food-card-dishes-label {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-    font-family: var(--font-mono);
-}
-
-.food-card-dish-tags {
-    display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem;
 }
 
-.dish-pill {
-    background: var(--bg-secondary);
-    padding: 0.3rem 0.65rem;
-    border-radius: 1rem;
-    font-size: 0.8rem;
-    color: var(--text-primary);
-    transition: all var(--transition-fast);
-}
-
-.dish-pill.highlight {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
-    font-weight: 600;
-}
-
-[data-theme="dark"] .dish-pill.highlight {
-    background: linear-gradient(135deg, #78350f, #92400e);
-    color: #fef3c7;
-}
-
-/* Map Section */
-.map-section {
-    margin-bottom: 1.5rem;
-}
-
-.map-toggle {
-    display: flex;
+.action-btn {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
-    width: 100%;
-    padding: 1rem;
-    background: var(--bg-card);
-    border: 2px dashed var(--border-color);
-    border-radius: 0.75rem;
-    color: var(--text-secondary);
+    padding: 0.75rem 1.5rem;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--text-primary);
+    font-family: 'Literata', serif;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    transition: all var(--transition-fast);
-    font-family: var(--font-mono);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--shadow-color);
 }
 
-.map-toggle:hover {
-    border-color: var(--primary);
-    color: var(--primary);
+.action-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.map-toggle.active {
-    border-style: solid;
-    border-color: var(--primary);
-    background: var(--bg-warm);
-    color: var(--primary);
+.action-btn:active {
+    transform: translateY(0);
 }
 
-.map-wrapper {
-    display: none;
-    margin-top: 1rem;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.map-wrapper.visible {
-    display: block;
-    animation: slideDown 0.4s var(--ease-out-expo);
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.map-container {
-    height: 400px;
-    width: 100%;
-}
-
-/* Map Category Legend */
-.map-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    background: var(--bg-card);
-    border-top: 1px solid var(--border-color);
-    justify-content: center;
-}
-
-.map-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
-}
-
-.map-legend-pin {
-    width: 12px;
-    height: 12px;
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.map-legend-pin.asian { background: var(--cat-asian); }
-.map-legend-pin.european { background: var(--cat-european); }
-.map-legend-pin.american { background: var(--cat-american); }
-.map-legend-pin.mexican { background: var(--cat-mexican); }
-.map-legend-pin.mediterranean { background: var(--cat-mediterranean); }
-.map-legend-pin.cafes { background: var(--cat-cafes); }
-.map-legend-pin.bars { background: var(--cat-bars); }
-
-/* Custom Google Maps Info Window Styling */
-.gm-style .gm-style-iw-c {
-    border-radius: 12px !important;
-    padding: 12px !important;
-}
-
-.gm-style .gm-style-iw-d {
-    overflow: hidden !important;
-}
-
-/* Empty State */
-.food-empty {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--text-muted);
-}
-
-.food-empty-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-}
-
-.food-empty-text {
+.action-btn span {
     font-size: 1.1rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .food-grid {
-        grid-template-columns: 1fr;
+    .food-actions {
+        gap: 0.75rem;
     }
     
-    .category-filters {
-        justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 0.5rem;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .category-pill {
-        flex-shrink: 0;
-    }
-    
-    .map-container {
-        height: 300px;
-    }
-    
-    .map-legend {
-        gap: 0.5rem;
-        padding: 0.5rem;
-    }
-    
-    .map-legend-item {
-        font-size: 0.7rem;
-    }
-    
-    .map-legend-pin {
-        width: 10px;
-        height: 10px;
+    .action-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
     }
 }
 
 /* ============================================
-   ACCESSIBILITY IMPROVEMENTS
+   BADGE SYSTEM
    ============================================ */
 
-/* Ensure category badges have sufficient contrast */
-.food-card-category .main-cat {
+.food-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0;
+    justify-content: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.food-card-category .sub-cat {
-    font-weight: 500;
-    opacity: 0.85;
+.badge-favorite {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    border: 1px solid #FF8C00;
 }
 
-/* Ensure text contrast on category pills */
-.category-pill[data-category].active {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+.badge-eater {
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    color: white;
+    border: 1px solid #A93226;
 }
 
-/* High contrast focus states for accessibility */
-.category-pill:focus-visible,
-.food-card:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 2px;
+.badge-infatuation {
+    background: linear-gradient(135deg, #FF6B6B, #EE5A6F);
+    color: white;
+    border: 1px solid #E91E63;
 }
 
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-    .food-card,
-    .category-pill,
-    .map-legend-pin {
-        transition: none !important;
-        animation: none !important;
-    }
+[data-theme="dark"] .badge-favorite {
+    background: linear-gradient(135deg, #FFD700, #FF8C00);
+    color: #222;
+}
+
+[data-theme="dark"] .badge-eater,
+[data-theme="dark"] .badge-infatuation {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

@@ -94,7 +94,8 @@
           "lat": 40.7116,
           "lng": -73.9579,
           "yelpRating": 4.6,
-          "googleRating": 4.7
+          "googleRating": 4.7,
+          "isHansFavorite": true
         },
         {
           "name": "Atomix",
@@ -107,7 +108,8 @@
           "lat": 40.74421,
           "lng": -73.98286,
           "yelpRating": 4.5,
-          "googleRating": 4.7
+          "googleRating": 4.7,
+          "onEaterList": true
         },
         {
           "name": "Rubirosa",
@@ -120,7 +122,8 @@
           "lat": 40.722748,
           "lng": -73.996232,
           "yelpRating": 4.3,
-          "googleRating": 4.6
+          "googleRating": 4.6,
+          "onInfatuationList": true
         },
         {
           "name": "Cello Pizza",
@@ -657,7 +660,8 @@
           "lat": 48.8644739,
           "lng": 2.3701387,
           "yelpRating": null,
-          "googleRating": 5
+          "googleRating": 5,
+          "isHansFavorite": true
         },
         {
           "name": "Berthillon",

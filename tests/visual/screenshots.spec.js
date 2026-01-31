@@ -1,4 +1,6 @@
 // Visual regression tests
+// NOTE: For more comprehensive visual testing including food.html and mobile viewports,
+// see comprehensive-visual.spec.js
 const { test, expect } = require('@playwright/test');
 
 test.describe('Visual Regression Tests', () => {

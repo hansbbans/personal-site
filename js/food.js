@@ -369,6 +369,16 @@ function renderCards() {
             `;
         }
         
+        // Build awards badges
+        let awardsBadges = '';
+        const badges = [];
+        if (r.isHansFavorite) badges.push('<span class="badge badge-favorite">⭐ Hans Favorite</span>');
+        if (r.onEaterList) badges.push('<span class="badge badge-eater">🏆 Eater 38</span>');
+        if (r.onInfatuationList) badges.push('<span class="badge badge-infatuation">🔥 Infatuation</span>');
+        if (badges.length > 0) {
+            awardsBadges = `<div class="food-card-badges">${badges.join('')}</div>`;
+        }
+        
         return `
         <div class="food-card ${featuredClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
              data-category="${r.mainCategory || r.category || 'general'}"
@@ -382,6 +392,7 @@ function renderCards() {
                     ` : ''}
                 </div>
                 ${categoryBadge}
+                ${awardsBadges}
             </div>
             <div class="food-card-body">
                 ${r.address ? `
@@ -536,3 +547,80 @@ function updateMap(restaurants) {
         });
     }
 }
+
+// ============================================
+// CSV DOWNLOAD & GOOGLE MAPS EXPORT
+// ============================================
+
+// Download restaurants as CSV
+function downloadCSV() {
+    const allRestaurants = citiesData.flatMap(city => 
+        city.restaurants.map(r => ({ ...r, city: city.name }))
+    );
+    
+    const headers = ['Name', 'City', 'Category', 'Subcategory', 'Address', 'Latitude', 'Longitude', 'Yelp Rating', 'Google Rating', 'Date Visited', 'Badges'];
+    
+    const rows = allRestaurants.map(r => {
+        const badges = [];
+        if (r.isHansFavorite) badges.push('Hans Favorite');
+        if (r.onEaterList) badges.push('Eater 38');
+        if (r.onInfatuationList) badges.push('Infatuation');
+        
+        return [
+            `"${r.name}"`,
+            r.city,
+            r.mainCategory || r.legacyCategory || '',
+            r.subcategory || '',
+            `"${r.address || ''}"`,
+            r.lat || '',
+            r.lng || '',
+            r.yelpRating || '',
+            r.googleRating || '',
+            r.dateVisited || '',
+            `"${badges.join(', ')}"`
+        ].join(',');
+    });
+    
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'hans-food-guide.csv';
+    link.click();
+}
+
+// Save all restaurants to Google Maps
+function saveToGoogleMaps() {
+    const allRestaurants = citiesData.flatMap(city => 
+        city.restaurants.filter(r => r.lat && r.lng).map(r => ({ ...r, city: city.name }))
+    );
+    
+    if (allRestaurants.length === 0) {
+        alert('No restaurants with location data available');
+        return;
+    }
+    
+    const baseUrl = 'https://www.google.com/maps/search/?api=1&query=';
+    const first = allRestaurants[0];
+    const url = `${baseUrl}${encodeURIComponent(first.name + ' ' + first.city)}`;
+    const count = allRestaurants.length;
+    const message = `Opening Google Maps with "${first.name}" (${count} total restaurants).\n\nTo save all locations:\n1. Click the location on the map\n2. Tap "Save" and create a new list\n3. Search for and add each restaurant from this guide`;
+    
+    if (confirm(message)) {
+        window.open(url, '_blank');
+    }
+}
+
+// Initialize action buttons
+document.addEventListener('DOMContentLoaded', () => {
+    const downloadBtn = document.getElementById('downloadCSV');
+    const saveMapsBtn = document.getElementById('saveToMaps');
+    
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', downloadCSV);
+    }
+    
+    if (saveMapsBtn) {
+        saveMapsBtn.addEventListener('click', saveToGoogleMaps);
+    }
+});
