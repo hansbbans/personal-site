@@ -50,7 +50,7 @@ async function checkPage(url) {
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
     
     // Wait a bit for any delayed JS errors
-    await page.waitForTimeout(2000);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     
     await browser.close();
     
