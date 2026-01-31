@@ -61,32 +61,14 @@
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: all 0.4s ease;
-    border: 2px solid transparent;
+    border: 2px solid var(--border-color);
     position: relative;
-    background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-                linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b6b) border-box;
-}
-
-.food-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    background: linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b6b);
-    border-radius: 1.5rem;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.food-card:hover::before {
-    opacity: 1;
 }
 
 .food-card:hover {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+    border-color: #ff6b6b;
 }
 
 .food-card .food-card-name,
