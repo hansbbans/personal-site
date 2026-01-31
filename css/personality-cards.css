@@ -57,17 +57,34 @@
 
 .food-card {
     background: var(--bg-card);
-    border-radius: 1.5rem; /* Softer, organic */
+    border-radius: 1rem;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: all 0.4s ease;
-    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
     position: relative;
 }
 
+.food-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #ff6b6b, #ffa500);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+}
+
+.food-card:hover::before {
+    transform: scaleY(1);
+}
+
 .food-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(255, 107, 107, 0.15);
     border-color: #ff6b6b;
 }
 
