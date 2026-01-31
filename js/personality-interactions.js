@@ -200,6 +200,7 @@ function addAudioFeedback() {
     
     // Add hover sounds to different card types
     document.addEventListener('mouseenter', (e) => {
+        if (!(e.target instanceof Element)) return;
         if (!e.target.closest('.card-interactive')) return;
         
         const card = e.target.closest('.card-interactive');
