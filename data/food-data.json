@@ -385,19 +385,6 @@
           "googleRating": 4.6
         },
         {
-          "name": "Plaza Ortega",
-          "legacyCategory": "Mexican",
-          "mainCategory": "Mexican",
-          "subcategory": "Other Mexican",
-          "dateVisited": "",
-          "address": "140 Stanhope St, Brooklyn, NY 11221",
-          "dishes": "",
-          "lat": 40.6891,
-          "lng": -73.9171,
-          "yelpRating": null,
-          "googleRating": 4.7
-        },
-        {
           "name": "Morgenstern's BANANAS",
           "legacyCategory": "Cafes & Desserts",
           "mainCategory": "Cafes & Desserts",
