@@ -1,6 +1,338 @@
 
 
 /* ============================================
+   FOOD STATS BAR
+   ============================================ */
+
+.food-stats {
+    text-align: center;
+    padding: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    margin-bottom: 1rem;
+}
+
+/* ============================================
+   SPICED UP CATEGORY FILTERS
+   ============================================ */
+
+/* Container with subtle gradient background */
+.category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, 
+        rgba(249, 115, 22, 0.03) 0%, 
+        rgba(20, 184, 166, 0.03) 50%,
+        rgba(236, 72, 153, 0.03) 100%);
+    border-radius: 1.5rem;
+    border: 1px dashed var(--border-light);
+}
+
+/* Base pill styling - more tactile and appetizing */
+.category-pill {
+    position: relative;
+    padding: 0.625rem 1.125rem;
+    border: 2px solid transparent;
+    background: var(--bg-card);
+    border-radius: 2rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Literata', Georgia, serif;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+}
+
+/* Shimmer effect on hover */
+.category-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.category-pill:hover::before {
+    left: 100%;
+}
+
+.category-pill:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.08),
+        0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.category-pill:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Emoji animation on hover */
+.category-pill .category-emoji {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-size: 1.1em;
+}
+
+.category-pill:hover .category-emoji {
+    transform: scale(1.3) rotate(-8deg);
+}
+
+/* Active state - vibrant and distinctive */
+.category-pill.active {
+    color: white;
+    border-color: transparent;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.category-pill.active .category-emoji {
+    transform: scale(1.2);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* ===== CATEGORY-SPECIFIC COLORS ===== */
+
+/* All - Warm neutral */
+.category-pill[data-category="all"].active {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+}
+
+.category-pill[data-category="all"]:hover:not(.active) {
+    border-color: #f97316;
+    color: #ea580c;
+}
+
+/* Asian - Rich crimson */
+.category-pill[data-category="Asian"].active {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+}
+
+.category-pill[data-category="Asian"]:hover:not(.active) {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+/* European - Deep navy */
+.category-pill[data-category="European"].active {
+    background: linear-gradient(135deg, #1e3a5f, #0f172a);
+    box-shadow: 0 4px 14px rgba(30, 58, 95, 0.35);
+}
+
+.category-pill[data-category="European"]:hover:not(.active) {
+    border-color: #1e3a5f;
+    color: #1e3a5f;
+}
+
+/* American - Golden amber */
+.category-pill[data-category="American"].active {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+}
+
+.category-pill[data-category="American"]:hover:not(.active) {
+    border-color: #d97706;
+    color: #d97706;
+}
+
+/* Mexican - Vibrant green */
+.category-pill[data-category="Mexican"].active {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+}
+
+.category-pill[data-category="Mexican"]:hover:not(.active) {
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+/* Mediterranean - Teal ocean */
+.category-pill[data-category="Mediterranean/Middle Eastern"].active {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35);
+}
+
+.category-pill[data-category="Mediterranean/Middle Eastern"]:hover:not(.active) {
+    border-color: #0891b2;
+    color: #0891b2;
+}
+
+/* Cafes - Cozy brown */
+.category-pill[data-category="Cafes & Desserts"].active {
+    background: linear-gradient(135deg, #92400e, #78350f);
+    box-shadow: 0 4px 14px rgba(146, 64, 14, 0.35);
+}
+
+.category-pill[data-category="Cafes & Desserts"]:hover:not(.active) {
+    border-color: #92400e;
+    color: #92400e;
+}
+
+/* Bars - Royal purple */
+.category-pill[data-category="Bars & Drinks"].active {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+}
+
+.category-pill[data-category="Bars & Drinks"]:hover:not(.active) {
+    border-color: #7c3aed;
+    color: #7c3aed;
+}
+
+/* Subcategory pills - smaller, more subtle */
+#subcategoryFilters .category-pill {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-width: 1.5px;
+}
+
+#subcategoryFilters .category-pill.active {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Hidden state for subcategories */
+.category-filters.hidden {
+    display: none;
+}
+
+/* Staggered entrance animation for pills */
+@keyframes pillPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(10px);
+    }
+    70% {
+        transform: scale(1.05) translateY(-2px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.category-pill {
+    animation: pillPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.category-pill:nth-child(1) { animation-delay: 0.05s; }
+.category-pill:nth-child(2) { animation-delay: 0.1s; }
+.category-pill:nth-child(3) { animation-delay: 0.15s; }
+.category-pill:nth-child(4) { animation-delay: 0.2s; }
+.category-pill:nth-child(5) { animation-delay: 0.25s; }
+.category-pill:nth-child(6) { animation-delay: 0.3s; }
+.category-pill:nth-child(7) { animation-delay: 0.35s; }
+.category-pill:nth-child(8) { animation-delay: 0.4s; }
+
+/* Subcategory parent-color theming */
+#subcategoryFilters .category-pill[data-parent="Asian"].active {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+#subcategoryFilters .category-pill[data-parent="European"].active {
+    background: linear-gradient(135deg, #1e3a5f, #0f172a);
+    box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3);
+}
+
+#subcategoryFilters .category-pill[data-parent="American"].active {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+}
+
+#subcategoryFilters .category-pill[data-parent="Mexican"].active {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+#subcategoryFilters .category-pill[data-parent="Mediterranean/Middle Eastern"].active {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    box-shadow: 0 2px 8px rgba(8, 145, 178, 0.3);
+}
+
+#subcategoryFilters .category-pill[data-parent="Cafes & Desserts"].active {
+    background: linear-gradient(135deg, #92400e, #78350f);
+    box-shadow: 0 2px 8px rgba(146, 64, 14, 0.3);
+}
+
+#subcategoryFilters .category-pill[data-parent="Bars & Drinks"].active {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .category-filters {
+    background: linear-gradient(135deg, 
+        rgba(249, 115, 22, 0.06) 0%, 
+        rgba(20, 184, 166, 0.06) 50%,
+        rgba(236, 72, 153, 0.06) 100%);
+    border-color: var(--border-default);
+}
+
+[data-theme="dark"] .category-pill {
+    background: var(--bg-card);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 1px 2px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .category-pill:hover {
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] #subcategoryFilters .category-pill {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .category-filters {
+        gap: 0.5rem;
+        padding: 0.75rem;
+        border-radius: 1rem;
+    }
+    
+    .category-pill {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.75rem;
+    }
+    
+    .category-pill:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
+}
+
+/* ============================================
    ACTION BUTTONS (CSV & GOOGLE MAPS)
    ============================================ */
 
@@ -64,8 +396,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin: 0.5rem 0;
-    justify-content: center;
+    margin-top: 0.5rem;
 }
 
 .badge {
@@ -74,11 +405,12 @@
     gap: 0.3rem;
     padding: 0.3rem 0.7rem;
     border-radius: 20px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
 }
 
 .badge-favorite {
@@ -110,34 +442,25 @@
 }
 
 /* ============================================
-   TEXT OVERFLOW FIXES
+   FOOD EMPTY STATE
    ============================================ */
 
-.food-card-name {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-    max-width: 100%;
+.food-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
 }
 
-.food-card-address {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    max-width: 100%;
+.food-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
 }
 
-.dish-pill {
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+.food-empty-text {
+    font-size: 1.1rem;
 }
-
-/* ============================================
-   HOVER STATE FIX
-   ============================================ */
-
-/* Note: .food-card:hover background is handled in personality-cards.css
-   to preserve the gradient border effect */
 
 /* ============================================
    MAP STYLES

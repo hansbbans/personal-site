@@ -210,12 +210,11 @@ function renderMainCategoryFilters() {
     
     container.innerHTML = `
         <button class="category-pill main-category-pill active" data-category="all">
-            All
+            <span class="category-emoji">🍽️</span> All
         </button>
         ${Object.entries(FOOD_CATEGORIES).map(([cat, info]) => `
             <button class="category-pill main-category-pill" data-category="${cat}">
-                <span class="category-emoji">${info.emoji}</span>
-                ${cat}
+                <span class="category-emoji">${info.emoji}</span> ${cat}
             </button>
         `).join('')}
     `;
@@ -249,15 +248,15 @@ function renderSubcategoryFilters() {
     }
     
     const subcategories = FOOD_CATEGORIES[currentMainCategory]?.subcategories || [];
+    const mainCatEmoji = FOOD_CATEGORIES[currentMainCategory]?.emoji || '🍽️';
     
     container.innerHTML = `
-        <button class="category-pill subcategory-pill active" data-subcategory="all">
-            All ${currentMainCategory}
+        <button class="category-pill subcategory-pill active" data-subcategory="all" data-parent="${currentMainCategory}">
+            <span class="category-emoji">${mainCatEmoji}</span> All ${currentMainCategory}
         </button>
         ${subcategories.map(sub => `
-            <button class="category-pill subcategory-pill" data-subcategory="${sub}">
-                <span class="category-emoji">${getSubcategoryEmoji(sub)}</span>
-                ${sub}
+            <button class="category-pill subcategory-pill" data-subcategory="${sub}" data-parent="${currentMainCategory}">
+                <span class="category-emoji">${getSubcategoryEmoji(sub)}</span> ${sub}
             </button>
         `).join('')}
     `;
@@ -413,9 +412,9 @@ function renderCards() {
              data-rating="${r.googleRating || 0}">
             <div class="food-card-header">
                 <div class="food-card-top">
-                    <h3 class="food-card-name ${isFeatured ? 'card-title' : ''}">${r.name}</h3>
+                    <h3 class="food-card-name">${r.name}</h3>
                     ${r.googleRating ? `
-                        <div class="rating">${'⭐'.repeat(Math.floor(r.googleRating))} ${r.googleRating.toFixed(1)}</div>
+                        <div class="rating">${r.googleRating.toFixed(1)}</div>
                     ` : ''}
                 </div>
                 ${categoryBadge}
