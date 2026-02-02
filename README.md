@@ -2,6 +2,8 @@
 
 A clean, modern personal website featuring gear recommendations, city food guides, photography, and book reviews.
 
+Last updated: 2026-02-02
+
 ## Features
 
 - **Gear Section**: Showcase products you love with Amazon affiliate links
