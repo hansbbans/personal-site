@@ -52,7 +52,7 @@
 }
 
 /* ===========================================
-   FOOD CARDS - Warm/Organic Aesthetic  
+   FOOD CARDS - Matches Gear Cards Exactly
    =========================================== */
 
 .food-card {
@@ -61,13 +61,10 @@
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-medium);
-    border: 1.5px solid var(--border-color);
+    border: 1px solid var(--border-color);
     position: relative;
-    display: flex;
-    flex-direction: column;
 }
 
-/* Left accent line like gear cards */
 .food-card::before {
     content: '';
     position: absolute;
@@ -79,185 +76,89 @@
     transition: background var(--transition-fast);
 }
 
-.food-card:hover::before {
-    background: linear-gradient(to bottom, #ff6b6b, #ffa500);
-}
-
 .food-card:hover {
     transform: translateY(-4px) translateX(2px);
     box-shadow: var(--shadow-lg);
     border-color: var(--primary);
 }
 
-/* Card structure - similar to gear cards */
-.food-card-header {
-    padding: 1.5rem 1.5rem 0.75rem;
-    border-bottom: 1px solid var(--border-light);
+.food-card:hover::before {
+    background: var(--primary);
+}
+
+.food-card.standout::before {
+    background: var(--primary);
+}
+
+.food-card.standout {
+    background: var(--bg-warm);
 }
 
 .food-card-body {
-    padding: 1rem 1.5rem 1.5rem;
-    flex: 1;
+    padding: 1.5rem;
+}
+
+.food-card-header {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-/* Text overflow fixes */
-.food-card .food-card-name {
-    font-family: 'Literata', Georgia, serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 0.5rem;
-    line-height: 1.4;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-}
-
-.food-card .food-card-address {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 0.35rem;
-    line-height: 1.5;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    transition: color var(--transition-fast);
-}
-
-.food-card .food-card-address:hover {
-    color: var(--primary);
-}
-
-.food-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.75rem;
-}
-
-.food-card .rating {
-    display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    background: linear-gradient(45deg, #ff6b6b, #ffa500);
-    color: white;
-    padding: 0.35rem 0.75rem;
-    border-radius: 2rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    flex-shrink: 0;
-    white-space: nowrap;
-}
-
-/* Category badge styling */
-.food-card-category {
-    display: flex;
+    gap: 0.5rem;
     flex-wrap: wrap;
-    gap: 0.35rem;
-    align-items: center;
-    font-size: 0.75rem;
-    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
-.food-card-category .main-cat {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-weight: 600;
+.food-card-category {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--primary);
-    background: rgba(249, 115, 22, 0.1);
+    background: rgba(194, 65, 12, 0.1);
     padding: 0.25rem 0.6rem;
     border-radius: 0.25rem;
     font-family: var(--font-mono);
 }
 
-.food-card-category .sub-cat {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-}
-
-[data-theme="dark"] .food-card-category .main-cat {
+[data-theme="dark"] .food-card-category {
     background: rgba(251, 146, 60, 0.15);
 }
 
-/* Dishes section */
-.food-card-dishes {
-    margin-top: auto;
-}
-
-.food-card-dishes-label {
-    font-size: 0.7rem;
+.food-card-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-    font-family: var(--font-mono);
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+    line-height: 1.35;
 }
 
-.food-card-dish-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+.food-card-name a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid transparent;
 }
 
-.dish-pill {
-    display: inline-block;
-    padding: 0.35rem 0.7rem;
-    background: var(--bg-secondary);
-    border-radius: 1rem;
-    font-size: 0.8rem;
+.food-card-name a:hover {
+    border-bottom-color: var(--primary);
+}
+
+.food-card-description {
+    font-size: 0.95rem;
     color: var(--text-secondary);
-    border: 1px solid var(--border-light);
+    margin: 0;
+    line-height: 1.7;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
-    max-width: 100%;
 }
 
-.dish-pill.highlight {
-    background: rgba(249, 115, 22, 0.1);
-    border-color: rgba(249, 115, 22, 0.3);
-    color: var(--primary);
-    font-weight: 500;
+/* Food-specific badge variations */
+.badge-high-rated {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border: 1px solid #b45309;
 }
-
-/* Featured card variation */
-.food-card.featured {
-    border-color: var(--primary);
-    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(249, 115, 22, 0.03) 100%);
-}
-
-.food-card.featured::before {
-    background: linear-gradient(to bottom, #ff6b6b, #ffa500);
-}
-
-/* Category-specific accent colors on hover */
-.food-card.category-asian:hover::before { background: linear-gradient(to bottom, #dc2626, #b91c1c); }
-.food-card.category-european:hover::before { background: linear-gradient(to bottom, #1e3a5f, #0f172a); }
-.food-card.category-american:hover::before { background: linear-gradient(to bottom, #d97706, #b45309); }
-.food-card.category-mexican:hover::before { background: linear-gradient(to bottom, #16a34a, #15803d); }
-.food-card.category-mediterranean:hover::before { background: linear-gradient(to bottom, #0891b2, #0e7490); }
-.food-card.category-cafes:hover::before { background: linear-gradient(to bottom, #92400e, #78350f); }
-.food-card.category-bars:hover::before { background: linear-gradient(to bottom, #7c3aed, #6d28d9); }
-
-.food-card.category-asian:hover { border-color: #dc2626; }
-.food-card.category-european:hover { border-color: #1e3a5f; }
-.food-card.category-american:hover { border-color: #d97706; }
-.food-card.category-mexican:hover { border-color: #16a34a; }
-.food-card.category-mediterranean:hover { border-color: #0891b2; }
-.food-card.category-cafes:hover { border-color: #92400e; }
-.food-card.category-bars:hover { border-color: #7c3aed; }
 
 /* ===========================================
    BOOK CARDS - Literary/Academic Aesthetic
@@ -319,17 +220,6 @@
 
 .book-card:hover .page-curl {
     opacity: 1;
-}
-
-/* ===========================================
-   FOOD GRID - Clean layout without stagger
-   =========================================== */
-
-.food-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.25rem;
-    margin: 2rem 0;
 }
 
 /* ===========================================
@@ -472,8 +362,7 @@
    =========================================== */
 
 @media (max-width: 768px) {
-    .personality-grid,
-    .food-grid {
+    .personality-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
@@ -491,21 +380,6 @@
     .book-card:hover {
         transform: translateY(-4px) scale(1.02); /* Simpler mobile animations */
     }
-    
-    /* Food card mobile adjustments */
-    .food-card-header,
-    .food-card-body {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-    }
-    
-    .food-card-header {
-        padding-top: 1.25rem;
-    }
-    
-    .food-card-body {
-        padding-bottom: 1.25rem;
-    }
 }
 
 /* ===========================================
@@ -516,30 +390,12 @@
     background: linear-gradient(45deg, #00d4ff, #0080ff);
 }
 
-[data-theme="dark"] .food-card {
-    border-color: var(--border-default);
-}
-
-[data-theme="dark"] .food-card:hover {
-    border-color: var(--primary);
-}
-
 [data-theme="dark"] .food-card::before {
     background: transparent;
 }
 
 [data-theme="dark"] .food-card:hover::before {
-    background: linear-gradient(to bottom, #ff6b6b, #ffa500);
-}
-
-[data-theme="dark"] .dish-pill {
-    background: var(--bg-secondary);
-    border-color: var(--border-default);
-}
-
-[data-theme="dark"] .dish-pill.highlight {
-    background: rgba(251, 146, 60, 0.15);
-    border-color: rgba(251, 146, 60, 0.3);
+    background: var(--primary);
 }
 
 [data-theme="dark"] .book-card {

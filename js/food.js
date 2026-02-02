@@ -329,7 +329,7 @@ function showCity(index) {
     console.log('[DEBUG] showCity() completed');
 }
 
-// Render cards
+// Render cards - matches gear card structure exactly
 function renderCards() {
     console.log('[DEBUG] renderCards() called');
     const grid = document.getElementById('foodGrid');
@@ -369,8 +369,11 @@ function renderCards() {
     grid.innerHTML = restaurants.map((r, index) => {
         // Add personality features for food cards
         const isHighRated = r.googleRating && r.googleRating >= 4.5;
-        const isFeatured = isHighRated && index % 6 === 0;
-        const featuredClass = isFeatured ? 'featured' : '';
+        const isStandout = r.isHansFavorite || r.onEaterList || r.onInfatuationList || isHighRated;
+        const isFeatured = isStandout && index % 7 === 0;
+        const personalityClass = isStandout ? 'standout' : '';
+        const featuredClass = isFeatured ? 'featured-large' : '';
+        const interactiveClass = r.address ? 'card-interactive' : '';
         
         // Get category CSS class for color coding
         const categoryClass = getCategoryClass(r.mainCategory);
@@ -378,62 +381,68 @@ function renderCards() {
         // Build Google Maps link from address
         const mapsLink = r.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + r.address)}` : null;
         
-        // Build category badge
-        let categoryBadge = '';
-        if (r.mainCategory && r.subcategory) {
-            categoryBadge = `
-                <span class="food-card-category">
-                    <span class="main-cat">${getMainCategoryEmoji(r.mainCategory)} ${r.mainCategory}</span>
-                    <span class="sub-cat">${getSubcategoryEmoji(r.subcategory)} ${r.subcategory}</span>
-                </span>
-            `;
-        } else if (r.category) {
-            categoryBadge = `
-                <span class="food-card-category">
-                    ${getSubcategoryEmoji(r.category)} ${r.category}
-                </span>
-            `;
+        // Build personality badge (like gear cards)
+        let personalityBadge = '';
+        if (r.isHansFavorite) {
+            personalityBadge = '<div class="personality-badge badge-favorite">❤️</div>';
+        } else if (r.onEaterList) {
+            personalityBadge = '<div class="personality-badge badge-eater">🏆</div>';
+        } else if (r.onInfatuationList) {
+            personalityBadge = '<div class="personality-badge badge-infatuation">🔥</div>';
+        } else if (isHighRated) {
+            personalityBadge = '<div class="personality-badge badge-high-rated">⭐</div>';
         }
         
-        // Build awards badges
-        let awardsBadges = '';
-        const badges = [];
-        if (r.isHansFavorite) badges.push('<span class="badge badge-favorite">⭐ Hans Favorite</span>');
-        if (r.onEaterList) badges.push('<span class="badge badge-eater">🏆 Eater 38</span>');
-        if (r.onInfatuationList) badges.push('<span class="badge badge-infatuation">🔥 Infatuation</span>');
-        if (badges.length > 0) {
-            awardsBadges = `<div class="food-card-badges">${badges.join('')}</div>`;
+        // Build category badge (like gear-card-category)
+        let categoryBadge = '';
+        if (r.mainCategory && r.subcategory) {
+            categoryBadge = `<span class="food-card-category">${getMainCategoryEmoji(r.mainCategory)} ${r.mainCategory} › ${getSubcategoryEmoji(r.subcategory)} ${r.subcategory}</span>`;
+        } else if (r.category) {
+            categoryBadge = `<span class="food-card-category">${getSubcategoryEmoji(r.category)} ${r.category}</span>`;
+        }
+        
+        // Build awards badges (inline like gear cards)
+        let awardBadge = '';
+        if (r.isHansFavorite) {
+            awardBadge = '<span class="badge badge-favorite">⭐ Favorite</span>';
+        } else if (r.onEaterList) {
+            awardBadge = '<span class="badge badge-eater">🏆 Eater 38</span>';
+        } else if (r.onInfatuationList) {
+            awardBadge = '<span class="badge badge-infatuation">🔥 Infatuation</span>';
+        } else if (isHighRated) {
+            awardBadge = `<span class="badge badge-high-rated">⭐ ${r.googleRating.toFixed(1)}</span>`;
+        }
+        
+        // Build description (address + dishes combined like gear description)
+        let description = '';
+        if (r.address) {
+            description += r.address;
+        }
+        if (r.dishes) {
+            const dishesList = r.dishes.split(',').map(d => d.trim()).join(' • ');
+            description += description ? ` — ${dishesList}` : dishesList;
         }
         
         return `
-        <div class="food-card ${featuredClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
+        <div class="food-card ${personalityClass} ${featuredClass} ${interactiveClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
              data-category="${r.mainCategory || r.category || 'general'}"
              data-subcategory="${r.subcategory || ''}"
-             data-rating="${r.googleRating || 0}">
-            <div class="food-card-header">
-                <div class="food-card-top">
-                    <h3 class="food-card-name">${r.name}</h3>
-                    ${r.googleRating ? `
-                        <div class="rating">${r.googleRating.toFixed(1)}</div>
-                    ` : ''}
-                </div>
-                ${categoryBadge}
-                ${awardsBadges}
-            </div>
+             data-rating="${r.googleRating || 0}"
+             title="${mapsLink ? 'Click to view on Google Maps' : ''}">
+            ${personalityBadge}
             <div class="food-card-body">
-                ${r.address ? `
-                    <a href="${mapsLink}" target="_blank" rel="noopener" class="food-card-address">📍 ${r.address}</a>
-                ` : ''}
-                ${r.dishes ? `
-                    <div class="food-card-dishes">
-                        <div class="food-card-dishes-label">🍽️ Must try</div>
-                        <div class="food-card-dish-tags">
-                            ${r.dishes.split(',').map((dish, i) => `
-                                <span class="dish-pill ${i === 0 ? 'highlight' : ''}">${dish.trim()}</span>
-                            `).join('')}
-                        </div>
-                    </div>
-                ` : ''}
+                <div class="food-card-header">
+                    ${categoryBadge}
+                    ${awardBadge}
+                </div>
+                <h3 class="food-card-name ${isFeatured ? 'card-title' : ''}">
+                    ${mapsLink 
+                        ? `<a href="${mapsLink}" target="_blank" rel="noopener">${r.name}</a>`
+                        : r.name
+                    }
+                </h3>
+                ${description ? `<p class="food-card-description">${description}</p>` : ''}
+                ${mapsLink ? '<div class="card-tooltip">Click to view on Google Maps</div>' : ''}
             </div>
         </div>
         `;
