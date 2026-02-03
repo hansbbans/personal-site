@@ -109,7 +109,8 @@
           "lng": -73.98286,
           "yelpRating": 4.5,
           "googleRating": 4.7,
-          "onEaterList": true
+          "onEaterList": true,
+          "michelinStars": 2
         },
         {
           "name": "Rubirosa",
@@ -123,7 +124,8 @@
           "lng": -73.996232,
           "yelpRating": 4.3,
           "googleRating": 4.6,
-          "onInfatuationList": true
+          "onInfatuationList": true,
+          "michelinBibGourmand": true
         },
         {
           "name": "Cello Pizza",
@@ -202,7 +204,8 @@
           "lng": -73.9507,
           "yelpRating": null,
           "googleRating": 4.3,
-          "notes": "Peruvian - placed in Other Asian temporarily until Latin American category added"
+          "notes": "Peruvian - placed in Other Asian temporarily until Latin American category added",
+          "michelinBibGourmand": true
         },
         {
           "name": "Sushi Ishikawa",
@@ -215,7 +218,9 @@
           "lat": 40.768759,
           "lng": -73.954061,
           "yelpRating": null,
-          "googleRating": 4.6
+          "googleRating": 4.6,
+          "michelinStars": 3,
+          "michelinBibGourmand": true
         },
         {
           "name": "Jungsik",
@@ -228,7 +233,8 @@
           "lat": 40.71875,
           "lng": -74.00975,
           "yelpRating": 4.6,
-          "googleRating": 4.6
+          "googleRating": 4.6,
+          "michelinStars": 2
         },
         {
           "name": "Los Tacos No. 1",
@@ -281,7 +287,8 @@
           "lat": 40.71875,
           "lng": -73.9895,
           "yelpRating": null,
-          "googleRating": 4.5
+          "googleRating": 4.5,
+          "michelinBibGourmand": true
         },
         {
           "name": "Raku",
@@ -450,7 +457,8 @@
           "lat": 40.758775,
           "lng": -73.8316571,
           "yelpRating": null,
-          "googleRating": null
+          "googleRating": null,
+          "michelinStars": 1
         },
         {
           "name": "Hometown Bar-B-Que",
@@ -567,7 +575,9 @@
           "lat": 40.7796,
           "lng": -73.9832,
           "yelpRating": 4.4,
-          "googleRating": 4.6
+          "googleRating": 4.6,
+          "michelinStars": 3,
+          "michelinBibGourmand": true
         },
         {
           "name": "NY Pizza Suprema",
