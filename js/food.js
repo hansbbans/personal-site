@@ -399,27 +399,18 @@ function renderCards() {
             categoryBadge = `<span class="food-card-category">${getSubcategoryEmoji(r.category)} ${r.category}</span>`;
         }
         
-        // Build awards badges (inline like gear cards)
-        let awardBadge = '';
-        if (r.isHansFavorite) {
-            awardBadge = '<span class="badge badge-favorite">⭐ Favorite</span>';
-        } else if (r.onEaterList) {
-            awardBadge = '<span class="badge badge-eater">🏆 Eater 38</span>';
-        } else if (r.onInfatuationList) {
-            awardBadge = '<span class="badge badge-infatuation">🔥 Infatuation</span>';
-        } else if (isHighRated) {
-            awardBadge = `<span class="badge badge-high-rated">⭐ ${r.googleRating.toFixed(1)}</span>`;
-        }
+        // Build all highlights badges (not just one)
+        const highlights = [];
+        if (r.isHansFavorite) highlights.push('<span class="badge badge-favorite">⭐ Hans Fave</span>');
+        if (r.onEaterList) highlights.push('<span class="badge badge-eater">🏆 Eater 38</span>');
+        if (r.onInfatuationList) highlights.push('<span class="badge badge-infatuation">🔥 Infatuation</span>');
+        if (r.isMichelinRated) highlights.push('<span class="badge badge-michelin">🍽️ Michelin</span>');
+        if (r.googleRating && r.googleRating >= 4.0) highlights.push(`<span class="badge badge-high-rated">⭐ ${r.googleRating.toFixed(1)}</span>`);
         
-        // Build description (address + dishes combined like gear description)
-        let description = '';
-        if (r.address) {
-            description += r.address;
-        }
-        if (r.dishes) {
-            const dishesList = r.dishes.split(',').map(d => d.trim()).join(' • ');
-            description += description ? ` — ${dishesList}` : dishesList;
-        }
+        const highlightsHtml = highlights.length > 0 ? `<div class="food-card-highlights">${highlights.join('')}</div>` : '';
+        
+        // Build notable dishes section
+        const dishesHtml = r.dishes ? `<div class="food-card-dishes"><span class="dishes-label">Notable:</span> ${r.dishes.split(',').map(d => d.trim()).join(', ')}</div>` : '';
         
         return `
         <div class="food-card ${personalityClass} ${interactiveClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
@@ -429,17 +420,17 @@ function renderCards() {
              title="${mapsLink ? 'Click to view on Google Maps' : ''}">
             ${personalityBadge}
             <div class="food-card-body">
-                <div class="food-card-header">
-                    ${categoryBadge}
-                    ${awardBadge}
-                </div>
                 <h3 class="food-card-name">
                     ${mapsLink 
                         ? `<a href="${mapsLink}" target="_blank" rel="noopener">${r.name}</a>`
                         : r.name
                     }
                 </h3>
-                ${description ? `<p class="food-card-description">${description}</p>` : ''}
+                <div class="food-card-meta">
+                    ${categoryBadge}
+                    ${highlightsHtml}
+                </div>
+                ${dishesHtml}
                 ${mapsLink ? '<div class="card-tooltip">Click to view on Google Maps</div>' : ''}
             </div>
         </div>

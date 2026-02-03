@@ -153,11 +153,47 @@
     word-break: break-word;
 }
 
+.food-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.food-card-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.food-card-dishes {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.food-card-dishes .dishes-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 /* Food-specific badge variations */
 .badge-high-rated {
     background: linear-gradient(135deg, #f59e0b, #d97706);
     color: white;
     border: 1px solid #b45309;
+}
+
+.badge-michelin {
+    background: linear-gradient(135deg, #dc2626, #991b1b);
+    color: white;
+    border: 1px solid #7f1d1d;
 }
 
 /* ===========================================
