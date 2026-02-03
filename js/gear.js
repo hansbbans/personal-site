@@ -1,6 +1,6 @@
 // Gear Page Script
-const GOOGLE_SHEETS_API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
-const GEAR_SPREADSHEET_ID = '1CjV68p-3hjCF1Hl5DMNjDFkRHjn6tIIBpCTWpHZju6s';
+const GOOGLE_SHEETS_API_KEY = SITE_CONFIG.googleSheetsApiKey;
+const GEAR_SPREADSHEET_ID = SITE_CONFIG.spreadsheets.gear;
 
 // Category emoji mapping
 const CATEGORY_EMOJI = {

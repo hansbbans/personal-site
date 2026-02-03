@@ -108,34 +108,19 @@ function setupMapToggle() {
 
 // Load data from local JSON file
 async function loadRestaurantData() {
-    console.log('[DEBUG] loadRestaurantData() started');
     try {
-        console.log('[DEBUG] Fetching data/food-data.json...');
         const response = await fetch('data/food-data.json');
-        console.log('[DEBUG] Response status:', response.status);
-        
         const data = await response.json();
-        console.log('[DEBUG] Data loaded:', data);
-        console.log('[DEBUG] Cities:', data.cities?.length);
-        
+
         // Sort cities: NYC first (home base), then by restaurant count descending
         citiesData = sortCities(data.cities);
-        console.log('[DEBUG] citiesData sorted:', citiesData.map(c => `${c.name}(${c.restaurants.length})`));
-        
-        console.log('[DEBUG] Calling renderCityTabs()...');
+
         renderCityTabs();
-        
-        console.log('[DEBUG] Calling renderMainCategoryFilters()...');
         renderMainCategoryFilters();
-        
-        console.log('[DEBUG] Calling showCity(0)...');
         showCity(0);
-        
-        console.log('[DEBUG] loadRestaurantData() completed successfully');
     } catch (error) {
-        console.error('[DEBUG] Error loading data:', error);
-        console.error('[DEBUG] Error stack:', error.stack);
-        document.getElementById('foodGrid').innerHTML = 
+        console.error('Error loading restaurant data:', error);
+        document.getElementById('foodGrid').innerHTML =
             '<p class="loading-message">Unable to load restaurants. Error: ' + error.message + '</p>';
     }
 }
@@ -299,51 +284,35 @@ function getFilteredRestaurants() {
 
 // Show city
 function showCity(index) {
-    console.log('[DEBUG] showCity(' + index + ') called');
     currentCity = index;
     currentMainCategory = 'all';
     currentSubcategory = 'all';
-    
-    console.log('[DEBUG] citiesData:', citiesData);
-    console.log('[DEBUG] currentCity data:', citiesData[currentCity]);
-    
+
     // Update active tab
     document.querySelectorAll('.city-tab').forEach((tab, i) => {
         tab.classList.toggle('active', i === index);
     });
-    
+
     // Reset category filter UI
     document.querySelectorAll('.main-category-pill').forEach(pill => {
         pill.classList.toggle('active', pill.dataset.category === 'all');
     });
-    
-    console.log('[DEBUG] Calling renderSubcategoryFilters()...');
+
     renderSubcategoryFilters();
-    
-    console.log('[DEBUG] Calling renderCards()...');
     renderCards();
-    
+
     if (mapVisible) {
         updateMap(getFilteredRestaurants());
     }
-    console.log('[DEBUG] showCity() completed');
 }
 
 // Render cards - matches gear card structure exactly
 function renderCards() {
-    console.log('[DEBUG] renderCards() called');
     const grid = document.getElementById('foodGrid');
-    console.log('[DEBUG] grid element:', grid);
-    
     const restaurants = getFilteredRestaurants();
-    console.log('[DEBUG] filtered restaurants:', restaurants.length);
-    
     const stats = document.getElementById('foodStats');
     const cityData = citiesData[currentCity];
-    console.log('[DEBUG] cityData:', cityData);
-    
     const total = cityData?.restaurants.length || 0;
-    console.log('[DEBUG] total restaurants:', total);
     
     // Update stats
     let statsText = '';

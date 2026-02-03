@@ -1,6 +1,6 @@
 // Configuration
-const GOOGLE_SHEETS_API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
-const SPREADSHEET_ID = '1EneuCtSuzmZI6P7Flwd0oRIsrrziX2fyduylwQIW3cc';
+const GOOGLE_SHEETS_API_KEY = SITE_CONFIG.googleSheetsApiKey;
+const SPREADSHEET_ID = SITE_CONFIG.spreadsheets.restaurants;
 
 // State
 let currentCity = 0;

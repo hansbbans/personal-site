@@ -1,6 +1,6 @@
 // Books Page Script
-const GOOGLE_SHEETS_API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
-const BOOKS_SPREADSHEET_ID = '119Fw5zFMeQZEGyEtgbadKhJY2ZHCNF_1ePsLBXa7bls';
+const GOOGLE_SHEETS_API_KEY = SITE_CONFIG.googleSheetsApiKey;
+const BOOKS_SPREADSHEET_ID = SITE_CONFIG.spreadsheets.books;
 
 // Category emoji mapping
 const CATEGORY_EMOJI = {

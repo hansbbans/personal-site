@@ -108,7 +108,7 @@ class FoodAdminApp {
     
     async loadRestaurantData() {
         try {
-            const API_KEY = 'AIzaSyBo_QKk0hkE8Kkp2sUS4qOLzSiYpI-bfr0';
+            const API_KEY = SITE_CONFIG.googleSheetsApiKey;
             const SPREADSHEET_ID = this.config.spreadsheetId;
             
             const metadataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}?key=${API_KEY}`;
