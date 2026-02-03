@@ -433,7 +433,7 @@ function renderCards() {
                     ${categoryBadge}
                     ${awardBadge}
                 </div>
-                <h3 class="food-card-name ${isFeatured ? 'card-title' : ''}">
+                <h3 class="food-card-name">
                     ${mapsLink 
                         ? `<a href="${mapsLink}" target="_blank" rel="noopener">${r.name}</a>`
                         : r.name
