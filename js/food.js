@@ -370,9 +370,7 @@ function renderCards() {
         // Add personality features for food cards
         const isHighRated = r.googleRating && r.googleRating >= 4.5;
         const isStandout = r.isHansFavorite || r.onEaterList || r.onInfatuationList || isHighRated;
-        const isFeatured = isStandout && index % 7 === 0;
         const personalityClass = isStandout ? 'standout' : '';
-        const featuredClass = isFeatured ? 'featured-large' : '';
         const interactiveClass = r.address ? 'card-interactive' : '';
         
         // Get category CSS class for color coding
@@ -424,7 +422,7 @@ function renderCards() {
         }
         
         return `
-        <div class="food-card ${personalityClass} ${featuredClass} ${interactiveClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
+        <div class="food-card ${personalityClass} ${interactiveClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
              data-category="${r.mainCategory || r.category || 'general'}"
              data-subcategory="${r.subcategory || ''}"
              data-rating="${r.googleRating || 0}"
