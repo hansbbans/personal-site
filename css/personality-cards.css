@@ -397,6 +397,32 @@
    RESPONSIVE PERSONALITY
    =========================================== */
 
+/* iPad/Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .personality-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .food-card-body {
+        padding: 1.25rem;
+    }
+    
+    .food-card-name {
+        font-size: 1rem;
+    }
+    
+    .food-card-meta {
+        gap: 0.35rem;
+    }
+    
+    .food-card-highlights .badge {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+/* Mobile (below 768px) */
 @media (max-width: 768px) {
     .personality-grid {
         grid-template-columns: 1fr;
@@ -415,6 +441,10 @@
     .food-card:hover,
     .book-card:hover {
         transform: translateY(-4px) scale(1.02); /* Simpler mobile animations */
+    }
+    
+    .food-card-body {
+        padding: 1rem;
     }
 }
 
