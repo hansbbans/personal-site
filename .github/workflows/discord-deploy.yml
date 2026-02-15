@@ -26,5 +26,5 @@ jobs:
           curl -X POST "$DISCORD_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d "{
-              \"content\": \"$EMOJI Deployment $STATE: ${{ github.event.deployment_status.environment }} - ${{ github.event.deployment_status.target_url }}\"
+              \"content\": \"$EMOJI **${{ github.event.repository.name }}** deployment $STATE: ${{ github.event.deployment_status.environment }} - ${{ github.event.deployment_status.target_url }}\"
             }"
