@@ -48,14 +48,88 @@ function renderGear() {
         return;
     }
 
-    container.innerHTML = '<ul class="simple-list">' +
-        gearData.map(item =>
-            '<li class="simple-list-item">' +
-            (item.amazonLink
-                ? '<a href="' + item.amazonLink + '" target="_blank" rel="noopener">' + item.name + '</a>'
-                : '<span>' + item.name + '</span>') +
-            (item.description ? ' &mdash; ' + item.description : '') +
-            '</li>'
-        ).join('') +
-    '</ul>';
+    const grouped = groupByCategory(gearData);
+    const sortedCategories = Array.from(grouped.keys()).sort((a, b) => {
+        const aIsDefault = a.toLowerCase() === 'gear';
+        const bIsDefault = b.toLowerCase() === 'gear';
+        if (aIsDefault && !bIsDefault) return -1;
+        if (!aIsDefault && bIsDefault) return 1;
+        return a.localeCompare(b);
+    });
+
+    container.innerHTML = '<div class="gear-hierarchy">' +
+        sortedCategories.map((category) => {
+            const items = grouped.get(category) || [];
+            return '<section class="gear-category-group">' +
+                '<h3 class="gear-category-title">' + escapeHtml(formatCategoryLabel(category)) + '</h3>' +
+                '<ol class="gear-category-list">' +
+                    items.map((item) => {
+                        const link = getSafeExternalUrl(item.amazonLink);
+                        const itemName = escapeHtml(item.name);
+                        const description = item.description
+                            ? '<span class="gear-item-description"> — ' + escapeHtml(item.description) + '</span>'
+                            : '';
+                        const itemLabel = link
+                            ? '<a href="' + escapeAttr(link) + '" target="_blank" rel="noopener">' + itemName + '</a>'
+                            : '<span>' + itemName + '</span>';
+                        return '<li class="gear-category-item">' + itemLabel + description + '</li>';
+                    }).join('') +
+                '</ol>' +
+            '</section>';
+        }).join('') +
+    '</div>';
+}
+
+function groupByCategory(items) {
+    const grouped = new Map();
+    items.forEach((item) => {
+        const category = normalizeCategory(item.category);
+        if (!grouped.has(category)) grouped.set(category, []);
+        grouped.get(category).push(item);
+    });
+    return grouped;
+}
+
+function normalizeCategory(category) {
+    if (typeof category !== 'string') return 'Gear';
+    const trimmed = category.trim();
+    return trimmed ? trimmed : 'Gear';
+}
+
+function formatCategoryLabel(category) {
+    return category
+        .split(/\s+/)
+        .map((word) => {
+            if (!word) return '';
+            if (word.toUpperCase() === word && word.length <= 5) return word;
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        })
+        .join(' ');
+}
+
+function getSafeExternalUrl(url) {
+    if (typeof url !== 'string') return '';
+    const trimmed = url.trim();
+    if (!trimmed) return '';
+    return /^https?:\/\//i.test(trimmed) ? trimmed : '';
+}
+
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function escapeAttr(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
 }
