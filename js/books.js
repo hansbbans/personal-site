@@ -82,11 +82,6 @@ function getSpineColor(book) {
     return SPINE_COLORS[hashStr(book.title + book.author) % SPINE_COLORS.length];
 }
 
-function getSpineWidth(book) {
-    // 26–50px simulating book thickness
-    return 26 + (hashStr(book.title) % 25);
-}
-
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadBooksData();
@@ -210,25 +205,26 @@ function renderBooks() {
                         ${shelf.map((book, bookIdx) => {
                             const globalIdx = shelfIdx * BOOKS_PER_SHELF + bookIdx;
                             const color = getSpineColor(book);
-                            const width = getSpineWidth(book);
-                            const lighterColor = color + 'cc'; // slight transparency for binding
                             return `
-                                <div class="book-spine"
+                                <div class="book-cover-item"
                                      data-book-index="${globalIdx}"
                                      data-shelf="${shelfIdx}"
-                                     style="width:${width}px; background-color:${color};"
+                                     style="background-color:${color};"
                                      title="${escapeAttr(book.title)} — ${escapeAttr(book.author)}">
                                     ${book.coverUrl ? `
-                                    <div class="book-spine-cover">
-                                        <img src="${book.coverUrl}" alt="" loading="lazy"
-                                             onerror="this.parentElement.style.display='none'">
-                                    </div>` : ''}
-                                    <div class="book-spine-binding"></div>
-                                    <div class="book-spine-text">
-                                        <span class="book-spine-title">${escapeHtml(book.title)}</span>
-                                        <span class="book-spine-author">${escapeHtml(book.author)}</span>
+                                    <div class="book-cover-face">
+                                        <img src="${book.coverUrl}" alt="${escapeAttr(book.title)}" loading="lazy"
+                                             onerror="this.closest('.book-cover-face').style.display='none'; const fallback = this.closest('.book-cover-item').querySelector('.book-cover-fallback'); if (fallback) fallback.style.display='flex';">
                                     </div>
-                                    ${book.rating && book.rating >= 4.5 ? '<div class="book-spine-star">★</div>' : ''}
+                                    <div class="book-cover-fallback" style="display:none;">
+                                        <span class="book-cover-fallback-title">${escapeHtml(book.title)}</span>
+                                        <span class="book-cover-fallback-author">${escapeHtml(book.author)}</span>
+                                    </div>` : `
+                                    <div class="book-cover-fallback">
+                                        <span class="book-cover-fallback-title">${escapeHtml(book.title)}</span>
+                                        <span class="book-cover-fallback-author">${escapeHtml(book.author)}</span>
+                                    </div>`}
+                                    ${book.rating && book.rating >= 4.5 ? '<div class="book-cover-star">★</div>' : ''}
                                 </div>
                             `;
                         }).join('')}
@@ -241,7 +237,7 @@ function renderBooks() {
     `;
 
     // Attach click handlers
-    grid.querySelectorAll('.book-spine').forEach(spine => {
+    grid.querySelectorAll('.book-cover-item').forEach(spine => {
         spine.addEventListener('click', () => {
             const bookIdx = parseInt(spine.dataset.bookIndex);
             const shelfIdx = parseInt(spine.dataset.shelf);
@@ -254,7 +250,7 @@ function handleSpineClick(bookIdx, shelfIdx, books) {
     const book = books[bookIdx];
     const panel = document.getElementById(`detail-shelf-${shelfIdx}`);
     const allPanels = document.querySelectorAll('.book-detail-panel');
-    const allSpines = document.querySelectorAll('.book-spine');
+    const allSpines = document.querySelectorAll('.book-cover-item');
 
     // Toggle off if same book clicked again
     if (activeBookIndex === bookIdx) {
@@ -270,7 +266,7 @@ function handleSpineClick(bookIdx, shelfIdx, books) {
     allSpines.forEach(s => s.classList.remove('active'));
 
     // Activate clicked spine
-    const activeSpine = document.querySelector(`.book-spine[data-book-index="${bookIdx}"]`);
+    const activeSpine = document.querySelector(`.book-cover-item[data-book-index="${bookIdx}"]`);
     if (activeSpine) activeSpine.classList.add('active');
     activeBookIndex = bookIdx;
 
