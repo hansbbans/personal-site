@@ -422,6 +422,11 @@
     margin-top: 0.5rem;
 }
 
+/* Keep food cards aligned in this grid; global stagger belongs on other pages. */
+#foodGrid > * {
+    transform: none;
+}
+
 .badge {
     display: inline-flex;
     align-items: center;

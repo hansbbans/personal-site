@@ -378,6 +378,12 @@
     z-index: 10;
 }
 
+/* Keep food badges clear of rounded card clipping in the top-right corner. */
+.food-card .personality-badge {
+    top: 0.75rem;
+    right: 0.75rem;
+}
+
 .badge-daily-driver {
     background: linear-gradient(45deg, #ff6b6b, #ffa500);
     animation: pulse 2s infinite;
