@@ -7,28 +7,49 @@
     <meta property="og:title" content="Hans Cho">
     <meta property="og:description" content="Hans Cho's personal site — food guides, photography, gear, book recommendations, and more.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://hanscho.com/images/R0002049.jpg">
+    <meta property="og:image:alt" content="Eiffel Tower viewed from the Seine under cloudy skies">
     <title>Hans Cho</title>
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+    <script data-theme-init>(function () {
+        try {
+            var stored = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (stored === 'dark' || (!stored && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        } catch (e) {}
+    })();</script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="nav-brand">Hans Cho</a>
+            <a href="index.html" class="nav-brand">Hans</a>
             <ul class="nav-menu">
-                <li><a href="about.html">About</a></li>
-                <li><a href="gear.html">Gear</a></li>
-                <li><a href="food.html">Food</a></li>
-                <li><a href="photos.html">Photos</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="now.html">Now</a></li>
+                <li><a href="index.html" class="active">🏠 Home</a></li>
+                <li><a href="about.html">👤 About</a></li>
+                <li><a href="gear.html">🎒 Gear</a></li>
+                <li><a href="food.html">🍜 Food</a></li>
+                <li><a href="photos.html">📷 Photos</a></li>
+                <li><a href="books.html">📚 Books</a></li>
+                <li><a href="now.html">⏰ Now</a></li>
             </ul>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                <span class="sun-icon">○</span>
-                <span class="moon-icon">●</span>
+                <span class="sun-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img" focusable="false">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+                    </svg>
+                </span>
+                <span class="moon-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img" focusable="false">
+                        <path d="M20.35 15.4A8.5 8.5 0 1 1 8.6 3.65a7 7 0 1 0 11.75 11.75z"></path>
+                    </svg>
+                </span>
             </button>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span>
@@ -45,8 +66,8 @@
                     <h1 class="hero-title">Hans Cho builds iOS apps and digital products</h1>
                     <p class="hero-subtitle">Dad to a 4-year-old. Based in NYC. Learning in public.</p>
                     <div class="hero-cta">
-                        <a href="food.html" class="cta-btn cta-primary">🍜 Explore Food Guide</a>
-                        <a href="about.html" class="cta-btn cta-secondary">More about me →</a>
+                        <a href="food.html#guide" class="cta-btn cta-primary">🍜 Explore Food Guide</a>
+                        <a href="about.html#about" class="cta-btn cta-secondary">More about me →</a>
                     </div>
                 </div>
 
@@ -96,22 +117,22 @@
                 <div class="quick-links">
                     <h2 class="section-label">Explore</h2>
                     <div class="links-grid">
-                        <a href="gear.html" class="link-card">
+                        <a href="gear.html#gear" class="link-card">
                             <h3>Gear</h3>
                             <p>Products I use daily</p>
                         </a>
 
-                        <a href="food.html" class="link-card">
+                        <a href="food.html#food" class="link-card">
                             <h3>Food</h3>
                             <p>Restaurant guides</p>
                         </a>
 
-                        <a href="photos.html" class="link-card">
+                        <a href="photos.html#photos" class="link-card">
                             <h3>Photos</h3>
                             <p>Travel & moments</p>
                         </a>
 
-                        <a href="books.html" class="link-card">
+                        <a href="books.html#books" class="link-card">
                             <h3>Books</h3>
                             <p>Reading list</p>
                         </a>
@@ -124,10 +145,20 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
+                <nav class="footer-nav" aria-label="Footer">
+                    <a href="index.html#top">Home</a>
+                    <a href="about.html#top">About</a>
+                    <a href="gear.html#top">Gear</a>
+                    <a href="food.html#top">Food</a>
+                    <a href="photos.html#top">Photos</a>
+                    <a href="books.html#top">Books</a>
+                    <a href="now.html#top">Now</a>
+                </nav>
+                <div class="footer-divider" aria-hidden="true"></div>
                 <div class="social-links">
                     <a href="mailto:hans.cho@gmail.com" aria-label="Email">Email</a>
                 </div>
-                <p>&copy; 2025 Hans Cho. Built with curiosity.</p>
+                <p>&copy; <span class="js-year"></span> Hans Cho. Built with curiosity.</p>
             </div>
         </div>
     </footer>

@@ -15,6 +15,10 @@ class PhotoLightbox {
     }
 
     init() {
+        if (!this.lightbox || !this.lightboxImg || !this.lightboxClose || !this.lightboxPrev || !this.lightboxNext || !this.lightboxCounter) {
+            return;
+        }
+
         // Get all photo items and their data
         this.updatePhotoItems();
         
@@ -24,24 +28,30 @@ class PhotoLightbox {
 
     updatePhotoItems() {
         // Get fresh photo items (important for dynamic loading)
-        const items = document.querySelectorAll('.photo-item');
-        this.photoItems = Array.from(items).map(item => {
+        this.photoItems = Array.from(document.querySelectorAll('.photo-item:not(.is-filtered-out)')).flatMap(item => {
             const img = item.querySelector('img');
-            return {
+            if (!img) return [];
+
+            return [{
                 element: item,
                 img: img,
                 src: img.src,
                 alt: img.alt || 'Photo'
-            };
+            }];
         });
     }
 
     setupEventListeners() {
-        // Photo item clicks
-        this.photoItems.forEach((item, index) => {
-            item.element.addEventListener('click', () => {
+        document.addEventListener('click', (e) => {
+            if (!(e.target instanceof Element)) return;
+            const photoItem = e.target.closest('.photo-item');
+            if (!photoItem) return;
+
+            this.updatePhotoItems();
+            const index = this.photoItems.findIndex(item => item.element === photoItem);
+            if (index !== -1) {
                 this.openLightbox(index);
-            });
+            }
         });
 
         // Navigation buttons
@@ -81,27 +91,28 @@ class PhotoLightbox {
 
     setupTouchNavigation() {
         let startX = 0;
-        let currentX = 0;
-        let isDragging = false;
+        let endX = 0;
+        let isTracking = false;
 
         this.lightboxImg.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-            isDragging = true;
+            endX = startX;
+            isTracking = true;
         });
 
         this.lightboxImg.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            currentX = e.touches[0].clientX;
+            if (!isTracking) return;
+            endX = e.touches[0].clientX;
         });
 
-        this.lightboxImg.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
+        this.lightboxImg.addEventListener('touchend', () => {
+            if (!isTracking) return;
+            isTracking = false;
 
-            const diffX = startX - currentX;
+            const diffX = startX - endX;
             const threshold = 50; // Minimum swipe distance
 
-            if (Math.abs(diffX) > threshold) {
+            if (Math.abs(diffX) >= threshold) {
                 if (diffX > 0) {
                     this.nextPhoto(); // Swipe left = next
                 } else {
@@ -114,6 +125,7 @@ class PhotoLightbox {
     openLightbox(index) {
         // Update photo items in case new ones were loaded
         this.updatePhotoItems();
+        if (index < 0 || index >= this.photoItems.length) return;
         
         this.currentIndex = index;
         this.updateLightboxContent();
@@ -127,6 +139,8 @@ class PhotoLightbox {
     }
 
     previousPhoto() {
+        if (this.photoItems.length === 0) return;
+
         this.currentIndex = this.currentIndex === 0 
             ? this.photoItems.length - 1 
             : this.currentIndex - 1;
@@ -134,6 +148,8 @@ class PhotoLightbox {
     }
 
     nextPhoto() {
+        if (this.photoItems.length === 0) return;
+
         this.currentIndex = this.currentIndex === this.photoItems.length - 1 
             ? 0 
             : this.currentIndex + 1;
