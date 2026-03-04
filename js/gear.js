@@ -1,6 +1,29 @@
 // Gear Page Script
 const GOOGLE_SHEETS_API_KEY = SITE_CONFIG.googleSheetsApiKey;
 const GEAR_SPREADSHEET_ID = SITE_CONFIG.spreadsheets.gear;
+const GearCategoryFilterUtils = window.CategoryFilterUtils || {
+    buildCategoryCounts(items, categorySelector) {
+        const counts = {};
+
+        items.forEach((item) => {
+            const category = categorySelector(item);
+            if (typeof category !== 'string') return;
+            const trimmed = category.trim();
+            if (!trimmed) return;
+            counts[trimmed] = (counts[trimmed] || 0) + 1;
+        });
+
+        return Object.entries(counts).sort((a, b) => {
+            if (b[1] !== a[1]) return b[1] - a[1];
+            return a[0].localeCompare(b[0]);
+        });
+    },
+    matchesCategory(category, selectedCategory) {
+        if (selectedCategory === 'all') return true;
+        if (typeof category !== 'string') return false;
+        return category.trim().toLowerCase() === String(selectedCategory).trim().toLowerCase();
+    }
+};
 
 // Category emoji mapping
 const CATEGORY_EMOJI = {
@@ -79,18 +102,7 @@ function parseGearData(values) {
 // Render category filter pills
 function renderCategoryFilters() {
     const container = document.getElementById('categoryFilters');
-    const categories = {};
-    
-    // Count categories
-    gearData.forEach(item => {
-        if (item.category && item.category.trim()) {
-            const cat = item.category.trim();
-            categories[cat] = (categories[cat] || 0) + 1;
-        }
-    });
-    
-    const sorted = Object.entries(categories)
-        .sort((a, b) => b[1] - a[1]);
+    const sorted = GearCategoryFilterUtils.buildCategoryCounts(gearData, (item) => item.category);
     
     container.innerHTML = `
         <button class="category-pill active" data-category="all">
@@ -118,12 +130,7 @@ function renderCategoryFilters() {
 
 // Get filtered gear
 function getFilteredGear() {
-    if (currentCategory === 'all') {
-        return gearData;
-    }
-    return gearData.filter(item => 
-        item.category && item.category.trim().toLowerCase() === currentCategory.toLowerCase()
-    );
+    return gearData.filter((item) => GearCategoryFilterUtils.matchesCategory(item.category, currentCategory));
 }
 
 // Get badge HTML
