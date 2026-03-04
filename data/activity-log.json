@@ -1,0 +1,57 @@
+[
+  {
+    "type": "task",
+    "title": "Test activity logging",
+    "timestamp": "2026-02-16T18:05:29Z"
+  },
+  {
+    "type": "system",
+    "title": "Mission Control dashboard created",
+    "timestamp": "2026-02-15T15:55:00Z"
+  },
+  {
+    "type": "task",
+    "title": "Built Mission Control dashboard with activity feed, calendar, and search",
+    "timestamp": "2026-02-15T15:50:00Z"
+  },
+  {
+    "type": "task",
+    "title": "Created food page admin interface",
+    "timestamp": "2026-02-15T14:30:00Z"
+  },
+  {
+    "type": "system",
+    "title": "Updated OpenClaw to latest version",
+    "timestamp": "2026-02-15T12:00:00Z"
+  },
+  {
+    "type": "message",
+    "title": "Sent morning briefing to #general",
+    "timestamp": "2026-02-15T09:00:00Z"
+  },
+  {
+    "type": "search",
+    "title": "Searched for new restaurants in NYC",
+    "timestamp": "2026-02-14T18:30:00Z"
+  },
+  {
+    "type": "task",
+    "title": "Added 3 new restaurants to food page",
+    "timestamp": "2026-02-14T17:00:00Z"
+  },
+  {
+    "type": "message",
+    "title": "Posted heartbeat summary to #general",
+    "timestamp": "2026-02-14T12:00:00Z"
+  },
+  {
+    "type": "system",
+    "title": "Configured auto-updater skill",
+    "timestamp": "2026-02-13T10:00:00Z"
+  },
+  {
+    "type": "task",
+    "title": "Set up cron job for daily food page health check",
+    "timestamp": "2026-02-12T15:00:00Z"
+  }
+]

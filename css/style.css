@@ -802,3 +802,30 @@ h1, h2, h3 {
         columns: 1;
     }
 }
+
+/* Simple list layout for gear and books pages */
+.simple-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.simple-list-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color, #eee);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.simple-list-item:last-child {
+    border-bottom: none;
+}
+
+.simple-list-item a {
+    color: var(--color-accent, #0066cc);
+    text-decoration: none;
+}
+
+.simple-list-item a:hover {
+    text-decoration: underline;
+}

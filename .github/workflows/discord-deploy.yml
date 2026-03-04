@@ -1,0 +1,30 @@
+name: Discord Deploy Notification
+
+on:
+  deployment_status
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord notification
+        if: github.event.deployment_status.state != 'pending'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          STATE="${{ github.event.deployment_status.state }}"
+          if [ "$STATE" = "success" ]; then
+            EMOJI="✅"
+          elif [ "$STATE" = "failure" ]; then
+            EMOJI="❌"
+          elif [ "$STATE" = "error" ]; then
+            EMOJI="⚠️"
+          else
+            EMOJI="📦"
+          fi
+          
+          curl -X POST "$DISCORD_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"content\": \"$EMOJI **${{ github.event.repository.name }}** deployment $STATE: ${{ github.event.deployment_status.environment }} - ${{ github.event.deployment_status.target_url }}\"
+            }"
