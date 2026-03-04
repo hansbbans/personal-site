@@ -1012,3 +1012,47 @@ h1, h2, h3 {
 .simple-list-item a:hover {
     text-decoration: underline;
 }
+
+/* Gear page: category hierarchy */
+.gear-hierarchy {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.gear-category-group {
+    padding: 1rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+}
+
+.gear-category-title {
+    margin: 0 0 0.7rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--text-primary);
+}
+
+.gear-category-list {
+    margin: 0;
+    padding-left: 1.4rem;
+}
+
+.gear-category-item {
+    margin: 0.35rem 0;
+    color: var(--text-primary);
+    line-height: 1.55;
+}
+
+.gear-category-item a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.gear-category-item a:hover {
+    text-decoration: underline;
+}
+
+.gear-item-description {
+    color: var(--text-secondary);
+}
