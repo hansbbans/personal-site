@@ -1,6 +1,29 @@
 // Books Page Script
 const GOOGLE_SHEETS_API_KEY = SITE_CONFIG.googleSheetsApiKey;
 const BOOKS_SPREADSHEET_ID = SITE_CONFIG.spreadsheets.books;
+const BooksCategoryFilterUtils = window.CategoryFilterUtils || {
+    buildCategoryCounts(items, categorySelector) {
+        const counts = {};
+
+        items.forEach((item) => {
+            const category = categorySelector(item);
+            if (typeof category !== 'string') return;
+            const trimmed = category.trim();
+            if (!trimmed) return;
+            counts[trimmed] = (counts[trimmed] || 0) + 1;
+        });
+
+        return Object.entries(counts).sort((a, b) => {
+            if (b[1] !== a[1]) return b[1] - a[1];
+            return a[0].localeCompare(b[0]);
+        });
+    },
+    matchesCategory(category, selectedCategory) {
+        if (selectedCategory === 'all') return true;
+        if (typeof category !== 'string') return false;
+        return category.trim().toLowerCase() === String(selectedCategory).trim().toLowerCase();
+    }
+};
 
 // Category emoji mapping
 const CATEGORY_EMOJI = {
@@ -118,7 +141,7 @@ function parseBookData(values) {
 // Render category filter pills
 function renderCategoryFilters() {
     const container = document.getElementById('categoryFilters');
-    const sorted = CategoryFilterUtils.buildCategoryCounts(booksData, (book) => book.category);
+    const sorted = BooksCategoryFilterUtils.buildCategoryCounts(booksData, (book) => book.category);
 
     container.innerHTML = `
         <button class="category-pill active" data-category="all">
@@ -146,7 +169,7 @@ function renderCategoryFilters() {
 }
 
 function getFilteredBooks() {
-    return booksData.filter((book) => CategoryFilterUtils.matchesCategory(book.category, currentCategory));
+    return booksData.filter((book) => BooksCategoryFilterUtils.matchesCategory(book.category, currentCategory));
 }
 
 // Main render — builds bookshelf rows
