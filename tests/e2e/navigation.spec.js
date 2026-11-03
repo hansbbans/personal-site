@@ -29,7 +29,7 @@ test.describe('Desktop Navigation', () => {
     ];
     
     for (const link of navLinks) {
-      const navLink = page.locator(`a[href="${link.href}"]`);
+      const navLink = page.locator(`.nav-menu a[href="${link.href}"]`);
       await expect(navLink).toBeVisible();
       await expect(navLink).toContainText(link.text.slice(2)); // Remove emoji
     }
