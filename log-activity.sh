@@ -3,9 +3,11 @@
 # Usage: ./log-activity.sh <type> "<title>"
 # Types: task, message, search, system, error
 
-LOG_FILE="/Users/Hans/code/personal-site/data/activity-log.json"
-TYPE="$1"
-TITLE="$2"
+set -euo pipefail
+
+LOG_FILE="${LOG_FILE:-$(cd "$(dirname "$0")" && pwd)/data/activity-log.json}"
+TYPE="${1:-}"
+TITLE="${2:-}"
 
 if [ -z "$TYPE" ] || [ -z "$TITLE" ]; then
     echo "Usage: ./log-activity.sh <type> \"<title>\""
@@ -19,21 +21,13 @@ else
     LOG="[]"
 fi
 
-# Create new entry
-ENTRY=$(cat <<EOF
-{
-    "type": "$TYPE",
-    "title": "$TITLE",
-    "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-}
-EOF
-)
-
-# Add to beginning of array
-NEW_LOG=$(echo "$LOG" | jq --argjson entry "$ENTRY" '[$entry] + .')
-
-# Keep only last 1000 entries
-NEW_LOG=$(echo "$NEW_LOG" | jq '.[:1000]')
+# Add the new entry (jq escapes quotes etc.) to the beginning, keep the last 1000.
+# With pipefail, a jq failure aborts before the log file is overwritten.
+NEW_LOG=$(echo "$LOG" | jq \
+    --arg type "$TYPE" \
+    --arg title "$TITLE" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    '([{type: $type, title: $title, timestamp: $timestamp}] + .) | .[:1000]')
 
 # Write back
 echo "$NEW_LOG" > "$LOG_FILE"
