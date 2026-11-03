@@ -28,6 +28,8 @@ class PhotoLoader {
             if (!img) return;
 
             const originalSrc = img.src;
+            // Keep the real path on the element; src is swapped for a placeholder below
+            img.dataset.fullSrc = originalSrc;
             const filename = originalSrc.split('/').pop();
             
             // Store image info

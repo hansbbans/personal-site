@@ -35,7 +35,8 @@ class PhotoLightbox {
             return [{
                 element: item,
                 img: img,
-                src: img.src,
+                // photo-loader swaps src for a placeholder until the photo scrolls into view
+                src: img.dataset.fullSrc || img.src,
                 alt: img.alt || 'Photo'
             }];
         });
