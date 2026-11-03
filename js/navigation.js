@@ -12,16 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     if (!mobileMenuToggle || !navMenu) return;
 
-    mobileMenuToggle.setAttribute('aria-expanded', 'false');
-    navMenu.setAttribute('aria-hidden', 'true');
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+    // The menu is only hidden while it is the closed off-canvas mobile menu.
+    // On desktop it is always visible, so it must stay exposed and focusable.
+    function syncMenuVisibility() {
+        const hidden = mobileQuery.matches && !navMenu.classList.contains('active');
+        if (mobileQuery.matches) {
+            navMenu.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+        } else {
+            navMenu.removeAttribute('aria-hidden');
+        }
+        navMenu.inert = hidden;
+    }
 
     function setMenuOpen(isOpen) {
         mobileMenuToggle.classList.toggle('active', isOpen);
         navMenu.classList.toggle('active', isOpen);
         mobileMenuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        navMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
         document.body.style.overflow = isOpen ? 'hidden' : '';
+        syncMenuVisibility();
     }
+
+    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    syncMenuVisibility();
+    mobileQuery.addEventListener('change', syncMenuVisibility);
 
     mobileMenuToggle.addEventListener('click', () => {
         setMenuOpen(!navMenu.classList.contains('active'));
