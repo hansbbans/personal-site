@@ -14,17 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     // Apply theme
-    const setTheme = (theme) => {
+    const applyTheme = (theme) => {
         if (theme === 'dark') {
             html.setAttribute('data-theme', 'dark');
         } else {
             html.removeAttribute('data-theme');
         }
+    };
+
+    // Apply and remember an explicit user choice
+    const setTheme = (theme) => {
+        applyTheme(theme);
         localStorage.setItem('theme', theme);
     };
     
-    // Initialize theme
-    setTheme(getPreferredTheme());
+    // Initialize theme without storing it, so the OS preference keeps applying
+    // until the user picks a theme with the toggle.
+    applyTheme(getPreferredTheme());
     
     // Toggle theme on button click
     if (themeToggle) {
@@ -39,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         // Only update if user hasn't explicitly set a preference
         if (!localStorage.getItem('theme')) {
-            setTheme(e.matches ? 'dark' : 'light');
+            applyTheme(e.matches ? 'dark' : 'light');
         }
     });
 });
