@@ -115,10 +115,12 @@ jobs:
       
       - name: Validate JSON Syntax
         run: |
+          status=0
           for file in $(find . -name "*.json" -not -path "./node_modules/*" -not -path "./.git/*"); do
             echo "Checking $file..."
-            python3 -c "import json; json.load(open('$file'))" || echo "INVALID: $file"
+            python3 -c "import json; json.load(open('$file'))" || { echo "INVALID: $file"; status=1; }
           done
+          exit $status
 
   # ==========================================
   # 5. JSON Schema Validation (NEW)
@@ -209,7 +211,7 @@ jobs:
         run: npx playwright install chromium
       
       - name: Run Mobile Viewport Tests
-        run: npx playwright test tests/visual/comprehensive-visual.spec.js --project=chromium --grep "Mobile Viewport Testing"
+        run: npx playwright test --config=playwright.comprehensive.config.js tests/visual/comprehensive-visual.spec.js --project=chromium --grep "Mobile Viewport Testing"
         env:
           CI: true
       
