@@ -98,6 +98,9 @@ function addKeyboardNavigation() {
     document.addEventListener('keydown', (e) => {
         const currentCards = cards();
         if (currentCards.length === 0) return;
+        // Only take over arrow/Home/End while a card has focus; otherwise these
+        // keys must keep scrolling the page.
+        if (!document.activeElement?.classList.contains('card-interactive')) return;
         
         switch(e.key) {
             case 'ArrowRight':

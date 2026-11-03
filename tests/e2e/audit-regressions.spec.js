@@ -77,3 +77,15 @@ test.describe('Photos lightbox', () => {
     await expect(page.locator('#lightbox-img')).toHaveAttribute('src', /images\//);
   });
 });
+
+test.describe('Food page keyboard', () => {
+  test('arrow keys and End still scroll the page', async ({ page }) => {
+    await page.route(/maps\.googleapis\.com/, (route) => route.abort());
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/food.html');
+    await page.waitForSelector('.card-interactive');
+    await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
+    await page.keyboard.press('End');
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  });
+});
