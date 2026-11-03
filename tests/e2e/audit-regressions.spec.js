@@ -89,3 +89,31 @@ test.describe('Food page keyboard', () => {
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
   });
 });
+
+test.describe('Books page', () => {
+  const books = Array.from({ length: 12 }, (_, i) => [`Book ${i}`, `Author ${i}`, 'Fiction', '4', '', '', '']);
+  const stubSheets = (page) => page.route(/sheets\.googleapis\.com/, (route) =>
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [['Title', 'Author', 'Category'], ...books] }) }));
+
+  for (const width of [800, 900, 1000]) {
+    test(`no horizontal page scroll at ${width}px`, async ({ page }) => {
+      await stubSheets(page);
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/books.html');
+      await page.waitForSelector('.book-cover-item');
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
+  }
+
+  test('book covers can be opened with the keyboard', async ({ page }) => {
+    await stubSheets(page);
+    await page.goto('/books.html');
+    const cover = page.locator('.book-cover-item').first();
+    await cover.focus();
+    expect(await cover.evaluate((el) => el === document.activeElement)).toBe(true);
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.book-detail-panel.visible')).toHaveCount(1);
+    await expect(cover).toHaveAttribute('aria-expanded', 'true');
+  });
+});

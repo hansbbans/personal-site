@@ -207,6 +207,11 @@ function renderBooks() {
                             const color = getSpineColor(book);
                             return `
                                 <div class="book-cover-item"
+                                     role="button"
+                                     tabindex="0"
+                                     aria-expanded="false"
+                                     aria-controls="detail-shelf-${shelfIdx}"
+                                     aria-label="${escapeAttr(book.title)} by ${escapeAttr(book.author)}"
                                      data-book-index="${globalIdx}"
                                      data-shelf="${shelfIdx}"
                                      style="background-color:${color};"
@@ -242,7 +247,20 @@ function renderBooks() {
             const bookIdx = parseInt(spine.dataset.bookIndex);
             const shelfIdx = parseInt(spine.dataset.shelf);
             handleSpineClick(bookIdx, shelfIdx, books);
+            syncSpineExpanded();
         });
+        spine.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            spine.click();
+        });
+    });
+}
+
+// Keep aria-expanded in step with the .active class on each cover
+function syncSpineExpanded() {
+    document.querySelectorAll('.book-cover-item').forEach((s) => {
+        s.setAttribute('aria-expanded', s.classList.contains('active') ? 'true' : 'false');
     });
 }
 
@@ -284,8 +302,12 @@ function handleSpineClick(bookIdx, shelfIdx, books) {
         e.stopPropagation();
         panel.classList.remove('visible');
         panel.innerHTML = '';
-        if (activeSpine) activeSpine.classList.remove('active');
+        if (activeSpine) {
+            activeSpine.classList.remove('active');
+            activeSpine.focus();
+        }
         activeBookIndex = null;
+        syncSpineExpanded();
     });
 }
 
