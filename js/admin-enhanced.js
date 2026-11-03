@@ -213,7 +213,7 @@ class PhotoAdminApp {
 
             const data = await response.json();
             this.photosHtmlSha = data.sha;
-            const html = atob(data.content);
+            const html = this.decodeGitHubContent(data.content);
             
             this.photos = this.parsePhotosFromHtml(html);
             this.originalPhotosHtml = html;
@@ -234,19 +234,30 @@ class PhotoAdminApp {
         }
     }
 
+    // GitHub returns base64 of the raw UTF-8 bytes; atob alone yields Latin-1.
+    decodeGitHubContent(content) {
+        const binary = atob(content.replace(/\s/g, ''));
+        const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+        return new TextDecoder('utf-8').decode(bytes);
+    }
+
     parsePhotosFromHtml(html) {
         const photos = [];
-        const regex = /<div class="photo-item"[^>]*>\s*<img src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>\s*<div class="photo-overlay">\s*<span class="photo-location">([^<]*)<\/span>\s*(?:<span class="photo-year">([^<]*)<\/span>)?\s*<\/div>/g;
+        const regex = /<div class="photo-item"[^>]*>\s*<img src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>\s*<div class="photo-overlay">\s*<span class="photo-location( photo-location-unknown)?">([^<]*)<\/span>\s*(?:<span class="photo-year">([^<]*)<\/span>)?\s*<\/div>/g;
+        // Ignore commented-out example blocks
+        const liveHtml = html.replace(/<!--[\s\S]*?-->/g, '');
         
         let match;
         let index = 0;
-        while ((match = regex.exec(html)) !== null) {
+        while ((match = regex.exec(liveHtml)) !== null) {
             photos.push({
                 id: `photo_${index++}`,
                 src: match[1],
                 alt: match[2] || 'Photo',
-                location: match[3] || 'Update location',
-                year: match[4] || '',
+                location: match[4] || 'Update location',
+                locationUnknown: Boolean(match[3]),
+                originalLocation: match[4] || 'Update location',
+                year: match[5] || '',
                 tags: [],
                 description: '',
                 exif: null
@@ -784,7 +795,8 @@ class PhotoAdminApp {
 
     async uploadToGitHub(upload) {
         const timestamp = Date.now();
-        const ext = upload.filename.split('.').pop().toLowerCase();
+        // optimizeImage always re-encodes to JPEG
+        const ext = upload.optimizedDataUrl ? 'jpg' : upload.filename.split('.').pop().toLowerCase();
         const filename = `photo_${timestamp}_${Math.random().toString(36).substr(2, 9)}.${ext}`;
         
         const base64 = upload.optimizedDataUrl || upload.dataUrl.split(',')[1];
@@ -820,7 +832,7 @@ class PhotoAdminApp {
         );
 
         const data = await response.json();
-        let html = atob(data.content);
+        let html = this.decodeGitHubContent(data.content);
 
         // Generate new photo blocks
         const newPhotoBlocks = uploads.map(upload => `
@@ -954,7 +966,7 @@ class PhotoAdminApp {
         }
 
         // Generate preview HTML
-        const previewHtml = this.generatePreviewHtml();
+        const previewHtml = this.generatePreviewHtml({ absoluteImageUrls: true });
         
         // Show in modal
         const modal = document.getElementById('previewModal');
@@ -966,7 +978,9 @@ class PhotoAdminApp {
         iframe.srcdoc = previewHtml;
     }
 
-    generatePreviewHtml() {
+    // absoluteImageUrls is for the admin preview only; committed HTML must keep
+    // the site's relative image paths.
+    generatePreviewHtml({ absoluteImageUrls = false } = {}) {
         // Clone the original HTML and apply changes
         let html = this.originalPhotosHtml;
         
@@ -976,9 +990,9 @@ class PhotoAdminApp {
         // Generate updated photo blocks
         const photoBlocks = activePhotos.map(photo => `
                     <div class="photo-item">
-                        <img src="${this.getImageUrl(photo.src)}" alt="${photo.alt}" loading="lazy">
+                        <img src="${absoluteImageUrls ? this.getImageUrl(photo.src) : photo.src}" alt="${photo.alt}" loading="lazy">
                         <div class="photo-overlay">
-                            <span class="photo-location">${photo.location}</span>
+                            <span class="photo-location${photo.locationUnknown && photo.location === photo.originalLocation ? ' photo-location-unknown' : ''}">${photo.location}</span>
                             ${photo.year ? `<span class="photo-year">${photo.year}</span>` : ''}
                         </div>
                     </div>`).join('\n');
