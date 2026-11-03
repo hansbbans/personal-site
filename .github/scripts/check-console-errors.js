@@ -5,10 +5,11 @@
 
 const puppeteer = require('puppeteer');
 
+const BASE_URL = (process.env.SITE_URL || 'https://hanscho.com').replace(/\/$/, '');
 const URLS = [
-  process.env.SITE_URL || 'https://hanscho.com',
-  'https://hanscho.com/food.html',
-  'https://hanscho.com/photos.html'
+  BASE_URL,
+  `${BASE_URL}/food.html`,
+  `${BASE_URL}/photos.html`
 ];
 
 async function checkPage(url) {
@@ -30,6 +31,9 @@ async function checkPage(url) {
     
     // Filter out common non-errors
     if (text.includes('Google Maps') || text.includes('deprecated')) return;
+    // Cloudflare Web Analytics rejects non-production origins (e.g. localhost)
+    const source = (msg.location && msg.location().url) || '';
+    if (text.includes('cloudflareinsights') || source.includes('cloudflareinsights')) return;
     
     if (type === 'error') {
       errors.push(text);
