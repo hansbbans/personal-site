@@ -273,3 +273,22 @@ test.describe('Sheets API errors', () => {
     });
   }
 });
+
+test.describe('Food admin cities', () => {
+  test('every sheet in the spreadsheet is selectable and manageable', async ({ page }) => {
+    const sheets = ['NYC', 'Toronto', 'Kyoto', 'Mexico City'];
+    await page.route(/sheets\.googleapis\.com/, (route) => {
+      const url = decodeURIComponent(route.request().url());
+      if (!url.includes('/values/')) {
+        return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ sheets: sheets.map((title) => ({ properties: { title } })) }) });
+      }
+      const sheet = url.split('/values/')[1].split('?')[0];
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [['Name', 'Category'], [`${sheet} Spot`, 'Ramen']] }) });
+    });
+    await page.goto('/food-admin.html');
+    await expect(page.locator('#citySelect option')).toHaveText(sheets);
+    await page.click('button[data-tab="manage"]');
+    await page.locator('#manageCityTabs .city-tab', { hasText: 'Mexico City' }).click();
+    await expect(page.locator('#restaurantList')).toContainText('Mexico City Spot');
+  });
+});
