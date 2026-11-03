@@ -363,9 +363,9 @@ function renderCards() {
         // Build category badge (like gear-card-category)
         let categoryBadge = '';
         if (r.mainCategory && r.subcategory) {
-            categoryBadge = `<span class="food-card-category">${getMainCategoryEmoji(r.mainCategory)} ${r.mainCategory} › ${getSubcategoryEmoji(r.subcategory)} ${r.subcategory}</span>`;
+            categoryBadge = `<span class="food-card-category">${getMainCategoryEmoji(r.mainCategory)} ${escapeHtml(r.mainCategory)} › ${getSubcategoryEmoji(r.subcategory)} ${escapeHtml(r.subcategory)}</span>`;
         } else if (r.category) {
-            categoryBadge = `<span class="food-card-category">${getSubcategoryEmoji(r.category)} ${r.category}</span>`;
+            categoryBadge = `<span class="food-card-category">${getSubcategoryEmoji(r.category)} ${escapeHtml(r.category)}</span>`;
         }
         
         // Build all highlights badges (not just one)
@@ -379,20 +379,20 @@ function renderCards() {
         const highlightsHtml = highlights.length > 0 ? `<div class="food-card-highlights">${highlights.join('')}</div>` : '';
         
         // Build notable dishes section
-        const dishesHtml = r.dishes ? `<div class="food-card-dishes"><span class="dishes-label">Notable:</span> ${r.dishes.split(',').map(d => d.trim()).join(', ')}</div>` : '';
+        const dishesHtml = r.dishes ? `<div class="food-card-dishes"><span class="dishes-label">Notable:</span> ${r.dishes.split(',').map(d => escapeHtml(d.trim())).join(', ')}</div>` : '';
         
         return `
         <div class="food-card ${personalityClass} ${interactiveClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
-             data-category="${r.mainCategory || r.category || 'general'}"
-             data-subcategory="${r.subcategory || ''}"
+             data-category="${escapeHtml(r.mainCategory || r.category || 'general')}"
+             data-subcategory="${escapeHtml(r.subcategory || '')}"
              data-rating="${r.googleRating || 0}"
              title="${mapsLink ? 'Click to view on Google Maps' : ''}">
             ${personalityBadge}
             <div class="food-card-body">
                 <h3 class="food-card-name">
                     ${mapsLink 
-                        ? `<a href="${mapsLink}" target="_blank" rel="noopener">${r.name}</a>`
-                        : r.name
+                        ? `<a href="${escapeHtml(mapsLink)}" target="_blank" rel="noopener">${escapeHtml(r.name)}</a>`
+                        : escapeHtml(r.name)
                     }
                 </h3>
                 <div class="food-card-meta">
@@ -405,6 +405,16 @@ function renderCards() {
         </div>
         `;
     }).join('');
+}
+
+// Restaurant data is text; escape it before it goes into HTML strings
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
 // Google Maps
@@ -496,10 +506,10 @@ function updateMap(restaurants) {
         const infoWindow = new google.maps.InfoWindow({
             content: `
                 <div style="padding: 8px; max-width: 220px; font-family: system-ui, -apple-system, sans-serif;">
-                    <h3 style="margin: 0 0 4px; font-size: 15px; font-weight: 600; color: #333;">${r.name}</h3>
-                    ${categoryDisplay ? `<p style="margin: 0 0 4px; font-size: 12px; color: ${categoryColor}; font-weight: 500;">${getSubcategoryEmoji(categoryDisplay)} ${categoryDisplay}</p>` : ''}
-                    ${r.mainCategory ? `<p style="margin: 0 0 4px; font-size: 11px; color: #888;">${getMainCategoryEmoji(r.mainCategory)} ${r.mainCategory}</p>` : ''}
-                    <p style="margin: 0; font-size: 13px; color: #666;">${r.address}</p>
+                    <h3 style="margin: 0 0 4px; font-size: 15px; font-weight: 600; color: #333;">${escapeHtml(r.name)}</h3>
+                    ${categoryDisplay ? `<p style="margin: 0 0 4px; font-size: 12px; color: ${categoryColor}; font-weight: 500;">${getSubcategoryEmoji(categoryDisplay)} ${escapeHtml(categoryDisplay)}</p>` : ''}
+                    ${r.mainCategory ? `<p style="margin: 0 0 4px; font-size: 11px; color: #888;">${getMainCategoryEmoji(r.mainCategory)} ${escapeHtml(r.mainCategory)}</p>` : ''}
+                    <p style="margin: 0; font-size: 13px; color: #666;">${escapeHtml(r.address)}</p>
                 </div>
             `
         });

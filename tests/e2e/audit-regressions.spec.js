@@ -292,3 +292,18 @@ test.describe('Food admin cities', () => {
     await expect(page.locator('#restaurantList')).toContainText('Mexico City Spot');
   });
 });
+
+test.describe('Food data rendering', () => {
+  test('restaurant text is rendered as text, not HTML', async ({ page }) => {
+    const data = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '../../data/food-data.json'), 'utf8'));
+    data.cities[0].restaurants[0].dishes = 'Bagel, <img src=x onerror="window.__xss=1">';
+    data.cities[0].restaurants[0].name = 'Fish <b>&</b> Chips';
+    await page.route(/maps\.googleapis\.com/, (route) => route.abort());
+    await page.route(/data\/food-data\.json/, (route) => route.fulfill({ contentType: 'application/json', body: JSON.stringify(data) }));
+    await page.goto('/food.html');
+    await page.waitForSelector('.food-card');
+    await page.waitForTimeout(300);
+    expect(await page.evaluate(() => window.__xss)).toBeUndefined();
+    await expect(page.locator('.food-card-name', { hasText: 'Fish <b>&</b> Chips' })).toHaveCount(1);
+  });
+});
