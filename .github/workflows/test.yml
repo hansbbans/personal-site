@@ -179,7 +179,7 @@ jobs:
         if: failure()
         with:
           name: visual-baselines
-          path: tests/visual/__snapshots__/
+          path: tests/visual/*-snapshots/
           retention-days: 30
       
       - name: Upload Actual Screenshots on Failure
