@@ -8,18 +8,37 @@ const fs = require('fs');
 const path = require('path');
 
 // Simple JSON schema validator (no external dependencies for CI)
-function validateSchema(data, schema, path = '') {
+function typeOf(value) {
+  if (value === null) return 'null';
+  if (Array.isArray(value)) return 'array';
+  return typeof value;
+}
+
+function resolveRef(ref, rootSchema) {
+  if (!ref.startsWith('#/')) throw new Error(`Unsupported $ref '${ref}'`);
+  return ref.slice(2).split('/').reduce((node, key) => {
+    if (!node || !(key in node)) throw new Error(`Unresolvable $ref '${ref}'`);
+    return node[key];
+  }, rootSchema);
+}
+
+function validateSchema(data, schema, path = '', rootSchema = schema) {
   const errors = [];
   
   function addError(message) {
     errors.push(`${path || 'root'}: ${message}`);
   }
+
+  if (schema.$ref) {
+    return validateSchema(data, resolveRef(schema.$ref, rootSchema), path, rootSchema);
+  }
   
   // Check type
   if (schema.type) {
-    const actualType = Array.isArray(data) ? 'array' : typeof data;
-    if (actualType !== schema.type) {
-      addError(`expected type ${schema.type}, got ${actualType}`);
+    const actualType = typeOf(data);
+    const allowedTypes = Array.isArray(schema.type) ? schema.type : [schema.type];
+    if (!allowedTypes.includes(actualType)) {
+      addError(`expected type ${allowedTypes.join(' or ')}, got ${actualType}`);
       return errors;
     }
   }
@@ -37,7 +56,7 @@ function validateSchema(data, schema, path = '') {
   if (schema.properties && typeof data === 'object' && data !== null) {
     for (const [key, value] of Object.entries(data)) {
       if (schema.properties[key]) {
-        const propErrors = validateSchema(value, schema.properties[key], `${path}.${key}`);
+        const propErrors = validateSchema(value, schema.properties[key], `${path}.${key}`, rootSchema);
         errors.push(...propErrors);
       }
     }
@@ -46,7 +65,7 @@ function validateSchema(data, schema, path = '') {
   // Check items for arrays
   if (schema.items && Array.isArray(data)) {
     data.forEach((item, index) => {
-      const itemErrors = validateSchema(item, schema.items, `${path}[${index}]`);
+      const itemErrors = validateSchema(item, schema.items, `${path}[${index}]`, rootSchema);
       errors.push(...itemErrors);
     });
   }
@@ -83,6 +102,15 @@ function validateSchema(data, schema, path = '') {
     }
   }
   
+  // Check additionalProperties given as a schema
+  if (schema.additionalProperties && typeof schema.additionalProperties === 'object' &&
+      typeOf(data) === 'object') {
+    for (const [key, value] of Object.entries(data)) {
+      if (schema.properties && key in schema.properties) continue;
+      errors.push(...validateSchema(value, schema.additionalProperties, `${path}.${key}`, rootSchema));
+    }
+  }
+
   // Check additionalProperties
   if (schema.additionalProperties === false && typeof data === 'object' && data !== null) {
     const allowedProps = Object.keys(schema.properties || {});
@@ -95,7 +123,7 @@ function validateSchema(data, schema, path = '') {
   
   // Handle oneOf, anyOf
   if (schema.anyOf && Array.isArray(schema.anyOf)) {
-    const validAny = schema.anyOf.some(subSchema => validateSchema(data, subSchema, path).length === 0);
+    const validAny = schema.anyOf.some(subSchema => validateSchema(data, subSchema, path, rootSchema).length === 0);
     if (!validAny) {
       addError(`data does not match any of the allowed schemas`);
     }
@@ -191,6 +219,10 @@ function validateFoodData() {
   }
 }
 
+module.exports = { validateSchema };
+
 // Run validation
-const success = validateFoodData();
-process.exit(success ? 0 : 1);
+if (require.main === module) {
+  const success = validateFoodData();
+  process.exit(success ? 0 : 1);
+}
