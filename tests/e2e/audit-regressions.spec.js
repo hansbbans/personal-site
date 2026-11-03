@@ -194,3 +194,24 @@ test.describe('Food page map', () => {
     expect(last.lng).toBeGreaterThan(135);
   });
 });
+
+test.describe('Small and short viewports', () => {
+  test('every mobile menu link can be reached on a landscape phone', async ({ page }) => {
+    await page.setViewportSize({ width: 667, height: 320 });
+    await page.goto('/index.html');
+    await page.click('.mobile-menu-toggle');
+    await expect(page.locator('.nav-menu')).toHaveClass(/active/);
+    await page.waitForTimeout(400); // slide-in transition
+    const last = page.locator('.nav-menu a').last();
+    await last.evaluate((el) => el.scrollIntoView({ block: 'end' }));
+    const bottom = await last.evaluate((el) => el.getBoundingClientRect().bottom);
+    expect(bottom).toBeLessThanOrEqual(320);
+  });
+
+  test('photos page does not scroll sideways at 320px', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/photos.html');
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+});
