@@ -154,6 +154,11 @@
     z-index: 5;
 }
 
+.book-cover-item:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
 .book-cover-item.active {
     transform: perspective(500px) rotateY(-6deg) translateY(-30px);
     box-shadow:
@@ -438,6 +443,13 @@
 }
 
 /* ─── Responsive ─────────────────────────────────────────── */
+
+/* A full shelf of 10 covers is ~930px wide; scroll the shelf, not the page */
+@media (max-width: 1024px) {
+    .shelf-row {
+        overflow-x: auto;
+    }
+}
 
 @media (max-width: 768px) {
     .shelf-row {
