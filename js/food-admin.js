@@ -75,9 +75,11 @@ class FoodAdminApp {
         subcategorySelect.onchange = () => {
             const sub = subcategorySelect.value;
             const legacyInput = document.getElementById('legacyCategory');
-            if (sub && !legacyInput.value) {
-                // Find a reverse mapping or use subcategory name
+            // Fill when empty or still holding our previous suggestion; never
+            // overwrite a value the user typed.
+            if (sub && (!legacyInput.value || legacyInput.value === legacyInput.dataset.suggested)) {
                 legacyInput.value = sub;
+                legacyInput.dataset.suggested = sub;
             }
         };
     }
@@ -300,9 +302,9 @@ class FoodAdminApp {
         // Clear form
         document.getElementById('restaurantName').value = '';
         document.getElementById('mainCategory').value = '';
-        document.getElementById('subcategory').value = '';
-        document.getElementById('subcategory').disabled = true;
+        this.updateSubcategories();
         document.getElementById('legacyCategory').value = '';
+        delete document.getElementById('legacyCategory').dataset.suggested;
         document.getElementById('address').value = '';
         document.getElementById('latitude').value = '';
         document.getElementById('longitude').value = '';
@@ -322,8 +324,10 @@ class FoodAdminApp {
         statusContent.textContent = message;
         statusBar.classList.remove('hidden');
         
+        // A pending auto-hide from an earlier message must not hide this one
+        clearTimeout(this.statusTimer);
         if (type === 'success' || type === 'info') {
-            setTimeout(() => this.hideStatus(), 5000);
+            this.statusTimer = setTimeout(() => this.hideStatus(), 5000);
         }
     }
     

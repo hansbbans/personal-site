@@ -215,3 +215,48 @@ test.describe('Small and short viewports', () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 });
+
+test.describe('Food admin add form', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route(/sheets\.googleapis\.com/, (route) =>
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [] }) }));
+    await page.goto('/food-admin.html');
+  });
+
+  test('auto-filled legacy category follows later subcategory changes', async ({ page }) => {
+    await page.selectOption('#mainCategory', 'Asian');
+    await page.selectOption('#subcategory', 'Japanese');
+    await expect(page.locator('#legacyCategory')).toHaveValue('Japanese');
+    await page.selectOption('#subcategory', 'Korean');
+    await expect(page.locator('#legacyCategory')).toHaveValue('Korean');
+  });
+
+  test('a typed legacy category is not overwritten', async ({ page }) => {
+    await page.selectOption('#mainCategory', 'Asian');
+    await page.fill('#legacyCategory', 'Ramen');
+    await page.selectOption('#subcategory', 'Japanese');
+    await expect(page.locator('#legacyCategory')).toHaveValue('Ramen');
+  });
+
+  test('form reset after adding puts subcategory back to its initial state', async ({ page }) => {
+    await page.selectOption('#mainCategory', 'Asian');
+    await page.selectOption('#subcategory', 'Japanese');
+    await page.fill('#restaurantName', 'Test Place');
+    await page.click('button[onclick="app.addRestaurant()"]');
+    await expect(page.locator('#subcategory')).toBeDisabled();
+    await expect(page.locator('#subcategory option')).toHaveText(['Select main category first']);
+  });
+
+  test('an error is not hidden by an earlier success message timer', async ({ page }) => {
+    await page.clock.install();
+    await page.selectOption('#mainCategory', 'Asian');
+    await page.selectOption('#subcategory', 'Japanese');
+    await page.fill('#restaurantName', 'Test Place');
+    await page.click('button[onclick="app.addRestaurant()"]');
+    await page.clock.runFor(3000);
+    await page.click('button[onclick="app.addRestaurant()"]'); // empty form -> error
+    await expect(page.locator('#statusBar')).toHaveClass(/error/);
+    await page.clock.runFor(3000);
+    await expect(page.locator('#statusBar')).not.toHaveClass(/hidden/);
+  });
+});
