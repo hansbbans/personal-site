@@ -117,3 +117,32 @@ test.describe('Books page', () => {
     await expect(cover).toHaveAttribute('aria-expanded', 'true');
   });
 });
+
+test.describe('Photos lightbox keyboard and dialog semantics', () => {
+  test('a photo can be opened with the keyboard and focus returns on close', async ({ page }) => {
+    await page.goto('/photos.html');
+    const item = page.locator('.photo-item').nth(2);
+    await item.focus();
+    expect(await item.evaluate((el) => el === document.activeElement)).toBe(true);
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#lightbox')).toHaveClass(/active/);
+    expect(await page.evaluate(() => !!document.activeElement.closest('#lightbox'))).toBe(true);
+    for (let i = 0; i < 5; i++) {
+      await page.keyboard.press('Tab');
+      expect(await page.evaluate(() => !!document.activeElement.closest('#lightbox'))).toBe(true);
+    }
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#lightbox')).not.toHaveClass(/active/);
+    expect(await item.evaluate((el) => el === document.activeElement)).toBe(true);
+  });
+
+  test('lightbox is a labelled modal dialog with named buttons', async ({ page }) => {
+    await page.goto('/photos.html');
+    const lightbox = page.locator('#lightbox');
+    await expect(lightbox).toHaveAttribute('role', 'dialog');
+    await expect(lightbox).toHaveAttribute('aria-modal', 'true');
+    for (const id of ['#lightbox-close', '#lightbox-prev', '#lightbox-next']) {
+      await expect(page.locator(id)).toHaveAttribute('aria-label', /.+/);
+    }
+  });
+});
