@@ -260,3 +260,16 @@ test.describe('Food admin add form', () => {
     await expect(page.locator('#statusBar')).not.toHaveClass(/hidden/);
   });
 });
+
+test.describe('Sheets API errors', () => {
+  for (const [path, grid, message] of [['/books.html', '#booksGrid', 'Unable to load books.'], ['/gear.html', '#gearGrid', 'Unable to load gear.']]) {
+    test(`${path} shows the load error when the Sheets API returns an error`, async ({ page }) => {
+      await page.route(/sheets\.googleapis\.com/, (route) => route.fulfill({
+        status: 403, contentType: 'application/json',
+        body: JSON.stringify({ error: { code: 403, message: 'API key not valid' } })
+      }));
+      await page.goto(path);
+      await expect(page.locator(grid)).toContainText(message);
+    });
+  }
+});

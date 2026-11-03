@@ -13,6 +13,10 @@ async function loadGearData() {
         const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${GEAR_SPREADSHEET_ID}/values/Sheet1?key=${GOOGLE_SHEETS_API_KEY}`;
         const response = await fetch(dataUrl);
         const data = await response.json();
+        // Sheets API errors (bad key, quota) come back as JSON with no values
+        if (!response.ok || data.error) {
+            throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
         gearData = parseGearData(data.values);
         renderGear();
     } catch (error) {
