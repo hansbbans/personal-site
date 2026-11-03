@@ -408,6 +408,28 @@ function renderCards() {
 }
 
 // Google Maps
+const CITY_CENTERS = {
+    'NYC': { lat: 40.7128, lng: -74.0060 },
+    'New York': { lat: 40.7128, lng: -74.0060 },
+    'Toronto': { lat: 43.6532, lng: -79.3832 },
+    'Tokyo': { lat: 35.6762, lng: 139.6503 },
+    'Paris': { lat: 48.8566, lng: 2.3522 },
+    'Portland': { lat: 45.5155, lng: -122.6789 }
+};
+const DEFAULT_CITY_CENTER = CITY_CENTERS.NYC;
+
+// Known center for the city, else the average of its restaurants' coordinates
+function getCityCenter(city) {
+    if (!city) return DEFAULT_CITY_CENTER;
+    if (CITY_CENTERS[city.name]) return CITY_CENTERS[city.name];
+    const located = (city.restaurants || []).filter(r => r.lat && r.lng);
+    if (located.length === 0) return DEFAULT_CITY_CENTER;
+    return {
+        lat: located.reduce((sum, r) => sum + r.lat, 0) / located.length,
+        lng: located.reduce((sum, r) => sum + r.lng, 0) / located.length
+    };
+}
+
 function initMap() {
     const mapElement = document.getElementById('map');
     if (!mapElement) {
@@ -415,17 +437,7 @@ function initMap() {
         return;
     }
     
-    const cityCenters = {
-        'NYC': { lat: 40.7128, lng: -74.0060 },
-        'New York': { lat: 40.7128, lng: -74.0060 },
-        'Toronto': { lat: 43.6532, lng: -79.3832 },
-        'Tokyo': { lat: 35.6762, lng: 139.6503 },
-        'Paris': { lat: 48.8566, lng: 2.3522 },
-        'Portland': { lat: 45.5155, lng: -122.6789 }
-    };
-    
-    const cityName = citiesData[currentCity]?.name || '';
-    const center = cityCenters[cityName] || { lat: 40.7128, lng: -74.0060 };
+    const center = getCityCenter(citiesData[currentCity]);
     
     try {
         map = new google.maps.Map(mapElement, {
@@ -457,17 +469,7 @@ function updateMap(restaurants) {
     const valid = restaurants.filter(r => r.lat && r.lng);
     
     if (valid.length === 0) {
-        const cityCenters = {
-            'NYC': { lat: 40.7128, lng: -74.0060 },
-            'New York': { lat: 40.7128, lng: -74.0060 },
-            'Toronto': { lat: 43.6532, lng: -79.3832 },
-            'Tokyo': { lat: 35.6762, lng: 139.6503 },
-            'Paris': { lat: 48.8566, lng: 2.3522 },
-            'Portland': { lat: 45.5155, lng: -122.6789 }
-        };
-        const cityName = citiesData[currentCity]?.name || '';
-        const center = cityCenters[cityName] || { lat: 40.7128, lng: -74.0060 };
-        map.setCenter(center);
+        map.setCenter(getCityCenter(citiesData[currentCity]));
         map.setZoom(12);
         return;
     }

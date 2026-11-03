@@ -146,3 +146,51 @@ test.describe('Photos lightbox keyboard and dialog semantics', () => {
     }
   });
 });
+
+test.describe('Food page map', () => {
+  // Minimal Maps stub that, like the real loader, calls the callback named in the URL.
+  const mapsStub = `
+    window.__mapCenters = [];
+    window.google = { maps: {
+      Map: class { constructor(el, opts) { window.__mapCreated = true; window.__mapCenters.push(opts.center); }
+        setCenter(c) { window.__mapCenters.push(c); } setZoom() {} fitBounds() {} getZoom() { return 12; }
+        addListener() {} controls = {}; },
+      Marker: class { constructor() {} setMap() {} addListener() {} },
+      InfoWindow: class { open() {} close() {} setContent() {} },
+      LatLngBounds: class { extend() {} },
+      event: { trigger() {}, addListenerOnce() {}, addListener() {} },
+      ControlPosition: {}, SymbolPath: {}, Size: class {}, Point: class {}
+    } };
+    window.initMap();`;
+
+  const stubMaps = (page) => page.route(/maps\.googleapis\.com/, (route) =>
+    route.fulfill({ contentType: 'text/javascript', body: mapsStub }));
+
+  test('map is created even when the Maps API loads before food.js', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await stubMaps(page);
+    await page.route(/js\/food\.js/, async (route) => {
+      await new Promise((r) => setTimeout(r, 300));
+      await route.continue();
+    });
+    await page.goto('/food.html');
+    await page.waitForSelector('.card-interactive');
+    expect(errors).toEqual([]);
+    expect(await page.evaluate(() => window.__mapCreated === true)).toBe(true);
+  });
+
+  test('empty filter result keeps the map on the selected city', async ({ page }) => {
+    await stubMaps(page);
+    await page.goto('/food.html');
+    await page.waitForSelector('.card-interactive');
+    await page.click('#mapToggle');
+    await page.locator('.city-tab', { hasText: 'Kyoto' }).click();
+    await page.click('.main-category-pill[data-category="Bars & Drinks"]');
+    const last = await page.evaluate(() => window.__mapCenters[window.__mapCenters.length - 1]);
+    // Kyoto is ~35.0N 135.7E, not the NYC fallback
+    expect(last.lat).toBeGreaterThan(34);
+    expect(last.lat).toBeLessThan(36);
+    expect(last.lng).toBeGreaterThan(135);
+  });
+});
