@@ -75,6 +75,11 @@ class PhotoLoader {
         
         img.src = canvas.toDataURL();
         img.style.filter = 'blur(10px)';
+        // The tiny canvas can't hold the exact ratio (20x13 for 3:2), so pin
+        // it until the real image arrives.
+        if (img.getAttribute('width') && img.getAttribute('height')) {
+            img.style.aspectRatio = `${w} / ${h}`;
+        }
     }
 
     handleIntersection(entries) {
@@ -104,6 +109,7 @@ class PhotoLoader {
             img.style.transition = 'filter 0.3s ease';
             img.src = src;
             img.style.filter = 'none';
+            img.style.aspectRatio = '';
             img.classList.remove('photo-loading');
             img.classList.add('photo-loaded');
             imageData.loaded = true;
@@ -118,6 +124,7 @@ class PhotoLoader {
             console.warn(`Failed to load ${src}, falling back to original`);
             img.src = imageData.original;
             img.style.filter = 'none';
+            img.style.aspectRatio = '';
         };
 
         tempImg.src = src;

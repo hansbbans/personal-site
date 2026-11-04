@@ -477,3 +477,21 @@ test('food admin edit modal shows the category for main-category legacy values',
   await expect(page.locator('#editMainCategory')).toHaveValue('Asian');
   await expect(page.locator('#editSubcategory')).toHaveValue('Other Asian');
 });
+
+test('placeholder tiles have the same height as the loaded photo', async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.route(/images\/optimized\//, async (route) => {
+    await new Promise((r) => setTimeout(r, 4000));
+    await route.abort().catch(() => {});
+  });
+  await page.goto('/photos.html', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(300);
+  const mismatched = await page.$$eval('.photo-item img', (imgs) => imgs
+    .filter((img) => (img.getAttribute('src') || '').startsWith('data:'))
+    .map((img) => {
+      const expected = img.getBoundingClientRect().width * Number(img.getAttribute('height')) / Number(img.getAttribute('width'));
+      return Math.abs(img.getBoundingClientRect().height - expected);
+    })
+    .filter((diff) => diff > 1));
+  expect(mismatched).toEqual([]);
+});
