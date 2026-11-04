@@ -319,3 +319,49 @@ test.describe('Michelin badges', () => {
     await expect(card('Sushi Ishikawa').locator('.badge-michelin')).toHaveCount(0);
   });
 });
+
+test.describe('Dark mode contrast', () => {
+  // Contrast of an element's text against its composited solid background.
+  const contrastOf = (locator) => locator.evaluate((el) => {
+    const parse = (c) => { const m = c.match(/[\d.]+/g).map(Number); return { r: m[0], g: m[1], b: m[2], a: m[3] ?? 1 }; };
+    const layers = [];
+    for (let node = el; node; node = node.parentElement) {
+      const bg = parse(getComputedStyle(node).backgroundColor);
+      if (bg.a > 0) { layers.push(bg); if (bg.a === 1) break; }
+    }
+    let base = { r: 255, g: 255, b: 255 };
+    for (const l of layers.reverse()) base = { r: l.r * l.a + base.r * (1 - l.a), g: l.g * l.a + base.g * (1 - l.a), b: l.b * l.a + base.b * (1 - l.a) };
+    const lum = ({ r, g, b }) => [r, g, b].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; })
+      .reduce((s, v, i) => s + v * [0.2126, 0.7152, 0.0722][i], 0);
+    const fg = parse(getComputedStyle(el).color);
+    const [hi, lo] = [lum(fg), lum(base)].sort((a, b) => b - a);
+    return (hi + 0.05) / (lo + 0.05);
+  });
+
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.route(/maps\.googleapis\.com/, (route) => route.abort());
+    await page.route(/sheets\.googleapis\.com/, (route) => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [
+      ['Title', 'Author', 'Category', 'Rating', 'Status', 'Notes', 'Link'],
+      ['Book', 'Author', 'Fiction', '4', 'Read', 'Notes', 'https://www.amazon.com/dp/B000000000']
+    ] }) }));
+  });
+
+  test('primary button on the home page', async ({ page }) => {
+    await page.goto('/index.html');
+    expect(await contrastOf(page.locator('.cta-primary'))).toBeGreaterThanOrEqual(3);
+  });
+
+  test('active category pill, its count and the Amazon button on the books page', async ({ page }) => {
+    await page.goto('/books.html');
+    expect(await contrastOf(page.locator('.category-pill.active').first())).toBeGreaterThanOrEqual(3);
+    expect(await contrastOf(page.locator('.category-pill.active .count').first())).toBeGreaterThanOrEqual(3);
+    await page.locator('.book-cover-item').first().click();
+    expect(await contrastOf(page.locator('.btn-amazon'))).toBeGreaterThanOrEqual(3);
+  });
+
+  test('home-city count badge on the food page', async ({ page }) => {
+    await page.goto('/food.html');
+    expect(await contrastOf(page.locator('.city-tab.home-base.active .city-count'))).toBeGreaterThanOrEqual(3);
+  });
+});

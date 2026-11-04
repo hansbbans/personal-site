@@ -661,6 +661,11 @@
     color: white;
 }
 
+/* White on the dark-mode teal is ~1.9:1; use dark text instead */
+[data-theme="dark"] .city-tab.home-base.active .city-count {
+    color: var(--bg-primary);
+}
+
 [data-theme="dark"] .city-tab.home-base {
     background: linear-gradient(135deg, #14b8a6, #0ea5e9);
     box-shadow: 0 2px 8px rgba(20, 184, 166, 0.25);

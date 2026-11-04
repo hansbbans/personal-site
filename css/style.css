@@ -339,6 +339,11 @@ h1, h2, h3 {
     box-shadow: var(--shadow-accent);
 }
 
+/* White on the lighter dark-mode orange is ~2.3:1; use dark text instead */
+[data-theme="dark"] .cta-primary {
+    color: var(--bg-primary);
+}
+
 .cta-primary:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
