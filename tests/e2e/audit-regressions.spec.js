@@ -365,3 +365,35 @@ test.describe('Dark mode contrast', () => {
     expect(await contrastOf(page.locator('.city-tab.home-base.active .city-count'))).toBeGreaterThanOrEqual(3);
   });
 });
+
+test.describe('Books detail panel scrolling', () => {
+  const books = Array.from({ length: 30 }, (_, i) => [`Book ${i}`, `Author ${i}`, 'Fiction', '4', 'Read', 'Some notes', '']);
+  test.beforeEach(async ({ page }) => {
+    await page.route(/sheets\.googleapis\.com/, (route) =>
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [['Title', 'Author', 'Category'], ...books] }) }));
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/books.html');
+  });
+
+  const panelVsNav = (page) => page.evaluate(() => ({
+    navBottom: document.querySelector('.navbar').getBoundingClientRect().bottom,
+    panel: document.querySelector('.book-detail-panel.visible').getBoundingClientRect().toJSON()
+  }));
+
+  test('opening a second book does not hide its panel under the sticky nav', async ({ page }) => {
+    await page.locator('.book-cover-item').nth(0).click();
+    await page.waitForTimeout(800);
+    await page.locator('.book-cover-item').nth(14).click();
+    await page.waitForTimeout(1000);
+    const { navBottom, panel } = await panelVsNav(page);
+    expect(panel.top).toBeGreaterThanOrEqual(navBottom);
+  });
+
+  test('a panel below the fold is scrolled into view', async ({ page }) => {
+    await page.locator('.book-cover-item').nth(14).click();
+    await page.waitForTimeout(1000);
+    const { navBottom, panel } = await panelVsNav(page);
+    expect(panel.top).toBeGreaterThanOrEqual(navBottom);
+    expect(panel.top).toBeLessThan(667);
+  });
+});

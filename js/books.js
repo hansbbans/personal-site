@@ -261,6 +261,22 @@ function renderBooks() {
     });
 }
 
+// scrollIntoView({block: 'nearest'}) ignores the sticky navbar, so opening a
+// book after another panel collapsed could park the new panel under it.
+function scrollPanelIntoView(panel) {
+    const gap = 12;
+    const navBottom = document.querySelector('.navbar')?.getBoundingClientRect().bottom || 0;
+    const rect = panel.getBoundingClientRect();
+    let delta = 0;
+    if (rect.top < navBottom + gap) {
+        delta = rect.top - navBottom - gap;
+    } else if (rect.bottom > window.innerHeight - gap) {
+        // Bring the bottom into view, but never push the top under the navbar
+        delta = Math.min(rect.bottom - window.innerHeight + gap, rect.top - navBottom - gap);
+    }
+    if (delta) window.scrollBy({ top: delta, behavior: 'smooth' });
+}
+
 // Keep aria-expanded in step with the .active class on each cover
 function syncSpineExpanded() {
     document.querySelectorAll('.book-cover-item').forEach((s) => {
@@ -296,10 +312,8 @@ function handleSpineClick(bookIdx, shelfIdx, books) {
     panel.innerHTML = renderDetailPanel(book);
     panel.classList.add('visible');
 
-    // Scroll so the shelf + panel is visible
-    setTimeout(() => {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 50);
+    // Scroll so the panel is visible below the sticky navbar
+    setTimeout(() => scrollPanelIntoView(panel), 50);
 
     // Close button
     panel.querySelector('.btn-close-detail').addEventListener('click', (e) => {
