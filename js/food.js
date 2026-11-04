@@ -67,8 +67,7 @@ function createMapPin(color) {
 // Map legacy category to new hierarchical system
 function mapCategory(legacyCategory) {
     if (!legacyCategory) return { mainCategory: null, subcategory: null };
-    const normalized = legacyCategory.trim();
-    return CATEGORY_MAPPING[normalized] || { mainCategory: null, subcategory: null };
+    return getCategoryInfo(legacyCategory);
 }
 
 // Initialize

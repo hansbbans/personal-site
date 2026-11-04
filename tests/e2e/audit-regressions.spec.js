@@ -432,3 +432,18 @@ test('photo tiles announce location and year', async ({ page }) => {
   expect(label).toContain(location);
   expect(label).toContain(year);
 });
+
+test('food admin edit modal shows the category for main-category legacy values', async ({ page }) => {
+  await page.route(/sheets\.googleapis\.com/, (route) => {
+    const url = decodeURIComponent(route.request().url());
+    if (!url.includes('/values/')) {
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ sheets: [{ properties: { title: 'NYC' } }] }) });
+    }
+    return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [['Name', 'Category'], ['Nan Xiang', 'Asian']] }) });
+  });
+  await page.goto('/food-admin.html');
+  await page.click('button[data-tab="manage"]');
+  await page.click('#restaurantList button:has-text("Edit")');
+  await expect(page.locator('#editMainCategory')).toHaveValue('Asian');
+  await expect(page.locator('#editSubcategory')).toHaveValue('Other Asian');
+});
