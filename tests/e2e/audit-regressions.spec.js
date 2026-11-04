@@ -242,8 +242,14 @@ test.describe('Small and short viewports', () => {
 
 test.describe('Food admin add form', () => {
   test.beforeEach(async ({ page }) => {
-    await page.route(/sheets\.googleapis\.com/, (route) =>
-      route.fulfill({ contentType: 'application/json', body: JSON.stringify({ values: [] }) }));
+    // A normal one-sheet spreadsheet; an error status bar would sit over the
+    // Add button on small screens.
+    await page.route(/sheets\.googleapis\.com/, (route) => route.fulfill({
+      contentType: 'application/json',
+      body: JSON.stringify(route.request().url().includes('/values/')
+        ? { values: [] }
+        : { sheets: [{ properties: { title: 'NYC' } }] })
+    }));
     await page.goto('/food-admin.html');
   });
 

@@ -19,8 +19,11 @@ describe('og:image', () => {
   });
 });
 
+const hasJq = (() => { try { execFileSync('jq', ['--version'], { stdio: 'ignore' }); return true; } catch { return false; } })();
+
 describe('log-activity.sh', () => {
-  test('a title with double quotes is logged and does not wipe the log', () => {
+  // The script needs jq (present on macOS dev machines and ubuntu-latest)
+  (hasJq ? test : test.skip)('a title with double quotes is logged and does not wipe the log', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'activity-'));
     const logFile = path.join(dir, 'activity-log.json');
     fs.writeFileSync(logFile, JSON.stringify([{ type: 'task', title: 'old', timestamp: 'x' }]));

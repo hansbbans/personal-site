@@ -167,7 +167,7 @@ test.describe('iPad Navigation', () => {
     await expect(navMenu).not.toHaveClass(/active/);
   });
 
-  test('should properly handle scroll lock on iPad', async ({ page }) => {
+  test('should properly handle scroll lock on iPad', async ({ page, browserName, isMobile }) => {
     const menuToggle = page.locator('.mobile-menu-toggle');
     const body = page.locator('body');
     
@@ -178,8 +178,11 @@ test.describe('iPad Navigation', () => {
     const bodyStyle = await body.evaluate(el => window.getComputedStyle(el).overflow);
     expect(bodyStyle).toBe('hidden');
     
-    // Try to scroll (should not scroll background)
-    await page.mouse.wheel(0, 500);
+    // Try to scroll (should not scroll background). mouse.wheel is not
+    // supported in mobile WebKit, so only use it where it exists.
+    if (!(browserName === 'webkit' && isMobile)) {
+      await page.mouse.wheel(0, 500);
+    }
     
     // Close menu
     await menuToggle.click();
