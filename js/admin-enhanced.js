@@ -250,7 +250,10 @@ class PhotoAdminApp {
         let match;
         let index = 0;
         while ((match = regex.exec(liveHtml)) !== null) {
+            const imgTag = match[0].match(/<img [^>]*>/)[0];
             photos.push({
+                width: imgTag.match(/\swidth="(\d+)"/)?.[1] || '',
+                height: imgTag.match(/\sheight="(\d+)"/)?.[1] || '',
                 id: `photo_${index++}`,
                 src: match[1],
                 alt: match[2] || 'Photo',
@@ -779,6 +782,8 @@ class PhotoAdminApp {
             
             const blob = await this.pica.toBlob(canvas, 'image/jpeg', this.config.jpegQuality / 100);
             upload.optimizedSize = blob.size;
+            upload.width = canvas.width;
+            upload.height = canvas.height;
             
             // Convert blob to base64
             const reader = new FileReader();
@@ -837,7 +842,7 @@ class PhotoAdminApp {
         // Generate new photo blocks
         const newPhotoBlocks = uploads.map(upload => `
                     <div class="photo-item">
-                        <img src="${upload.uploadedPath}" alt="${upload.alt || 'Photo'}" loading="lazy">
+                        <img src="${upload.uploadedPath}" alt="${upload.alt || 'Photo'}"${this.dimensionAttrs(upload)} loading="lazy">
                         <div class="photo-overlay">
                             <span class="photo-location">${upload.location}</span>
                             <span class="photo-year">${upload.year}</span>
@@ -978,6 +983,11 @@ class PhotoAdminApp {
         iframe.srcdoc = previewHtml;
     }
 
+    // width/height let photo-loader draw a placeholder with the photo's shape
+    dimensionAttrs({ width, height }) {
+        return width && height ? ` width="${width}" height="${height}"` : '';
+    }
+
     // absoluteImageUrls is for the admin preview only; committed HTML must keep
     // the site's relative image paths.
     generatePreviewHtml({ absoluteImageUrls = false } = {}) {
@@ -990,7 +1000,7 @@ class PhotoAdminApp {
         // Generate updated photo blocks
         const photoBlocks = activePhotos.map(photo => `
                     <div class="photo-item">
-                        <img src="${absoluteImageUrls ? this.getImageUrl(photo.src) : photo.src}" alt="${photo.alt}" loading="lazy">
+                        <img src="${absoluteImageUrls ? this.getImageUrl(photo.src) : photo.src}" alt="${photo.alt}"${this.dimensionAttrs(photo)} loading="lazy">
                         <div class="photo-overlay">
                             <span class="photo-location${photo.locationUnknown && photo.location === photo.originalLocation ? ' photo-location-unknown' : ''}">${photo.location}</span>
                             ${photo.year ? `<span class="photo-year">${photo.year}</span>` : ''}

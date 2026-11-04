@@ -397,3 +397,28 @@ test.describe('Books detail panel scrolling', () => {
     expect(panel.top).toBeLessThan(667);
   });
 });
+
+test.describe('Photo placeholders', () => {
+  test('placeholders match the theme and the photo shape', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    // Hold optimized images so the placeholders stay up
+    await page.route(/images\/optimized\//, async (route) => {
+      await new Promise((r) => setTimeout(r, 5000));
+      await route.abort().catch(() => {});
+    });
+    await page.goto('/photos.html', { waitUntil: 'domcontentloaded' });
+    const info = await page.locator('.photo-item img').first().evaluate(async (img) => {
+      await img.decode().catch(() => {});
+      const c = document.createElement('canvas');
+      c.width = img.naturalWidth; c.height = img.naturalHeight;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+      return { r, g, b, ratio: img.naturalWidth / img.naturalHeight, attrRatio: img.width / img.height,
+        declared: Number(img.getAttribute('width')) / Number(img.getAttribute('height')) };
+    });
+    expect((info.r + info.g + info.b) / 3).toBeLessThan(80);
+    expect(info.declared).toBeGreaterThan(0);
+    expect(Math.abs(info.ratio - info.declared)).toBeLessThan(0.1);
+  });
+});

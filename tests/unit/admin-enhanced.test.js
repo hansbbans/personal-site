@@ -49,6 +49,15 @@ describe('PhotoAdminApp photos.html round trip', () => {
       .toBe((photosHtml.match(/photo-location-unknown/g) || []).length);
   });
 
+  test('committed HTML keeps image width/height attributes', () => {
+    const app = makeApp();
+    app.photos = app.parsePhotosFromHtml(photosHtml);
+    app.originalPhotosHtml = photosHtml;
+    const html = app.generatePreviewHtml();
+    const dims = (h) => [...h.replace(/<!--[\s\S]*?-->/g, '').matchAll(/<img [^>]*width="(\d+)" height="(\d+)"/g)].map((m) => m[0].match(/src="[^"]+"|width="\d+"|height="\d+"/g).join(' '));
+    expect(dims(html)).toEqual(dims(photosHtml));
+  });
+
   test('editing an unknown location drops the unknown-location class for that photo', () => {
     const app = makeApp();
     app.photos = app.parsePhotosFromHtml(photosHtml);

@@ -54,18 +54,24 @@ class PhotoLoader {
     }
 
     setPlaceholder(img) {
-        // Create a tiny blurred placeholder (you could generate these server-side)
+        // Draw at the photo's own aspect ratio (from its width/height attributes)
+        // so the column layout doesn't jump when the real image arrives.
+        const w = Number(img.getAttribute('width')) || 4;
+        const h = Number(img.getAttribute('height')) || 3;
         const canvas = document.createElement('canvas');
         canvas.width = 20;
-        canvas.height = 15;
+        canvas.height = Math.max(1, Math.round(20 * h / w));
         const ctx = canvas.getContext('2d');
-        
-        // Simple gradient placeholder
-        const gradient = ctx.createLinearGradient(0, 0, 20, 15);
-        gradient.addColorStop(0, '#f0f0f0');
-        gradient.addColorStop(1, '#e0e0e0');
+
+        // Theme-aware colors, so dark mode doesn't flash bright boxes
+        const styles = getComputedStyle(document.documentElement);
+        const from = styles.getPropertyValue('--bg-secondary').trim() || '#f0f0f0';
+        const to = styles.getPropertyValue('--border-light').trim() || '#e0e0e0';
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, from);
+        gradient.addColorStop(1, to);
         ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 20, 15);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         img.src = canvas.toDataURL();
         img.style.filter = 'blur(10px)';
