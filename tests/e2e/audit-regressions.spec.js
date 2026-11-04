@@ -422,3 +422,13 @@ test.describe('Photo placeholders', () => {
     expect(Math.abs(info.ratio - info.declared)).toBeLessThan(0.1);
   });
 });
+
+test('photo tiles announce location and year', async ({ page }) => {
+  await page.goto('/photos.html');
+  const item = page.locator('.photo-item').first();
+  const location = (await item.locator('.photo-location').textContent()).trim();
+  const year = (await item.locator('.photo-year').textContent()).trim();
+  const label = await item.getAttribute('aria-label');
+  expect(label).toContain(location);
+  expect(label).toContain(year);
+});

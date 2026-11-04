@@ -61,7 +61,11 @@ class PhotoLightbox {
             if (!img) return;
             item.setAttribute('tabindex', '0');
             item.setAttribute('role', 'button');
-            item.setAttribute('aria-label', `View photo: ${img.alt || 'Photo'}`);
+            // The button label replaces its content, so carry the overlay text too
+            const details = ['.photo-location', '.photo-year']
+                .map((sel) => item.querySelector(sel)?.textContent.trim())
+                .filter(Boolean);
+            item.setAttribute('aria-label', [`View photo: ${img.alt || 'Photo'}`, ...details].join(', '));
             item.addEventListener('keydown', (e) => {
                 if (e.key !== 'Enter' && e.key !== ' ') return;
                 e.preventDefault();
