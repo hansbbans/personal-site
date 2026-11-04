@@ -307,3 +307,15 @@ test.describe('Food data rendering', () => {
     await expect(page.locator('.food-card-name', { hasText: 'Fish <b>&</b> Chips' })).toHaveCount(1);
   });
 });
+
+test.describe('Michelin badges', () => {
+  test('starred and Bib Gourmand restaurants show a Michelin badge', async ({ page }) => {
+    await page.route(/maps\.googleapis\.com/, (route) => route.abort());
+    await page.goto('/food.html');
+    await page.locator('.city-tab', { hasText: 'NYC' }).click();
+    const card = (name) => page.locator('.food-card', { has: page.locator('.food-card-name', { hasText: name }) });
+    await expect(card('Atomix').locator('.badge-michelin')).toContainText('2');
+    await expect(card('Rubirosa').locator('.badge-michelin')).toContainText('Bib Gourmand');
+    await expect(card('Sushi Ishikawa').locator('.badge-michelin')).toHaveCount(0);
+  });
+});

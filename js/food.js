@@ -373,7 +373,11 @@ function renderCards() {
         if (r.isHansFavorite) highlights.push('<span class="badge badge-favorite">⭐ Hans Fave</span>');
         if (r.onEaterList) highlights.push('<span class="badge badge-eater">🏆 Eater 38</span>');
         if (r.onInfatuationList) highlights.push('<span class="badge badge-infatuation">🔥 Infatuation</span>');
-        if (r.isMichelinRated) highlights.push('<span class="badge badge-michelin">🍽️ Michelin</span>');
+        if (r.michelinStars) {
+            highlights.push(`<span class="badge badge-michelin">🍽️ ${r.michelinStars} Michelin star${r.michelinStars > 1 ? 's' : ''}</span>`);
+        } else if (r.michelinBibGourmand) {
+            highlights.push('<span class="badge badge-michelin">🍽️ Bib Gourmand</span>');
+        }
         if (r.googleRating && r.googleRating >= 4.0) highlights.push(`<span class="badge badge-high-rated">⭐ ${r.googleRating.toFixed(1)}</span>`);
         
         const highlightsHtml = highlights.length > 0 ? `<div class="food-card-highlights">${highlights.join('')}</div>` : '';
