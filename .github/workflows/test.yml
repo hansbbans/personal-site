@@ -8,6 +8,7 @@ on:
   schedule:
     # Run daily at 9am UTC
     - cron: '0 9 * * *'
+  workflow_dispatch:
 
 env:
   # For local file testing
