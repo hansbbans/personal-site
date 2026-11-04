@@ -157,7 +157,7 @@ jobs:
         run: npm ci
       
       - name: Install Playwright Browsers
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium
       
       - name: Run Visual Regression Tests
         run: npx playwright test --config=playwright.comprehensive.config.js
@@ -208,7 +208,7 @@ jobs:
         run: npm ci
       
       - name: Install Playwright Browsers
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium
       
       - name: Run Mobile Viewport Tests
         run: npx playwright test --config=playwright.comprehensive.config.js tests/visual/comprehensive-visual.spec.js --project=chromium --grep "Mobile Viewport Testing"
@@ -241,7 +241,7 @@ jobs:
         run: npm ci
       
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: npx playwright install --with-deps
       
       - name: Run E2E Tests
         run: npm run test:e2e
