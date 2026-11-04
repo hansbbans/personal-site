@@ -117,15 +117,15 @@ test.describe('Food Page Specific Tests', () => {
   
   test('food page - restaurant cards render correctly', async ({ page }) => {
     await page.goto('/food.html');
-    await page.waitForSelector('.personality-card', { timeout: 15000 });
+    await page.waitForSelector('.food-card', { timeout: 15000 });
     await page.waitForTimeout(2000);
     
     // Check restaurant cards exist
-    const cardCount = await page.locator('.personality-card').count();
+    const cardCount = await page.locator('.food-card').count();
     expect(cardCount).toBeGreaterThan(0);
     
     // Screenshot first card for comparison
-    const firstCard = page.locator('.personality-card').first();
+    const firstCard = page.locator('.food-card').first();
     await expect(firstCard).toHaveScreenshot('food-restaurant-card.png');
   });
   
@@ -235,9 +235,13 @@ test.describe('Console Error Detection', () => {
         if (msg.type() === 'error') {
           // Filter out Google Maps errors (expected in test environment)
           const text = msg.text();
+          const source = msg.location()?.url || '';
           if (!text.includes('Google Maps') && 
               !text.includes('google') &&
-              !text.includes('maps.googleapis')) {
+              !text.includes('maps.googleapis') &&
+              // Cloudflare Web Analytics only accepts the production origin
+              !text.includes('cloudflareinsights') &&
+              !source.includes('cloudflareinsights')) {
             errors.push(text);
           }
         }

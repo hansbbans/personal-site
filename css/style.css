@@ -127,6 +127,11 @@ h1, h2, h3 {
     line-height: 1.2;
 }
 
+/* Page titles on the section pages (books, food, gear, photos) */
+.section-title {
+    font-size: 1.5rem;
+}
+
 ::selection {
     background: var(--primary);
     color: var(--bg-primary);
@@ -337,6 +342,11 @@ h1, h2, h3 {
     background: var(--primary);
     color: white;
     box-shadow: var(--shadow-accent);
+}
+
+/* White on the lighter dark-mode orange is ~2.3:1; use dark text instead */
+[data-theme="dark"] .cta-primary {
+    color: var(--bg-primary);
 }
 
 .cta-primary:hover {
@@ -600,6 +610,10 @@ h1, h2, h3 {
         transition: left var(--transition-medium);
         gap: 1.5rem;
         border-bottom: 1px solid var(--border-light);
+        /* Body scroll is locked while open, so the menu must scroll itself on short screens */
+        max-height: calc(100vh - 57px);
+        max-height: calc(100dvh - 57px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
@@ -775,6 +789,8 @@ h1, h2, h3 {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .photo-filter label {
@@ -786,6 +802,9 @@ h1, h2, h3 {
 }
 
 .photo-filter select {
+    /* Long location names must not widen the page on small phones */
+    max-width: 100%;
+    min-width: 0;
     border: 1px solid var(--border-default);
     background: var(--bg-card);
     color: var(--text-primary);

@@ -19,7 +19,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'json'],
   testTimeout: 10000,
   verbose: true,
-  collectCoverage: true,
+  collectCoverage: false,
   coverageThreshold: {
     global: {
       branches: 70,

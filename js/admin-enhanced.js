@@ -213,7 +213,7 @@ class PhotoAdminApp {
 
             const data = await response.json();
             this.photosHtmlSha = data.sha;
-            const html = atob(data.content);
+            const html = this.decodeGitHubContent(data.content);
             
             this.photos = this.parsePhotosFromHtml(html);
             this.originalPhotosHtml = html;
@@ -234,21 +234,37 @@ class PhotoAdminApp {
         }
     }
 
+    // GitHub returns base64 of the raw UTF-8 bytes; atob alone yields Latin-1.
+    decodeGitHubContent(content) {
+        const binary = atob(content.replace(/\s/g, ''));
+        const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+        return new TextDecoder('utf-8').decode(bytes);
+    }
+
     parsePhotosFromHtml(html) {
         const photos = [];
-        const regex = /<div class="photo-item"[^>]*>\s*<img src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>\s*<div class="photo-overlay">\s*<span class="photo-location">([^<]*)<\/span>\s*(?:<span class="photo-year">([^<]*)<\/span>)?\s*<\/div>/g;
+        const regex = /<div class="photo-item"[^>]*>\s*<img src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>\s*<div class="photo-overlay">\s*<span class="photo-location( photo-location-unknown)?">([^<]*)<\/span>\s*(?:<span class="photo-year">([^<]*)<\/span>)?\s*<\/div>/g;
+        // Ignore commented-out example blocks
+        const liveHtml = html.replace(/<!--[\s\S]*?-->/g, '');
         
         let match;
         let index = 0;
-        while ((match = regex.exec(html)) !== null) {
+        while ((match = regex.exec(liveHtml)) !== null) {
+            const imgTag = match[0].match(/<img [^>]*>/)[0];
+            const itemTag = match[0].match(/<div class="photo-item"[^>]*>/)[0];
+            const dataAttr = (name) => this.decodeHtml(itemTag.match(new RegExp(`\\sdata-${name}="([^"]*)"`))?.[1] || '');
             photos.push({
+                width: imgTag.match(/\swidth="(\d+)"/)?.[1] || '',
+                height: imgTag.match(/\sheight="(\d+)"/)?.[1] || '',
                 id: `photo_${index++}`,
                 src: match[1],
-                alt: match[2] || 'Photo',
-                location: match[3] || 'Update location',
-                year: match[4] || '',
-                tags: [],
-                description: '',
+                alt: this.decodeHtml(match[2]) || 'Photo',
+                location: this.decodeHtml(match[4]) || 'Update location',
+                locationUnknown: Boolean(match[3]),
+                originalLocation: this.decodeHtml(match[4]) || 'Update location',
+                year: this.decodeHtml(match[5] || ''),
+                tags: dataAttr('tags').split(',').map(t => t.trim()).filter(Boolean),
+                description: dataAttr('description'),
                 exif: null
             });
         }
@@ -288,30 +304,30 @@ class PhotoAdminApp {
                     </div>
                 </div>
                 <div class="photo-preview">
-                    <img src="${this.getImageUrl(photo.src)}" alt="${photo.alt}" loading="lazy">
+                    <img src="${this.getImageUrl(photo.src)}" alt="${this.escapeHtml(photo.alt)}" loading="lazy">
                     <div class="photo-overlay">
                         <div class="photo-metadata">
-                            📍 ${photo.location}<br>
-                            📅 ${photo.year || 'No year'}
-                            ${photo.tags.length > 0 ? `<br>🏷️ ${photo.tags.join(', ')}` : ''}
+                            📍 ${this.escapeHtml(photo.location)}<br>
+                            📅 ${this.escapeHtml(photo.year || 'No year')}
+                            ${photo.tags.length > 0 ? `<br>🏷️ ${this.escapeHtml(photo.tags.join(', '))}` : ''}
                         </div>
                     </div>
                 </div>
                 <div class="photo-details">
                     <div class="form-group">
                         <label>Location</label>
-                        <input type="text" class="form-control" value="${photo.location}" 
+                        <input type="text" class="form-control" value="${this.escapeHtml(photo.location)}" 
                                onchange="app.updatePhotoField('${photo.id}', 'location', this.value)">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Year</label>
-                            <input type="number" class="form-control" value="${photo.year}" 
+                            <input type="number" class="form-control" value="${this.escapeHtml(photo.year)}" 
                                    onchange="app.updatePhotoField('${photo.id}', 'year', this.value)">
                         </div>
                         <div class="form-group">
                             <label>Alt Text</label>
-                            <input type="text" class="form-control" value="${photo.alt}" 
+                            <input type="text" class="form-control" value="${this.escapeHtml(photo.alt)}" 
                                    onchange="app.updatePhotoField('${photo.id}', 'alt', this.value)">
                         </div>
                     </div>
@@ -346,11 +362,11 @@ class PhotoAdminApp {
                     <div class="photo-filename">${this.getFilename(photo.src)}</div>
                 </div>
                 <div class="photo-preview">
-                    <img src="${this.getImageUrl(photo.src)}" alt="${photo.alt}" loading="lazy">
+                    <img src="${this.getImageUrl(photo.src)}" alt="${this.escapeHtml(photo.alt)}" loading="lazy">
                     <div class="photo-overlay">
                         <div class="photo-metadata">
-                            📍 ${photo.location}<br>
-                            📅 ${photo.year || 'No year'}
+                            📍 ${this.escapeHtml(photo.location)}<br>
+                            📅 ${this.escapeHtml(photo.year || 'No year')}
                         </div>
                     </div>
                 </div>
@@ -621,7 +637,7 @@ class PhotoAdminApp {
         preview.innerHTML = this.pendingUploads.map(upload => `
             <div class="upload-card" data-upload-id="${upload.id}">
                 <div class="photo-card-header">
-                    <div class="photo-filename">${upload.filename}</div>
+                    <div class="photo-filename">${this.escapeHtml(upload.filename)}</div>
                     <button class="btn-action" onclick="app.removeUpload('${upload.id}')">×</button>
                 </div>
                 <div class="photo-preview">
@@ -635,7 +651,7 @@ class PhotoAdminApp {
                 <div class="photo-details">
                     <div class="form-group">
                         <label>Location</label>
-                        <input type="text" class="form-control" value="${upload.location}" 
+                        <input type="text" class="form-control" value="${this.escapeHtml(upload.location)}" 
                                onchange="app.updateUploadField('${upload.id}', 'location', this.value)">
                     </div>
                     <div class="form-row">
@@ -646,7 +662,7 @@ class PhotoAdminApp {
                         </div>
                         <div class="form-group">
                             <label>Alt Text</label>
-                            <input type="text" class="form-control" value="${upload.alt}" 
+                            <input type="text" class="form-control" value="${this.escapeHtml(upload.alt)}" 
                                    placeholder="Photo description"
                                    onchange="app.updateUploadField('${upload.id}', 'alt', this.value)">
                         </div>
@@ -768,6 +784,8 @@ class PhotoAdminApp {
             
             const blob = await this.pica.toBlob(canvas, 'image/jpeg', this.config.jpegQuality / 100);
             upload.optimizedSize = blob.size;
+            upload.width = canvas.width;
+            upload.height = canvas.height;
             
             // Convert blob to base64
             const reader = new FileReader();
@@ -784,7 +802,8 @@ class PhotoAdminApp {
 
     async uploadToGitHub(upload) {
         const timestamp = Date.now();
-        const ext = upload.filename.split('.').pop().toLowerCase();
+        // optimizeImage always re-encodes to JPEG
+        const ext = upload.optimizedDataUrl ? 'jpg' : upload.filename.split('.').pop().toLowerCase();
         const filename = `photo_${timestamp}_${Math.random().toString(36).substr(2, 9)}.${ext}`;
         
         const base64 = upload.optimizedDataUrl || upload.dataUrl.split(',')[1];
@@ -820,15 +839,15 @@ class PhotoAdminApp {
         );
 
         const data = await response.json();
-        let html = atob(data.content);
+        let html = this.decodeGitHubContent(data.content);
 
         // Generate new photo blocks
         const newPhotoBlocks = uploads.map(upload => `
-                    <div class="photo-item">
-                        <img src="${upload.uploadedPath}" alt="${upload.alt || 'Photo'}" loading="lazy">
+                    <div class="photo-item"${this.photoItemAttrs(upload)}>
+                        <img src="${upload.uploadedPath}" alt="${this.escapeHtml(upload.alt || 'Photo')}"${this.dimensionAttrs(upload)} loading="lazy">
                         <div class="photo-overlay">
-                            <span class="photo-location">${upload.location}</span>
-                            <span class="photo-year">${upload.year}</span>
+                            <span class="photo-location">${this.escapeHtml(upload.location)}</span>
+                            <span class="photo-year">${this.escapeHtml(upload.year)}</span>
                         </div>
                     </div>`).join('\n');
 
@@ -954,7 +973,7 @@ class PhotoAdminApp {
         }
 
         // Generate preview HTML
-        const previewHtml = this.generatePreviewHtml();
+        const previewHtml = this.generatePreviewHtml({ absoluteImageUrls: true });
         
         // Show in modal
         const modal = document.getElementById('previewModal');
@@ -966,7 +985,37 @@ class PhotoAdminApp {
         iframe.srcdoc = previewHtml;
     }
 
-    generatePreviewHtml() {
+    // Values written into photos.html are escaped, and decoded when read back
+    escapeHtml(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    decodeHtml(value) {
+        const el = document.createElement('textarea');
+        el.innerHTML = value;
+        return el.value;
+    }
+
+    // Tags and description have no visible place in the gallery, so keep them
+    // as data attributes on the photo item.
+    photoItemAttrs(photo) {
+        const tags = (photo.tags || []).join(', ');
+        return (tags ? ` data-tags="${this.escapeHtml(tags)}"` : '') +
+            (photo.description ? ` data-description="${this.escapeHtml(photo.description)}"` : '');
+    }
+
+    // width/height let photo-loader draw a placeholder with the photo's shape
+    dimensionAttrs({ width, height }) {
+        return width && height ? ` width="${width}" height="${height}"` : '';
+    }
+
+    // absoluteImageUrls is for the admin preview only; committed HTML must keep
+    // the site's relative image paths.
+    generatePreviewHtml({ absoluteImageUrls = false } = {}) {
         // Clone the original HTML and apply changes
         let html = this.originalPhotosHtml;
         
@@ -975,11 +1024,11 @@ class PhotoAdminApp {
         
         // Generate updated photo blocks
         const photoBlocks = activePhotos.map(photo => `
-                    <div class="photo-item">
-                        <img src="${this.getImageUrl(photo.src)}" alt="${photo.alt}" loading="lazy">
+                    <div class="photo-item"${this.photoItemAttrs(photo)}>
+                        <img src="${absoluteImageUrls ? this.getImageUrl(photo.src) : photo.src}" alt="${this.escapeHtml(photo.alt)}"${this.dimensionAttrs(photo)} loading="lazy">
                         <div class="photo-overlay">
-                            <span class="photo-location">${photo.location}</span>
-                            ${photo.year ? `<span class="photo-year">${photo.year}</span>` : ''}
+                            <span class="photo-location${photo.locationUnknown && photo.location === photo.originalLocation ? ' photo-location-unknown' : ''}">${this.escapeHtml(photo.location)}</span>
+                            ${photo.year ? `<span class="photo-year">${this.escapeHtml(photo.year)}</span>` : ''}
                         </div>
                     </div>`).join('\n');
 

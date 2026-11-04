@@ -163,7 +163,7 @@ test.describe('Component Visual Tests', () => {
     await page.waitForTimeout(1000);
     
     // Test navigation arrows
-    await expect(page.locator('.lightbox-nav')).toHaveScreenshot('lightbox-arrows.png');
+    await expect(page.locator('.lightbox-nav').first()).toHaveScreenshot('lightbox-arrows.png');
     
     // Test counter
     await expect(page.locator('.lightbox-counter')).toHaveScreenshot('lightbox-counter.png');

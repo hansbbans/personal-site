@@ -8,13 +8,13 @@
     <meta property="og:title" content="Food Guide - Hans Cho">
     <meta property="og:description" content="Curated restaurant recommendations across NYC, Toronto, Tokyo, and more.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://hanscho.com/images/R0002049.jpg">
+    <meta property="og:image" content="https://hanscho.com/images/optimized/large/R0002049.jpg">
     <meta property="og:image:alt" content="Eiffel Tower viewed from the Seine under cloudy skies">
     <title>Food Guide - Hans</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍜</text></svg>">
     <script data-theme-init>(function () {
         try {
-            var stored = localStorage.getItem('theme');
+            var stored = localStorage.getItem('theme-preference');
             var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (stored === 'dark' || (!stored && prefersDark)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -64,7 +64,7 @@
     <main>
         <section class="section">
             <div class="container">
-                <h2 class="section-title">🍜 Food Guide</h2>
+                <h1 class="section-title">🍜 Food Guide</h1>
                 <p class="section-subtitle">Places I love eating at</p>
 
                 <!-- City Tabs -->
@@ -134,9 +134,10 @@
 
     <script src="js/navigation.js"></script>
     <script src="js/theme.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfQ4-x8DWUnMWqG5XuVGV-GBvvyFf7cQc&callback=initMap" async defer></script>
     <script src="js/food-categories.js?v=3"></script>
     <script src="js/food.js?v=3"></script>
+    <!-- Loaded after food.js, which defines the initMap callback -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfQ4-x8DWUnMWqG5XuVGV-GBvvyFf7cQc&callback=initMap" async defer></script>
     <script src="js/personality-interactions.js?v=3"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fede3c0d4b03486c98392098d02e566b"}'></script>
 </body>

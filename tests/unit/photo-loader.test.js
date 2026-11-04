@@ -19,6 +19,15 @@ global.Image = class {
   }
 };
 
+beforeEach(() => jest.useFakeTimers());
+afterEach(() => jest.useRealTimers());
+
+const loadPhotoLoader = () => {
+  const src = require('fs').readFileSync(require('path').join(__dirname, '../../js/photo-loader.js'), 'utf8');
+  // The class is a script-level declaration; expose it the way a browser global would be.
+  global.PhotoLoader = new Function(`${src}\nreturn PhotoLoader;`)();
+};
+
 describe('PhotoLoader', () => {
   let photoLoader;
   
@@ -44,7 +53,7 @@ describe('PhotoLoader', () => {
     `;
     
     // Load PhotoLoader class (simulate loading from file)
-    eval(require('fs').readFileSync('./js/photo-loader.js', 'utf8'));
+    loadPhotoLoader();
   });
 
   afterEach(() => {
@@ -122,10 +131,10 @@ describe('PhotoLoader', () => {
   });
 
   test('should set placeholder correctly', () => {
-    photoLoader = new PhotoLoader();
-    
     const img = document.querySelector('img');
     const originalSrc = img.src;
+
+    photoLoader = new PhotoLoader();
     
     photoLoader.setPlaceholder(img);
     
@@ -134,13 +143,14 @@ describe('PhotoLoader', () => {
     expect(img.style.filter).toBe('blur(10px)');
   });
 
-  test('should load image with smooth transition', async () => {
+  test('should load image with smooth transition', () => {
     photoLoader = new PhotoLoader();
     
     const img = document.querySelector('img');
     img.classList.add('photo-loading');
     
-    await photoLoader.loadImage(img);
+    photoLoader.loadImage(img);
+    jest.advanceTimersByTime(200);
     
     expect(img.classList.contains('photo-loading')).toBe(false);
     expect(img.classList.contains('photo-loaded')).toBe(true);
@@ -167,15 +177,16 @@ describe('PhotoLoader Error Handling', () => {
       }
     };
     
-    eval(require('fs').readFileSync('./js/photo-loader.js', 'utf8'));
+    loadPhotoLoader();
   });
 
-  test('should handle image load errors gracefully', async () => {
-    const photoLoader = new PhotoLoader();
+  test('should handle image load errors gracefully', () => {
     const img = document.querySelector('img');
     const originalSrc = img.src;
+    const photoLoader = new PhotoLoader();
     
-    await photoLoader.loadImage(img);
+    photoLoader.loadImage(img);
+    jest.advanceTimersByTime(200);
     
     // Should fallback to original src on error
     expect(img.src).toBe(originalSrc);
@@ -187,7 +198,7 @@ describe('PhotoLoader Integration', () => {
   test('should work with dynamically added photos', () => {
     document.body.innerHTML = '<div class="photos-grid"></div>';
     
-    eval(require('fs').readFileSync('./js/photo-loader.js', 'utf8'));
+    loadPhotoLoader();
     const photoLoader = new PhotoLoader();
     
     expect(photoLoader.images.size).toBe(0);
@@ -199,8 +210,8 @@ describe('PhotoLoader Integration', () => {
       </div>
     `;
     
-    // Update photo items
-    photoLoader.updatePhotoItems();
+    // Re-scan photo items
+    photoLoader.setupPhotoItems();
     
     expect(photoLoader.images.size).toBe(1);
   });

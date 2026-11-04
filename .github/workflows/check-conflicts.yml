@@ -14,7 +14,7 @@ jobs:
       
       - name: Check for merge conflict markers
         run: |
-          if grep -r "<<<<<<< HEAD\|=======\|>>>>>>>" --include="*.css" --include="*.js" --include="*.html" --include="*.md" . 2>/dev/null; then
+          if grep -rnE "^(<<<<<<<|=======|>>>>>>>)( |$)" --exclude-dir=node_modules --exclude-dir=.git --include="*.css" --include="*.js" --include="*.html" --include="*.md" . 2>/dev/null; then
             echo "❌ Merge conflict markers found!"
             exit 1
           fi

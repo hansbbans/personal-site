@@ -20,9 +20,12 @@ Object.keys(metadata).forEach(filename => {
     
     if (html.includes(pattern)) {
         // Find this photo's year span and update it
-        const beforePattern = new RegExp(`(src="images/${filename.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[\\s\\S]*?<span class="photo-year">)TBD(</span>)`);
-        html = html.replace(beforePattern, `$1${year}$2`);
-        console.log(`Updated ${filename} → ${year}`);
+        // Stay inside this photo's item: never cross into the next image
+        const beforePattern = new RegExp(`(src="images/${filename.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"(?:(?!src="images/)[\\s\\S])*?<span class="photo-year">)TBD(</span>)`);
+        if (beforePattern.test(html)) {
+            html = html.replace(beforePattern, `$1${year}$2`);
+            console.log(`Updated ${filename} → ${year}`);
+        }
     }
 });
 

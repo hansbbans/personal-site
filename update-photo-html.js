@@ -1,52 +1,52 @@
 #!/usr/bin/env node
 
-// Update photos.html with metadata (location + year)
+// Update photos.html with metadata (year, plus location where the page still
+// shows a placeholder). Only each photo's own overlay is touched; alt text,
+// classes and every other photo stay as they are.
 const fs = require('fs');
 
-console.log('🔄 Updating photos.html with metadata...');
+const PLACEHOLDER_LOCATIONS = ['Update location', 'Location unavailable', ''];
+const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-// Read metadata
-const metadata = JSON.parse(fs.readFileSync('photo-metadata.json', 'utf8'));
+function updateHtml(html, metadata) {
+    let updated = 0;
+    for (const [filename, photo] of Object.entries(metadata)) {
+        // The overlay has no nested divs, so the first </div> after it closes it
+        const overlayRegex = new RegExp(
+            `(<img src="images/${escapeRegExp(filename)}"[^>]*>\\s*<div class="photo-overlay">)([\\s\\S]*?)(</div>)`
+        );
+        html = html.replace(overlayRegex, (match, open, overlay, close) => {
+            let next = overlay;
 
-// Read current HTML
-let html = fs.readFileSync('photos.html', 'utf8');
+            if (photo.year) {
+                const yearSpan = `<span class="photo-year">${escapeHtml(photo.year)}</span>`;
+                next = /<span class="photo-year">[^<]*<\/span>/.test(next)
+                    ? next.replace(/<span class="photo-year">[^<]*<\/span>/, yearSpan)
+                    : next.replace(/(<\/span>)(\s*)$/, `$1$2    ${yearSpan}$2`);
+            }
 
-// Update each photo item
-Object.keys(metadata).forEach(filename => {
-    const photo = metadata[filename];
-    const srcPattern = `src="images/${filename}"`;
-    
-    // Find the photo item containing this image
-    const photoItemRegex = new RegExp(
-        `<div class="photo-item">([\\s\\S]*?)${filename.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([\\s\\S]*?)</div>(?=\\s*(?:<div class="photo-item">|</div>|$))`,
-        'g'
-    );
-    
-    html = html.replace(photoItemRegex, (match, before, after) => {
-        // Extract current overlay content to preserve any manual updates
-        const overlayMatch = match.match(/<span class="photo-location">(.*?)<\/span>/);
-        const currentLocation = overlayMatch ? overlayMatch[1] : 'Update location';
-        
-        // Only update if still showing "Update location"
-        const location = currentLocation === 'Update location' ? 'Update location' : currentLocation;
-        
-        return `<div class="photo-item">
-                        <img src="images/${filename}" alt="Photo from ${photo.year}" loading="lazy">
-                        <div class="photo-overlay">
-                            <span class="photo-location">${location}</span>
-                            <span class="photo-year">${photo.year}</span>
-                        </div>
-                    </div>`;
-    });
-});
+            const location = photo.location && !PLACEHOLDER_LOCATIONS.includes(photo.location) ? photo.location : null;
+            if (location) {
+                next = next.replace(/<span class="photo-location[^"]*">([^<]*)<\/span>/, (span, current) =>
+                    PLACEHOLDER_LOCATIONS.includes(current.trim())
+                        ? `<span class="photo-location">${escapeHtml(location)}</span>`
+                        : span);
+            }
 
-// Write updated HTML
-fs.writeFileSync('photos.html', html);
+            if (next !== overlay) updated++;
+            return open + next + close;
+        });
+    }
+    return { html, updated };
+}
 
-console.log('✅ Updated photos.html with years from metadata');
-console.log('📅 Years displayed:', [...new Set(Object.values(metadata).map(p => p.year))].sort().join(', '));
-console.log('');
-console.log('💡 Next steps:');
-console.log('   1. Update CSS for .photo-year styling');
-console.log('   2. Manually update locations in the HTML');
-console.log('   3. Consider adding location metadata extraction');
+module.exports = { updateHtml };
+
+if (require.main === module) {
+    console.log('🔄 Updating photos.html with metadata...');
+    const metadata = JSON.parse(fs.readFileSync('photo-metadata.json', 'utf8'));
+    const { html, updated } = updateHtml(fs.readFileSync('photos.html', 'utf8'), metadata);
+    fs.writeFileSync('photos.html', html);
+    console.log(`✅ Updated ${updated} photo(s) in photos.html`);
+}

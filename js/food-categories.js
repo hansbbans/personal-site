@@ -80,6 +80,13 @@ const CATEGORY_MAPPING = {
     "Sandwich": { mainCategory: "American", subcategory: "Sandwiches/Delis" },
     "Deli": { mainCategory: "American", subcategory: "Sandwiches/Delis" },
     "Steakhouse": { mainCategory: "American", subcategory: "Steakhouse" },
+    "Sandwiches": { mainCategory: "American", subcategory: "Sandwiches/Delis" },
+    "Jewish": { mainCategory: "American", subcategory: "Sandwiches/Delis" },
+    "Southern": { mainCategory: "American", subcategory: "BBQ/Southern" },
+    "Breakfast": { mainCategory: "American", subcategory: "Other American" },
+    "Cuban": { mainCategory: "American", subcategory: "Other American" },
+    "Creole": { mainCategory: "American", subcategory: "Other American" },
+    "African": { mainCategory: "American", subcategory: "Other American" },
     
     // Mexican
     "Mexican": { mainCategory: "Mexican", subcategory: "Other Mexican" },
@@ -175,7 +182,18 @@ const SUBCATEGORY_EMOJI = {
 function getCategoryInfo(flatCategory) {
     if (!flatCategory) return { mainCategory: null, subcategory: null };
     const normalized = flatCategory.trim();
-    return CATEGORY_MAPPING[normalized] || { mainCategory: null, subcategory: null };
+    if (CATEGORY_MAPPING[normalized]) return CATEGORY_MAPPING[normalized];
+
+    // Main category names (e.g. "Asian") and subcategory names (e.g.
+    // "Burgers/Diners", which the admin suggests as the legacy value) map
+    // to themselves.
+    if (FOOD_CATEGORIES[normalized]) {
+        return { mainCategory: normalized, subcategory: `Other ${normalized}` };
+    }
+    for (const [mainCategory, { subcategories }] of Object.entries(FOOD_CATEGORIES)) {
+        if (subcategories.includes(normalized)) return { mainCategory, subcategory: normalized };
+    }
+    return { mainCategory: null, subcategory: null };
 }
 
 // Helper function to get emoji for subcategory

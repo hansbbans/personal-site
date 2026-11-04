@@ -38,6 +38,11 @@
     border-color: var(--primary);
 }
 
+/* White on the lighter dark-mode orange is ~2.3:1; use dark text instead */
+[data-theme="dark"] .category-pill.active {
+    color: var(--bg-primary);
+}
+
 .category-pill .count {
     background: rgba(255, 255, 255, 0.2);
     padding: 0.1rem 0.4rem;
@@ -152,6 +157,11 @@
         -8px 8px 24px rgba(0, 0, 0, 0.45),
         3px 3px 12px rgba(0, 0, 0, 0.2);
     z-index: 5;
+}
+
+.book-cover-item:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
 }
 
 .book-cover-item.active {
@@ -341,6 +351,10 @@
     font-family: var(--font-mono);
 }
 
+[data-theme="dark"] .btn-amazon {
+    color: var(--bg-primary);
+}
+
 .btn-amazon:hover {
     opacity: 0.88;
     transform: translateY(-1px);
@@ -438,6 +452,13 @@
 }
 
 /* ─── Responsive ─────────────────────────────────────────── */
+
+/* A full shelf of 10 covers is ~930px wide; scroll the shelf, not the page */
+@media (max-width: 1024px) {
+    .shelf-row {
+        overflow-x: auto;
+    }
+}
 
 @media (max-width: 768px) {
     .shelf-row {

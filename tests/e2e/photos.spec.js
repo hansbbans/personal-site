@@ -23,22 +23,25 @@ test.describe('Photo Gallery', () => {
     expect(yearText).toMatch(/^\d{4}$/);
   });
 
-  test('should lazy load images progressively', async ({ page }) => {
-    // Check that images start with placeholder/small versions
-    const firstImg = page.locator('.photo-item img').first();
-    
-    // Initially might have placeholder
-    await expect(firstImg).toBeVisible();
-    
-    // Scroll down to trigger more lazy loading
-    await page.keyboard.press('End');
-    
-    // Wait for lazy loading to complete
-    await page.waitForTimeout(2000);
-    
-    // Check that more images are loaded
-    const loadedImages = await page.locator('.photo-item img[src*="images/"]').count();
-    expect(loadedImages).toBeGreaterThan(20);
+  test('should lazy load images progressively', async ({ page, browserName, isMobile }) => {
+    // Linux headless WebKit with mobile emulation never delivers
+    // IntersectionObserver entries, even on a bare test page; macOS WebKit
+    // (Mobile Safari project) passes.
+    test.fixme(browserName === 'webkit' && isMobile && process.platform === 'linux',
+      'IntersectionObserver does not fire in Linux headless mobile WebKit');
+    const images = page.locator('.photo-item img');
+    const total = await images.count();
+    await expect(images.first()).toBeVisible();
+
+    // Bring each photo on screen in turn, the way a reader scrolls through.
+    // (scrollIntoViewIfNeeded waits for rendered frames, which headless
+    // WebKit on Linux otherwise skips while the page is idle.)
+    for (let i = 0; i < total; i++) {
+      await images.nth(i).scrollIntoViewIfNeeded();
+    }
+
+    // Every photo has swapped its placeholder for a real image
+    await expect.poll(() => page.locator('.photo-item img[src*="images/"]').count(), { timeout: 10000 }).toBe(total);
   });
 
   test('should open lightbox on photo click', async ({ page }) => {

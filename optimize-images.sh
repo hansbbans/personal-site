@@ -10,7 +10,7 @@ cd "$(dirname "$0")"
 mkdir -p images/optimized/{small,medium,large}
 
 # Process each photo
-for img in images/photo_*.jpg images/photo_*.jpeg; do
+for img in images/*.jpg images/*.jpeg; do
     if [[ -f "$img" ]]; then
         filename=$(basename "$img")
         echo "Processing $filename..."

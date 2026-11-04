@@ -29,7 +29,7 @@ test.describe('Desktop Navigation', () => {
     ];
     
     for (const link of navLinks) {
-      const navLink = page.locator(`a[href="${link.href}"]`);
+      const navLink = page.locator(`.nav-menu a[href="${link.href}"]`);
       await expect(navLink).toBeVisible();
       await expect(navLink).toContainText(link.text.slice(2)); // Remove emoji
     }
@@ -39,7 +39,7 @@ test.describe('Desktop Navigation', () => {
     // Navigate to photos page
     await page.click('a[href="photos.html"]');
     await expect(page).toHaveURL(/photos\.html$/);
-    await expect(page.locator('h2')).toContainText('Photography');
+    await expect(page.locator('h1')).toContainText('Photography');
     
     // Navigate to about page
     await page.click('a[href="about.html"]');
@@ -167,7 +167,7 @@ test.describe('iPad Navigation', () => {
     await expect(navMenu).not.toHaveClass(/active/);
   });
 
-  test('should properly handle scroll lock on iPad', async ({ page }) => {
+  test('should properly handle scroll lock on iPad', async ({ page, browserName, isMobile }) => {
     const menuToggle = page.locator('.mobile-menu-toggle');
     const body = page.locator('body');
     
@@ -178,8 +178,11 @@ test.describe('iPad Navigation', () => {
     const bodyStyle = await body.evaluate(el => window.getComputedStyle(el).overflow);
     expect(bodyStyle).toBe('hidden');
     
-    // Try to scroll (should not scroll background)
-    await page.mouse.wheel(0, 500);
+    // Try to scroll (should not scroll background). mouse.wheel is not
+    // supported in mobile WebKit, so only use it where it exists.
+    if (!(browserName === 'webkit' && isMobile)) {
+      await page.mouse.wheel(0, 500);
+    }
     
     // Close menu
     await menuToggle.click();

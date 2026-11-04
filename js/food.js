@@ -67,8 +67,7 @@ function createMapPin(color) {
 // Map legacy category to new hierarchical system
 function mapCategory(legacyCategory) {
     if (!legacyCategory) return { mainCategory: null, subcategory: null };
-    const normalized = legacyCategory.trim();
-    return CATEGORY_MAPPING[normalized] || { mainCategory: null, subcategory: null };
+    return getCategoryInfo(legacyCategory);
 }
 
 // Initialize
@@ -363,9 +362,9 @@ function renderCards() {
         // Build category badge (like gear-card-category)
         let categoryBadge = '';
         if (r.mainCategory && r.subcategory) {
-            categoryBadge = `<span class="food-card-category">${getMainCategoryEmoji(r.mainCategory)} ${r.mainCategory} › ${getSubcategoryEmoji(r.subcategory)} ${r.subcategory}</span>`;
+            categoryBadge = `<span class="food-card-category">${getMainCategoryEmoji(r.mainCategory)} ${escapeHtml(r.mainCategory)} › ${getSubcategoryEmoji(r.subcategory)} ${escapeHtml(r.subcategory)}</span>`;
         } else if (r.category) {
-            categoryBadge = `<span class="food-card-category">${getSubcategoryEmoji(r.category)} ${r.category}</span>`;
+            categoryBadge = `<span class="food-card-category">${getSubcategoryEmoji(r.category)} ${escapeHtml(r.category)}</span>`;
         }
         
         // Build all highlights badges (not just one)
@@ -373,26 +372,30 @@ function renderCards() {
         if (r.isHansFavorite) highlights.push('<span class="badge badge-favorite">⭐ Hans Fave</span>');
         if (r.onEaterList) highlights.push('<span class="badge badge-eater">🏆 Eater 38</span>');
         if (r.onInfatuationList) highlights.push('<span class="badge badge-infatuation">🔥 Infatuation</span>');
-        if (r.isMichelinRated) highlights.push('<span class="badge badge-michelin">🍽️ Michelin</span>');
+        if (r.michelinStars) {
+            highlights.push(`<span class="badge badge-michelin">🍽️ ${r.michelinStars} Michelin star${r.michelinStars > 1 ? 's' : ''}</span>`);
+        } else if (r.michelinBibGourmand) {
+            highlights.push('<span class="badge badge-michelin">🍽️ Bib Gourmand</span>');
+        }
         if (r.googleRating && r.googleRating >= 4.0) highlights.push(`<span class="badge badge-high-rated">⭐ ${r.googleRating.toFixed(1)}</span>`);
         
         const highlightsHtml = highlights.length > 0 ? `<div class="food-card-highlights">${highlights.join('')}</div>` : '';
         
         // Build notable dishes section
-        const dishesHtml = r.dishes ? `<div class="food-card-dishes"><span class="dishes-label">Notable:</span> ${r.dishes.split(',').map(d => d.trim()).join(', ')}</div>` : '';
+        const dishesHtml = r.dishes ? `<div class="food-card-dishes"><span class="dishes-label">Notable:</span> ${r.dishes.split(',').map(d => escapeHtml(d.trim())).join(', ')}</div>` : '';
         
         return `
         <div class="food-card ${personalityClass} ${interactiveClass} ${categoryClass ? 'category-' + categoryClass : ''}" 
-             data-category="${r.mainCategory || r.category || 'general'}"
-             data-subcategory="${r.subcategory || ''}"
+             data-category="${escapeHtml(r.mainCategory || r.category || 'general')}"
+             data-subcategory="${escapeHtml(r.subcategory || '')}"
              data-rating="${r.googleRating || 0}"
              title="${mapsLink ? 'Click to view on Google Maps' : ''}">
             ${personalityBadge}
             <div class="food-card-body">
                 <h3 class="food-card-name">
                     ${mapsLink 
-                        ? `<a href="${mapsLink}" target="_blank" rel="noopener">${r.name}</a>`
-                        : r.name
+                        ? `<a href="${escapeHtml(mapsLink)}" target="_blank" rel="noopener">${escapeHtml(r.name)}</a>`
+                        : escapeHtml(r.name)
                     }
                 </h3>
                 <div class="food-card-meta">
@@ -407,7 +410,39 @@ function renderCards() {
     }).join('');
 }
 
+// Restaurant data is text; escape it before it goes into HTML strings
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Google Maps
+const CITY_CENTERS = {
+    'NYC': { lat: 40.7128, lng: -74.0060 },
+    'New York': { lat: 40.7128, lng: -74.0060 },
+    'Toronto': { lat: 43.6532, lng: -79.3832 },
+    'Tokyo': { lat: 35.6762, lng: 139.6503 },
+    'Paris': { lat: 48.8566, lng: 2.3522 },
+    'Portland': { lat: 45.5155, lng: -122.6789 }
+};
+const DEFAULT_CITY_CENTER = CITY_CENTERS.NYC;
+
+// Known center for the city, else the average of its restaurants' coordinates
+function getCityCenter(city) {
+    if (!city) return DEFAULT_CITY_CENTER;
+    if (CITY_CENTERS[city.name]) return CITY_CENTERS[city.name];
+    const located = (city.restaurants || []).filter(r => r.lat && r.lng);
+    if (located.length === 0) return DEFAULT_CITY_CENTER;
+    return {
+        lat: located.reduce((sum, r) => sum + r.lat, 0) / located.length,
+        lng: located.reduce((sum, r) => sum + r.lng, 0) / located.length
+    };
+}
+
 function initMap() {
     const mapElement = document.getElementById('map');
     if (!mapElement) {
@@ -415,17 +450,7 @@ function initMap() {
         return;
     }
     
-    const cityCenters = {
-        'NYC': { lat: 40.7128, lng: -74.0060 },
-        'New York': { lat: 40.7128, lng: -74.0060 },
-        'Toronto': { lat: 43.6532, lng: -79.3832 },
-        'Tokyo': { lat: 35.6762, lng: 139.6503 },
-        'Paris': { lat: 48.8566, lng: 2.3522 },
-        'Portland': { lat: 45.5155, lng: -122.6789 }
-    };
-    
-    const cityName = citiesData[currentCity]?.name || '';
-    const center = cityCenters[cityName] || { lat: 40.7128, lng: -74.0060 };
+    const center = getCityCenter(citiesData[currentCity]);
     
     try {
         map = new google.maps.Map(mapElement, {
@@ -457,17 +482,7 @@ function updateMap(restaurants) {
     const valid = restaurants.filter(r => r.lat && r.lng);
     
     if (valid.length === 0) {
-        const cityCenters = {
-            'NYC': { lat: 40.7128, lng: -74.0060 },
-            'New York': { lat: 40.7128, lng: -74.0060 },
-            'Toronto': { lat: 43.6532, lng: -79.3832 },
-            'Tokyo': { lat: 35.6762, lng: 139.6503 },
-            'Paris': { lat: 48.8566, lng: 2.3522 },
-            'Portland': { lat: 45.5155, lng: -122.6789 }
-        };
-        const cityName = citiesData[currentCity]?.name || '';
-        const center = cityCenters[cityName] || { lat: 40.7128, lng: -74.0060 };
-        map.setCenter(center);
+        map.setCenter(getCityCenter(citiesData[currentCity]));
         map.setZoom(12);
         return;
     }
@@ -494,10 +509,10 @@ function updateMap(restaurants) {
         const infoWindow = new google.maps.InfoWindow({
             content: `
                 <div style="padding: 8px; max-width: 220px; font-family: system-ui, -apple-system, sans-serif;">
-                    <h3 style="margin: 0 0 4px; font-size: 15px; font-weight: 600; color: #333;">${r.name}</h3>
-                    ${categoryDisplay ? `<p style="margin: 0 0 4px; font-size: 12px; color: ${categoryColor}; font-weight: 500;">${getSubcategoryEmoji(categoryDisplay)} ${categoryDisplay}</p>` : ''}
-                    ${r.mainCategory ? `<p style="margin: 0 0 4px; font-size: 11px; color: #888;">${getMainCategoryEmoji(r.mainCategory)} ${r.mainCategory}</p>` : ''}
-                    <p style="margin: 0; font-size: 13px; color: #666;">${r.address}</p>
+                    <h3 style="margin: 0 0 4px; font-size: 15px; font-weight: 600; color: #333;">${escapeHtml(r.name)}</h3>
+                    ${categoryDisplay ? `<p style="margin: 0 0 4px; font-size: 12px; color: ${categoryColor}; font-weight: 500;">${getSubcategoryEmoji(categoryDisplay)} ${escapeHtml(categoryDisplay)}</p>` : ''}
+                    ${r.mainCategory ? `<p style="margin: 0 0 4px; font-size: 11px; color: #888;">${getMainCategoryEmoji(r.mainCategory)} ${escapeHtml(r.mainCategory)}</p>` : ''}
+                    <p style="margin: 0; font-size: 13px; color: #666;">${escapeHtml(r.address)}</p>
                 </div>
             `
         });

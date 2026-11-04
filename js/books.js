@@ -93,6 +93,10 @@ async function loadBooksData() {
         const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${BOOKS_SPREADSHEET_ID}/values/Sheet1?key=${GOOGLE_SHEETS_API_KEY}`;
         const response = await fetch(dataUrl);
         const data = await response.json();
+        // Sheets API errors (bad key, quota) come back as JSON with no values
+        if (!response.ok || data.error) {
+            throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
 
         booksData = parseBookData(data.values);
 
@@ -207,6 +211,11 @@ function renderBooks() {
                             const color = getSpineColor(book);
                             return `
                                 <div class="book-cover-item"
+                                     role="button"
+                                     tabindex="0"
+                                     aria-expanded="false"
+                                     aria-controls="detail-shelf-${shelfIdx}"
+                                     aria-label="${escapeAttr(book.title)} by ${escapeAttr(book.author)}"
                                      data-book-index="${globalIdx}"
                                      data-shelf="${shelfIdx}"
                                      style="background-color:${color};"
@@ -242,7 +251,36 @@ function renderBooks() {
             const bookIdx = parseInt(spine.dataset.bookIndex);
             const shelfIdx = parseInt(spine.dataset.shelf);
             handleSpineClick(bookIdx, shelfIdx, books);
+            syncSpineExpanded();
         });
+        spine.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            spine.click();
+        });
+    });
+}
+
+// scrollIntoView({block: 'nearest'}) ignores the sticky navbar, so opening a
+// book after another panel collapsed could park the new panel under it.
+function scrollPanelIntoView(panel) {
+    const gap = 12;
+    const navBottom = document.querySelector('.navbar')?.getBoundingClientRect().bottom || 0;
+    const rect = panel.getBoundingClientRect();
+    let delta = 0;
+    if (rect.top < navBottom + gap) {
+        delta = rect.top - navBottom - gap;
+    } else if (rect.bottom > window.innerHeight - gap) {
+        // Bring the bottom into view, but never push the top under the navbar
+        delta = Math.min(rect.bottom - window.innerHeight + gap, rect.top - navBottom - gap);
+    }
+    if (delta) window.scrollBy({ top: delta, behavior: 'smooth' });
+}
+
+// Keep aria-expanded in step with the .active class on each cover
+function syncSpineExpanded() {
+    document.querySelectorAll('.book-cover-item').forEach((s) => {
+        s.setAttribute('aria-expanded', s.classList.contains('active') ? 'true' : 'false');
     });
 }
 
@@ -274,18 +312,20 @@ function handleSpineClick(bookIdx, shelfIdx, books) {
     panel.innerHTML = renderDetailPanel(book);
     panel.classList.add('visible');
 
-    // Scroll so the shelf + panel is visible
-    setTimeout(() => {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 50);
+    // Scroll so the panel is visible below the sticky navbar
+    setTimeout(() => scrollPanelIntoView(panel), 50);
 
     // Close button
     panel.querySelector('.btn-close-detail').addEventListener('click', (e) => {
         e.stopPropagation();
         panel.classList.remove('visible');
         panel.innerHTML = '';
-        if (activeSpine) activeSpine.classList.remove('active');
+        if (activeSpine) {
+            activeSpine.classList.remove('active');
+            activeSpine.focus();
+        }
         activeBookIndex = null;
+        syncSpineExpanded();
     });
 }
 

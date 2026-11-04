@@ -14,7 +14,7 @@
             <div class="icon">🔐</div>
             <h2>Photo Admin</h2>
             <div class="input-group">
-                <input type="password" id="passwordInput" placeholder="Enter password" autofocus>
+                <input type="password" id="passwordInput" aria-label="Password" placeholder="Enter password" autofocus>
                 <button onclick="app.checkPassword()" class="btn-primary">Enter</button>
             </div>
             <p class="error hidden" id="passwordError">Incorrect password</p>
@@ -49,15 +49,15 @@
                     <div class="settings-section">
                         <h4>GitHub Configuration</h4>
                         <div class="form-group">
-                            <label>Repository Owner</label>
+                            <label for="repoOwner">Repository Owner</label>
                             <input type="text" id="repoOwner" placeholder="hansbbans" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Repository Name</label>
+                            <label for="repoName">Repository Name</label>
                             <input type="text" id="repoName" placeholder="personal-site" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>GitHub Token</label>
+                            <label for="githubToken">GitHub Token</label>
                             <input type="password" id="githubToken" placeholder="ghp_..." class="form-control">
                             <small>Needs 'repo' scope. <a href="https://github.com/settings/tokens/new?scopes=repo&description=Personal%20Site%20Admin" target="_blank">Create token →</a></small>
                         </div>
@@ -66,11 +66,11 @@
                     <div class="settings-section">
                         <h4>Image Optimization</h4>
                         <div class="form-group">
-                            <label>Max Width (px)</label>
+                            <label for="maxWidth">Max Width (px)</label>
                             <input type="number" id="maxWidth" value="1920" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>JPEG Quality (0-100)</label>
+                            <label for="jpegQuality">JPEG Quality (0-100)</label>
                             <input type="number" id="jpegQuality" value="85" min="1" max="100" class="form-control">
                         </div>
                         <div class="form-group">
@@ -97,28 +97,28 @@
                 </div>
                 <div class="modal-body">
                     <div id="editPhotoPreview" style="margin-bottom: 1.5rem;">
-                        <img id="editPhotoImage" style="width: 100%; border-radius: 8px;" />
+                        <img id="editPhotoImage" alt="Photo being edited" style="width: 100%; border-radius: 8px;" />
                     </div>
                     <div class="form-group">
-                        <label>Location</label>
+                        <label for="editLocation">Location</label>
                         <input type="text" id="editLocation" class="form-control">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Year</label>
+                            <label for="editYear">Year</label>
                             <input type="number" id="editYear" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Alt Text</label>
+                            <label for="editAlt">Alt Text</label>
                             <input type="text" id="editAlt" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Tags (comma-separated)</label>
+                        <label for="editTags">Tags (comma-separated)</label>
                         <input type="text" id="editTags" placeholder="travel, landscape, sunset" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
+                        <label for="editDescription">Description</label>
                         <textarea id="editDescription" class="form-control" rows="3"></textarea>
                     </div>
                 </div>
@@ -165,12 +165,12 @@
             <div class="tab-panel active" id="manageTab">
                 <div class="toolbar">
                     <div class="toolbar-left">
-                        <input type="text" id="searchInput" placeholder="🔍 Search photos..." 
+                        <input type="text" id="searchInput" aria-label="Search photos" placeholder="🔍 Search photos..." 
                                class="search-input" oninput="filterPhotos()">
-                        <select id="filterYear" class="filter-select" onchange="filterPhotos()">
+                        <select id="filterYear" aria-label="Filter by year" class="filter-select" onchange="filterPhotos()">
                             <option value="">All Years</option>
                         </select>
-                        <select id="filterLocation" class="filter-select" onchange="filterPhotos()">
+                        <select id="filterLocation" aria-label="Filter by location" class="filter-select" onchange="filterPhotos()">
                             <option value="">All Locations</option>
                         </select>
                     </div>
@@ -200,7 +200,7 @@
                             <div class="drop-icon">📁</div>
                             <h3>Drag & Drop Photos</h3>
                             <p>or click to select files</p>
-                            <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                            <input type="file" id="fileInput" aria-label="Choose photos to upload" multiple accept="image/*" style="display: none;">
                         </div>
                     </div>
 
@@ -239,23 +239,23 @@
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Update Location</label>
+                                    <label for="batchLocation">Update Location</label>
                                     <input type="text" id="batchLocation" placeholder="Leave empty to skip" class="form-control">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label>Update Year</label>
+                                    <label for="batchYear">Update Year</label>
                                     <input type="number" id="batchYear" placeholder="Leave empty to skip" class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Add Tags (comma-separated)</label>
+                                <label for="batchTags">Add Tags (comma-separated)</label>
                                 <input type="text" id="batchTags" placeholder="travel, landscape, sunset" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label>Add Description</label>
+                                <label for="batchDescription">Add Description</label>
                                 <textarea id="batchDescription" placeholder="Description for selected photos" 
                                           class="form-control" rows="3"></textarea>
                             </div>

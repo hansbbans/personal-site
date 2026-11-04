@@ -26,15 +26,15 @@ class FoodAdminApp {
     }
     
     setupEventListeners() {
-        // City tabs in manage view
-        document.querySelectorAll('#manageCityTabs .city-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                this.currentManageCity = tab.dataset.city;
-                document.querySelectorAll('#manageCityTabs .city-tab').forEach(t => 
-                    t.classList.toggle('active', t.dataset.city === this.currentManageCity)
-                );
-                this.renderRestaurantList();
-            });
+        // City tabs in manage view (delegated: tabs are rebuilt from the sheet list)
+        document.getElementById('manageCityTabs')?.addEventListener('click', (e) => {
+            const tab = e.target instanceof Element ? e.target.closest('.city-tab') : null;
+            if (!tab) return;
+            this.currentManageCity = tab.dataset.city;
+            document.querySelectorAll('#manageCityTabs .city-tab').forEach(t => 
+                t.classList.toggle('active', t.dataset.city === this.currentManageCity)
+            );
+            this.renderRestaurantList();
         });
     }
     
@@ -75,9 +75,11 @@ class FoodAdminApp {
         subcategorySelect.onchange = () => {
             const sub = subcategorySelect.value;
             const legacyInput = document.getElementById('legacyCategory');
-            if (sub && !legacyInput.value) {
-                // Find a reverse mapping or use subcategory name
+            // Fill when empty or still holding our previous suggestion; never
+            // overwrite a value the user typed.
+            if (sub && (!legacyInput.value || legacyInput.value === legacyInput.dataset.suggested)) {
                 legacyInput.value = sub;
+                legacyInput.dataset.suggested = sub;
             }
         };
     }
@@ -134,10 +136,42 @@ class FoodAdminApp {
                 })
             );
             
+            this.renderCityControls();
             this.renderRestaurantList();
         } catch (error) {
             console.error('Error loading data:', error);
             this.showStatus('error', 'Failed to load restaurant data');
+        }
+    }
+    
+    // Build the city select and manage tabs from the sheets actually loaded
+    renderCityControls() {
+        const names = this.citiesData.map(c => c.name);
+        if (names.length === 0) return;
+        if (!names.includes(this.currentManageCity)) this.currentManageCity = names[0];
+
+        const option = (name) => {
+            const el = document.createElement('option');
+            el.value = name;
+            el.textContent = name;
+            return el;
+        };
+        const select = document.getElementById('citySelect');
+        if (select) {
+            const selected = select.value;
+            select.replaceChildren(...names.map(option));
+            if (names.includes(selected)) select.value = selected;
+        }
+
+        const tabs = document.getElementById('manageCityTabs');
+        if (tabs) {
+            tabs.replaceChildren(...names.map((name) => {
+                const btn = document.createElement('button');
+                btn.className = 'city-tab' + (name === this.currentManageCity ? ' active' : '');
+                btn.dataset.city = name;
+                btn.textContent = name;
+                return btn;
+            }));
         }
     }
     
@@ -300,9 +334,9 @@ class FoodAdminApp {
         // Clear form
         document.getElementById('restaurantName').value = '';
         document.getElementById('mainCategory').value = '';
-        document.getElementById('subcategory').value = '';
-        document.getElementById('subcategory').disabled = true;
+        this.updateSubcategories();
         document.getElementById('legacyCategory').value = '';
+        delete document.getElementById('legacyCategory').dataset.suggested;
         document.getElementById('address').value = '';
         document.getElementById('latitude').value = '';
         document.getElementById('longitude').value = '';
@@ -322,8 +356,10 @@ class FoodAdminApp {
         statusContent.textContent = message;
         statusBar.classList.remove('hidden');
         
+        // A pending auto-hide from an earlier message must not hide this one
+        clearTimeout(this.statusTimer);
         if (type === 'success' || type === 'info') {
-            setTimeout(() => this.hideStatus(), 5000);
+            this.statusTimer = setTimeout(() => this.hideStatus(), 5000);
         }
     }
     

@@ -35,7 +35,8 @@ class PhotoLightbox {
             return [{
                 element: item,
                 img: img,
-                src: img.src,
+                // photo-loader swaps src for a placeholder until the photo scrolls into view
+                src: img.dataset.fullSrc || img.src,
                 alt: img.alt || 'Photo'
             }];
         });
@@ -52,6 +53,24 @@ class PhotoLightbox {
             if (index !== -1) {
                 this.openLightbox(index);
             }
+        });
+
+        // Make photos reachable and openable from the keyboard
+        document.querySelectorAll('.photo-item').forEach((item) => {
+            const img = item.querySelector('img');
+            if (!img) return;
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('role', 'button');
+            // The button label replaces its content, so carry the overlay text too
+            const details = ['.photo-location', '.photo-year']
+                .map((sel) => item.querySelector(sel)?.textContent.trim())
+                .filter(Boolean);
+            item.setAttribute('aria-label', [`View photo: ${img.alt || 'Photo'}`, ...details].join(', '));
+            item.addEventListener('keydown', (e) => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                item.click();
+            });
         });
 
         // Navigation buttons
@@ -71,6 +90,15 @@ class PhotoLightbox {
             if (!this.lightbox.classList.contains('active')) return;
             
             switch(e.key) {
+                case 'Tab': {
+                    // Keep focus inside the dialog
+                    const focusables = [this.lightboxClose, this.lightboxPrev, this.lightboxNext];
+                    const current = focusables.indexOf(document.activeElement);
+                    const step = e.shiftKey ? -1 : 1;
+                    e.preventDefault();
+                    focusables[(current + step + focusables.length) % focusables.length].focus();
+                    break;
+                }
                 case 'Escape':
                     this.closeLightbox();
                     break;
@@ -129,13 +157,17 @@ class PhotoLightbox {
         
         this.currentIndex = index;
         this.updateLightboxContent();
+        this.returnFocusTo = document.activeElement;
         this.lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
+        this.lightboxClose.focus();
     }
 
     closeLightbox() {
         this.lightbox.classList.remove('active');
         document.body.style.overflow = '';
+        const opener = this.photoItems[this.currentIndex]?.element || this.returnFocusTo;
+        if (opener && typeof opener.focus === 'function') opener.focus();
     }
 
     previousPhoto() {
