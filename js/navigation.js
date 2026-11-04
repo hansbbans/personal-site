@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navMenu.classList.contains('active')) {
             setMenuOpen(false);
+            // The closed menu is inert, so give focus back to its toggle
+            mobileMenuToggle.focus();
         }
     });
 
