@@ -85,6 +85,10 @@ else
     print_status "Failed to start local server" 1
 fi
 
+# Stop our server: lighthouserc.js starts its own on port 3000
+kill $SERVER_PID 2>/dev/null || true
+wait $SERVER_PID 2>/dev/null || true
+
 echo ""
 echo "🚀 Performance Tests"
 echo "-------------------"
