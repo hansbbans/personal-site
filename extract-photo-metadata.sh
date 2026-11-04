@@ -1,44 +1,15 @@
 #!/bin/bash
 
-# Extract metadata from photos and generate updated HTML
+# Fill photo-metadata.json with EXIF capture dates for every gallery photo.
+# Existing entries are merged: curated year, location, date and description
+# values are kept, and only missing fields are filled in.
+#
+# (Spotlight's kMDItemContentCreationDate is the file's creation time on
+# disk, e.g. the checkout date, not when the photo was taken, so the date is
+# read from EXIF instead.)
 
-echo "🔍 Extracting photo metadata..."
-
+set -euo pipefail
 cd "$(dirname "$0")"
 
-# Create metadata JSON file
-echo "{" > photo-metadata.json
-
-first=true
-for img in images/photo_*.{jpg,jpeg}; do
-    if [[ -f "$img" ]]; then
-        filename=$(basename "$img")
-        
-        # Extract date using mdls
-        creation_date=$(mdls "$img" | grep "kMDItemContentCreationDate " | awk -F' = ' '{print $2}' | cut -d' ' -f1)
-        year=$(echo "$creation_date" | cut -d'-' -f1)
-        
-        # Add comma if not first entry
-        if [ "$first" = false ]; then
-            echo "," >> photo-metadata.json
-        fi
-        first=false
-        
-        # Add to JSON
-        echo "  \"$filename\": {" >> photo-metadata.json
-        echo "    \"year\": \"$year\"," >> photo-metadata.json
-        echo "    \"location\": \"Update location\"," >> photo-metadata.json
-        echo "    \"date\": \"$creation_date\"" >> photo-metadata.json
-        echo -n "  }" >> photo-metadata.json
-        
-        echo "$filename: $year"
-    fi
-done
-
-echo "" >> photo-metadata.json
-echo "}" >> photo-metadata.json
-
-echo ""
-echo "✅ Metadata extracted to photo-metadata.json"
-echo "📊 Photo years found:"
-cat photo-metadata.json | grep -o '"year": "[0-9]*"' | sort | uniq -c | sort -nr
+echo "🔍 Extracting photo metadata..."
+node scripts/extract-photo-metadata.js
