@@ -168,7 +168,7 @@ test.describe('Food page map', () => {
 
   test('map is created even when the Maps API loads before food.js', async ({ page }) => {
     const errors = [];
-    page.on('pageerror', (e) => errors.push(e.message));
+    page.on('pageerror', (e) => { if (!e.message.includes('cloudflareinsights')) errors.push(e.message); });
     await stubMaps(page);
     await page.route(/js\/food\.js/, async (route) => {
       await new Promise((r) => setTimeout(r, 300));
