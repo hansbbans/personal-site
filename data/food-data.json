@@ -218,9 +218,7 @@
           "lat": 40.768759,
           "lng": -73.954061,
           "yelpRating": null,
-          "googleRating": 4.6,
-          "michelinStars": 3,
-          "michelinBibGourmand": true
+          "googleRating": 4.6
         },
         {
           "name": "Jungsik",
@@ -287,8 +285,7 @@
           "lat": 40.71875,
           "lng": -73.9895,
           "yelpRating": null,
-          "googleRating": 4.5,
-          "michelinBibGourmand": true
+          "googleRating": 4.5
         },
         {
           "name": "Raku",
@@ -457,8 +454,7 @@
           "lat": 40.758775,
           "lng": -73.8316571,
           "yelpRating": null,
-          "googleRating": null,
-          "michelinStars": 1
+          "googleRating": null
         },
         {
           "name": "Hometown Bar-B-Que",
@@ -575,9 +571,7 @@
           "lat": 40.7796,
           "lng": -73.9832,
           "yelpRating": 4.4,
-          "googleRating": 4.6,
-          "michelinStars": 3,
-          "michelinBibGourmand": true
+          "googleRating": 4.6
         },
         {
           "name": "NY Pizza Suprema",

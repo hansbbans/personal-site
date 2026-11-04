@@ -84,7 +84,7 @@ const MICHELIN_STARS = {
 
 // Michelin Bib Gourmand (affordable excellence)
 const MICHELIN_BIB_GOURMAND = {
-  'NYC': ['Hanoi House', 'L\'Artusi', 'Llama Inn', 'Rubirosa', 'Rubirosa', 'Casa Enrique', 'Claro', 'Contra', 'Crown Shy', 'Davelle', 'Di An Di', 'Dirt Candy', 'Don Angie', 'Gomi', 'Harta', 'Jeju Noodle Bar', 'Kochi', 'Kopitiam', 'Kru', 'Laut', 'Le Crocodile', 'Lilia', 'Llama San', 'Máximo Bistrot', 'Meadowsweet', 'Misi', 'Miss Ada', 'Naks', 'Nami Nori', 'Noodle Village', 'Okonomi', 'Oxomoco', 'Pig and Khao', 'Red Paper Clip', 'Sake Bar Hagi', 'SakaMai', 'Samurai Mama', 'Sauvage', 'Semma', 'Solace', 'Sushi Katsuei', 'Sushi of Gari', 'Szechuan Mountain House', 'Tailor', 'Tanoshi', 'The Four Horsemen', 'Tuome', 'Ugly Baby', 'Veselka', 'Wa Jeong', 'Wilfie & Nell', 'Win Son', 'Yopparai', 'Zaab Zaab']
+  'NYC': ['Hanoi House', 'L\'Artusi', 'Llama Inn', 'Rubirosa', 'Casa Enrique', 'Claro', 'Contra', 'Crown Shy', 'Davelle', 'Di An Di', 'Dirt Candy', 'Don Angie', 'Gomi', 'Harta', 'Jeju Noodle Bar', 'Kochi', 'Kopitiam', 'Kru', 'Laut', 'Le Crocodile', 'Lilia', 'Llama San', 'Máximo Bistrot', 'Meadowsweet', 'Misi', 'Miss Ada', 'Naks', 'Nami Nori', 'Noodle Village', 'Okonomi', 'Oxomoco', 'Pig and Khao', 'Red Paper Clip', 'Sake Bar Hagi', 'SakaMai', 'Samurai Mama', 'Sauvage', 'Semma', 'Solace', 'Sushi Katsuei', 'Sushi of Gari', 'Szechuan Mountain House', 'Tailor', 'Tanoshi', 'The Four Horsemen', 'Tuome', 'Ugly Baby', 'Veselka', 'Wa Jeong', 'Wilfie & Nell', 'Win Son', 'Yopparai', 'Zaab Zaab']
 };
 
 // Load restaurant data
@@ -101,33 +101,18 @@ function saveRestaurantData(data) {
   console.log('✅ Data saved to food-data.json');
 }
 
-// Fuzzy match restaurant names (handles slight variations)
+// Match restaurant names that differ only in case, accents, punctuation or spacing.
+// Partial/word-overlap matching produced false positives ("Sushi Ishikawa" ~
+// "Sushi Sho"), so names must otherwise be identical.
 function fuzzyMatch(name1, name2) {
-  const normalize = (str) => str.toLowerCase()
+  const normalize = (str) => str
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
     .replace(/[^\w\s]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
-  
-  const n1 = normalize(name1);
-  const n2 = normalize(name2);
-  
-  // Exact match
-  if (n1 === n2) return true;
-  
-  // One contains the other
-  if (n1.includes(n2) || n2.includes(n1)) return true;
-  
-  // Edit distance (simplified)
-  const words1 = n1.split(' ');
-  const words2 = n2.split(' ');
-  const commonWords = words1.filter(w => words2.includes(w));
-  
-  // If more than half the words match
-  if (commonWords.length >= Math.min(words1.length, words2.length) / 2) {
-    return true;
-  }
-  
-  return false;
+
+  return normalize(name1) === normalize(name2);
 }
 
 // Update Michelin stars for a city
@@ -148,6 +133,10 @@ function updateMichelinStars(data, cityName) {
   let updated = 0;
   
   cityData.restaurants.forEach(restaurant => {
+    // Recompute from the lists so earlier wrong matches don't linger
+    delete restaurant.michelinStars;
+    delete restaurant.michelinBibGourmand;
+
     // Check 3 stars
     if (stars[3].some(michelinName => fuzzyMatch(restaurant.name, michelinName))) {
       restaurant.michelinStars = 3;
@@ -252,4 +241,8 @@ function main() {
   console.log('3. Run this script again after updating Michelin data (annually in November)');
 }
 
-main();
+module.exports = { fuzzyMatch, updateMichelinStars };
+
+if (require.main === module) {
+  main();
+}
