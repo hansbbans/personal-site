@@ -39,7 +39,7 @@ test.describe('Desktop Navigation', () => {
     // Navigate to photos page
     await page.click('a[href="photos.html"]');
     await expect(page).toHaveURL(/photos\.html$/);
-    await expect(page.locator('h2')).toContainText('Photography');
+    await expect(page.locator('h1')).toContainText('Photography');
     
     // Navigate to about page
     await page.click('a[href="about.html"]');

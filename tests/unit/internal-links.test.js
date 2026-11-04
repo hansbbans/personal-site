@@ -22,3 +22,11 @@ describe.each(pages)('%s', (page) => {
     }
   });
 });
+
+describe('headings', () => {
+  const publicPages = ['index.html', 'about.html', 'now.html', 'gear.html', 'books.html', 'food.html', 'photos.html'];
+  test.each(publicPages)('%s has exactly one h1', (page) => {
+    const html = fs.readFileSync(path.join(root, page), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+    expect((html.match(/<h1[\s>]/g) || []).length).toBe(1);
+  });
+});
