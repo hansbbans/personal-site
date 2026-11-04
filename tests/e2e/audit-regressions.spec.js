@@ -172,8 +172,23 @@ test.describe('Food page map', () => {
     } };
     window.initMap();`;
 
-  const stubMaps = (page) => page.route(/maps\.googleapis\.com/, (route) =>
-    route.fulfill({ contentType: 'text/javascript', body: mapsStub }));
+  // Fixed data so the tests don't depend on the live food guide contents
+  const place = (name, lat, lng) => ({ name, mainCategory: 'Asian', subcategory: 'Japanese', lat, lng, address: `${name} St` });
+  const foodData = {
+    metadata: { lastUpdated: '2026-01-01', version: '1' },
+    categories: { Asian: { emoji: '🥢', subcategories: ['Japanese'] }, 'Bars & Drinks': { emoji: '🍸', subcategories: ['Cocktail Bars'] } },
+    cities: [
+      { name: 'NYC', restaurants: [place('Nyc One', 40.72, -74.0), place('Nyc Two', 40.73, -73.99)] },
+      { name: 'Kyoto', restaurants: [place('Kyoto One', 35.0, 135.76), place('Kyoto Two', 35.02, 135.78)] }
+    ]
+  };
+
+  const stubMaps = async (page) => {
+    await page.route(/data\/food-data\.json/, (route) =>
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(foodData) }));
+    await page.route(/maps\.googleapis\.com/, (route) =>
+      route.fulfill({ contentType: 'text/javascript', body: mapsStub }));
+  };
 
   test('map is created even when the Maps API loads before food.js', async ({ page }) => {
     const errors = [];
