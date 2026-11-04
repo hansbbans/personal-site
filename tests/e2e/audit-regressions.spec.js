@@ -33,6 +33,15 @@ test.describe('Theme', () => {
   test('loading a page does not store a theme the user never chose', async ({ page }) => {
     await page.goto('/about.html');
     expect(await page.evaluate(() => localStorage.getItem('theme'))).toBeNull();
+    expect(await page.evaluate(() => localStorage.getItem('theme-preference'))).toBeNull();
+  });
+
+  test('a theme auto-saved by the old code no longer pins the page', async ({ page }) => {
+    await page.addInitScript(() => { if (!sessionStorage.getItem('seeded')) { localStorage.setItem('theme', 'light'); sessionStorage.setItem('seeded', '1'); } });
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.goto('/about.html');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    expect(await page.evaluate(() => localStorage.getItem('theme'))).toBeNull();
   });
 
   test('theme follows OS changes until the user picks one', async ({ page }) => {
@@ -46,7 +55,7 @@ test.describe('Theme', () => {
     await page.emulateMedia({ colorScheme: 'light' });
     await page.goto('/about.html');
     await page.click('#theme-toggle');
-    expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('dark');
+    expect(await page.evaluate(() => localStorage.getItem('theme-preference'))).toBe('dark');
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   });
