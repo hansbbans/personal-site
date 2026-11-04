@@ -68,6 +68,32 @@ describe('PhotoAdminApp photos.html round trip', () => {
     expect(html).toContain('<span class="photo-location">Kraków</span>');
   });
 
+  test('tag and description edits are written and read back', () => {
+    const app = makeApp();
+    app.photos = app.parsePhotosFromHtml(photosHtml);
+    app.originalPhotosHtml = photosHtml;
+    Object.assign(app.photos[0], { tags: ['travel', 'night'], description: 'Late set "after hours" <live>' });
+    const html = app.generatePreviewHtml();
+    const reparsed = app.parsePhotosFromHtml(html);
+    expect(reparsed[0].tags).toEqual(['travel', 'night']);
+    expect(reparsed[0].description).toBe('Late set "after hours" <live>');
+    expect(reparsed).toHaveLength(app.photos.length);
+  });
+
+  test('special characters in location and alt survive repeated commits unchanged', () => {
+    const app = makeApp();
+    app.photos = app.parsePhotosFromHtml(photosHtml);
+    app.originalPhotosHtml = photosHtml;
+    Object.assign(app.photos[0], { location: 'Rock & Roll "Hall" <of> Fame', alt: 'A "quoted" alt & more' });
+    const first = app.generatePreviewHtml();
+    const again = makeApp();
+    again.photos = again.parsePhotosFromHtml(first);
+    again.originalPhotosHtml = first;
+    expect(again.photos[0].location).toBe('Rock & Roll "Hall" <of> Fame');
+    expect(again.photos[0].alt).toBe('A "quoted" alt & more');
+    expect(again.generatePreviewHtml()).toBe(first);
+  });
+
   test('decodes GitHub base64 content as UTF-8', () => {
     const app = makeApp();
     const b64 = Buffer.from(photosHtml, 'utf8').toString('base64').replace(/(.{60})/g, '$1\n');
