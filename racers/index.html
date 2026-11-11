@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a1220">
+<title>Vroom Valley Grand Prix</title>
+<link rel="stylesheet" href="build-42eafa4/style.css">
+<script type="importmap">
+{ "imports": { "three": "./build-42eafa4/lib/three/core/three.module.js", "three/addons/": "./build-42eafa4/lib/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="fade"></div>
+
+<div id="loading" class="screen">
+  <div class="logo">VROOM VALLEY<span>GRAND PRIX</span></div>
+  <div class="sub">Warming up the engines…</div>
+</div>
+
+<div id="select" class="screen hidden">
+  <div class="logo small">VROOM VALLEY<span>GRAND PRIX</span></div>
+  <div class="picker">
+    <button id="prev" class="arrow" aria-label="Previous racer">◀</button>
+    <div class="nameplate">
+      <div class="pick">Pick your racer!</div>
+      <div id="carName">Zippy</div>
+    </div>
+    <button id="next" class="arrow" aria-label="Next racer">▶</button>
+  </div>
+  <button id="go" class="bigbtn">GO!</button>
+</div>
+
+<div id="hud" class="hidden">
+  <div id="place"><span id="placeNum">1</span><sup id="placeSuf">st</sup></div>
+  <div id="lap">LAP <b id="lapNum">1</b><i>/</i><span id="lapTotal">2</span></div>
+  <div id="speedo">
+    <div class="bar"><div id="speedFill"></div></div>
+    <div class="num"><b id="speedNum">0</b><small>MPH</small></div>
+  </div>
+  <canvas id="minimap" aria-label="Track map"></canvas>
+  <div id="hint">Hold <kbd>▲</kbd> to go fast!</div>
+  <div id="banner"></div>
+</div>
+
+<div id="count" class="hidden"></div>
+
+<div id="touch" class="hidden">
+  <button id="btnLeft" class="pedal steer left" aria-label="Steer left">◀</button>
+  <button id="btnRight" class="pedal steer right" aria-label="Steer right">▶</button>
+  <button id="btnDown" class="pedal down" aria-label="Slow">▼<small>SLOW</small></button>
+  <button id="btnUp" class="pedal up" aria-label="Fast">▲<small>FAST</small></button>
+</div>
+
+<div id="finish" class="screen hidden">
+  <div class="fin-head">
+    <div class="fin-top">You finished</div>
+    <div class="fin-row"><span id="finMedal">🏆</span><span id="finPlace">1st!</span></div>
+  </div>
+  <div class="fin-btns">
+    <button id="again" class="bigbtn">Race Again</button>
+    <button id="pick" class="smallbtn">Pick a Racer</button>
+  </div>
+</div>
+
+<button id="mute" aria-label="Sound on or off">🔊</button>
+<script type="module" src="build-42eafa4/src/main.js"></script>
+</body>
+</html>
