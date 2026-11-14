@@ -8,15 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const THEME_KEY = 'theme-preference';
     localStorage.removeItem('theme');
     
-    // Check for saved theme preference or default to system preference
-    const getPreferredTheme = () => {
-        const savedTheme = localStorage.getItem(THEME_KEY);
-        if (savedTheme) {
-            return savedTheme;
-        }
-        // Check system preference
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
+    // Night mode is the site's default look; daylight is opt-in via the toggle.
+    const getPreferredTheme = () => localStorage.getItem(THEME_KEY) || 'dark';
     
     // Apply theme
     const applyTheme = (theme) => {
@@ -33,8 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(THEME_KEY, theme);
     };
     
-    // Initialize theme without storing it, so the OS preference keeps applying
-    // until the user picks a theme with the toggle.
     applyTheme(getPreferredTheme());
     
     // Toggle theme on button click
@@ -45,12 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
             setTheme(newTheme);
         });
     }
-    
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        // Only update if user hasn't explicitly set a preference
-        if (!localStorage.getItem(THEME_KEY)) {
-            applyTheme(e.matches ? 'dark' : 'light');
-        }
-    });
 });

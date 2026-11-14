@@ -10,32 +10,32 @@
     <meta property="og:image" content="https://hanscho.com/images/optimized/large/R0002049.jpg">
     <meta property="og:image:alt" content="Eiffel Tower viewed from the Seine under cloudy skies">
     <title>About - Hans</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%2306060c%22/><rect x=%224%22 y=%224%22 width=%2292%22 height=%2292%22 fill=%22none%22 stroke=%22%2300f0ff%22 stroke-width=%228%22/><text x=%2250%22 y=%2272%22 font-family=%22monospace%22 font-weight=%22700%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22%2300f0ff%22>H</text></svg>">
     <script data-theme-init>(function () {
         try {
             var stored = localStorage.getItem('theme-preference');
-            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (stored === 'dark' || (!stored && prefersDark)) {
+            if (stored !== 'light') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
         } catch (e) {}
     })();</script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cyber.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="nav-brand">Hans</a>
             <ul class="nav-menu">
-                <li><a href="about.html" class="active">👤 About</a></li>
-                <li><a href="gear.html">🎒 Gear</a></li>
-                <li><a href="food.html">🍜 Food</a></li>
-                <li><a href="photos.html">📷 Photos</a></li>
-                <li><a href="books.html">📚 Books</a></li>
-                <li><a href="now.html">⏰ Now</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="gear.html">Gear</a></li>
+                <li><a href="food.html">Food</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="now.html">Now</a></li>
             </ul>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                 <span class="sun-icon" aria-hidden="true">
@@ -62,7 +62,7 @@
         <section class="section">
             <div class="container">
                 <div class="page-content">
-                    <h1 class="fade-in" id="about">👤 About Me</h1>
+                    <h1 class="fade-in" id="about">About Me</h1>
                     
                     <div class="bio-section fade-in" style="margin-bottom: 3rem;">
                         <div class="bio-content">
@@ -72,17 +72,17 @@
                     </div>
 
                     <div class="fade-in">
-                        <h2>🌍 The Short Version</h2>
+                        <h2>The Short Version</h2>
                         <p>I'm a curious human who loves exploring technology, traveling to new places, and documenting everything along the way. I believe in buying fewer things but better things, eating well, and reading widely.</p>
                         
-                        <h2>💼 What I Do</h2>
+                        <h2>What I Do</h2>
                         <p>I work in tech (more details coming soon). I spend my days building products and solving interesting problems. When I'm not working, you'll find me testing out new gear, hunting for the best restaurants in whatever city I'm in, or getting lost in a good book.</p>
                         
-                        <h2>🎯 Why This Site</h2>
+                        <h2>Why This Site</h2>
                         <p>This site is my way of sharing the things I've discovered and loved. After years of responding to friends asking "what backpack should I get?" or "where should I eat in Tokyo?", I decided to put it all in one place.</p>
                         <p>Every recommendation here is something I've personally used, eaten, or read. No affiliate links, no sponsored content — just honest opinions from someone who's probably spent too much time researching these things.</p>
                         
-                        <h2>📫 Get In Touch</h2>
+                        <h2>Get In Touch</h2>
                         <p>Want to say hi? Have a recommendation for me? Found a bug on this site? I'd love to hear from you.</p>
                         <ul>
                             <li>Email: <a href="mailto:hans.cho@gmail.com">hans.cho@gmail.com</a></li>

@@ -44,10 +44,9 @@ test.describe('Theme', () => {
     expect(await page.evaluate(() => localStorage.getItem('theme'))).toBeNull();
   });
 
-  test('theme follows OS changes until the user picks one', async ({ page }) => {
+  test('night mode is the default even when the OS prefers light', async ({ page }) => {
     await page.emulateMedia({ colorScheme: 'light' });
     await page.goto('/about.html');
-    await page.emulateMedia({ colorScheme: 'dark' });
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   });
 
@@ -55,9 +54,9 @@ test.describe('Theme', () => {
     await page.emulateMedia({ colorScheme: 'light' });
     await page.goto('/about.html');
     await page.click('#theme-toggle');
-    expect(await page.evaluate(() => localStorage.getItem('theme-preference'))).toBe('dark');
+    expect(await page.evaluate(() => localStorage.getItem('theme-preference'))).toBe('light');
     await page.reload();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
   });
 });
 
