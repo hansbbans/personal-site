@@ -7,9 +7,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1a1220">
 <title>Vroom Valley Grand Prix</title>
-<link rel="stylesheet" href="build-42eafa4/style.css">
+<link rel="stylesheet" href="build-1e10a9a/style.css">
 <script type="importmap">
-{ "imports": { "three": "./build-42eafa4/lib/three/core/three.module.js", "three/addons/": "./build-42eafa4/lib/three/examples/jsm/" } }
+{ "imports": { "three": "./build-1e10a9a/lib/three/core/three.module.js", "three/addons/": "./build-1e10a9a/lib/three/examples/jsm/" } }
 </script>
 </head>
 <body>
@@ -32,6 +32,13 @@
     <button id="next" class="arrow" aria-label="Next racer">▶</button>
   </div>
   <button id="go" class="bigbtn">GO!</button>
+  <div class="options">
+    <div id="tracks" class="tracks" aria-label="Pick a track"></div>
+    <div class="laps" aria-label="How many laps">
+      <button id="laps2" class="lapbtn">2 laps</button>
+      <button id="laps3" class="lapbtn">3 laps <span class="pitflag">+ pit stop 🔧</span></button>
+    </div>
+  </div>
 </div>
 
 <div id="hud" class="hidden">
@@ -47,6 +54,7 @@
 </div>
 
 <div id="count" class="hidden"></div>
+<div id="mudscreen" aria-hidden="true"></div>
 
 <div id="touch" class="hidden">
   <button id="btnLeft" class="pedal steer left" aria-label="Steer left">◀</button>
@@ -67,6 +75,6 @@
 </div>
 
 <button id="mute" aria-label="Sound on or off">🔊</button>
-<script type="module" src="build-42eafa4/src/main.js"></script>
+<script type="module" src="build-1e10a9a/src/main.js"></script>
 </body>
 </html>
