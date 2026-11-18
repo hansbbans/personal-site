@@ -3,35 +3,30 @@ import { Sky } from 'three/addons/objects/Sky.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { ROAD_HALF, sandTexture, checkerTexture } from './track.js';
 import { mulberry32, makeNoise2D, fbm, smoothstep, lerp, makeCanvas, TAU } from './util.js';
+import { buildCrowd } from './crowd.js';
+import { buildSpeedway, SPEEDWAY_BAND } from './speedway.js';
+import { PIT_S } from './course.js';
 
 const Y = new THREE.Vector3(0, 1, 0);
 const FONT = '"Arial Rounded MT Bold", "Avenir Next", "Helvetica Neue", Arial, sans-serif';
 
-export function buildWorld(scene, renderer, track) {
-  const rnd = mulberry32(20261110);
-  const noise = makeNoise2D(77);
-  const centre = { x: 170, z: 70 };
-  const F = track.constructor.frame();
-  const world = { updaters: [] };
-
-  // ------------------------------------------------------------ sky and light
+// Sky, sun and reflections: built once, shared by every track.
+export function buildSky(scene, renderer) {
+  const sky = {};
   const el = THREE.MathUtils.degToRad(24);
   const az = THREE.MathUtils.degToRad(64);
   const sunDir = new THREE.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el));
-  world.sunDir = sunDir;
+  sky.sunDir = sunDir;
 
-  const makeSky = () => {
-    const sky = new Sky();
-    sky.scale.setScalar(9000);
-    const u = sky.material.uniforms;
-    u.turbidity.value = 4.2;
-    u.rayleigh.value = 1.9;
-    u.mieCoefficient.value = 0.004;
-    u.mieDirectionalG.value = 0.84;
-    u.sunPosition.value.copy(sunDir);
-    return sky;
-  };
-  scene.add(makeSky());
+  const dome = new Sky();
+  dome.scale.setScalar(9000);
+  const u = dome.material.uniforms;
+  u.turbidity.value = 4.2;
+  u.rayleigh.value = 1.9;
+  u.mieCoefficient.value = 0.004;
+  u.mieDirectionalG.value = 0.84;
+  u.sunPosition.value.copy(sunDir);
+  scene.add(dome);
   // Reflections come from a simple painted sky rather than the physical one:
   // the real sun is thousands of times brighter than the sky and would turn
   // every glossy car into a white blob.
@@ -73,8 +68,42 @@ export function buildWorld(scene, renderer, track) {
   sun.shadow.normalBias = 0.06;
   sun.shadow.radius = 3;
   scene.add(sun, sun.target);
-  scene.add(new THREE.HemisphereLight(0xcfe2ff, 0xc28a5c, 0.75));
-  world.sun = sun;
+  const hemi = new THREE.HemisphereLight(0xcfe2ff, 0xc28a5c, 0.75);
+  scene.add(hemi);
+  sky.sun = sun;
+  sky.setTheme = (theme) => {
+    scene.fog.color.set(theme.fog);
+    hemi.groundColor.set(theme.hemiGround);
+  };
+  // the shadow box follows whatever the camera is looking at
+  sky.update = (focus) => {
+    sun.target.position.copy(focus);
+    sun.position.copy(focus).addScaledVector(sunDir, 190);
+  };
+  return sky;
+}
+
+// Everything that belongs to one track: terrain, rocks, plants, grandstands,
+// gantry, billboards, balloons, clouds. All of it goes into `scene` (a group
+// for this track), so switching tracks is remove-and-dispose.
+// keepOut: [{x, z, r}] spots that scattered scenery must stay clear of.
+export function buildWorld(scene, track, theme, { keepOut = [] } = {}) {
+  const rnd = mulberry32(20261110);
+  const noise = makeNoise2D(77);
+  const F = track.constructor.frame();
+  const world = { updaters: [] };
+  let bx0 = Infinity, bx1 = -Infinity, bz0 = Infinity, bz1 = -Infinity;
+  for (const p of track.pts) {
+    bx0 = Math.min(bx0, p.x); bx1 = Math.max(bx1, p.x);
+    bz0 = Math.min(bz0, p.z); bz1 = Math.max(bz1, p.z);
+  }
+  const centre = { x: (bx0 + bx1) / 2, z: (bz0 + bz1) / 2 };
+  // +1 if the outside of the loop is left of the road at s, else -1
+  const outside = (s) => {
+    track.sample(s, F);
+    return F.side.x * (F.pos.x - centre.x) + F.side.z * (F.pos.z - centre.z) > 0 ? 1 : -1;
+  };
+  const speedway = !!theme.speedway;
 
   // ------------------------------------------------------------ ground maths
   const n = track.n;
@@ -104,7 +133,7 @@ export function buildWorld(scene, renderer, track) {
   const natural = (x, z) => {
     const r = Math.hypot(x - centre.x, z - centre.z);
     return (
-      fbm(noise, x * 0.0035, z * 0.0035, 4) * 16 +
+      fbm(noise, x * 0.0035, z * 0.0035, 4) * 16 * (theme.hills ?? 1) +
       fbm(noise, x * 0.021 + 40, z * 0.021, 2) * 1.3 +
       smoothstep(560, 1250, r) * 120 - 3
     );
@@ -133,7 +162,7 @@ export function buildWorld(scene, renderer, track) {
     g.translate(centre.x, 0, centre.z);
     const p = g.attributes.position;
     const col = new Float32Array(p.count * 3);
-    const cA = new THREE.Color('#e3b077'), cB = new THREE.Color('#c98a52'), cC = new THREE.Color('#b56a3c');
+    const [cA, cB, cC] = theme.ground.map((h) => new THREE.Color(h));
     const c = new THREE.Color();
     for (let i = 0; i < p.count; i++) {
       const x = p.getX(i), z = p.getZ(i);
@@ -155,7 +184,7 @@ export function buildWorld(scene, renderer, track) {
 
   // ------------------------------------------------------------ mesas
   {
-    const palette = ['#c9673b', '#dc8c50', '#b8552f', '#e3a465', '#cf7443'].map((h) => new THREE.Color(h));
+    const palette = theme.mesa.map((h) => new THREE.Color(h));
     const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, flatShading: true });
     const variants = [];
     for (let v = 0; v < 5; v++) {
@@ -183,7 +212,8 @@ export function buildWorld(scene, renderer, track) {
       variants.push(g);
     }
     let placed = 0, tries = 0;
-    const spots = [[150, 60, 34, 46], [205, 140, 22, 30]];
+    // a couple of big ones inside the loop, if there is room
+    const spots = speedway ? [] : [[centre.x - 20, centre.z - 10, 34, 46], [centre.x + 35, centre.z + 70, 22, 30]].filter(([x, z, R]) => nearest(x, z).d > R + 45);
     while (placed < 34 && tries++ < 600) {
       const a = rnd() * TAU, r = 300 + rnd() * 900;
       const R = 30 + rnd() * 75, H = 45 + rnd() * 110;
@@ -231,29 +261,74 @@ export function buildWorld(scene, renderer, track) {
     const s = rnd() * track.length;
     const side = rnd() < 0.5 ? -1 : 1;
     const d = dMin + Math.pow(rnd(), 1.6) * (dMax - dMin);
+    if (speedway && side === outside(s) && d < SPEEDWAY_BAND) return false; // the stands are there
     track.sample(s, F);
     const x = F.pos.x + F.side.x * side * d, z = F.pos.z + F.side.z * side * d;
     if (nearest(x, z).d < dMin - 0.5) return false; // would land on another piece of track
+    if (keepOut.some((k) => Math.hypot(x - k.x, z - k.z) < k.r)) return false;
     obj.position.set(x, surfaceY(x, z) - sink, z);
     obj.rotation.y = rnd() * TAU;
     return true;
   }
 
-  // cacti
+  // Which way a sign beside the road at side (+1 left, -1 right) should face:
+  // back towards the cars coming, turned towards the road by k.
+  const faceOncoming = (f, side, k, out = new THREE.Vector3()) =>
+    out.set(-f.tan.x - f.side.x * side * k, 0, -f.tan.z - f.side.z * side * k).normalize();
+
+  // Arrow boards round the outside of each hairpin (built further down); worked
+  // out first so trees and rocks keep clear of them.
+  const boards = [];
+  for (const h of track.hairpins()) {
+    const left = h.turn > 0, side = left ? -1 : 1; // the outside of the bend
+    for (let s = h.s0 - 12; s <= h.s1 + 2; s += 6.5) {
+      track.sample(s, F);
+      const pos = F.pos.clone().addScaledVector(F.side, side * (ROAD_HALF + 5.4));
+      pos.y = surfaceY(pos.x, pos.z) - 0.1;
+      const n = faceOncoming(F, side, 0.45);
+      boards.push({ pos, rotY: Math.atan2(n.x, n.z), left });
+    }
+  }
+  keepOut = [...keepOut, ...boards.map((b) => ({ x: b.pos.x, z: b.pos.z, r: 4.5 }))];
+
+  // plants: cacti in the desert, round trees everywhere else
   {
-    const cap = (r, len) => new THREE.CapsuleGeometry(r, len, 4, 10);
-    const trunk = cap(0.34, 2.8).translate(0, 1.7, 0);
-    const a1 = cap(0.22, 0.6).rotateZ(Math.PI / 2).translate(0.6, 1.5, 0);
-    const a2 = cap(0.22, 0.9).translate(1.0, 2.05, 0);
-    const b1 = cap(0.2, 0.5).rotateZ(Math.PI / 2).translate(-0.55, 2.1, 0);
-    const b2 = cap(0.2, 0.7).translate(-0.9, 2.55, 0);
-    const geo = mergeGeometries([trunk, a1, a2, b1, b2]);
-    const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.75 });
+    let geo;
+    if (theme.plant === 'cactus') {
+      const cap = (r, len) => new THREE.CapsuleGeometry(r, len, 4, 10);
+      const trunk = cap(0.34, 2.8).translate(0, 1.7, 0);
+      const a1 = cap(0.22, 0.6).rotateZ(Math.PI / 2).translate(0.6, 1.5, 0);
+      const a2 = cap(0.22, 0.9).translate(1.0, 2.05, 0);
+      const b1 = cap(0.2, 0.5).rotateZ(Math.PI / 2).translate(-0.55, 2.1, 0);
+      const b2 = cap(0.2, 0.7).translate(-0.9, 2.55, 0);
+      geo = mergeGeometries([trunk, a1, a2, b1, b2]);
+    } else {
+      // one mesh, so the trunk is painted with the vertex colours and the top
+      // takes the instance colour
+      const trunk = new THREE.CylinderGeometry(0.22, 0.3, 1.6, 8).translate(0, 0.8, 0);
+      const top = theme.plant === 'pine'
+        ? mergeGeometries([
+          new THREE.ConeGeometry(1.7, 2.6, 10).translate(0, 2.4, 0),
+          new THREE.ConeGeometry(1.3, 2.2, 10).translate(0, 3.6, 0),
+          new THREE.ConeGeometry(0.85, 1.8, 10).translate(0, 4.7, 0),
+        ])
+        : new THREE.IcosahedronGeometry(1.6, 1).scale(1, 0.9, 1).translate(0, 2.9, 0);
+      const paint = (g, hex) => {
+        g = g.index ? g.toNonIndexed() : g;
+        g.deleteAttribute('uv');
+        const c = new THREE.Color(hex), n = g.attributes.position.count, a = new Float32Array(n * 3);
+        for (let i = 0; i < n; i++) { a[i * 3] = c.r; a[i * 3 + 1] = c.g; a[i * 3 + 2] = c.b; }
+        g.setAttribute('color', new THREE.BufferAttribute(a, 3));
+        return g;
+      };
+      geo = mergeGeometries([paint(trunk, '#3a2a1e'), paint(top, '#ffffff')]);
+    }
+    const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.75, vertexColors: theme.plant !== 'cactus', flatShading: theme.plant !== 'cactus' });
     scatter(geo, mat, 240, (o) => {
       if (!beside(o, ROAD_HALF + 7, ROAD_HALF + 85)) return false;
       const k = 0.7 + rnd() * 0.9;
       o.scale.set(k, k * (0.85 + rnd() * 0.4), k);
-    }, { shadow: true, colors: ['#3f9a55', '#4aa862', '#358a4a', '#5ab06a'] });
+    }, { shadow: true, colors: theme.plantColors });
   }
   // rocks
   {
@@ -264,7 +339,7 @@ export function buildWorld(scene, renderer, track) {
       const k = 0.4 + Math.pow(rnd(), 3) * 3.2;
       o.scale.set(k * (0.8 + rnd() * 0.6), k * (0.5 + rnd() * 0.5), k * (0.8 + rnd() * 0.6));
       o.rotation.set(rnd() * 0.4, rnd() * TAU, rnd() * 0.4);
-    }, { shadow: true, colors: ['#b8683f', '#c57a4c', '#a55a36', '#d08a58'] });
+    }, { shadow: true, colors: theme.rocks });
   }
   // dry bushes
   {
@@ -274,7 +349,7 @@ export function buildWorld(scene, renderer, track) {
       if (!beside(o, ROAD_HALF + 6, ROAD_HALF + 110, 0.1)) return false;
       const k = 0.35 + rnd() * 0.8;
       o.scale.set(k * 1.3, k * 0.8, k * 1.3);
-    }, { colors: ['#9aa24a', '#b7a94e', '#7f9443', '#c2b25e'] });
+    }, { colors: theme.bushes });
   }
   // marker posts: a steady rhythm past the window makes speed readable
   {
@@ -310,8 +385,42 @@ export function buildWorld(scene, renderer, track) {
     mesh.castShadow = true;
   }
 
+  // red and white arrow boards round the outside of each hairpin, pointing the
+  // way the road goes
+  if (boards.length) {
+    const arrow = (left) => {
+      const c = makeCanvas(256, 160), ctx = c.getContext('2d');
+      ctx.fillStyle = '#e2362b';
+      ctx.fillRect(0, 0, 256, 160);
+      ctx.fillStyle = '#ffffff';
+      for (const dx of [-46, 46]) {
+        const x = 128 + dx, k = left ? -1 : 1;
+        ctx.beginPath();
+        ctx.moveTo(x - 30 * k, 18); ctx.lineTo(x + 6 * k, 18); ctx.lineTo(x + 44 * k, 80);
+        ctx.lineTo(x + 6 * k, 142); ctx.lineTo(x - 30 * k, 142); ctx.lineTo(x + 8 * k, 80);
+        ctx.closePath();
+        ctx.fill();
+      }
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    };
+    const white = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: 0.6 });
+    const boardGeo = new THREE.BoxGeometry(2.6, 1.6, 0.14).translate(0, 1.85, 0);
+    const put = (list) => (o, i) => { o.position.copy(list[i].pos); o.rotation.y = list[i].rotY; };
+    for (const left of [true, false]) {
+      const these = boards.filter((b) => b.left === left);
+      if (!these.length) continue;
+      const face = new THREE.MeshStandardMaterial({ map: arrow(left), roughness: 0.5, emissive: 0xffffff, emissiveIntensity: 0.12 });
+      face.emissiveMap = face.map;
+      scatter(boardGeo, [white, white, white, white, face, white], these.length, put(these), { shadow: true });
+    }
+    scatter(new THREE.BoxGeometry(0.14, 1.2, 0.14).translate(0, 0.6, 0), white, boards.length, put(boards));
+  }
+
   // ------------------------------------------------------------ grandstands
-  const crowd = { base: [], phase: [], amp: [] };
+  const seats = []; // x, y, z of everyone in the stands
   {
     const concrete = new THREE.MeshStandardMaterial({ color: 0xd9d2c6, roughness: 0.9 });
     const roofs = ['#e2362b', '#2f7fe6', '#f5b81f'].map((h) => new THREE.MeshStandardMaterial({ color: h, roughness: 0.55 }));
@@ -321,6 +430,7 @@ export function buildWorld(scene, renderer, track) {
     const local = new THREE.Vector3();
     for (const s of [-34, -6, 34, 62]) {
       for (const sideSign of [1, -1]) {
+        if (speedway && sideSign === outside(s)) continue; // the long stands run round the outside
         track.sample(s, F);
         const zAxis = F.side.clone().multiplyScalar(-sideSign); // faces the road
         const xAxis = new THREE.Vector3().crossVectors(Y, zAxis).normalize();
@@ -356,38 +466,25 @@ export function buildWorld(scene, renderer, track) {
           for (let x = -WIDTH / 2 + 0.7; x < WIDTH / 2 - 0.5; x += 0.82) {
             if (rnd() < 0.08) continue;
             local.set(x + (rnd() - 0.5) * 0.2, base + RISE * (t + 1), -t * RUN + 0.1).applyMatrix4(g.matrixWorld);
-            crowd.base.push(local.x, local.y, local.z);
-            crowd.phase.push(rnd() * TAU);
-            crowd.amp.push(0.5 + rnd());
+            seats.push(local.x, local.y, local.z);
           }
         }
       }
     }
-    const count = crowd.phase.length;
-    const bodyGeo = new THREE.CapsuleGeometry(0.24, 0.42, 3, 8).translate(0, 0.45, 0);
-    const headGeo = new THREE.SphereGeometry(0.19, 10, 8).translate(0, 1.05, 0);
-    const mat = () => new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.85 });
-    const bodies = new THREE.InstancedMesh(bodyGeo, mat(), count);
-    const heads = new THREE.InstancedMesh(headGeo, mat(), count);
-    const shirts = ['#ff5a4f', '#2f8cff', '#ffd21f', '#27c9a0', '#ff7a1a', '#8b44e0', '#ffffff', '#ff3d7f', '#39c24f'];
-    const skins = ['#f2c9a0', '#d9a273', '#a86d44', '#7a4a2b', '#f7d9bb'];
-    const c = new THREE.Color();
-    const m = new THREE.Matrix4();
-    for (let i = 0; i < count; i++) {
-      m.makeTranslation(crowd.base[i * 3], crowd.base[i * 3 + 1], crowd.base[i * 3 + 2]);
-      bodies.setMatrixAt(i, m);
-      heads.setMatrixAt(i, m);
-      bodies.setColorAt(i, c.set(shirts[Math.floor(rnd() * shirts.length)]));
-      heads.setColorAt(i, c.set(skins[Math.floor(rnd() * skins.length)]));
-    }
-    bodies.frustumCulled = heads.frustumCulled = false;
-    scene.add(bodies, heads);
-    crowd.bodies = bodies;
-    crowd.heads = heads;
-    crowd.count = count;
     track.sample(14, F);
     world.standPos = F.pos.clone();
   }
+
+  // ------------------------------------------------------------ speedway
+  // stands, wall and fence all the way round the outside, open at the pit lane
+  let oval = null;
+  if (speedway) {
+    oval = buildSpeedway(scene, track, { outside, gaps: [[PIT_S - 26, PIT_S + 26]], rnd });
+    for (const v of oval.spots) seats.push(v);
+    world.crowdEverywhere = true;
+  }
+  const crowd = buildCrowd(scene, seats, rnd);
+  world.crowdCount = crowd.count;
 
   // ------------------------------------------------------------ start gantry
   {
@@ -472,7 +569,7 @@ export function buildWorld(scene, renderer, track) {
       ['SUNNY OIL', 'Slippery since forever', '#2f8cff', '#ffffff', '#ffd21f'],
     ];
     const steel = new THREE.MeshStandardMaterial({ color: 0x4a4038, roughness: 0.8 });
-    const spots = [250, 470, 700, 930, 1180, 1420];
+    const spots = [0.148, 0.279, 0.415, 0.552, 0.7, 0.842].map((f) => f * track.length);
     spots.forEach((s, i) => {
       const [big, small, bg, fg, accent] = ads[i % ads.length];
       const c = makeCanvas(1024, 448), ctx = c.getContext('2d');
@@ -496,10 +593,11 @@ export function buildWorld(scene, renderer, track) {
       tex.anisotropy = 8;
       const face = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.6 });
       const curv = track.curvatureAt(s);
-      const side = curv > 0 ? -1 : 1; // outside of the bend
+      // outside of the bend; on the speedway the stands are there, so inside
+      const side = speedway ? -outside(s) : curv > 0 ? -1 : 1;
       track.sample(s, F);
       const pos = F.pos.clone().addScaledVector(F.side, side * (ROAD_HALF + 17));
-      const zAxis = F.tan.clone().multiplyScalar(-1).addScaledVector(F.side, -side * 0.55).setY(0).normalize();
+      const zAxis = faceOncoming(F, side, 0.55);
       const xAxis = new THREE.Vector3().crossVectors(Y, zAxis).normalize();
       const g = new THREE.Group();
       pos.y = surfaceY(pos.x, pos.z) - 0.5;
@@ -581,27 +679,13 @@ export function buildWorld(scene, renderer, track) {
   }
 
   // ------------------------------------------------------------ per-frame
-  let crowdClock = 0;
-  world.update = (dt, t, focus, excite) => {
-    sun.target.position.copy(focus);
-    sun.position.copy(focus).addScaledVector(sunDir, 190);
+  world.update = (dt, t, excite) => {
     for (const b of balloons) {
       b.g.position.y = b.y + Math.sin(t * 0.25 + b.ph) * 5;
       b.g.rotation.y = t * 0.03 + b.ph;
     }
-    crowdClock += dt;
-    if (crowdClock > 1 / 30) {
-      crowdClock = 0;
-      const A = crowd.bodies.instanceMatrix.array, B = crowd.heads.instanceMatrix.array;
-      const speed = 5 + excite * 7, height = 0.1 + excite * 0.42;
-      for (let i = 0; i < crowd.count; i++) {
-        const y = crowd.base[i * 3 + 1] + Math.abs(Math.sin(t * speed * (0.7 + crowd.amp[i] * 0.3) + crowd.phase[i])) * height * crowd.amp[i];
-        A[i * 16 + 13] = y;
-        B[i * 16 + 13] = y;
-      }
-      crowd.bodies.instanceMatrix.needsUpdate = true;
-      crowd.heads.instanceMatrix.needsUpdate = true;
-    }
+    crowd.update(dt, excite);
+    if (oval) oval.update(dt);
   };
 
   return world;

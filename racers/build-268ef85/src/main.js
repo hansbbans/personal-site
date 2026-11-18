@@ -5,9 +5,10 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { Track, laneOffset, buildCourse } from './track.js';
-import { COURSE } from './course.js';
+import { TRACKS, THEMES, trackById } from './tracks.js';
 import { Minimap } from './minimap.js';
-import { buildWorld } from './world.js';
+import { buildSky, buildWorld } from './world.js';
+import { FoamWall, PitBox, GoldRing, PIT_LAT } from './props.js';
 import { Car, CAR_SPECS } from './car.js';
 import { Race, PLAYER_VMAX, BOOST_V, START_S } from './race.js';
 import { AudioSys } from './audio.js';
@@ -16,8 +17,10 @@ import { clamp, lerp, damp, smoothstep, ordinalSuffix } from './util.js';
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
-const LAPS = 2;
 const N = CAR_SPECS.length;
+// remembered between visits; ?track=heart&laps=3 in the address wins
+const saved = (() => { try { return JSON.parse(localStorage.getItem('vroom.options')) || {}; } catch { return {}; } })();
+const saveOptions = () => { try { localStorage.setItem('vroom.options', JSON.stringify({ track: G.trackId, laps: G.laps })); } catch {} };
 
 // ------------------------------------------------------------------ renderer
 const canvas = $('game');
@@ -77,12 +80,59 @@ window.addEventListener('resize', resize);
 resize();
 
 // ------------------------------------------------------------------ world
-const track = new Track();
-scene.add(track.buildMeshes(renderer.capabilities.getMaxAnisotropy()));
-const world = buildWorld(scene, renderer, track);
-const course = buildCourse(track, COURSE, renderer.capabilities.getMaxAnisotropy());
-scene.add(course.group);
-const minimap = new Minimap($('minimap'), track, COURSE, CAR_SPECS);
+const sky = buildSky(scene, renderer);
+const aniso = renderer.capabilities.getMaxAnisotropy();
+// Everything that belongs to the chosen track. Swapped out whole on the pick screen.
+let level = null, track = null, world = null, course = null, minimap = null;
+
+function disposeTree(root) {
+  root.traverse((o) => {
+    if (o.geometry) o.geometry.dispose();
+    const mats = Array.isArray(o.material) ? o.material : o.material ? [o.material] : [];
+    for (const m of mats) {
+      for (const k of ['map', 'emissiveMap', 'alphaMap', 'normalMap', 'roughnessMap']) if (m[k]) m[k].dispose();
+      m.dispose();
+    }
+    if (o.isInstancedMesh) o.dispose();
+  });
+}
+
+function loadLevel(id) {
+  const def = trackById(id);
+  if (level) {
+    scene.remove(level.group);
+    disposeTree(level.group);
+  }
+  const group = new THREE.Group();
+  const t = new Track(def.points);
+  const theme = THEMES[def.theme];
+  group.add(t.buildMeshes(aniso, theme));
+  const pitBox = def.course.pit ? new PitBox(t, def.course.pit) : null;
+  // keep cacti, trees and rocks out of the pit garage
+  const keepOut = [];
+  if (pitBox) {
+    const f = t.sample(def.course.pit.s, Track.frame());
+    const c = f.pos.clone().addScaledVector(f.side, PIT_LAT - 7);
+    keepOut.push({ x: c.x, z: c.z, r: 24 });
+  }
+  const w = buildWorld(group, t, theme, { keepOut });
+  const c = buildCourse(t, def.course, aniso);
+  group.add(c.group);
+  const walls = def.course.walls.map((wl) => new FoamWall(t, wl));
+  for (const x of walls) group.add(x.group);
+  if (pitBox) group.add(pitBox.group);
+  const ring = def.course.ring ? new GoldRing(t, def.course.ring) : null;
+  if (ring) group.add(ring.group);
+  scene.add(group);
+  sky.setTheme(theme);
+  level = { def, group, walls, pitBox, ring };
+  track = t; world = w; course = c;
+  if (minimap) minimap.setTrack(t, def.course);
+  else minimap = new Minimap($('minimap'), t, def.course, CAR_SPECS);
+  G.trackId = def.id;
+  markOptions();
+}
+
 const cars = CAR_SPECS.map((s, i) => new Car(s, i));
 cars.forEach((c) => scene.add(c.root));
 const dust = new Particles(900);
@@ -116,6 +166,15 @@ const G = {
   confettiAt: 0,
   autopilot: params.has('auto'),
   selLat: 0,
+  trackId: params.get('track') || saved.track || TRACKS[0].id,
+  laps: [2, 3].includes(+params.get('laps')) ? +params.get('laps') : saved.laps === 3 ? 3 : 2,
+  mud: new Float32Array(N), // how muddy each car is, 0..1
+  pitShow: false,
+  pitLeaving: false,
+  ringLap: 0, // the lap the player last flew through the golden ring
+  ringAt: -1, // race time of the first ring, for the "press space" tip
+  usedBank: false,
+  bankShown: -1,
 };
 G.selLat = laneOffset(G.sel);
 
@@ -181,7 +240,9 @@ function updateCamera(dt) {
     } else {
       chasePose(want, START_S, lat, 0);
     }
-  } else if (G.state === 'race') {
+  } else if (G.state === 'pit' && G.pitShow) {
+    level.pitBox.cameraPose(want, G.time);
+  } else if (G.state === 'race' || G.state === 'pit') {
     // the camera follows the player's steering and jumps, a touch behind
     G.camLat = damp(G.camLat, p.lat, 5, dt);
     G.camY = damp(G.camY, p.y, 9, dt);
@@ -230,7 +291,63 @@ const ui = {
   finPlace: $('finPlace'), finMedal: $('finMedal'), fade: $('fade'), speedo: $('speedo'),
 };
 const show = (el, on) => el.classList.toggle('hidden', !on);
-$('lapTotal').textContent = LAPS;
+
+// --- track and lap choice on the pick screen
+const trackBtns = TRACKS.map((def) => {
+  const b = document.createElement('button');
+  b.className = 'trk';
+  b.setAttribute('aria-label', def.name);
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = 132;
+  drawThumb(cv, new Track(def.points));
+  const name = document.createElement('span');
+  name.textContent = def.name;
+  b.append(cv, name);
+  b.addEventListener('click', (e) => { e.preventDefault(); audio.ensure(N); chooseTrack(def.id); b.blur(); });
+  $('tracks').append(b);
+  return b;
+});
+// the track's shape, like the map in the race (screen-up = +z, +x to the left)
+function drawThumb(cv, t) {
+  const g = cv.getContext('2d'), W = cv.width;
+  let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+  for (const p of t.pts) { x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); z0 = Math.min(z0, p.z); z1 = Math.max(z1, p.z); }
+  const k = (W * 0.76) / Math.max(x1 - x0, z1 - z0);
+  const r = Math.min(1, (t.closestApproach() * k * 0.72) / 15); // keep a hairpin's legs apart
+  const X = (x) => W / 2 - (x - (x0 + x1) / 2) * k, Y = (z) => W / 2 - (z - (z0 + z1) / 2) * k;
+  g.beginPath();
+  for (let i = 0; i <= t.n; i += 6) { const p = t.pts[i % t.n]; i ? g.lineTo(X(p.x), Y(p.z)) : g.moveTo(X(p.x), Y(p.z)); }
+  g.closePath();
+  g.lineJoin = 'round';
+  g.strokeStyle = '#1a1220'; g.lineWidth = 15 * r; g.stroke();
+  g.strokeStyle = '#ffffff'; g.lineWidth = 8 * r; g.stroke();
+  const p = t.pts[0];
+  g.fillStyle = '#ef3b2d';
+  g.beginPath(); g.arc(X(p.x), Y(p.z), 9, 0, Math.PI * 2); g.fill();
+  g.lineWidth = 3; g.strokeStyle = '#1a1220'; g.stroke();
+}
+function markOptions() {
+  TRACKS.forEach((def, i) => trackBtns[i].classList.toggle('on', def.id === G.trackId));
+  $('laps2').classList.toggle('on', G.laps === 2);
+  $('laps3').classList.toggle('on', G.laps === 3);
+}
+function chooseTrack(id) {
+  if (G.state !== 'select' || G.switching) return;
+  audio.blip();
+  if (id === G.trackId) return;
+  G.trackId = id;
+  markOptions();
+  saveOptions();
+  G.switching = true;
+  fadeThen(() => { loadLevel(id); G.switching = false; });
+}
+function chooseLaps(n) {
+  if (G.state !== 'select') return;
+  audio.blip();
+  G.laps = n;
+  markOptions();
+  saveOptions();
+}
 
 function setName() {
   const spec = CAR_SPECS[G.sel];
@@ -266,7 +383,22 @@ function showSelect() {
 function startGrid() {
   const prevState = G.state;
   audio.ensure(N);
-  G.race = new Race({ trackLength: track.length, laps: LAPS, playerIndex: G.sel, count: N, seed: (Math.random() * 1e9) | 0, course: COURSE });
+  G.race = new Race({
+    trackLength: track.length, laps: G.laps, pitLap: G.laps >= 3 ? 2 : 0, playerIndex: G.sel, count: N,
+    seed: (Math.random() * 1e9) | 0, course: level.def.course,
+  });
+  $('lapTotal').textContent = G.laps;
+  if (level.pitBox) level.pitBox.stop();
+  G.pitShow = G.pitLeaving = false;
+  cars.forEach((c) => { c.root.visible = true; });
+  show(ui.speedo, true);
+  G.mud.fill(0);
+  cars.forEach((c) => c.setMud(0));
+  if (level.ring) level.ring.reset(false);
+  G.ringLap = 0;
+  G.ringAt = -1;
+  G.usedBank = false;
+  syncBank();
   G.state = 'grid';
   G.t = 0;
   G.countStep = -1;
@@ -318,6 +450,43 @@ function finishRace() {
   camBlend(1.4);
 }
 
+// Lap 2 of 3: the race waits while the crew change the wheels.
+function startPit() {
+  G.state = 'pit';
+  G.t = 0;
+  show(ui.touch, false);
+  ui.hint.classList.remove('on');
+  banner('PIT STOP!');
+  audio.blip();
+  fadeThen(() => {
+    level.pitBox.start(cars[G.sel], audio);
+    G.pitShow = true;
+    show(ui.speedo, false);
+    cars.forEach((c, i) => { c.root.visible = i === G.sel; });
+    blendT = 1;
+  });
+}
+
+function endPit() {
+  G.pitLeaving = true;
+  fadeThen(() => {
+    level.pitBox.stop();
+    G.pitShow = false;
+    G.pitLeaving = false;
+    show(ui.speedo, true);
+    cars.forEach((c) => { c.root.visible = true; });
+    G.race.endPit();
+    G.state = 'race';
+    G.camLat = G.race.player.lat;
+    G.camY = G.race.player.y;
+    blendT = 1;
+    show(ui.touch, true);
+    banner('GO GO GO!');
+    audio.countBeep(true);
+    audio.cheer(2, 0.3);
+  });
+}
+
 function fadeThen(fn) {
   ui.fade.classList.add('on');
   setTimeout(() => {
@@ -332,7 +501,12 @@ function press(what) {
     // The camera faces the cars, so screen-right is the cars' left (lower lane numbers).
     if (what === 'left') pick(G.sel + 1);
     else if (what === 'right') pick(G.sel - 1);
-    else if (what === 'ok' || what === 'up') startGrid();
+    else if ((what === 'ok' || what === 'up') && !G.switching) startGrid();
+    else if (what === 'down') {
+      // Down on the pick screen: next track
+      const i = TRACKS.findIndex((d) => d.id === G.trackId);
+      chooseTrack(TRACKS[(i + 1) % TRACKS.length].id);
+    } else if (what === 'laps') chooseLaps(G.laps === 2 ? 3 : 2);
   } else if (G.state === 'finish' && G.finishPanel && G.t > 3) {
     if (what === 'ok' || what === 'up') fadeThen(startGrid);
   }
@@ -349,9 +523,12 @@ window.addEventListener('keydown', (e) => {
   if (e.repeat) return;
   audio.ensure(N);
   if (k === 'ArrowUp' || k === 'w' || k === 'W') { G.input.up = true; press('up'); }
-  else if (k === 'ArrowDown' || k === 's' || k === 'S') G.input.down = true;
+  else if (k === 'ArrowDown' || k === 's' || k === 'S') { G.input.down = true; press('down'); }
+  else if (k === 'l' || k === 'L') press('laps');
+  else if (k >= '1' && k <= String(TRACKS.length)) chooseTrack(TRACKS[+k - 1].id);
   else if (k === 'ArrowLeft' || k === 'a' || k === 'A') { G.input.left = true; press('left'); }
   else if (k === 'ArrowRight' || k === 'd' || k === 'D') { G.input.right = true; press('right'); }
+  else if (k === ' ' && G.state === 'race') useBank();
   else if (k === 'Enter' || k === ' ') press('ok');
   else if (k === 'm' || k === 'M') toggleMute();
   syncPedals();
@@ -380,6 +557,33 @@ for (const [id, key] of [['btnUp', 'up'], ['btnDown', 'down'], ['btnLeft', 'left
   el.addEventListener('lostpointercapture', set(false));
   el.addEventListener('contextmenu', (e) => e.preventDefault());
 }
+// the golden boost button: spend a boost saved from the ring
+$('btnBoost').addEventListener('pointerdown', (e) => {
+  e.preventDefault();
+  audio.ensure(N);
+  useBank();
+});
+$('btnBoost').addEventListener('contextmenu', (e) => e.preventDefault());
+function useBank() {
+  if (G.state !== 'race' || !G.race.useBoost()) return;
+  G.usedBank = true;
+  syncBank();
+}
+// the count on the boost button; pops when it changes
+function syncBank(pop = false) {
+  const n = G.race ? G.race.player.banked : 0;
+  if (n === G.bankShown && !pop) return;
+  G.bankShown = n;
+  const b = $('btnBoost');
+  $('bankNum').textContent = n;
+  b.classList.toggle('empty', n === 0);
+  if (pop) {
+    b.classList.remove('pop');
+    void b.offsetWidth;
+    b.classList.add('pop');
+  }
+}
+
 const tap = (id, fn) => $(id).addEventListener('click', (e) => { e.preventDefault(); audio.ensure(N); fn(); e.currentTarget.blur(); });
 tap('prev', () => press('left'));
 tap('next', () => press('right'));
@@ -391,6 +595,8 @@ function toggleMute() {
   $('mute').textContent = audio.muted ? '🔇' : '🔊';
 }
 tap('mute', toggleMute);
+tap('laps2', () => chooseLaps(2));
+tap('laps3', () => chooseLaps(3));
 document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 
@@ -433,8 +639,26 @@ function handleEvents() {
     if (e.type === 'boost' && isP) {
       audio.whoosh();
       audio.blip();
-      G.shake = Math.max(G.shake, 0.5);
-      if (G.state === 'race') banner('BOOST!');
+      G.shake = Math.max(G.shake, e.banked ? 0.7 : 0.5);
+      if (G.state === 'race') banner(e.banked ? 'SUPER BOOST!' : 'BOOST!');
+    } else if (e.type === 'ring' && isP) {
+      level.ring.collect();
+      G.ringLap = race.lapOf(e.car);
+      if (G.ringAt < 0) G.ringAt = race.time;
+      // gold sparkles fly off the rim, carried along with the car
+      level.ring.centre(V);
+      const q = level.ring.group.quaternion, r = level.def.course.ring.r;
+      for (let k = 0; k < 70; k++) {
+        const a = Math.random() * Math.PI * 2, u = 3 + Math.random() * 6;
+        V2.set(Math.cos(a) * r, Math.sin(a) * r, 0).applyQuaternion(q).add(V);
+        FWD.set(Math.cos(a) * u, Math.sin(a) * u, e.car.v * 0.6).applyQuaternion(q);
+        sparks.spawn(V2.x, V2.y, V2.z, FWD.x, FWD.y, FWD.z, 0.6 + Math.random() * 0.4, 0.35, 0.05, 3.0, 2.3, 0.6, 1, -6);
+      }
+      audio.ding();
+      audio.ding(0.12);
+      audio.cheer(1.5, 0.3);
+      if (G.state === 'race') banner('GOLD RING!');
+      syncBank(true);
     } else if (e.type === 'jump' && isP) {
       audio.cheer(1.8, 0.35);
       if (G.state === 'race') banner('WHEEE!');
@@ -459,9 +683,64 @@ function handleEvents() {
       G.shake = Math.max(G.shake, 0.6);
       cars[e.rival.index].hop();
       audio.noiseBurst({ dur: 0.18, vol: 0.3, f0: 220, f1: 700, f2: 160, q: 1, attack: 0.003 });
+    } else if (e.type === 'wall') {
+      // the wall nearest this car's spot on the lap
+      const sl = race.lapS(e.car.s);
+      const wall = level.walls.reduce((best, w, k) => {
+        const d = Math.abs(level.def.course.walls[k].s - sl);
+        return !best || d < best.d ? { w, d } : best;
+      }, null);
+      if (wall && wall.w.hit(e.lat, e.v) && isP) {
+        audio.crash();
+        G.shake = Math.max(G.shake, 0.7);
+        if (G.state === 'race') banner('CRASH!');
+      } else if (near) audio.noiseBurst({ dur: 0.3, vol: 0.12, f0: 300, f1: 800, f2: 160, q: 0.7, attack: 0.004 });
+    } else if (e.type === 'mud') {
+      G.mud[i] = 1;
+      if (near) mudBurst(car, 45);
+      if (isP) {
+        audio.splat();
+        G.shake = Math.max(G.shake, 0.35);
+        if (G.state === 'race') { banner('SPLAT!'); mudOnScreen(); }
+      }
+    } else if (e.type === 'pit' && isP) {
+      startPit();
     }
   }
   race.events.length = 0;
+}
+
+// brown gloop thrown up round a car
+function mudBurst(car, n, speed = 1) {
+  FWD.set(0, 0, 1).applyQuaternion(car.root.quaternion);
+  for (let k = 0; k < n; k++) {
+    const side = Math.random() < 0.5 ? -1 : 1;
+    car.worldPoint(side * (0.7 + Math.random() * 0.4), 0.15, (Math.random() - 0.5) * 3.2, V);
+    const out = (1.5 + Math.random() * 4) * speed;
+    const sh = 0.75 + Math.random() * 0.35;
+    dust.spawn(
+      V.x, V.y, V.z,
+      side * FWD.z * out + (Math.random() - 0.5) * 2, (2 + Math.random() * 5) * speed, -side * FWD.x * out + (Math.random() - 0.5) * 2,
+      0.5 + Math.random() * 0.5, 0.35, 0.7, 0.36 * sh, 0.23 * sh, 0.11 * sh, 1, -16
+    );
+  }
+}
+
+// a few blobs of mud on the screen that slide off
+function mudOnScreen() {
+  const box = $('mudscreen');
+  box.textContent = '';
+  const n = 4 + Math.floor(Math.random() * 3);
+  for (let k = 0; k < n; k++) {
+    const el = document.createElement('i');
+    const size = 8 + Math.random() * 12; // vmin
+    el.style.width = `${size}vmin`;
+    el.style.height = `${size * (0.75 + Math.random() * 0.4)}vmin`;
+    el.style.left = `${4 + Math.random() * 82}%`;
+    el.style.top = `${8 + Math.random() * 60}%`;
+    el.style.animationDelay = `${k * 0.04}s`;
+    box.append(el);
+  }
 }
 
 // ------------------------------------------------------------------ per-frame
@@ -516,7 +795,12 @@ function updateCars(dt) {
     const curv = track.curvatureAt(s);
     const wander = rc && rc.isPlayer ? 0 : Math.sin(G.time * 0.55 + i * 1.7) * 0.13 * clamp(v / 25, 0, 1);
     G.pitch[i] = damp(G.pitch[i], rc ? rc.pitch : 0, 14, dt);
-    car.place(F, (rc ? rc.lat : laneOffset(i)) + wander, rc ? rc.y : 0, rc ? rc.yaw : 0, G.pitch[i], rc ? rc.ground : 0);
+    const inPit = G.pitShow && i === G.sel; // the pit box puts the car in the garage itself
+    if (!inPit) car.place(F, (rc ? rc.lat : laneOffset(i)) + wander, rc ? rc.y : 0, rc ? rc.yaw : 0, G.pitch[i], rc ? rc.ground : 0);
+    // mud wears off as you drive (stays on while you sit in the pit)
+    if (rc && rc.inMud) G.mud[i] = 1;
+    else if (G.state === 'race' || G.state === 'finish') G.mud[i] = Math.max(0, G.mud[i] - dt * 0.11);
+    car.setMud(Math.min(1, G.mud[i] * 1.4));
 
     // engine revving on the grid
     let revT = 0;
@@ -534,18 +818,20 @@ function updateCars(dt) {
     let mood = 'calm';
     if (G.state === 'select') mood = i === G.sel ? 'grin' : 'calm';
     else if (pre) mood = 'rev';
+    else if (inPit) mood = 'happy';
     else if (rc) {
       if (rc.finished) mood = 'happy';
       else if (rc.braking) mood = 'brake';
       else mood = v > PLAYER_VMAX * 0.86 || rc.air ? 'fast' : 'race';
     }
     car.setMood(mood);
+    const pitV = inPit ? level.pitBox.show.speed || 0 : 0;
     car.update(dt, G.time, {
-      v,
-      a: rc ? rc.a : 0,
-      latAcc: v * v * curv + (rc ? rc.latV * v * 0.025 : 0),
-      curv,
-      steer: rc ? rc.yaw * 1.6 : 0,
+      v: inPit ? pitV : G.state === 'pit' ? 0 : v,
+      a: inPit || G.state === 'pit' ? 0 : rc ? rc.a : 0,
+      latAcc: inPit ? 0 : v * v * curv + (rc ? rc.latV * v * 0.025 : 0),
+      curv: inPit ? 0 : curv,
+      steer: inPit ? 0 : rc ? rc.yaw * 1.6 : 0,
       rev: G.rev[i],
       braking: rc ? rc.braking : false,
       camPos: camera.position,
@@ -561,6 +847,12 @@ function updateFx(dt) {
       if (car.root.position.distanceToSquared(camera.position) > 170 * 170) continue;
       const v = rc.v;
       if (rc.air) continue;
+      if (rc.inMud && v > 3) {
+        G.mudAcc = (G.mudAcc || 0) + dt * 90;
+        const n = Math.floor(G.mudAcc);
+        G.mudAcc -= n;
+        mudBurst(car, n, 0.8);
+      }
       const launch = race.time < 1.9 && v > 0.5;
       const smoke = launch || (rc.braking && v > 8);
       let rate = v > 6 ? 8 + v * 0.34 : 0;
@@ -633,6 +925,11 @@ function updateAudio() {
       rpm = 0.18 + G.rev[i] * 0.78;
       throttle = G.rev[i];
       vol = isP ? 0.3 + G.rev[i] * 0.3 : (0.16 + G.rev[i] * 0.22) / (1 + (dist / 14) ** 2) + 0.05;
+    } else if (G.state === 'pit') {
+      // everyone waits; your engine ticks over in the garage
+      rpm = 0.18;
+      throttle = 0.1;
+      vol = isP ? 0.16 : 0;
     } else {
       rpm = rpmFor(rc.v);
       throttle = rc.throttle;
@@ -647,8 +944,9 @@ function updateAudio() {
     e.set(rpm, throttle, vol, pan, pitch);
   }
   const dStand = camera.position.distanceTo(world.standPos);
-  const nearStand = 1 / (1 + (dStand / 90) ** 2);
-  audio.setCrowd((G.state === 'finish' ? 0.2 : G.state === 'grid' ? 0.14 : 0.03) + nearStand * 0.16);
+  // on the speedway there are people all the way round
+  const nearStand = world.crowdEverywhere ? 0.7 : 1 / (1 + (dStand / 90) ** 2);
+  audio.setCrowd((G.state === 'finish' ? 0.2 : G.state === 'grid' || G.state === 'pit' ? 0.14 : 0.03) + nearStand * 0.16);
 }
 
 function updateHud(dt) {
@@ -669,23 +967,32 @@ function updateHud(dt) {
   if (lap !== G.lapShown) {
     G.lapShown = lap;
     ui.lapNum.textContent = lap;
-    if (lap === LAPS) {
+    if (lap === G.laps) {
       banner('FINAL LAP!');
       audio.blip();
       audio.cheer(2.2, 0.3);
+    } else {
+      banner(`LAP ${lap}!`);
+      audio.blip();
     }
   }
   minimap.draw(race, G.sel);
   ui.speedFill.style.width = `${clamp(p.v / PLAYER_VMAX, 0, 1) * 100}%`;
   ui.speedNum.textContent = Math.round(p.v * 2.23694);
   ui.speedo.classList.toggle('boost', p.boostT > 0);
+  syncBank();
+  // the ring comes back for the next lap
+  if (level.ring && level.ring.state === 'off' && race.lapOf(p) > G.ringLap) level.ring.reset();
   // nudge a child who has let go of everything; early on, show how to steer
   if (G.input.left || G.input.right) G.steered = true;
   G.idle = !G.input.up && p.v < 32 ? G.idle + dt : 0;
   const steerTip = !G.steered && race.time > 2.5 && race.time < 9;
-  const tip = G.idle > 2.2 ? 'fast' : steerTip ? 'steer' : '';
+  const ringTip = p.banked > 0 && !G.usedBank && G.ringAt >= 0 && race.time - G.ringAt > 1.6 && race.time - G.ringAt < 7;
+  const tip = G.idle > 2.2 ? 'fast' : ringTip ? 'ring' : steerTip ? 'steer' : '';
   if (tip && tip !== G.tip) {
-    ui.hint.innerHTML = tip === 'fast' ? 'Hold <kbd>▲</kbd> to go fast!' : '<kbd>◀</kbd> <kbd>▶</kbd> to steer!';
+    ui.hint.innerHTML = tip === 'fast' ? 'Hold <kbd>▲</kbd> to go fast!'
+      : tip === 'ring' ? (isTouch ? 'Tap <kbd class="gold">BOOST</kbd> to zoom!' : 'Press <kbd class="gold">SPACE</kbd> to boost!')
+        : '<kbd>◀</kbd> <kbd>▶</kbd> to steer!';
   }
   G.tip = tip || G.tip;
   ui.hint.classList.toggle('on', !!tip);
@@ -697,6 +1004,7 @@ function update(dt) {
   if (G.autopilot) {
     if (G.state === 'select' && G.t > 0.5) startGrid();
     G.input.up = G.state === 'race' || G.state === 'grid';
+    if (G.state === 'race' && G.race.player.banked && G.race.player.boostT <= 0) useBank();
   }
   if (G.state === 'grid') updateGrid();
   if (G.race && (G.state === 'race' || G.state === 'finish')) {
@@ -710,7 +1018,23 @@ function update(dt) {
     handleEvents();
     if (G.state === 'race' && G.race.player.finished) finishRace();
   }
+  if (G.state === 'pit' && G.pitShow) {
+    const sh = level.pitBox.show;
+    const sparkleAt = sh.sparkle ? sh.sparkle.at : -1;
+    if (level.pitBox.update(dt, G.time) && !G.pitLeaving) endPit();
+    // a twinkle when each new wheel goes on
+    if (sh.sparkle && sh.sparkle.at !== sparkleAt) {
+      const w = cars[G.sel].wheels[sh.sparkle.i];
+      w.pivot.getWorldPosition(V);
+      for (let k = 0; k < 26; k++) {
+        const a = Math.random() * Math.PI * 2, u = 2 + Math.random() * 3;
+        sparks.spawn(V.x, V.y, V.z, Math.cos(a) * u, 1 + Math.random() * 3, Math.sin(a) * u, 0.5, 0.25, 0.05, 2.6, 2.2, 0.9, 1, -4);
+      }
+    }
+  }
   course.tick(dt);
+  for (const w of level.walls) w.update(dt);
+  if (level.ring) level.ring.update(dt, G.time);
   if (G.state === 'finish' && !G.finishPanel && G.t > 1.4) {
     G.finishPanel = true;
     show(ui.finish, true);
@@ -722,8 +1046,9 @@ function update(dt) {
   updateAudio();
   updateHud(dt);
   const focus = cars[G.sel].root.position;
-  const excite = G.state === 'grid' || G.state === 'finish' ? 1 : G.state === 'race' ? 0.55 : 0.2;
-  world.update(dt, G.time, focus, excite);
+  const excite = G.state === 'grid' || G.state === 'finish' || G.state === 'pit' ? 1 : G.state === 'race' ? 0.55 : 0.2;
+  sky.update(focus);
+  world.update(dt, G.time, excite);
   const sp = G.state === 'race' ? Math.pow(clamp(G.race.player.v / PLAYER_VMAX, 0, 1), 2.2) : 0;
   grade.uniforms.uSpeed.value = damp(grade.uniforms.uSpeed.value, sp, 6, dt);
 }
@@ -753,6 +1078,7 @@ function frame(now) {
 }
 
 // ------------------------------------------------------------------ boot
+loadLevel(G.trackId);
 showSelect();
 update(1 / 60);
 cam.pos.copy(want.pos); cam.look.copy(want.look); cam.fov = want.fov;
@@ -769,7 +1095,10 @@ requestAnimationFrame((t) => {
 
 // handy for testing from the console
 window.__game = {
-  G, cars, track, world, camera, renderer, scene, audio, bloom, grade, composer, startGrid, showSelect, pick, press,
+  G, cars, camera, renderer, scene, audio, bloom, grade, composer, startGrid, showSelect, pick, press, loadLevel, chooseTrack, chooseLaps,
+  get track() { return track; },
+  get world() { return world; },
+  get level() { return level; },
   // advance the game by hand (the browser pauses animation in hidden tabs)
   // look at car i from a given angle (degrees) and distance, for checking the models
   view(i, az = 30, el = 12, dist = 7, fov = 35) {

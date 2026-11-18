@@ -4,7 +4,7 @@
 import * as THREE from 'three';
 import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { clamp, lerp, damp, makeCanvas, TAU } from './util.js';
+import { clamp, lerp, damp, makeCanvas, mulberry32, TAU } from './util.js';
 
 const FONT = '"Arial Rounded MT Bold", "Avenir Next", "Helvetica Neue", Arial, sans-serif';
 
@@ -239,8 +239,36 @@ function shared() {
     return new THREE.CanvasTexture(c);
   })();
 
+  // mud splats low on the sides (and up over the wheels), drawn in the body's
+  // own UVs: across = along the car, down = round the section from the top
+  const mud = (() => {
+    const W = 512, H = 512;
+    const c = makeCanvas(W, H), g = c.getContext('2d');
+    const rnd = mulberry32(17);
+    const yOf = (phi) => (1 - BODY.arcFrac(phi)) * H;
+    for (let i = 0; i < 420; i++) {
+      const left = rnd() < 0.5;
+      // mostly low down; a few flung higher, more round the wheel arches
+      const up = Math.pow(rnd(), 2.2);
+      const phi = 0.5 + up * 1.15;
+      const nearWheel = rnd() < 0.45;
+      const u = nearWheel ? (rnd() < 0.5 ? 0.22 : 0.8) + (rnd() - 0.5) * 0.16 : rnd();
+      const x = u * W, y = yOf(left ? phi : TAU - phi);
+      const r = (2 + rnd() * 10) * (1 - up * 0.6);
+      g.fillStyle = `rgba(${78 + rnd() * 30 | 0},${50 + rnd() * 20 | 0},${24 + rnd() * 12 | 0},${0.75 + rnd() * 0.25})`;
+      g.beginPath();
+      g.ellipse(x, y, r * (1 + rnd()), r, rnd() * Math.PI, 0, Math.PI * 2);
+      g.fill();
+      // a drip
+      if (rnd() < 0.2) g.fillRect(x - 1.5, y, 3, (left ? -1 : 1) * -r * 2);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  })();
+
   SHARED = {
-    body, cabin, windshield, sideL, sideR, rear, roof, doorL, doorR, tyre, rim, hub, spoke, cap, blob, R, HW,
+    body, cabin, windshield, sideL, sideR, rear, roof, doorL, doorR, tyre, rim, hub, spoke, cap, blob, mud, R, HW,
     tyreMat: new THREE.MeshStandardMaterial({ color: 0x17171b, roughness: 0.82 }),
     chromeMat: new THREE.MeshStandardMaterial({ color: 0xdfe3ea, roughness: 0.18, metalness: 1 }),
     glassMat: new THREE.MeshPhysicalMaterial({ color: 0x0b0f1a, roughness: 0.06, metalness: 0.4, clearcoat: 1, clearcoatRoughness: 0.03, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }),
@@ -502,6 +530,13 @@ export class Car {
     };
     const bodyMesh = add(S.body, this.paintMat);
     add(S.cabin, this.plainMat);
+    // mud from the mud pits: fades in on a splat, wears off as you drive
+    this.mudMat = new THREE.MeshStandardMaterial({
+      map: S.mud, transparent: true, opacity: 0, roughness: 0.7, depthWrite: false,
+      polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1,
+    });
+    this.mudMesh = add(S.body, this.mudMat, this.shell, false);
+    this.mudMesh.visible = false;
 
     // --- face
     this.eyeCanvas = makeCanvas(512, 288);
@@ -610,7 +645,7 @@ export class Car {
       }
       add(S.cap, S.chromeMat, flip, false);
       this.root.add(pivot);
-      this.wheels.push({ pivot, spin, front });
+      this.wheels.push({ pivot, spin, front, home: pivot.position.clone() });
       const a = add(arch, this.plainMat, this.chassis);
       a.position.set(Math.sign(x) * 0.9 * sx, S.R - 0.02, z);
     }
@@ -657,6 +692,12 @@ export class Car {
     const lift = Math.max(0, y - ground);
     this.blob.position.y = 0.035 - lift;
     this.blob.material.opacity = 0.55 / (1 + lift * 0.8);
+  }
+
+  // 0 = clean, 1 = covered in mud
+  setMud(k) {
+    this.mudMat.opacity = Math.min(1, k);
+    this.mudMesh.visible = k > 0.01;
   }
 
   // squash on landing

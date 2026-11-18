@@ -1,26 +1,16 @@
 // The little track map in the corner: the circuit, the start line, the ramp,
-// and a coloured dot for every racer. The player's dot is bigger, ringed in
-// white and drawn on top.
+// the wall, the mud, and a coloured dot for every racer. The player's dot is
+// bigger, ringed in white and drawn on top.
 import { Track } from './track.js';
 
 export class Minimap {
   constructor(canvas, track, course, specs) {
     this.canvas = canvas;
-    this.track = track;
-    this.course = course;
     this.specs = specs;
     this.f = Track.frame();
     this.size = 0;
     this.base = document.createElement('canvas');
-    // Map the world onto the canvas. Screen-up is the direction the cars set
-    // off in (+z), and +x (the cars' left) is screen-left, so the map turns
-    // the same way the road does.
-    let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
-    for (const p of track.pts) {
-      x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x);
-      z0 = Math.min(z0, p.z); z1 = Math.max(z1, p.z);
-    }
-    this.box = { x0, x1, z0, z1 };
+    this.setTrack(track, course);
     // Measure only when the box changes size (or appears), never per frame.
     this.cssW = this.cssH = 0;
     const measure = () => {
@@ -30,6 +20,22 @@ export class Minimap {
     if (typeof ResizeObserver !== 'undefined') new ResizeObserver(measure).observe(canvas);
     else window.addEventListener('resize', measure);
     measure();
+  }
+
+  setTrack(track, course) {
+    this.track = track;
+    this.course = course;
+    // Map the world onto the canvas. Screen-up is +z, and +x (the left of a
+    // car heading up the screen) is screen-left, so the map turns the same
+    // way the road does.
+    let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+    for (const p of track.pts) {
+      x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x);
+      z0 = Math.min(z0, p.z); z1 = Math.max(z1, p.z);
+    }
+    this.box = { x0, x1, z0, z1 };
+    this.gap = track.closestApproach(); // a hairpin's legs: draw the road thin enough to keep them apart
+    this.W = this.H = 0; // lay out again on the next draw
   }
 
   // world (x, z) -> canvas pixels
@@ -60,6 +66,7 @@ export class Minimap {
     const g = this.base.getContext('2d');
     const u = this.size / 110; // u: one "pixel" at the 110px design width
     const t = this.track;
+    const r = Math.min(1, (this.gap * this.k * 0.72) / (9 * u)); // road outline at most 72% of the gap
     g.clearRect(0, 0, this.W, this.H);
     g.beginPath();
     for (let i = 0; i <= t.n; i += 4) {
@@ -71,13 +78,13 @@ export class Minimap {
     g.closePath();
     g.lineJoin = g.lineCap = 'round';
     g.strokeStyle = '#1a1220';
-    g.lineWidth = 9 * u;
+    g.lineWidth = 9 * u * r;
     g.stroke();
     g.strokeStyle = '#5b5763';
-    g.lineWidth = 5.5 * u;
+    g.lineWidth = 5.5 * u * r;
     g.stroke();
     g.strokeStyle = 'rgba(255,255,255,0.35)';
-    g.lineWidth = 0.9 * u;
+    g.lineWidth = 0.9 * u * r;
     g.setLineDash([3 * u, 3 * u]);
     g.stroke();
     g.setLineDash([]);
@@ -97,6 +104,23 @@ export class Minimap {
     };
     across(0, 60, 3.2 * u, '#1a1220');
     across(0, 52, 1.8 * u, '#ffffff');
+
+    // mud: brown blobs; the wall: a short brick-red bar across the road
+    for (const m of this.course.mud || []) {
+      t.sample(m.s + m.len / 2, f);
+      const [x, y] = this._xy(f.pos.x + f.side.x * m.lat, f.pos.z + f.side.z * m.lat);
+      g.beginPath();
+      g.arc(x, y, 3.2 * u, 0, Math.PI * 2);
+      g.fillStyle = '#7a4a22';
+      g.fill();
+      g.lineWidth = 1 * u;
+      g.strokeStyle = '#1a1220';
+      g.stroke();
+    }
+    for (const w of this.course.walls || []) {
+      across(w.s, 48, 4.2 * u, '#1a1220');
+      across(w.s, 40, 2.6 * u, '#ff5a4f');
+    }
 
     // the ramp: an orange dot where it sits (it's only two lanes wide)
     const ramp = this.course.ramp;
