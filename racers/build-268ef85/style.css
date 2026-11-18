@@ -67,6 +67,47 @@ button { font-family: inherit; cursor: pointer; border: 0; color: inherit; }
   background: #fff; color: var(--ink); border: 4px solid var(--ink); box-shadow: 0 5px 0 var(--ink);
 }
 
+/* track and lap choice under the GO button */
+.options { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: clamp(8px, 1.6vw, 20px); }
+.tracks { display: flex; gap: clamp(6px, 1vw, 12px); }
+.trk {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 6px 4px; border-radius: 14px;
+  background: rgba(20,12,26,.62); border: 3px solid rgba(255,255,255,.35); color: #fff;
+  font-weight: 800; font-size: clamp(10px, 1.25vw, 14px); line-height: 1.1; width: clamp(64px, 9vw, 104px);
+  box-shadow: 0 4px 0 var(--ink);
+}
+.trk canvas { width: clamp(40px, 5.6vw, 66px); height: clamp(40px, 5.6vw, 66px); }
+.trk.on { background: var(--yellow); color: var(--ink); border-color: var(--ink); transform: translateY(-3px) scale(1.06); box-shadow: 0 7px 0 var(--ink); }
+.laps { display: flex; flex-direction: column; gap: 6px; }
+.lapbtn {
+  padding: .35em .9em; border-radius: 999px; font-weight: 900; font-size: clamp(13px, 1.6vw, 19px);
+  background: rgba(20,12,26,.62); border: 3px solid rgba(255,255,255,.35); box-shadow: 0 4px 0 var(--ink); white-space: nowrap;
+}
+.lapbtn.on { background: #fff; color: var(--ink); border-color: var(--ink); }
+.lapbtn .pitflag { font-size: .8em; opacity: .85; }
+.trk:active, .lapbtn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+@media (max-height: 520px) {
+  .logo.small { font-size: clamp(20px, 6vh, 40px); }
+  .bigbtn { margin: 6px 0 8px; font-size: clamp(26px, 8vh, 44px); }
+  .trk { width: auto; padding: 3px 5px; }
+  .trk span { display: none; }
+  .trk canvas { width: 34px; height: 34px; }
+  .laps { flex-direction: row; }
+}
+@media (max-width: 600px) {
+  .trk span { display: none; }
+  .trk { width: auto; }
+}
+
+/* mud on the screen after a splat */
+#mudscreen { position: fixed; inset: 0; pointer-events: none; z-index: 7; overflow: hidden; }
+#mudscreen i {
+  position: absolute; display: block; border-radius: 48% 52% 45% 55% / 55% 45% 58% 42%;
+  background: radial-gradient(circle at 35% 30%, rgba(160,115,70,.95), rgba(92,58,28,.95) 45%, rgba(70,42,18,.92) 70%, rgba(70,42,18,0) 72%);
+  animation: mud 2.6s ease-in both;
+}
+@keyframes mud { 0% { transform: scale(.2); opacity: 0; } 8% { transform: scale(1.08); opacity: 1; } 14% { transform: scale(1); } 70% { opacity: 1; } 100% { transform: translateY(40px) scaleY(1.15); opacity: 0; } }
+
 #hud { position: fixed; inset: 0; pointer-events: none; z-index: 8; }
 #place {
   position: absolute; left: max(18px, env(safe-area-inset-left)); top: max(12px, env(safe-area-inset-top));
@@ -98,7 +139,7 @@ button { font-family: inherit; cursor: pointer; border: 0; color: inherit; }
 #speedo .num { margin-top: 2px; font-weight: 900; font-style: italic; font-size: clamp(26px, 4.4vw, 52px); -webkit-text-stroke: clamp(3px, .4vw, 5px) var(--ink); paint-order: stroke fill; text-shadow: 0 3px 0 var(--ink); line-height: 1; }
 #speedo small { font-size: .42em; margin-left: .3em; letter-spacing: .1em; }
 #hint {
-  position: absolute; left: 50%; top: 24%; transform: translateX(-50%); padding: .35em 1em; border-radius: 999px;
+  position: absolute; left: 50%; top: 24%; translate: -50% 0; padding: .35em 1em; border-radius: 999px;
   background: rgba(20,12,26,.72); font-weight: 800; font-size: clamp(20px, 3.4vw, 40px); white-space: nowrap;
   opacity: 0; transition: opacity .4s ease;
 }
@@ -146,6 +187,22 @@ button { font-family: inherit; cursor: pointer; border: 0; color: inherit; }
   .pedal.down { right: calc(max(14px, env(safe-area-inset-right)) + 70px + 10px); }
 }
 .pedal.on { transform: translateY(6px) scale(.96); box-shadow: 0 2px 0 var(--ink); filter: brightness(1.2); }
+/* boosts saved from the golden ring: sits above FAST, glows when there is one to spend */
+.pedal.boostbtn {
+  right: max(20px, env(safe-area-inset-right)); bottom: calc(max(20px, env(safe-area-inset-bottom)) + clamp(84px, 17vmin, 170px) + 22px);
+  height: clamp(64px, 12vmin, 120px); border-radius: 999px; color: var(--ink);
+  background: radial-gradient(circle at 35% 30%, #fff6c4, #ffd21f 45%, #f0a400); box-shadow: 0 8px 0 var(--ink), 0 0 26px rgba(255,200,40,.85);
+  transition: opacity .25s ease, filter .25s ease;
+}
+.pedal.boostbtn b { font-size: .8em; line-height: .9; }
+.pedal.boostbtn small { margin-top: .1em; }
+.pedal.boostbtn.empty { opacity: .38; filter: grayscale(.8); box-shadow: 0 8px 0 var(--ink); }
+.pedal.boostbtn.pop { animation: bankpop .5s cubic-bezier(.2, 1.7, .4, 1); }
+@keyframes bankpop { 0% { transform: scale(1.6) rotate(-10deg); } 100% { transform: scale(1) rotate(0); } }
+#hint kbd.gold { background: #ffc62a; color: var(--ink); }
+@media (max-width: 480px) {
+  .pedal.boostbtn { right: max(14px, env(safe-area-inset-right)); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 70px + 14px); width: 70px; height: 56px; }
+}
 
 #finish { justify-content: space-between; background: linear-gradient(180deg, rgba(20,12,26,.5) 0%, rgba(20,12,26,0) 34%, rgba(20,12,26,0) 62%, rgba(20,12,26,.55) 100%); }
 .fin-head { display: flex; flex-direction: column; align-items: center; }

@@ -1,6 +1,6 @@
 // Pure race rules: no rendering, so it can be tested from Node.
 import { clamp, smoothstep, mulberry32, shuffle, TAU } from './util.js';
-import { laneOffset, rampHeight, LAT_MAX, PAD_LEN, PAD_HALF_W } from './course.js';
+import { laneOffset, rampHeight, inMud, LAT_MAX, PAD_LEN, PAD_HALF_W } from './course.js';
 
 export const PLAYER_VMAX = 62; // m/s
 export const LAUNCH_ACCEL = 16; // m/s^2 from a standstill; everyone gets the same
@@ -18,6 +18,7 @@ export const MAX_YAW = 0.2; // rad (~11 degrees): the nose never swings round fu
 export const GRAVITY = 24; // a little heavier than real, so jumps feel snappy
 export const CAR_L = 4.3; // nose-to-tail spacing when two cars touch
 export const CAR_W = 1.95; // side-to-side spacing when two cars touch
+const CAR_MID = 0.7; // height of the middle of a car above its wheels
 const DODGE_LOOK = 20; // a rival this close behind a slower player moves over...
 const DODGE_LEAD = 1.6; // ...plus this many seconds of closing speed
 const DODGE_SPEED = 4.5; // m/s sideways for a dodging rival
@@ -37,12 +38,18 @@ export const DEFAULT_TUNING = {
 };
 
 export class Race {
-  // course: { pads: [{s, lat}], ramp: {s, len, h} | null, latMax }. Defaults to
-  // a bare road so the core race rules can be tested on their own.
-  constructor({ trackLength, laps = 2, playerIndex = 2, count = 6, seed = 1, tuning = {}, course = {} }) {
+  // course: { pads: [{s, lat}], ramp: {s, len, h} | null, walls: [{s}],
+  // mud: [{s, len, lat, halfW}], pit: {s} | null, latMax }. Defaults to a bare
+  // road so the core race rules can be tested on their own.
+  // pitLap: the lap on which the player stops in the pit box (0 = no stop).
+  constructor({ trackLength, laps = 2, pitLap = 0, playerIndex = 2, count = 6, seed = 1, tuning = {}, course = {} }) {
     this.tune = { ...DEFAULT_TUNING, ...tuning };
-    this.course = { pads: [], ramp: null, latMax: LAT_MAX, ...course };
-    this.events = []; // { type: 'boost' | 'jump' | 'land' | 'bump', car, ... } for sound and effects
+    this.course = { pads: [], ramp: null, ring: null, walls: [], mud: [], pit: null, latMax: LAT_MAX, ...course };
+    // { type: 'boost' | 'jump' | 'land' | 'bump' | 'wall' | 'mud' | 'pit' | 'ring', car, ... } for sound and effects
+    this.events = [];
+    this.pitLap = this.course.pit ? pitLap : 0;
+    this.pitting = false; // the race waits while the player's wheels are changed
+    this.pitDone = false;
     this.L = trackLength;
     this.laps = laps;
     this.total = laps * trackLength;
@@ -77,6 +84,8 @@ export class Race {
         air: false,
         pitch: 0,
         boostT: 0,
+        banked: 0, // boosts saved up from the golden ring (player only)
+        inMud: false,
         finished: false,
         finishTime: 0,
         place: 0,
@@ -90,7 +99,7 @@ export class Race {
   }
 
   update(dt, input) {
-    if (!this.started || dt <= 0) return;
+    if (!this.started || this.pitting || dt <= 0) return;
     this.time += dt;
     const p = this.player;
     for (const c of this.cars) {
@@ -156,7 +165,11 @@ export class Race {
       const prevS = c.s;
       c.s += c.v * dt;
       this._jump(c, dt);
-      if (c.isPlayer && !c.finished) this._pads(c, prevS);
+      if (c.isPlayer && !c.finished) {
+        this._pads(c, prevS);
+        this._ring(c, prevS);
+      }
+      this._fun(c, prevS);
       if (!c.finished && c.s >= this.total) this._finish(c);
     }
     this._collide();
@@ -283,11 +296,62 @@ export class Race {
       const mid = pad.s + PAD_LEN / 2;
       const crossed = a <= b ? mid > a && mid <= b : mid > a || mid <= b;
       if (crossed && Math.abs(c.lat - pad.lat) < PAD_HALF_W + 0.7) {
-        c.boostT = BOOST_TIME;
+        c.boostT = Math.max(c.boostT, BOOST_TIME); // never cuts a double boost short
         this.events.push({ type: 'boost', car: c });
         return; // side-by-side pads count once
       }
     }
+  }
+
+  // Fly through the golden ring (its centre crossed this step, the car's
+  // middle inside the hoop) to save a boost for later.
+  _ring(c, prevS) {
+    const ring = this.course.ring;
+    if (!ring || !c.air) return;
+    const a = this.lapS(prevS), b = this.lapS(c.s);
+    const crossed = a <= b ? ring.s > a && ring.s <= b : ring.s > a || ring.s <= b;
+    if (crossed && Math.hypot(c.lat - ring.lat, c.y + CAR_MID - ring.y) < ring.r) {
+      c.banked++;
+      this.events.push({ type: 'ring', car: c });
+    }
+  }
+
+  // Spend a saved boost (space bar). Only while racing, and not while SLOW is
+  // held (that would cancel it straight away). Pressed during a boost, it adds
+  // on, so a quick double tap never throws one away.
+  useBoost() {
+    const p = this.player;
+    if (!this.started || this.pitting || p.finished || p.braking || p.banked <= 0) return false;
+    p.banked--;
+    p.boostT = Math.max(0, p.boostT) + BOOST_TIME;
+    this.events.push({ type: 'boost', car: p, banked: true });
+    return true;
+  }
+
+  // The foam wall and the mud pits: things to see and hear, never a change in
+  // speed or line. Then the pit stop, which pauses the race (see endPit).
+  _fun(c, prevS) {
+    const a = this.lapS(prevS), b = this.lapS(c.s);
+    for (const w of this.course.walls) {
+      const crossed = a <= b ? w.s > a && w.s <= b : w.s > a || w.s <= b;
+      if (crossed && c.s > 0) this.events.push({ type: 'wall', car: c, lat: c.lat, v: c.v });
+    }
+    const was = c.inMud;
+    c.inMud = !c.air && this.course.mud.some((m) => inMud(m, b, c.lat));
+    if (c.inMud && !was) this.events.push({ type: 'mud', car: c });
+    if (c.isPlayer && this.pitLap && !this.pitDone && !c.finished) {
+      const at = (this.pitLap - 1) * this.L + this.course.pit.s;
+      if (prevS < at && c.s >= at) {
+        this.pitting = true;
+        this.pitDone = true;
+        this.events.push({ type: 'pit', car: c });
+      }
+    }
+  }
+
+  // The new wheels are on: carry on exactly where everyone was.
+  endPit() {
+    this.pitting = false;
   }
 
   // The player can't drive through rivals: rear-end one and you're stuck

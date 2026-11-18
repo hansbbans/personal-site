@@ -2,35 +2,19 @@ import * as THREE from 'three';
 import { makeCanvas, mulberry32 } from './util.js';
 
 import { LANE_W, ROAD_HALF, laneOffset, rampHeight, PAD_LEN, PAD_HALF_W } from './course.js';
+import { TRACKS } from './tracks.js';
 
 export { LANE_W, ROAD_HALF, laneOffset };
 export const LANE_COUNT = 6;
 
 const Y = new THREE.Vector3(0, 1, 0);
 
-// Centre line of the circuit: x, height, z (metres). The first point is the
-// start/finish line, in the middle of the main straight.
-const POINTS = [
-  [0, 0, 0],
-  [0, 0, 110],
-  [0, 0.5, 220],
-  [50, 3, 330],
-  [170, 7, 395],
-  [290, 5, 345],
-  [345, 1, 220],
-  [290, -2, 100],
-  [335, 0, -30],
-  [310, 5, -170],
-  [190, 9, -250],
-  [70, 6, -215],
-  [5, 2, -130],
-  [0, 0.3, -60],
-];
-
 export class Track {
-  constructor() {
+  // points: the centre line, [x, height, z] in metres (see tracks.js). The
+  // first point is the start/finish line, in the middle of the main straight.
+  constructor(points = TRACKS[0].points) {
     this.curve = new THREE.CatmullRomCurve3(
-      POINTS.map((p) => new THREE.Vector3(p[0], p[1], p[2])),
+      points.map((p) => new THREE.Vector3(p[0], p[1], p[2])),
       true,
       'centripetal'
     );
@@ -101,6 +85,46 @@ export class Track {
     return this.curv[i] * (1 - t) + this.curv[(i + 1) % n] * t;
   }
 
+  // How close (m) two separate bits of road come, at least 150 m apart along it.
+  closestApproach() {
+    if (this._gap === undefined) {
+      const P = this.pts, n = this.n;
+      let gap = Infinity;
+      for (let i = 0; i < n; i += 4) {
+        for (let j = i + 150; j < n - 150 + i && j < n; j += 4) gap = Math.min(gap, Math.hypot(P[i].x - P[j].x, P[i].z - P[j].z));
+      }
+      this._gap = gap;
+    }
+    return this._gap;
+  }
+
+  // The hairpins: bends tighter than 60 m that turn the road round (more than
+  // 120 degrees inside the tight part; Zig-Zag's measure about 155, no other
+  // bend on any track more than about 55). { s0, s1 (s1 > s0, even across the line), turn (radians, + = left), tight (1/m) }.
+  hairpins() {
+    const n = this.n, tight = (i) => Math.abs(this.curv[i % n]) > 1 / 60;
+    // start the scan somewhere straight, so a hairpin across s = 0 stays whole
+    let i0 = 0;
+    while (i0 < n && tight(i0)) i0++;
+    if (i0 === n) return [];
+    const out = [];
+    let cur = null;
+    for (let k = 1; k <= n; k++) {
+      const i = i0 + k;
+      if (tight(i)) {
+        const c = this.curv[i % n];
+        cur ||= { s0: (i % n) * this.ds, turn: 0, tight: 0, k0: k };
+        cur.turn += c * this.ds;
+        cur.tight = Math.max(cur.tight, Math.abs(c));
+        cur.s1 = cur.s0 + (k - cur.k0) * this.ds; // may run past the lap's end
+      } else if (cur) {
+        if (Math.abs(cur.turn) > (120 * Math.PI) / 180) out.push({ s0: cur.s0, s1: cur.s1, turn: cur.turn, tight: cur.tight });
+        cur = null;
+      }
+    }
+    return out.sort((a, b) => a.s0 - b.s0);
+  }
+
   // A ribbon following the track between lateral offsets a (left edge) and
   // b (right edge), a > b, with heights ya / yb above the road surface.
   strip(a, b, ya, yb, { s0 = 0, s1 = this.length, step = 2, vScale = 1 / 12 } = {}) {
@@ -127,7 +151,7 @@ export class Track {
     return g;
   }
 
-  buildMeshes(maxAniso = 8) {
+  buildMeshes(maxAniso = 8, theme = null) {
     const group = new THREE.Group();
     const L = this.length;
     const tile = (len) => Math.round(L / len) / L; // whole number of repeats per lap
@@ -159,7 +183,7 @@ export class Track {
     // --- sandy shoulders and banks that hide the terrain seam
     const sandTex = sandTexture();
     sandTex.anisotropy = maxAniso;
-    const sandMat = new THREE.MeshStandardMaterial({ map: sandTex, color: 0xe2b27a, roughness: 1 });
+    const sandMat = new THREE.MeshStandardMaterial({ map: sandTex, color: theme ? theme.shoulder : 0xe2b27a, roughness: 1 });
     const e0 = ROAD_HALF + cw, e1 = ROAD_HALF + 5.5, e2 = ROAD_HALF + 12.5;
     for (const [a, b, ya, yb] of [
       [e1, e0, -0.04, 0.03],
@@ -189,8 +213,8 @@ export class Track {
   }
 }
 
-// Boost pads and the jump ramp. Returns the group plus a tick(dt) that scrolls
-// the glowing chevrons on the pads.
+// Boost pads, the jump ramp and the mud pits. Returns the group plus a
+// tick(dt) that scrolls the glowing chevrons on the pads.
 export function buildCourse(track, course, maxAniso = 8) {
   const group = new THREE.Group();
   const o = Track.frame();
@@ -255,12 +279,69 @@ export function buildCourse(track, course, maxAniso = 8) {
     group.add(topMesh, sideMesh);
   }
 
+  // --- mud pits: a gloopy brown puddle with ragged edges, glossy where it's wet
+  if (course.mud && course.mud.length) {
+    const mudTex = mudTexture();
+    mudTex.anisotropy = maxAniso;
+    const mudMat = new THREE.MeshStandardMaterial({
+      map: mudTex, transparent: true, alphaTest: 0.05, roughness: 0.28, metalness: 0.05, depthWrite: false,
+      polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3,
+    });
+    for (const m of course.mud) {
+      const g = track.strip(m.lat + m.halfW, m.lat - m.halfW, 0.035, 0.035, { s0: m.s, s1: m.s + m.len, step: 1, vScale: 1 / m.len });
+      const mesh = new THREE.Mesh(g, mudMat);
+      mesh.receiveShadow = true;
+      mesh.renderOrder = 1;
+      group.add(mesh);
+    }
+  }
+
   return {
     group,
     tick(dt) {
       padTex.offset.y = (padTex.offset.y - dt * 1.6) % 1;
     },
   };
+}
+
+function mudTexture() {
+  const W = 256, H = 512;
+  const c = makeCanvas(W, H), g = c.getContext('2d');
+  const rnd = mulberry32(31);
+  // the puddle: a fat rounded blob made of overlapping circles, so its edge wobbles
+  const blob = (color, shrink) => {
+    g.fillStyle = color;
+    for (let i = 0; i < 46; i++) {
+      const t = i / 45;
+      const y = H * (0.08 + t * 0.84);
+      const w = W * (0.45 - shrink) * Math.sqrt(Math.sin(Math.PI * (0.06 + t * 0.88)));
+      for (const side of [-1, 1]) {
+        g.beginPath();
+        g.arc(W / 2 + side * w * (0.48 + rnd() * 0.1), y + (rnd() - 0.5) * 10, w * (0.48 + rnd() * 0.08), 0, Math.PI * 2);
+        g.fill();
+      }
+    }
+  };
+  blob('#5a3a1e', 0);
+  blob('#6e4824', 0.06);
+  // darker wet pools and lighter clods
+  for (let i = 0; i < 60; i++) {
+    const x = W * (0.2 + rnd() * 0.6), y = H * (0.12 + rnd() * 0.76);
+    g.fillStyle = rnd() < 0.6 ? 'rgba(52,30,14,0.75)' : 'rgba(140,100,60,0.55)';
+    g.beginPath();
+    g.ellipse(x, y, 4 + rnd() * 16, 3 + rnd() * 10, rnd() * Math.PI, 0, Math.PI * 2);
+    g.fill();
+  }
+  // shiny highlights
+  g.fillStyle = 'rgba(255,240,210,0.35)';
+  for (let i = 0; i < 14; i++) {
+    g.beginPath();
+    g.ellipse(W * (0.3 + rnd() * 0.4), H * (0.15 + rnd() * 0.7), 3 + rnd() * 6, 1.5 + rnd() * 2, rnd(), 0, Math.PI * 2);
+    g.fill();
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
 }
 
 function chevronTexture() {

@@ -179,4 +179,23 @@ export class AudioSys {
     this.tone(660, 0.09, 0.22, 'triangle');
     this.tone(990, 0.12, 0.18, 'triangle', 0.07);
   }
+  // bursting through the foam wall: a soft crunch and a bonk
+  crash() {
+    this.noiseBurst({ dur: 0.45, vol: 0.4, f0: 300, f1: 900, f2: 140, q: 0.7, attack: 0.004 });
+    this.tone(130, 0.25, 0.3, 'triangle');
+    this.tone(98, 0.3, 0.22, 'triangle', 0.08);
+  }
+  // into the mud: a low squelch
+  splat() {
+    this.noiseBurst({ dur: 0.4, vol: 0.38, f0: 140, f1: 420, f2: 90, q: 1.4, attack: 0.01 });
+    this.tone(70, 0.2, 0.2, 'sine');
+  }
+  // the wheel gun: brrrt-brrrt, then a ding when the wheel is on
+  wrench(when = 0) {
+    for (let i = 0; i < 2; i++) this.tone(38 + i * 6, 0.16, 0.22, 'sawtooth', when + i * 0.2);
+  }
+  ding(when = 0) {
+    this.tone(1568, 0.25, 0.16, 'sine', when);
+    this.tone(2093, 0.3, 0.1, 'sine', when + 0.05);
+  }
 }
