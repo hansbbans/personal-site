@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>SKYBREAK</title>
+<meta name="description" content="SKYBREAK: a vertical-scrolling space shooter. Fly, power up, and take down the Dreadnought.">
+<meta name="theme-color" content="#04060d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4l6 20 22 14-2 6-20-6-2 12 8 6v4l-12-3-12 3v-4l8-6-2-12-20 6-2-6 22-14z' fill='%235ee7ff'/%3E%3C/svg%3E">
+<style>
+  :root { --s: 1; --cyan: #5ee7ff; --pink: #ff4f9a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%; overflow: hidden; color: #eaf2ff;
+    font-family: "Inter", "SF Pro Display", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-user-select: none; user-select: none; touch-action: none;
+  }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 25%, #0e1a33 0%, #04060d 72%);
+  }
+  #stage {
+    position: relative; overflow: hidden; font-size: calc(16px * var(--s));
+    box-shadow: 0 0 90px rgba(94, 231, 255, .07), 0 30px 90px rgba(0, 0, 0, .65);
+  }
+  canvas { display: block; }
+  .overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1.3em; text-align: center;
+    opacity: 0; pointer-events: none; transition: opacity .35s ease;
+    background: linear-gradient(180deg, rgba(4, 8, 20, .35), rgba(4, 8, 20, .7));
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  }
+  .overlay.show { opacity: 1; pointer-events: auto; }
+  .logo {
+    font-size: 4.4em; font-weight: 900; letter-spacing: .06em; line-height: .95;
+    background: linear-gradient(180deg, #ffffff 0%, #c9f4ff 55%, #5ee7ff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 .3em rgba(94, 231, 255, .35));
+  }
+  .logo .b {
+    background: linear-gradient(180deg, #ffe0ec 0%, #ff4f9a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .kicker { font-size: .78em; font-weight: 700; letter-spacing: .45em; text-transform: uppercase; color: #8fb3d9; }
+  .big { font-size: 2.5em; font-weight: 900; letter-spacing: .14em; }
+  .big.red { color: #ff5d7d; text-shadow: 0 0 .5em rgba(255, 79, 120, .4); }
+  .big.cyan { color: #9ff6ff; text-shadow: 0 0 .5em rgba(94, 231, 255, .4); }
+  .panel {
+    background: rgba(14, 22, 44, .62); border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1em; padding: 1.1em 1.4em; min-width: 21em;
+  }
+  .btns { display: flex; flex-direction: column; gap: .7em; align-items: center; }
+  .btn {
+    font: inherit; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; font-size: .95em;
+    padding: .95em 2.6em; border-radius: 999px; border: 0; cursor: pointer; color: #03121b;
+    background: linear-gradient(180deg, #a6f8ff, #3cc6ee);
+    box-shadow: 0 .45em 1.6em rgba(94, 231, 255, .35), inset 0 1px 0 rgba(255, 255, 255, .6);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 .6em 2em rgba(94, 231, 255, .5), inset 0 1px 0 rgba(255, 255, 255, .6); }
+  .btn.alt { background: linear-gradient(180deg, #ffc2da, #ff4f9a); box-shadow: 0 .45em 1.6em rgba(255, 79, 154, .35), inset 0 1px 0 rgba(255,255,255,.5); }
+  .btn.ghost { background: transparent; color: #cfe6ff; border: 1px solid rgba(255, 255, 255, .22); box-shadow: none; }
+  .btn.hidden { display: none; }
+  .keys { display: grid; grid-template-columns: auto 1fr; gap: .55em 1.1em; font-size: .8em; color: #a9bfdc; text-align: left; align-items: center; }
+  kbd {
+    font: inherit; font-weight: 700; font-size: .82em; padding: .18em .5em; border-radius: .4em; color: #fff;
+    background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14);
+  }
+  .legend { display: flex; gap: .9em; flex-wrap: wrap; justify-content: center; font-size: .7em; color: #a9bfdc; font-weight: 600; letter-spacing: .06em; }
+  .chip { display: flex; align-items: center; gap: .45em; }
+  .dot {
+    width: 1.7em; height: 1.7em; border-radius: 50%; display: grid; place-items: center;
+    font-weight: 900; font-size: .9em; border: 2px solid currentColor; background: rgba(255,255,255,.04);
+  }
+  .stats { display: grid; grid-template-columns: 1fr auto; gap: .5em 2em; font-size: .9em; text-align: left; }
+  .stats dt { color: #8fb3d9; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .85em; }
+  .stats dd { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+  .stats .total { font-size: 1.25em; color: #9ff6ff; }
+  .hint { font-size: .68em; color: #6f87a8; letter-spacing: .22em; text-transform: uppercase; }
+  .newhi { color: #ffd85e; font-weight: 800; letter-spacing: .3em; font-size: .8em; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="game"></canvas>
+
+  <div id="ov-title" class="overlay show">
+    <div class="kicker">Stage 1 · Ember Belt</div>
+    <div class="logo">SKY<span class="b">BREAK</span></div>
+    <div class="panel">
+      <div class="keys">
+        <span><kbd>←↑↓→</kbd> / <kbd>WASD</kbd></span><span>Fly (auto-fire is always on)</span>
+        <span><kbd>Space</kbd></span><span>Bomb: hits every enemy on screen</span>
+        <span><kbd>Shift</kbd></span><span>Precision flying, shows hitbox</span>
+        <span><kbd>Mouse</kbd> / <kbd>Touch</kbd></span><span>Drag to fly, second finger bombs</span>
+        <span><kbd>P</kbd> / <kbd>Esc</kbd></span><span>Pause</span>
+        <span><kbd>M</kbd></span><span>Mute</span>
+      </div>
+    </div>
+    <div class="legend">
+      <span class="chip"><span class="dot" style="color:#5ee7ff">V</span>Vulcan</span>
+      <span class="chip"><span class="dot" style="color:#ff9f4a">S</span>Spread</span>
+      <span class="chip"><span class="dot" style="color:#b6ff5c">L</span>Laser</span>
+      <span class="chip"><span class="dot" style="color:#ffd85e">M</span>Missiles</span>
+      <span class="chip"><span class="dot" style="color:#b48cff">B</span>Bomb</span>
+      <span class="chip"><span class="dot" style="color:#6aa8ff">◆</span>Shield</span>
+      <span class="chip"><span class="dot" style="color:#4dffa0">+</span>Repair</span>
+    </div>
+    <div class="btns"><button class="btn" id="btn-start">Launch</button></div>
+    <div class="hint">Press Enter to launch</div>
+  </div>
+
+  <div id="ov-pause" class="overlay">
+    <div class="big">PAUSED</div>
+    <div class="btns">
+      <button class="btn" id="btn-resume">Resume</button>
+      <button class="btn ghost" id="btn-quit">Quit to title</button>
+    </div>
+  </div>
+
+  <div id="ov-over" class="overlay">
+    <div class="kicker">Mission failed</div>
+    <div class="big red">SHOT DOWN</div>
+    <div class="panel"><dl class="stats" id="over-stats"></dl></div>
+    <div class="newhi" id="over-hi"></div>
+    <div class="btns">
+      <button class="btn alt" id="btn-retry-boss">Retry boss</button>
+      <button class="btn" id="btn-retry">Restart stage</button>
+      <button class="btn ghost" id="btn-over-title">Title</button>
+    </div>
+  </div>
+
+  <div id="ov-clear" class="overlay">
+    <div class="kicker">Dreadnought destroyed</div>
+    <div class="big cyan">STAGE CLEAR</div>
+    <div class="panel"><dl class="stats" id="clear-stats"></dl></div>
+    <div class="newhi" id="clear-hi"></div>
+    <div class="btns">
+      <button class="btn" id="btn-again">Fly again</button>
+      <button class="btn ghost" id="btn-clear-title">Title</button>
+    </div>
+  </div>
+</div>
+<script src="build-c45dda2/js/core.js"></script>
+<script src="build-c45dda2/js/audio.js"></script>
+<script src="build-c45dda2/js/world.js"></script>
+<script src="build-c45dda2/js/boss.js"></script>
+<script src="build-c45dda2/js/render.js"></script>
+<script src="build-c45dda2/js/main.js"></script>
+</body>
+</html>
